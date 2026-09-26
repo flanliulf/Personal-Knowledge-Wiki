@@ -1,0 +1,428 @@
+{
+  "schema_version": 1,
+  "contract_version": "1.0.0",
+  "verified_at": "2026-09-09",
+  "sources": {
+    "openai-skills": {
+      "kind": "official-documentation",
+      "url": "https://learn.chatgpt.com/docs/build-skills",
+      "note": "Skill 结构、发现、触发及可选 Codex 配置；不是完整 parser schema。"
+    },
+    "openai-build": {
+      "kind": "official-documentation",
+      "url": "https://developers.openai.com/plugins/build/skills",
+      "note": "工作流边界、资源用途、MCP 依赖与行为测试。"
+    },
+    "tooling-policy": {
+      "kind": "project-policy",
+      "path": "references/check-rules.md",
+      "note": "tooling 自定约束，不冒充 OpenAI 官方要求。"
+    },
+    "tooling-quality": {
+      "kind": "project-quality",
+      "path": "references/check-rules.md",
+      "note": "本项目选择的通用检查方法，不是官方加载器行为保证。"
+    }
+  },
+  "scopes": {
+    "base": "所有普通 workflow Skill 的基础格式和质量",
+    "tooling": "用户或目标政策明确采用双语版本化工具约定",
+    "codex": "明确以 Codex 为目标宿主"
+  },
+  "statuses": [
+    "PASS",
+    "FAIL",
+    "WARN",
+    "N/A",
+    "NOT_CHECKED"
+  ],
+  "rules": [
+    {
+      "id": "YML-01",
+      "title": "name 必填",
+      "scope": "base",
+      "source": "openai-skills",
+      "severity": "Error",
+      "method": "static-review",
+      "criteria": "SKILL.md 的 name 必须是非空字符串；tooling 命名格式另由 FILE-02 检查。"
+    },
+    {
+      "id": "YML-02",
+      "title": "description 长度预算",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Error",
+      "method": "static-review",
+      "criteria": "tooling description 不超过 1024 字符；这是项目兼容性预算，不能作为 OpenAI 通用硬上限。"
+    },
+    {
+      "id": "YML-03",
+      "title": "description 目标与边界",
+      "scope": "base",
+      "source": "openai-skills",
+      "severity": "Warning",
+      "method": "semantic-review",
+      "criteria": "简洁描述用户目标、何时触发及有混淆风险时的排除边界；不强制三段式，不堆叠能力清单。"
+    },
+    {
+      "id": "YML-04",
+      "title": "metadata 项目契约",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Warning",
+      "method": "static-review",
+      "criteria": "metadata 是映射；version、author、catalog 的项目约束分别按 VER 规则核验。其他 metadata 或顶级字段不因未知而报 Error；查目标宿主来源，未证实支持时报告兼容性待确认，不删除扩展字段。"
+    },
+    {
+      "id": "YML-05",
+      "title": "YAML 可解析与安全解析",
+      "scope": "base",
+      "source": "tooling-quality",
+      "severity": "Error",
+      "method": "static-review",
+      "criteria": "用现有安全 YAML parser 验证起始 frontmatter、映射结构、重复键、类型及禁止执行型自定义 tag。未取得 parser 证据时 NOT_CHECKED。合法 > 折叠标量、普通字符串中的尖括号或命令说明本身不是注入证据。"
+    },
+    {
+      "id": "DESC-01",
+      "title": "目标语言覆盖",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Warning",
+      "method": "semantic-review",
+      "criteria": "中文 canonical description 覆盖中文使用意图和关键英文术语；英文 mirror 可用英文语义等价表达。不按单引号或固定关键词个数判断，不要求同一语言逐字重复。"
+    },
+    {
+      "id": "DESC-02",
+      "title": "触发词具体性",
+      "scope": "base",
+      "source": "openai-skills",
+      "severity": "Warning",
+      "method": "semantic-review",
+      "criteria": "用途和关键触发信息前置；首句应足以区分相邻 Skill。通过代表性请求判断具体性，不能仅凭关键词黑名单。"
+    },
+    {
+      "id": "DESC-03",
+      "title": "可用的描述内容",
+      "scope": "base",
+      "source": "tooling-quality",
+      "severity": "Warning",
+      "method": "static-review",
+      "criteria": "最终 description 不应残留未替换的模板占位符或伪造宿主支持保证；正常尖括号文本不单独判错。"
+    },
+    {
+      "id": "FILE-01",
+      "title": "SKILL.md 大写",
+      "scope": "base",
+      "source": "openai-skills",
+      "severity": "Error",
+      "method": "static-review",
+      "criteria": "文件名严格为 `SKILL.md`，不接受其他大小写"
+    },
+    {
+      "id": "FILE-02",
+      "title": "目录名 kebab-case",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Error",
+      "method": "static-review",
+      "criteria": "tooling 下 name 与目录名相等，匹配 ^[a-z0-9]+(-[a-z0-9]+)*$，最多 64 字符；不对 base 目标强制。"
+    },
+    {
+      "id": "FILE-03",
+      "title": "无 README.md",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Error",
+      "method": "static-review",
+      "criteria": "tooling 包避免冗余 README.md；如目标宿主或项目有明确用途，说明理由后允许。外部 Skill 含 README.md 不是官方合规错误。"
+    },
+    {
+      "id": "FILE-04",
+      "title": "CHANGELOG.md 存在",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Error",
+      "method": "static-review",
+      "criteria": "普通 tooling workflow package 必须包含 CHANGELOG.md；与 creator 的交付要求一致。"
+    },
+    {
+      "id": "FILE-05",
+      "title": "命名限制来源",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Warning",
+      "method": "static-review",
+      "criteria": "不宣称 claude-、codex-、anthropic- 是官方全局保留前缀；若目标宿主或项目另有命名限制，提供来源后核验，否则 N/A。"
+    },
+    {
+      "id": "FILE-06",
+      "title": "SKILL.en.md 存在",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Error",
+      "method": "static-review",
+      "criteria": "tooling 包必须包含 SKILL.en.md；其他来源 Skill 不强制 mirror。"
+    },
+    {
+      "id": "VER-01",
+      "title": "metadata.version 存在",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Error",
+      "method": "static-review",
+      "criteria": "tooling metadata.version 必填，符合 SemVer；非项目 Skill 不强制。"
+    },
+    {
+      "id": "VER-02",
+      "title": "版本号一致",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Error",
+      "method": "static-review",
+      "criteria": "SKILL.md 中 `metadata.version` 与 CHANGELOG.md 最新版本号一致"
+    },
+    {
+      "id": "VER-03",
+      "title": "CHANGELOG 日期格式",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Warning",
+      "method": "static-review",
+      "criteria": "`## [x.y.z] - ` 后的日期匹配 `YYYY-MM-DD` 格式"
+    },
+    {
+      "id": "VER-04",
+      "title": "metadata.author 存在",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Error",
+      "method": "static-review",
+      "criteria": "tooling metadata.author 必填非空且保留原作者；metadata.catalog 可选，存在时为非空 kebab-case 语义分类，与 mirror 相等，不要求路径包含 catalog 层。"
+    },
+    {
+      "id": "VER-05",
+      "title": "SKILL.en.md 版本一致",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Error",
+      "method": "static-review",
+      "criteria": "SKILL.en.md 的 `metadata.version` 与 SKILL.md 完全一致"
+    },
+    {
+      "id": "BODY-01",
+      "title": "字数限制",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Error",
+      "method": "static-review",
+      "criteria": "tooling 两个入口正文各不超过 5000 字符；这是项目预算，不是 OpenAI 官方限制。"
+    },
+    {
+      "id": "BODY-02",
+      "title": "必需章节",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Warning",
+      "method": "static-review",
+      "criteria": "tooling 普通 workflow 包应包含 Overview、Core Capabilities、Workflow、Notes 四个语义章节，支持 Markdown 或方括号标题。"
+    },
+    {
+      "id": "BODY-03",
+      "title": "引用路径正确",
+      "scope": "base",
+      "source": "openai-build",
+      "severity": "Warning",
+      "method": "static-review",
+      "criteria": "入口引用的 references、scripts、assets、agents 文件均可解析；依赖其他 Skill 的资源必须有实际根路径和加载方式，不能假设相对 CWD。模板示意路径不按真实依赖误报。"
+    },
+    {
+      "id": "BODY-04",
+      "title": "无模糊表述",
+      "scope": "base",
+      "source": "openai-build",
+      "severity": "Warning",
+      "method": "semantic-review",
+      "criteria": "步骤明确输入、输出、不能推断的事实及询问/停止条件；允许有清楚判断条件的“必要时”，不靠禁词扫描替代执行性审查。"
+    },
+    {
+      "id": "BODY-05",
+      "title": "职责聚焦",
+      "scope": "base",
+      "source": "openai-build",
+      "severity": "Warning",
+      "method": "semantic-review",
+      "criteria": "每个 Skill 聚焦可识别用户目标；能力条数不作通用门槛。不同触发、输入或成功标准的工作流应评估拆分。"
+    },
+    {
+      "id": "BODY-06",
+      "title": "中文 canonical 语言规则",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Warning",
+      "method": "static-review",
+      "criteria": "SKILL.md 章节标题使用 English（中文）形式，正文内容使用中文，技术标识使用英文"
+    },
+    {
+      "id": "BODY-07",
+      "title": "Workflow density",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Warning",
+      "method": "density-script",
+      "criteria": "仅使用 check_skill_density.py 的 JSON：workflow_chars > 1500 且 workflow_ratio > 0.5 时 WARN；workflow_status 为 missing/ambiguous 时 NOT_CHECKED，不能把 null 或 0 当作通过；4500 字符为项目接近预算提示。"
+    },
+    {
+      "id": "BODY-08",
+      "title": "Workflow extraction",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Warning",
+      "method": "density-script+semantic-review",
+      "criteria": "仅在 BODY-07 密度命中时适用。应有可解析且承载详细流程的 reference；文件名正则仅为线索，需核验等价 reference 的内容与入口加载路由。"
+    },
+    {
+      "id": "NAME-01",
+      "title": "Reference 文件命名",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Warning",
+      "method": "static-review",
+      "criteria": "`references/` 下的文件使用小写短横线（如 `api-guide.md`）"
+    },
+    {
+      "id": "NAME-02",
+      "title": "Script 文件命名",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Warning",
+      "method": "static-review",
+      "criteria": "Python 文件 snake_case（如 `convert_csv.py`），Shell 文件 kebab-case（如 `run-checks.sh`）"
+    },
+    {
+      "id": "NAME-03",
+      "title": "Assets 文件命名",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Warning",
+      "method": "static-review",
+      "criteria": "`assets/` 下的文件使用小写短横线（如 `report-template.md`）"
+    },
+    {
+      "id": "MIRROR-01",
+      "title": "身份字段与触发语义一致",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Error",
+      "method": "static+semantic-review",
+      "criteria": "name、allowed-tools、license、metadata 映射在两种入口中保持相等；version 同时由 VER-05 检查。description 允许翻译，但用户目标、触发与排除边界必须语义等价，不要求原文完全相同。"
+    },
+    {
+      "id": "MIRROR-02",
+      "title": "英文章节齐备",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Warning",
+      "method": "semantic-review",
+      "criteria": "英文 mirror 对应中文 canonical 的章节、能力、输入输出、步骤、限制和停止条件；Markdown 或方括号标题均可，不要求能力条数固定。"
+    },
+    {
+      "id": "MIRROR-03",
+      "title": "引用路径同步",
+      "scope": "tooling",
+      "source": "tooling-policy",
+      "severity": "Warning",
+      "method": "static-review",
+      "criteria": "两个入口引用的真实资源均存在；应消费同一规则契约。语言版本资源可不同，但必须明确对应关系，不因引用集合不同自动认定漂移。"
+    },
+    {
+      "id": "CLASS-01",
+      "title": "模板文件应放 assets/",
+      "scope": "base",
+      "source": "openai-build",
+      "severity": "Warning",
+      "method": "semantic-review",
+      "criteria": "供复制或转换的最终模板放 assets；讲解模板写法、包含多个示例的参考指南可以放 references。不能仅凭 markdown 代码围栏判定模板用途。"
+    },
+    {
+      "id": "CLASS-02",
+      "title": "脚本文件应放 scripts/",
+      "scope": "base",
+      "source": "openai-build",
+      "severity": "Warning",
+      "method": "semantic-review",
+      "criteria": "实际执行的确定性辅助代码放 scripts；说明性代码样例按阅读用途分类，不按扩展名单独判错。"
+    },
+    {
+      "id": "CLASS-03",
+      "title": "知识文档应放 references/",
+      "scope": "base",
+      "source": "openai-build",
+      "severity": "Warning",
+      "method": "semantic-review",
+      "criteria": "供阅读的背景、规则、schema 与示例放 references；assets 内无代码围栏的 Markdown 仍可能是有效模板，应检查实际消费方式。"
+    },
+    {
+      "id": "YML-06",
+      "title": "description 必填",
+      "scope": "base",
+      "source": "openai-skills",
+      "severity": "Error",
+      "method": "static-review",
+      "criteria": "SKILL.md 的 description 必须是非空字符串；多行 YAML 标量解析后验证。"
+    },
+    {
+      "id": "BODY-11",
+      "title": "参考资料加载路由",
+      "scope": "base",
+      "source": "openai-build",
+      "severity": "Warning",
+      "method": "semantic-review",
+      "criteria": "关键规范、模板、测试资料应从入口或明确工作流步骤可达，并说明读取或运行条件；不要求一次加载所有资源。"
+    },
+    {
+      "id": "CDX-01",
+      "title": "可选配置有效性",
+      "scope": "codex",
+      "source": "openai-skills",
+      "severity": "Error",
+      "method": "static-review",
+      "criteria": "agents/openai.yaml 存在时用安全 YAML parser 验证映射；已文档化 interface 字段为字符串，policy.allow_implicit_invocation 为 boolean。缺失且未需要该配置时 N/A；未知字段查目标宿主资料，支持性未知记 NOT_CHECKED，不伪造全量 schema。"
+    },
+    {
+      "id": "CDX-02",
+      "title": "MCP 依赖声明",
+      "scope": "codex",
+      "source": "openai-build",
+      "severity": "Error",
+      "method": "static+semantic-review",
+      "criteria": "依赖 MCP 的 Codex Skill 应在 agents/openai.yaml dependencies.tools 声明与真实服务匹配的依赖；type/value/transport/url 等采用已验证服务值，不生成猜测 URL。无 MCP 依赖时 N/A；工具缺失、结果不明确时有明确停止或降级步骤。"
+    },
+    {
+      "id": "CDX-03",
+      "title": "调用策略与触发",
+      "scope": "codex",
+      "source": "openai-skills",
+      "severity": "Warning",
+      "method": "semantic-review",
+      "criteria": "需要禁用隐式调用时设置 policy.allow_implicit_invocation: false；未设置默认 true。核验 description 前置信息与显式/隐式调用测试，不能把配置解析成功当作触发已验证。"
+    },
+    {
+      "id": "CDX-04",
+      "title": "发现与宿主边界",
+      "scope": "codex",
+      "source": "openai-skills",
+      "severity": "Warning",
+      "method": "semantic-review",
+      "criteria": "区分 source authoring 与 Codex .agents/skills 本地发现、plugin 分发；相同 name 不合并。allowed-tools 不当作跨宿主权限隔离或 MCP 依赖声明；变更通常自动发现，未显示时再重启。"
+    },
+    {
+      "id": "TEST-01",
+      "title": "行为验证证据",
+      "scope": "base",
+      "source": "openai-build",
+      "severity": "Warning",
+      "method": "behavior-review",
+      "criteria": "检查直接、同义、输入缺失、不应触发、边界请求，验证输出质量、未虚构事实与依赖缺失处理；无真实宿主执行记录时 NOT_CHECKED。记录宿主、版本、输入、预期与实际结果，不将建议用例或静态 PASS 当作行为通过。"
+    }
+  ]
+}
