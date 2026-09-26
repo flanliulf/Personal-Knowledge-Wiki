@@ -1,6 +1,7 @@
 # Project Rules（项目规约）
 
-- 本项目是本机收集的 AI 源资产库：`prompts/` 存放提示词，`skills/` 存放技能源资产，`README.md` 提供目录职责与内容清单。
+- 本项目是本机收集的 AI 源资产与写作参考资料库：`prompts/` 存放提示词，`skills/` 存放技能源资产，`guidelines/` 存放外部规范指南快照，`README.md` 提供目录职责与内容清单。
+- `guidelines/<project>/source/` 保留上游原文和许可文件，`SOURCE.md` 记录来源、收录版本、范围及使用边界。Skill 为便于独立使用，可在自己的 `references/upstream/` 内保留经核对的上游原文副本与许可文件，并在包内记录来源。外部指南仅供参考，不自动成为本项目或其他项目的强制规约；新增项目规则须在本项目自己的规约或 Skill 中明确写出。上述两处的上游原文均不按本项目的章节标题格式改写。
 - `prompts/` 和 `skills/` 的下一级必须全部是子目录；每个子目录承载一个 prompt 或 skill 的所有相关信息，禁止在这两个分类目录下直接放置文件。
 - `prompts/<prompt-name>/` 下只允许存放该 prompt 的源 `.md` 文档，以及与源文档同级的相关子目录，如 `work/`（运行依赖）、`output/`（输出）、`examples/`（历史示例）等；禁止放置任何其他独立文档，handoff 历史等必须归入相关子目录。
 - `skills/<skill-name>/` 遵循相同约束，但技能定义使用与 skill 同名的源目录 `skills/<skill-name>/<skill-name>/`，其中包含 `SKILL.md` 及其他技能定义文件、子目录；`work/`、`output/`、`examples/` 等与该源目录同级，资产目录下禁止放置独立文档。
