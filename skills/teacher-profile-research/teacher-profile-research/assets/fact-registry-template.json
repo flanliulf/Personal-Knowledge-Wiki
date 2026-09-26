@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "research_id": null,
+  "revision": 1,
+  "as_of": null,
+  "updated_at": null,
+  "scope": {
+    "school": null,
+    "campus": null,
+    "class_context": null,
+    "question": null,
+    "output_language": "zh-CN"
+  },
+  "people": [],
+  "sources": [],
+  "claims": [],
+  "conclusions": [],
+  "corrections": []
+}
