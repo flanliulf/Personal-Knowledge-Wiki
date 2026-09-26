@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "proposal",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "batchId",
+    "generatedAt",
+    "timezone",
+    "scope",
+    "items"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "enum": [
+        "1"
+      ]
+    },
+    "batchId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+    },
+    "generatedAt": {
+      "type": "string",
+      "minLength": 1,
+      "format": "date-time"
+    },
+    "timezone": {
+      "enum": [
+        "Asia/Shanghai"
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "required": [
+        "description",
+        "unavailable"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unavailable": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "itemId",
+          "threadId",
+          "hostId",
+          "source",
+          "createdAtSource",
+          "oldTitle",
+          "newTitle",
+          "decision",
+          "reason",
+          "baseline"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "itemId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "threadId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "hostId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source": {
+            "enum": [
+              "codex"
+            ]
+          },
+          "createdAtSource": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1
+          },
+          "oldTitle": {
+            "type": "string",
+            "minLength": 1
+          },
+          "newTitle": {
+            "type": "string",
+            "minLength": 1
+          },
+          "decision": {
+            "enum": [
+              "rename",
+              "keep"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "baseline": {
+            "type": "object",
+            "required": [
+              "observedAt",
+              "title",
+              "createdAt",
+              "running",
+              "protected",
+              "unavailableProtection",
+              "evidence"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "observedAt": {
+                "type": "string",
+                "minLength": 1,
+                "format": "date-time"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "createdAt": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "minLength": 1,
+                "format": "date-time"
+              },
+              "running": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "protected": {
+                "type": "object",
+                "properties": {
+                  "projectName": {},
+                  "projectId": {},
+                  "pinned": {},
+                  "archived": {},
+                  "sectionId": {},
+                  "order": {},
+                  "updatedAt": {},
+                  "contentFingerprint": {}
+                },
+                "additionalProperties": false
+              },
+              "unavailableProtection": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "projectName",
+                    "projectId",
+                    "pinned",
+                    "archived",
+                    "sectionId",
+                    "order",
+                    "updatedAt",
+                    "contentFingerprint"
+                  ]
+                },
+                "uniqueItems": true
+              },
+              "evidence": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

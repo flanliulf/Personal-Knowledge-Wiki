@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "snapshot",
+  "type": "object",
+  "required": [
+    "observedAt",
+    "title",
+    "createdAt",
+    "running",
+    "protected",
+    "unavailableProtection",
+    "evidence"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "observedAt": {
+      "type": "string",
+      "minLength": 1,
+      "format": "date-time"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "createdAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "format": "date-time"
+    },
+    "running": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "protected": {
+      "type": "object",
+      "properties": {
+        "projectName": {},
+        "projectId": {},
+        "pinned": {},
+        "archived": {},
+        "sectionId": {},
+        "order": {},
+        "updatedAt": {},
+        "contentFingerprint": {}
+      },
+      "additionalProperties": false
+    },
+    "unavailableProtection": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "projectName",
+          "projectId",
+          "pinned",
+          "archived",
+          "sectionId",
+          "order",
+          "updatedAt",
+          "contentFingerprint"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "evidence": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

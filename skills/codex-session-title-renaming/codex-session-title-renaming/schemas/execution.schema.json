@@ -1,0 +1,329 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "execution",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "batchId",
+    "proposalSha256",
+    "approval",
+    "startedAt",
+    "finishedAt",
+    "items"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "enum": [
+        "1"
+      ]
+    },
+    "batchId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "proposalSha256": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "approval": {
+      "type": "object",
+      "required": [
+        "confirmedAt",
+        "evidence"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "confirmedAt": {
+          "type": "string",
+          "minLength": 1,
+          "format": "date-time"
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "startedAt": {
+      "type": "string",
+      "minLength": 1,
+      "format": "date-time"
+    },
+    "finishedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "format": "date-time"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "itemId",
+          "status",
+          "before",
+          "after",
+          "requestOutcome",
+          "reason",
+          "error",
+          "checks"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "itemId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "verified",
+              "failed",
+              "skipped",
+              "not_executed",
+              "unknown"
+            ]
+          },
+          "before": {
+            "anyOf": [
+              {
+                "type": "object",
+                "required": [
+                  "observedAt",
+                  "title",
+                  "createdAt",
+                  "running",
+                  "protected",
+                  "unavailableProtection",
+                  "evidence"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "observedAt": {
+                    "type": "string",
+                    "minLength": 1,
+                    "format": "date-time"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "createdAt": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "format": "date-time"
+                  },
+                  "running": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "protected": {
+                    "type": "object",
+                    "properties": {
+                      "projectName": {},
+                      "projectId": {},
+                      "pinned": {},
+                      "archived": {},
+                      "sectionId": {},
+                      "order": {},
+                      "updatedAt": {},
+                      "contentFingerprint": {}
+                    },
+                    "additionalProperties": false
+                  },
+                  "unavailableProtection": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "projectName",
+                        "projectId",
+                        "pinned",
+                        "archived",
+                        "sectionId",
+                        "order",
+                        "updatedAt",
+                        "contentFingerprint"
+                      ]
+                    },
+                    "uniqueItems": true
+                  },
+                  "evidence": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "after": {
+            "anyOf": [
+              {
+                "type": "object",
+                "required": [
+                  "observedAt",
+                  "title",
+                  "createdAt",
+                  "running",
+                  "protected",
+                  "unavailableProtection",
+                  "evidence"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "observedAt": {
+                    "type": "string",
+                    "minLength": 1,
+                    "format": "date-time"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "createdAt": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "format": "date-time"
+                  },
+                  "running": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "protected": {
+                    "type": "object",
+                    "properties": {
+                      "projectName": {},
+                      "projectId": {},
+                      "pinned": {},
+                      "archived": {},
+                      "sectionId": {},
+                      "order": {},
+                      "updatedAt": {},
+                      "contentFingerprint": {}
+                    },
+                    "additionalProperties": false
+                  },
+                  "unavailableProtection": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "projectName",
+                        "projectId",
+                        "pinned",
+                        "archived",
+                        "sectionId",
+                        "order",
+                        "updatedAt",
+                        "contentFingerprint"
+                      ]
+                    },
+                    "uniqueItems": true
+                  },
+                  "evidence": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "requestOutcome": {
+            "enum": [
+              "not_sent",
+              "success",
+              "error",
+              "uncertain"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1
+          },
+          "checks": {
+            "type": "object",
+            "required": [
+              "titleMatch",
+              "createdAtMatch",
+              "protectedMatch",
+              "protectedDiff",
+              "unavailableProtection"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "titleMatch": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "createdAtMatch": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "protectedMatch": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "protectedDiff": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "unavailableProtection": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "projectName",
+                    "projectId",
+                    "pinned",
+                    "archived",
+                    "sectionId",
+                    "order",
+                    "updatedAt",
+                    "contentFingerprint"
+                  ]
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

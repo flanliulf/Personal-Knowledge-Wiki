@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1",
+  "batchId": "example-batch",
+  "generatedAt": "2026-09-08T01:01:00Z",
+  "timezone": "Asia/Shanghai",
+  "scope": {
+    "description": "仅虚构示例，不代表任何真实会话范围",
+    "unavailable": []
+  },
+  "items": [
+    {
+      "itemId": "item-1",
+      "threadId": "example-thread",
+      "hostId": "local",
+      "source": "codex",
+      "createdAtSource": "虚构 fixture 的 createdAt（已规范化为 UTC）",
+      "oldTitle": "分析示例报告",
+      "newTitle": "260101 | 分析 | 分析示例报告",
+      "decision": "rename",
+      "reason": "示例：上海时间跨年后应为 260101",
+      "baseline": {
+        "observedAt": "2026-09-08T01:00:00Z",
+        "title": "分析示例报告",
+        "createdAt": "2025-12-31T16:30:00Z",
+        "running": false,
+        "protected": {
+          "projectName": "示例项目",
+          "projectId": "example-project",
+          "pinned": false,
+          "archived": false,
+          "sectionId": null,
+          "order": [
+            "example-thread"
+          ],
+          "updatedAt": "2026-09-07T09:00:00Z"
+        },
+        "unavailableProtection": [
+          "contentFingerprint"
+        ],
+        "evidence": "虚构 fixture，仅用于格式演示，不代表真实工具回读"
+      }
+    }
+  ]
+}
