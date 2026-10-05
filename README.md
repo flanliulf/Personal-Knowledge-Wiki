@@ -1,8 +1,8 @@
-# KnowledgeWiki（AI 源资产与写作参考资料库）
+# AI 源资产与写作参考资料库（KnowledgeWiki）
 
 本项目用于集中存放本机收集的 AI 源资产与写作参考资料，包括提示词（prompts）、技能（skills）和外部规范指南（guidelines），便于查阅、整理和复用。
 
-## Directory Guide（目录职责）
+## 目录职责（Directory Guide）
 
 | 路径 | 职责与当前内容 |
 | --- | --- |
@@ -12,14 +12,14 @@
 | [AGENTS.md](AGENTS.md) | AI LLM / Agent 分析和维护本项目时的顶层规约。 |
 | [CLAUDE.md](CLAUDE.md) | 指向 AGENTS.md 的软链接，共用同一份规约。 |
 
-## Asset Organization（资产组织）
+## 资产组织（Asset Organization）
 
 以下为硬性约束：
 
 1. `prompts/` 和 `skills/` 的下一级必须全部是子目录，每个子目录承载一项资产的所有相关信息，禁止直接放置文件。
 2. `prompts/<prompt-name>/` 下只允许存放该 prompt 的源 `.md` 文档，以及与其同级的相关子目录，如 `work/`（运行依赖）、`output/`（输出）、`examples/`（历史示例）等。禁止存放其他任何独立文档；会话 handoff 历史等须归入相关子目录。
 3. `skills/<skill-name>/` 使用相同组织规则，但源定义是与 skill 同名的子目录 `<skill-name>/`，其中包含 `SKILL.md` 及其他技能定义文件、子目录。配套的 `work/`、`output/`、`examples/` 等与该源目录同级，资产目录下禁止放置独立文档。
-4. `guidelines/<project>/source/` 保存未经改写的上游文件与许可文本；同级 `SOURCE.md` 记录来源、版本、收录范围及使用边界。Skill 需要独立携带参考资料时，可将经核对的原文和许可文件复制到其 `references/upstream/`，并在包内注明版本与许可。外部指南仅供参考，不自动成为项目规约；本项目自写文档遵循 English（中文）标题格式，两处上游原文保留原样。
+4. `guidelines/<project>/source/` 保存未经改写的上游文件与许可文本；同级 `SOURCE.md` 记录来源、版本、收录范围及使用边界。Skill 需要独立携带参考资料时，可将经核对的原文和许可文件复制到其 `references/upstream/`，并在包内注明版本与许可。外部指南仅供参考，不自动成为项目规约；本项目自写文档遵循 中文（English）标题格式，两处上游原文保留原样。
 
 规范结构示意（配套子目录按需创建）：
 
@@ -96,7 +96,7 @@ guidelines/
 - [年份补全对照表](prompts/codex-session-title-renaming/output/会话标题年份补全对照表.md)
 - [资产迁移记录](prompts/codex-session-title-renaming/output/会话资产迁移记录.md)
 
-## Asset Inventory（资产清单）
+## 资产清单（Asset Inventory）
 
 | 资产 | 内容摘要 |
 | --- | --- |
@@ -112,9 +112,9 @@ guidelines/
 | [document-style-guide](guidelines/document-style-guide/SOURCE.md) | 中文技术文档写作参考；保留上游 README 与标题、文本、段落、数值、标点、文档体系、参考链接七个章节。 |
 | [chinese-copywriting-guidelines](guidelines/chinese-copywriting-guidelines/SOURCE.md) | 中文文案排版参考；保留上游繁简中文 README 和 MIT 许可文本。 |
 
-## Skill Usage（技能使用）
+## 技能使用（Skill Usage）
 
-### Session Titles（会话标题整理）
+### 会话标题整理（Session Titles）
 
 - [运行指南](skills/codex-session-title-renaming/codex-session-title-renaming/references/workflow.md)：`audit`、`apply`、`report` 三个入口及辅助脚本命令。
 - [数据契约](skills/codex-session-title-renaming/codex-session-title-renaming/references/data-contract.md)：提案、批准绑定、实际回读、保护字段与结果限制。
@@ -128,7 +128,7 @@ guidelines/
 python3 -B -m unittest discover -s skills/codex-session-title-renaming/codex-session-title-renaming/tests -v
 ```
 
-### Skill Tooling（技能创建与检查）
+### 技能创建与检查（Skill Tooling）
 
 **所有新开展的 session 在本项目创建或更新 Skill 时，必须使用内置 [skills-creator](skills/skills-creator/skills-creator/SKILL.md) 创建或修订，再使用内置 [skills-lint](skills/skills-lint/skills-lint/SKILL.md) 检查最新源包并记录结果。** 两者通过共享规则契约维护本项目 canonical source 定义的一致性；即使宿主未自动发现，也须读取本项目源入口执行。该约束由 [AGENTS.md](AGENTS.md) 与其软链接 [CLAUDE.md](CLAUDE.md) 共同提供，profile/host 按目标适用规则选择。
 
@@ -149,7 +149,7 @@ python3 -B -m unittest discover -s skills/skills-lint/skills-lint/scripts/tests 
 
 list_rules 只生成待检查清单，density 只提供统计，不等于完整 lint 或真实宿主行为通过。源包已迁入，安装副本未同步；使用时读取本项目源入口，若要通过宿主发现则按另行授权安装内层完整包，creator 和 lint 应配套提供。
 
-### Teacher Research（教师公开信息研究）
+### 教师公开信息研究（Teacher Research）
 
 读取 [Skill 入口](skills/teacher-profile-research/teacher-profile-research/SKILL.md)，可用于“调研指定学校教师的履历和带班经历”“核验这份教师介绍”“根据新证据更新师资团队分析”。运行需要宿主具备公开检索和正文读取能力；能力缺失时明确降级为材料审查。
 
@@ -160,7 +160,7 @@ list_rules 只生成待检查清单，density 只提供统计，不等于完整 
 - [武汉中学2026级15班首轮研究](skills/teacher-profile-research/output/research-20260909-001/report.md)：2026年秋季入学、武华班型；六人画像、事实库、检索日志与最小核验摘记。任课名单由用户提供，同名候选与已确认职业记录分开。
 - [武汉中学2026级15班官网补证版（当前）](skills/teacher-profile-research/output/research-20260909-002/report.md)：补足物理、英语身份与多位教师履历，保留生物职称冲突和化学身份缺口；修订日志与事实历史完整保留。
 
-### Technical Writing（中文技术文档写作）
+### 中文技术文档写作（Technical Writing）
 
 - [Skill 入口](skills/chinese-technical-writing/chinese-technical-writing/SKILL.md)：写作、定点修改或只读审阅中文技术文档；仅提问时不写回文件。
 - [包内技术文档指南](skills/chinese-technical-writing/chinese-technical-writing/references/upstream/document-style-guide/README.md)与[包内中文排版指南](skills/chinese-technical-writing/chinese-technical-writing/references/upstream/chinese-copywriting-guidelines/README.zh-Hans.md)：保留上游规范和示例；[来源与许可](skills/chinese-technical-writing/chinese-technical-writing/references/source-provenance.md)记录收录版本。
@@ -181,6 +181,6 @@ list_rules 只生成待检查清单，density 只提供统计，不等于完整 
 
 三个包均按内置 creator/lint 的 `base`、host `unspecified` 检查。检查记录保存在各资产的本机 `output/creation-1.0.0/validation.md`，按 `.gitignore` 保留，不随源包推送。记录区分静态/语义检查与尚未执行的行为验证；密度脚本不识别中文在前的流程标题，流程比例统计未验证。源包尚未安装，宿主发现及真实触发未验证。
 
-## Maintenance（维护说明）
+## 维护说明（Maintenance）
 
 项目发生变更时，必须重新思考 README.md 的内容组织，并按实际情况更新目录职责、资产清单和摘要，保持说明与项目现状一致。
