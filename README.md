@@ -7,7 +7,7 @@
 | 路径 | 职责与当前内容 |
 | --- | --- |
 | [prompts/](prompts/) | 按独立资产子目录存放提示词及其配套内容；当前收录 Codex 会话标题整理提示词。 |
-| [skills/](skills/) | 按独立资产子目录存放 Agent 技能及配套内容；当前维护 Codex 会话标题整理、通用技能创建、规范检查、教师公开信息研究和中文技术文档写作五个源包。 |
+| [skills/](skills/) | 按独立资产子目录存放 Agent 技能及配套内容；当前维护会话标题整理、技能创建、规范检查、教师研究、中文技术写作，以及事件风暴、领域关系、聚合设计八个源包。 |
 | [guidelines/](guidelines/) | 按上游项目收录规范指南原文、许可与来源记录；当前收录两份中文写作指南，均为外部参考资料。 |
 | [AGENTS.md](AGENTS.md) | AI LLM / Agent 分析和维护本项目时的顶层规约。 |
 | [CLAUDE.md](CLAUDE.md) | 指向 AGENTS.md 的软链接，共用同一份规约。 |
@@ -68,10 +68,19 @@ skills/
 │   ├── teacher-profile-research/      # 中文入口、CHANGELOG、研究规则和成品模板
 │   ├── work/                         # 用户原方案与创建前 README 快照
 │   └── output/                       # 创建验证证据及按独立批次保存的教师研究报告
-└── chinese-technical-writing/
-    ├── chinese-technical-writing/    # 中文入口、写作自检、文档类型指引与包内指南原文
-    │   └── references/upstream/      # 两份指南的原文副本及许可文件
-    └── output/                       # 创建、历次修订与检查结果
+├── chinese-technical-writing/
+│   ├── chinese-technical-writing/    # 中文入口、写作自检、文档类型指引与包内指南原文
+│   │   └── references/upstream/      # 两份指南的原文副本及许可文件
+│   └── output/                       # 创建、历次修订与检查结果
+├── ddd-event-storming/
+│   ├── ddd-event-storming/            # 中文入口、事件分析流程、证据契约和报告模板
+│   └── output/                       # 本机创建检查证据
+├── ddd-domain-relationships/
+│   ├── ddd-domain-relationships/      # 中文入口、关系分析流程、证据契约和报告模板
+│   └── output/                       # 本机创建检查证据
+└── ddd-aggregate-design/
+    ├── ddd-aggregate-design/          # 中文入口、聚合分析流程、证据契约和报告模板
+    └── output/                       # 本机创建检查证据
 guidelines/
 ├── document-style-guide/
 │   ├── SOURCE.md                     # 来源、上游 commit、许可及使用边界
@@ -97,6 +106,9 @@ guidelines/
 | [skills-lint](skills/skills-lint/skills-lint/SKILL.md) | 3.0.0：只读规则审查、动态规则清单、密度 schema v2 和行为证据边界。由旧 forge 2.3.0 迁入。 |
 | [teacher-profile-research](skills/teacher-profile-research/teacher-profile-research/SKILL.md) | 1.0.0：教师公开信息画像与教学决策研究；身份消歧、A–D 来源分级、五态逐条核验、任教与班主任轨迹、团队分析及多轮纠错。单 Skill 源包，采用 base；未安装，已按源入口完成首轮公开信息研究。 |
 | [chinese-technical-writing](skills/chinese-technical-writing/chinese-technical-writing/SKILL.md) | 1.1.1：基于项目事实写作和定点修订中文技术文档；包内直接引用两份指南原文，重叠规则以 `document-style-guide` 为准，增加 Agent 写作自检和可选 `autocorrect` 检查。采用 base；未安装，真实宿主行为未验证。 |
+| [ddd-event-storming](skills/ddd-event-storming/ddd-event-storming/SKILL.md) | 1.0.0：分析领域事件、命令、角色、查询与功能覆盖；支持已有用例，交付候选概念、规则和未决问题。基于第 03–04 讲，采用 base；未安装，真实宿主行为未验证。 |
+| [ddd-domain-relationships](skills/ddd-domain-relationships/ddd-domain-relationships/SKILL.md) | 1.0.0：分析双向多重性、角色、关系属性、有效期、历史和限定符。基于第 05–06、20–21、24 讲，并核对第 33 讲演进反例；采用 base，未安装，真实宿主行为未验证。 |
+| [ddd-aggregate-design](skills/ddd-aggregate-design/ddd-aggregate-design/SKILL.md) | 1.0.0：从不变规则和并发场景比较聚合边界，分析封装、事务、版本保护与更新语义。基于第 14–17 讲，采用 base；未安装，真实宿主行为未验证。 |
 | [document-style-guide](guidelines/document-style-guide/SOURCE.md) | 中文技术文档写作参考；保留上游 README 与标题、文本、段落、数值、标点、文档体系、参考链接七个章节。 |
 | [chinese-copywriting-guidelines](guidelines/chinese-copywriting-guidelines/SOURCE.md) | 中文文案排版参考；保留上游繁简中文 README 和 MIT 许可文本。 |
 
@@ -154,6 +166,20 @@ list_rules 只生成待检查清单，density 只提供统计，不等于完整 
 - [包内技术文档指南](skills/chinese-technical-writing/chinese-technical-writing/references/upstream/document-style-guide/README.md)与[包内中文排版指南](skills/chinese-technical-writing/chinese-technical-writing/references/upstream/chinese-copywriting-guidelines/README.zh-Hans.md)：保留上游规范和示例；[来源与许可](skills/chinese-technical-writing/chinese-technical-writing/references/source-provenance.md)记录收录版本。
 - [指南适用说明](skills/chinese-technical-writing/chinese-technical-writing/references/writing-rules.md)、[文档类型指引](skills/chinese-technical-writing/chinese-technical-writing/references/document-types.md)、[Agent 写作自检](skills/chinese-technical-writing/chinese-technical-writing/references/agent-review.md)与[autocorrect 流程](skills/chinese-technical-writing/chinese-technical-writing/references/autocorrect-workflow.md)：先核实事实，再依原文组织内容，最后审稿和校对排版。
 - 检查结果保存在本机 `skills/chinese-technical-writing/output/`，按创建与修订版本留存；该目录遵循 `.gitignore`，不随源包推送。最新 `revision-1.1.0/validation.md` 区分静态检查和未执行的真实宿主行为验证。
+
+### DDD 分析（DDD Analysis）
+
+三个源包可独立使用，也可按“业务事件 → 领域关系 → 聚合边界”衔接。运行时读取对应内层 `SKILL.md`。各包都携带流程、证据契约、来源说明、报告模板和 8 个行为用例，不依赖本机课程目录或其他 Skill 已安装。原课程未复制或改写。
+
+| 源包 | 典型请求 | 主要交付 |
+| --- | --- | --- |
+| [ddd-event-storming](skills/ddd-event-storming/ddd-event-storming/SKILL.md) | 分析这项需求的业务事件，检查遗漏的命令和查询。 | 事件—命令矩阵、独立查询、功能覆盖、候选概念和规则。 |
+| [ddd-domain-relationships](skills/ddd-domain-relationships/ddd-domain-relationships/SKILL.md) | 分析员工与项目关系的双向多重性、关系属性及历史。 | 有明确读向和时间范围的关系表、限定符、规则及问题。 |
+| [ddd-aggregate-design](skills/ddd-aggregate-design/ddd-aggregate-design/SKILL.md) | 根据业务规则和并发操作比较聚合根与事务边界。 | 边界候选、规则覆盖、写入与持久化契约、并发验证计划。 |
+
+交接保留 `concept_id`、`rule_id`、`source_id` 和 `question_id`。共同字段为 `scope`、`baseline`、`sources`、`concepts`、`rules`、`decisions`、`open_questions`、`result_status`。`confirmed`、`candidate`、`unknown`、`conflicted`、`rejected` 五种状态用于区分事实和候选；关键未知或冲突需要澄清。分析默认在对话中交付，保存报告须有用户指定位置。`ready_for_review` 不表示设计批准或代码实现授权。
+
+三个包均按内置 creator/lint 的 `base`、host `unspecified` 检查。检查记录保存在各资产的本机 `output/creation-1.0.0/validation.md`，按 `.gitignore` 保留，不随源包推送。记录区分静态/语义检查与尚未执行的行为验证；密度脚本不识别中文在前的流程标题，流程比例统计未验证。源包尚未安装，宿主发现及真实触发未验证。
 
 ## Maintenance（维护说明）
 
