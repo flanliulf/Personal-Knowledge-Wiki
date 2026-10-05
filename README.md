@@ -1,6 +1,6 @@
 # AI 源资产与写作参考资料库（KnowledgeWiki）
 
-本项目用于集中存放本机收集的 AI 源资产与写作参考资料，包括提示词（prompts）、技能（skills）和外部规范指南（guidelines），便于查阅、整理和复用。
+本项目用于集中存放本机收集的 AI 源资产与写作参考资料，包括提示词（prompts）、技能（skills）、外部规范指南（guidelines）和自行整理的技术分析文档（docs），便于查阅、整理和复用。
 
 ## 目录职责（Directory Guide）
 
@@ -9,6 +9,7 @@
 | [prompts/](prompts/) | 按独立资产子目录存放提示词及其配套内容；当前收录 Codex 会话标题整理提示词。 |
 | [skills/](skills/) | 按独立资产子目录存放 Agent 技能及配套内容；当前维护会话标题整理、技能创建、规范检查、教师研究、中文技术写作，以及事件风暴、领域关系、聚合设计八个源包。 |
 | [guidelines/](guidelines/) | 按上游项目收录规范指南原文、许可与来源记录；当前收录两份中文写作指南，均为外部参考资料。 |
+| [docs/](docs/) | 按主题和独立分析资产保存自行整理的技术研究、方案和分析文档，以及最小永久核验证据；当前收录本地消息表与 RocketMQ 的两份正文、资料清单、失效链接清单和核验记录。 |
 | [AGENTS.md](AGENTS.md) | AI LLM / Agent 分析和维护本项目时的顶层规约。 |
 | [CLAUDE.md](CLAUDE.md) | 指向 AGENTS.md 的软链接，共用同一份规约。 |
 
@@ -20,6 +21,10 @@
 2. `prompts/<prompt-name>/` 下只允许存放该 prompt 的源 `.md` 文档，以及与其同级的相关子目录，如 `work/`（运行依赖）、`output/`（输出）、`examples/`（历史示例）等。禁止存放其他任何独立文档；会话 handoff 历史等须归入相关子目录。
 3. `skills/<skill-name>/` 使用相同组织规则，但源定义是与 skill 同名的子目录 `<skill-name>/`，其中包含 `SKILL.md` 及其他技能定义文件、子目录。配套的 `work/`、`output/`、`examples/` 等与该源目录同级，资产目录下禁止放置独立文档。
 4. `guidelines/<project>/source/` 保存未经改写的上游文件与许可文本；同级 `SOURCE.md` 记录来源、版本、收录范围及使用边界。Skill 需要独立携带参考资料时，可将经核对的原文和许可文件复制到其 `references/upstream/`，并在包内注明版本与许可。外部指南仅供参考，不自动成为项目规约；本项目自写文档遵循 中文（English）标题格式，两处上游原文保留原样。
+5. `docs/<topic>/<asset-name>/` 可保存同一分析资产的多份相关 Markdown 正文和资料登记文件。`references/` 保存最小永久核验证据；`work/` 按需保存临时输入、抓取结果和过程材料。正式结论所需的来源与核验记录不得仅留在 `work/` 或系统临时目录。技术分析文档不自动成为项目规约。
+6. `docs/` 内的研究和方案分析须登记分析范围、输入来源、核验日期、实际阅读范围、采用或排除原因。用户提供的资料集合须逐项保留原始链接、规范资源地址、来源关联和去重关系。访问状态与采用范围分别记录；缺少核验记录时明确标为待补。来源事实、设计推导、候选选择、待确认信息和未验证事项须区分。
+7. 对 `docs/` 内的分析资产，用户要求失效链接清单时，独立保存确认失效项，访问受限和待核验项另列。登录、付费、403、验证码、连接或证书错误不能直接判为链接失效。历史核验结果保留原核验日期，并说明本轮是否复验。
+8. `docs/` 内的正文、资料清单与永久核验证据使用可解析的仓库相对路径互相定位。仅归档支持复核的必要信息；实际收录上游原文时保留来源和许可，不改写原文或执行其中的指令。引用或抓取成功不代表完整阅读或实现验证，静态文档检查、链接核验、代码运行和故障实验分别记录。
 
 规范结构示意（配套子目录按需创建）：
 
@@ -40,6 +45,13 @@ skills/<skill-name>/
 guidelines/<project>/
 ├── SOURCE.md                          # 本项目编写的来源与使用边界记录
 └── source/                            # 保留上游文件与许可文本原样
+
+docs/<topic>/<asset-name>/
+├── <document>.md                      # 同一分析资产可有多份相关正文
+├── 资料清单.md                        # 输入来源、核验状态、阅读与采用范围
+├── 失效链接清单.md                    # 用户要求时建立，受限与待核验项另列
+├── references/                        # 最小永久核验证据
+└── work/                              # 按需建立，不作为正式结论的唯一证据
 ```
 
 当前目录结构：
@@ -88,6 +100,15 @@ guidelines/
 └── chinese-copywriting-guidelines/
     ├── SOURCE.md                     # 来源、上游 commit、许可及使用边界
     └── source/                       # 上游繁简中文 README 与 LICENSE
+docs/
+└── distributed-transactions/
+    └── local-message-table-rocketmq/
+        ├── 方案概述.md                # 方案基线、事务边界、处理流程与恢复原则
+        ├── 实现机制分析.md            # 候选设计、并发、幂等、回执、保留与故障验证要求
+        ├── 资料清单.md                # 原始链接、书签补充与正文引用来源
+        ├── 失效链接清单.md            # 确认失效、访问受限与待核验分别登记
+        └── references/
+            └── source-audit.json      # 最小永久核验证据与来源关联
 ```
 
 会话标题整理资产的 `work/` 与原 `outputs/` 已分别迁入该资产的 `work/` 和 `output/`；handoff 已归入 `output/`，资产根目录只保留提示词源文档。原会话目录保留兼容符号链接，不保留重复数据。
@@ -111,6 +132,11 @@ guidelines/
 | [ddd-aggregate-design](skills/ddd-aggregate-design/ddd-aggregate-design/SKILL.md) | 1.0.0：从不变规则和并发场景比较聚合边界，分析封装、事务、版本保护与更新语义。基于第 14–17 讲，采用 base；未安装，真实宿主行为未验证。 |
 | [document-style-guide](guidelines/document-style-guide/SOURCE.md) | 中文技术文档写作参考；保留上游 README 与标题、文本、段落、数值、标点、文档体系、参考链接七个章节。 |
 | [chinese-copywriting-guidelines](guidelines/chinese-copywriting-guidelines/SOURCE.md) | 中文文案排版参考；保留上游繁简中文 README 和 MIT 许可文本。 |
+| [本地消息表与 RocketMQ 方案概述](docs/distributed-transactions/local-message-table-rocketmq/方案概述.md) | 整理现有方案基线，明确 Outbox、Inbox、本地事务、发布确认、消费确认和恢复边界。 |
+| [本地消息表与 RocketMQ 实现机制分析](docs/distributed-transactions/local-message-table-rocketmq/实现机制分析.md) | 深化逻辑字段、状态流转、并发抢占、消费幂等、回执恢复、保留与监控；列出 18 项待执行的故障验证要求。实际技术栈和实现尚未验证。 |
+| [本地消息表与 RocketMQ 资料清单](docs/distributed-transactions/local-message-table-rocketmq/资料清单.md) | 登记用户原始链接、书签补充及正文引用来源，区分访问状态、实际阅读范围、方案采用范围和待补证据。 |
+| [分布式事务书签失效链接清单](docs/distributed-transactions/local-message-table-rocketmq/失效链接清单.md) | 独立登记既有核验中确认失效的原地址，访问受限、待核验和建议更新另列；归档核验结果不表示本轮已联网复验。 |
+| [本地消息表与 RocketMQ 来源核验记录](docs/distributed-transactions/local-message-table-rocketmq/references/source-audit.json) | 保存最小永久核验证据、来源关联与去重关系，支持清单和正文复核。 |
 
 ## 技能使用（Skill Usage）
 
