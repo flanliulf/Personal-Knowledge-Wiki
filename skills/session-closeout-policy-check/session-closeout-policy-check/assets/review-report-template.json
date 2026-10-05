@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "",
+  "commit_check": "UNVERIFIED",
+  "policy_update": "NONE",
+  "scope_basis": "unknown",
+  "policy_discovery_complete": false,
+  "findings": [],
+  "checks": [],
+  "policy_changes": [],
+  "limitations": ["模板尚未执行审查；不得将此文件作为通过证据"]
+}

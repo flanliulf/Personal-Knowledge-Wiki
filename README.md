@@ -7,7 +7,7 @@
 | 路径 | 职责与当前内容 |
 | --- | --- |
 | [prompts/](prompts/) | 按独立资产子目录存放提示词及其配套内容；当前收录 Codex 会话标题整理提示词。 |
-| [skills/](skills/) | 按独立资产子目录存放 Agent 技能及配套内容；当前维护会话标题整理、技能创建、规范检查、教师研究、中文技术写作，以及事件风暴、领域关系、聚合设计八个源包。 |
+| [skills/](skills/) | 按独立资产子目录存放 Agent 技能及配套内容；当前维护会话标题整理、技能创建、规范检查、教师研究、中文技术写作、事件风暴、领域关系、聚合设计和会话收尾规约检查九个源包。 |
 | [guidelines/](guidelines/) | 按上游项目收录规范指南原文、许可与来源记录；当前收录两份中文写作指南，均为外部参考资料。 |
 | [docs/](docs/) | 按主题和独立分析资产保存自行整理的技术研究、方案和分析文档，以及最小永久核验证据；当前收录本地消息表与 RocketMQ 的两份正文、资料清单、失效链接清单和核验记录。 |
 | [AGENTS.md](AGENTS.md) | AI LLM / Agent 分析和维护本项目时的顶层规约。 |
@@ -90,9 +90,12 @@ skills/
 ├── ddd-domain-relationships/
 │   ├── ddd-domain-relationships/      # 中文入口、关系分析流程、证据契约和报告模板
 │   └── output/                       # 本机创建检查证据
-└── ddd-aggregate-design/
-    ├── ddd-aggregate-design/          # 中文入口、聚合分析流程、证据契约和报告模板
-    └── output/                       # 本机创建检查证据
+├── ddd-aggregate-design/
+│   ├── ddd-aggregate-design/          # 中文入口、聚合分析流程、证据契约和报告模板
+│   └── output/                       # 本机创建检查证据
+└── session-closeout-policy-check/
+    ├── session-closeout-policy-check/ # 共享 Skill、Codex/Claude Code Hook 模板和快照核对工具
+    └── output/                       # 本机创建检查证据，不表示真实宿主已启用
 guidelines/
 ├── document-style-guide/
 │   ├── SOURCE.md                     # 来源、上游 commit、许可及使用边界
@@ -130,6 +133,7 @@ docs/
 | [ddd-event-storming](skills/ddd-event-storming/ddd-event-storming/SKILL.md) | 1.0.0：分析领域事件、命令、角色、查询与功能覆盖；支持已有用例，交付候选概念、规则和未决问题。基于第 03–04 讲，采用 base；未安装，真实宿主行为未验证。 |
 | [ddd-domain-relationships](skills/ddd-domain-relationships/ddd-domain-relationships/SKILL.md) | 1.0.0：分析双向多重性、角色、关系属性、有效期、历史和限定符。基于第 05–06、20–21、24 讲，并核对第 33 讲演进反例；采用 base，未安装，真实宿主行为未验证。 |
 | [ddd-aggregate-design](skills/ddd-aggregate-design/ddd-aggregate-design/SKILL.md) | 1.0.0：从不变规则和并发场景比较聚合边界，分析封装、事务、版本保护与更新语义。基于第 14–17 讲，采用 base；未安装，真实宿主行为未验证。 |
+| [session-closeout-policy-check](skills/session-closeout-policy-check/session-closeout-policy-check/SKILL.md) | 1.0.0：会话收尾、提交前的通用规约审查；共享 Skill 评估符合性与规约演进，Codex/Claude Code 命令型 Hooks 显式触发，可选 Git 入口核对实际 index。采用 base；源包未安装，真实宿主事件未验证。 |
 | [document-style-guide](guidelines/document-style-guide/SOURCE.md) | 中文技术文档写作参考；保留上游 README 与标题、文本、段落、数值、标点、文档体系、参考链接七个章节。 |
 | [chinese-copywriting-guidelines](guidelines/chinese-copywriting-guidelines/SOURCE.md) | 中文文案排版参考；保留上游繁简中文 README 和 MIT 许可文本。 |
 | [本地消息表与 RocketMQ 方案概述](docs/distributed-transactions/local-message-table-rocketmq/方案概述.md) | 整理现有方案基线，明确 Outbox、Inbox、本地事务、发布确认、消费确认和恢复边界。 |
@@ -206,6 +210,15 @@ list_rules 只生成待检查清单，density 只提供统计，不等于完整 
 交接保留 `concept_id`、`rule_id`、`source_id` 和 `question_id`。共同字段为 `scope`、`baseline`、`sources`、`concepts`、`rules`、`decisions`、`open_questions`、`result_status`。`confirmed`、`candidate`、`unknown`、`conflicted`、`rejected` 五种状态用于区分事实和候选；关键未知或冲突需要澄清。分析默认在对话中交付，保存报告须有用户指定位置。`ready_for_review` 不表示设计批准或代码实现授权。
 
 三个包均按内置 creator/lint 的 `base`、host `unspecified` 检查。检查记录保存在各资产的本机 `output/creation-1.0.0/validation.md`，按 `.gitignore` 保留，不随源包推送。记录区分静态/语义检查与尚未执行的行为验证；密度脚本不识别中文在前的流程标题，流程比例统计未验证。源包尚未安装，宿主发现及真实触发未验证。
+
+### 会话收尾与提交检查（Session Closeout）
+
+- [Skill 入口](skills/session-closeout-policy-check/session-closeout-policy-check/SKILL.md)：检查本次授权修改是否符合项目规约，区分明确违规、覆盖缺口、规则冲突、证据不足和可选改进。
+- [检查契约](skills/session-closeout-policy-check/session-closeout-policy-check/references/check-contract.md)与[详细流程](skills/session-closeout-policy-check/session-closeout-policy-check/references/workflow.md)：读取各项目自己的规则，分别确认会话范围与提交候选；实际 index、上下文或规约变化时重新检查。
+- [宿主适配](skills/session-closeout-policy-check/session-closeout-policy-check/references/host-adapters.md)：共享 Skill 与 Codex、Claude Code 命令型 Hook 模板结合；明确启用的一次收尾请求最多提醒一次。可选 Git `pre-commit` 只核对当前报告和候选快照。
+- [官方来源与边界](skills/session-closeout-policy-check/session-closeout-policy-check/references/source-provenance.md)与[行为验收计划](skills/session-closeout-policy-check/session-closeout-policy-check/references/behavior-cases.md)：官方能力核验、确定性脚本测试和真实宿主执行分开记录。
+
+源包使用内置 creator/lint 的 `base` 与 Codex 适用规则检查，Claude Code 兼容性另按官方资料核验。创建检查记录保存在本机 `skills/session-closeout-policy-check/output/creation-1.0.0/`，遵循 `.gitignore`；模板不是已安装配置，未注册任何 Hooks，未读取 transcript，未执行真实宿主行为验收。
 
 ## 维护说明（Maintenance）
 

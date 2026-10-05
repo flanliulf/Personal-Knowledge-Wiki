@@ -1,0 +1,16 @@
+{
+  "description": "显式启用收尾请求后，提示执行 session-closeout-policy-check；模板需替换路径并经信任后使用。",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/ABS/PYTHON\" -B \"/ABS/SKILL/scripts/closeout_check.py\" hook --host codex --request \"/ABS/RUN/request.json\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

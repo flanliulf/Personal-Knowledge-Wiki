@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/ABS/PYTHON\" -B \"/ABS/SKILL/scripts/closeout_check.py\" hook --host claude-code --request \"/ABS/RUN/request.json\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

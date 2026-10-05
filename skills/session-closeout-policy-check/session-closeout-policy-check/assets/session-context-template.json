@@ -1,0 +1,11 @@
+{
+  "task": "填写当前可信用户任务与收尾要求",
+  "authorized_scope": ["REPLACE_WITH_CONFIRMED_RELATIVE_PATH"],
+  "authorization_evidence": "填写用户确认的范围依据；模板内容不表示已授权",
+  "policy_paths": ["AGENTS.md"],
+  "external_policies": [],
+  "baseline": {
+    "status": "unknown",
+    "reason": "尚未取得可信会话起始记录；当前 HEAD 不能替代起始状态"
+  }
+}

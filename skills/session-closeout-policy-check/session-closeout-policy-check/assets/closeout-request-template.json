@@ -1,0 +1,7 @@
+{
+  "request_id": "REPLACE_WITH_NEW_CLOSEOUT_REQUEST_ID",
+  "active": false,
+  "repo_root": "/ABS/PROJECT",
+  "context_path": "/ABS/RUN/context.json",
+  "report_path": "/ABS/RUN/report.json"
+}
