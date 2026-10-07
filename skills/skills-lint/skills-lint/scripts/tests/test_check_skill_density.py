@@ -44,6 +44,16 @@ class ExtractWorkflowTests(unittest.TestCase):
                 "## Workflow（工作流）\n步骤一\n### Detail\n细节\n",
             ),
             (
+                "SKILL.md",
+                "## 执行流程（Workflow）\n步骤一\n### 细节（Detail）\n细节\n## 注意事项（Notes）\n不要包含",
+                "## 执行流程（Workflow）\n步骤一\n### 细节（Detail）\n细节\n",
+            ),
+            (
+                "SKILL.md",
+                "[工作流（Workflow）]\n步骤一\n[注意事项（Notes）]\n不要包含",
+                "[工作流（Workflow）]\n步骤一\n",
+            ),
+            (
                 "SKILL.en.md",
                 "## Workflow\nStep one\n### Detail\nDetails\n## Notes\nDo not include",
                 "## Workflow\nStep one\n### Detail\nDetails\n",

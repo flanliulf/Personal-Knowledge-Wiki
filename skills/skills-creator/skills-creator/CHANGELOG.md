@@ -4,6 +4,16 @@
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/)，版本号遵循 [Semantic Versioning](https://semver.org/)。
 
+## [3.0.0] - 2026-10-07
+
+### 变更（Changed）
+- 中文入口与入口示例模板的章节标题改为 中文（English）形式，与配套 lint 4.0.0 的 BODY-06 一致；英文 mirror 继续使用英文标题。
+- 配套契约改为核实 skills-lint 4.0.0；spec-guide 与 testing-guide 同步版本及标题说明。
+
+### 兼容性（Compatibility）
+- 破坏性变更：按 tooling 生成的新入口改用中文在前的标题，旧 English（中文）标题需迁移。规则契约 1.0.0 不变，不再与 lint 3.0.0 配套。
+- 未执行真实宿主行为验收，安装副本未同步。
+
 ## [2.0.0] - 2026-09-09
 
 ### Changed（变更）

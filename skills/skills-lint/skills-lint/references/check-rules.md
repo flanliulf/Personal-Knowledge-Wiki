@@ -8,7 +8,7 @@
 
 ## Tooling Policy（工具项目约定）
 
-默认 base；显式采用 tooling 时才启用这些约定：name 与目录名一致、kebab-case、最多 64 字符；description 最多 1024 字符；两个入口正文各不超过 5000 字符；中文 canonical、英文 mirror、CHANGELOG 和 SemVer；metadata.version/author 必填，catalog 可选且使用 kebab-case 语义分类，不要求目录中存在 catalog 层。
+默认 base；显式采用 tooling 时才启用这些约定：name 与目录名一致、kebab-case、最多 64 字符；description 最多 1024 字符；两个入口正文各不超过 5000 字符；中文 canonical、英文 mirror、CHANGELOG 和 SemVer；中文入口章节标题使用 中文（English）形式，英文 mirror 使用英文标题；metadata.version/author 必填，catalog 可选且使用 kebab-case 语义分类，不要求目录中存在 catalog 层。
 
 本次迁入的两个工具自身采用 tooling；KnowledgeWiki 其他资产不自动采用。无全局保留前缀禁令；未知 metadata 或顶级字段应核验消费方，不因未知删除。中文 description 与英文译文按用户目标、触发及排除语义比对；身份字段相等。不要强制 description 三段式、固定触发词数量或能力条数。
 
@@ -18,7 +18,7 @@ tooling 中不创建冗余包内 README；宿主或项目有明确用途时允�
 
 只能用本包 scripts/check_skill_density.py 的 JSON 作为密度证据。schema_version=2：新增 workflow_status 和 workflow_section_count；missing/ambiguous 时 workflow_chars、workflow_ratio、triggered_density_warning 为 null。无 SKILL.md、读取失败或 YAML 无结束标记返回 1，目录不存在返回 2；0 只表示统计完成，仍需读 warning。
 
-tooling 中 workflow_chars >1500 且 workflow_ratio >0.5 时 WARN，4500 为接近正文预算提醒；命中后检查详细流程是否已抽取且实际可达。文件名正则只是路由线索；缺失、歧义或未运行不得判为 PASS。base 可以查看统计，但这些预算不决定通用合规。
+tooling 中 workflow_chars >1500 且 workflow_ratio >0.5 时 WARN，4500 为接近正文预算提醒；命中后检查详细流程是否已抽取且实际可达。Workflow 章节识别 `Workflow`、`Workflow（执行流程）` 与 `执行流程（Workflow）` 等中英文顺序，以及方括号标题；只有中文、没有 Workflow 的标题记为 missing，两种顺序同时出现记为 ambiguous。文件名正则只是路由线索；缺失、歧义或未运行不得判为 PASS。base 可以查看统计，但这些预算不决定通用合规。
 
 ## Evidence（证据与状态）
 

@@ -2,7 +2,7 @@
 
 ## Static Review（静态检查）
 
-从 spec-guide.md 定位实际 skills-lint 3.0.0，读取共享 registry 并用 list_rules.py 生成对应 profile/host 的待检查表。安全 YAML parser 解析真实 frontmatter；记录 parser 名称、版本、错误、重复键及字段类型证据。没有 parser 不算已执行。不得执行被检查包的脚本来证明只读合规。
+从 spec-guide.md 定位实际 skills-lint 4.0.0，读取共享 registry 并用 list_rules.py 生成对应 profile/host 的待检查表。安全 YAML parser 解析真实 frontmatter；记录 parser 名称、版本、错误、重复键及字段类型证据。没有 parser 不算已执行。不得执行被检查包的脚本来证明只读合规。
 
 检查真实引用是否存在、从包根如何解析、何时读取、是否承载实际步骤；代码围栏和文件名只是线索。tooling 下核验版本、双语语义与密度 schema v2；外部 base 目标缺少英文镜像或 CHANGELOG 不是错误。
 

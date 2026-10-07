@@ -260,7 +260,7 @@
       "source": "tooling-policy",
       "severity": "Warning",
       "method": "static-review",
-      "criteria": "SKILL.md 章节标题使用 English（中文）形式，正文内容使用中文，技术标识使用英文"
+      "criteria": "SKILL.md 章节标题使用 中文（English）形式，正文内容使用中文，技术标识使用英文；英文 mirror 使用英文标题。"
     },
     {
       "id": "BODY-07",

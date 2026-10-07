@@ -53,7 +53,9 @@ def mask_fences(body: str) -> str:
 
 def workflow_sections(body: str) -> list:
     masked = mask_fences(body)
-    title = r"Workflow(?:[ \t]*(?:（(?:执行流程|工作流)）|\((?:执行流程|工作流)\)))?"
+    chinese = r"(?:执行流程|工作流)"
+    title = (rf"(?:Workflow(?:[ \t]*(?:（{chinese}）|\({chinese}\)))?"
+             rf"|{chinese}[ \t]*(?:（Workflow）|\(Workflow\)))")
     pattern = rf"^ {{0,3}}(?:\[{title}\]|(?P<markdown>#{{1,6}})[ \t]+{title}(?:[ \t]+#+)?)[ \t]*$"
     sections = []
     for match in re.finditer(pattern, masked, re.MULTILINE | re.IGNORECASE):

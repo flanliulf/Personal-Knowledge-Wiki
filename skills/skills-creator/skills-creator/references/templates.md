@@ -20,18 +20,18 @@ metadata:
 以上 metadata 及以下正文结构是 tooling 示例；base 只必需 name、description，按需求保留扩展。正文按以下语义结构写入；不要求固定能力条数或统一措辞：
 
 ```markdown
-## Overview（技能说明）
+## 技能说明（Overview）
 说明用户目标与交付物。
 
-## Core Capabilities（核心能力）
+## 核心能力（Core Capabilities）
 列出完成该目标所需的实际能力。
 
-## Workflow（执行流程）
+## 执行流程（Workflow）
 1. 校验用户提供的输入；说明缺失信息时的处理。
 2. 在需要详细规则时读取真实 reference 路径。
 3. 执行步骤并检查结果，定义完成及停止条件。
 
-## Notes（注意事项）
+## 注意事项（Notes）
 记录范围、不能推断的事实、依赖缺失处理和输出要求。
 ```
 

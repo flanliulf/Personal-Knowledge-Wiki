@@ -26,7 +26,9 @@ class DensityTests(unittest.TestCase):
         for filename in ("SKILL.md", "SKILL.en.md"):
             for heading in ("## Workflow", "[Workflow]", "## Workflow（工作流）",
                             "[Workflow（执行流程）]", "## Workflow（执行流程）",
-                            "## Workflow (工作流)", "## Workflow ###"):
+                            "## Workflow (工作流)", "## Workflow ###",
+                            "## 执行流程（Workflow）", "[执行流程（Workflow）]",
+                            "## 工作流（Workflow）", "## 执行流程 (Workflow)"):
                 with self.subTest(filename=filename, heading=heading):
                     row = self.inspect(heading + "\n" + "执行步骤。" * 400, filename)
                     self.assertEqual(row["workflow_status"], "identified")
@@ -63,6 +65,15 @@ class DensityTests(unittest.TestCase):
         row = self.inspect("## Workflow\nfirst\n## Workflow\nsecond")
         self.assertEqual(row["workflow_status"], "ambiguous")
         self.assertIsNone(row["triggered_density_warning"])
+
+    def test_both_title_orders_together_are_ambiguous(self):
+        row = self.inspect("## Workflow（执行流程）\nfirst\n## 执行流程（Workflow）\nsecond")
+        self.assertEqual(row["workflow_status"], "ambiguous")
+        self.assertEqual(row["workflow_section_count"], 2)
+
+    def test_chinese_title_without_english_is_not_workflow(self):
+        row = self.inspect("## 执行流程\n" + "执行步骤。" * 400)
+        self.assertEqual(row["workflow_status"], "missing")
 
     def test_frontmatter_delimiters_are_lines(self):
         body = "## Workflow\ntext\n---\nmore"

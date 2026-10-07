@@ -4,6 +4,17 @@
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/)，版本号遵循 [Semantic Versioning](https://semver.org/)。
 
+## [4.0.0] - 2026-10-07
+
+### 变更（Changed）
+- BODY-06 改为要求 tooling 中文入口章节标题使用 中文（English）形式，与 KnowledgeWiki 项目规约一致；英文 mirror 继续使用英文标题。
+- `check_skill_density.py` 同时识别 `执行流程（Workflow）`、`工作流（Workflow）` 及半角括号写法，原有 `Workflow（执行流程）` 等写法继续兼容；两种顺序同时出现记为 ambiguous。
+- 本包中文入口章节标题迁移为中文在前；check-rules 同步标题与密度识别说明。
+
+### 兼容性（Compatibility）
+- 破坏性变更：沿用 English（中文）标题的 tooling 包会在 BODY-06 得到 WARN，需迁移标题。配套 creator 3.0.0 / lint 4.0.0，规则契约 1.0.0 与密度 schema_version=2 不变。
+- 只含中文、不含 Workflow 的标题仍记为 missing。未执行真实宿主行为验收，安装副本未同步。
+
 ## [3.0.0] - 2026-09-09
 
 ### Changed（变更）
