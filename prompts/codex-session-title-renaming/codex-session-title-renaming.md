@@ -1,8 +1,8 @@
-# Asset Status（资产状态）
+# 资产状态（Asset Status）
 
 本提示词作为历史源资产保留，后续运行规则统一维护于 [codex-session-title-renaming Skill](../../skills/codex-session-title-renaming/codex-session-title-renaming/SKILL.md)。新 Skill 源包已建立，尚未安装或验证真实应用调用；历史执行证据继续保留在本资产的 `work/`、`output/` 中。下方原文不再作为新版流程的维护入口。
 
-## Historical Prompt（历史提示词）
+## 历史提示词（Historical Prompt）
 
 我的Codex中对话记录越来越多，现在每个会话的标题很混乱，本任务是我希望你针对我的所有会话标题执行修改，原则是只修改会话名称，不修改项目名称。
 
