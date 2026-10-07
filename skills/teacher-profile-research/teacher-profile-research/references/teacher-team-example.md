@@ -1,10 +1,10 @@
-# Teacher Team Example（虚构案例与行为用例）
+# 虚构案例与行为用例（Teacher Team Example）
 
-## Fixture Boundary（虚构边界）
+## 虚构边界（Fixture Boundary）
 
 下述“示例学校甲”“教师甲/乙/丙”及材料完全虚构，只用于检查规则理解，不提供真实教师结论，不执行联网搜索，不构成行为测试通过记录。模板字段约束见 `references/fact-registry.md`。
 
-## Worked Example（核验示例）
+## 核验示例（Worked Example）
 
 用户材料说：“教师甲是示例学校甲的英语教师，某师资文章证明其获奖。”材料正文却是：前一人物“教师乙”段落列荣誉，下一标题才开始“教师甲，生物学科”。
 
@@ -20,13 +20,13 @@
 
 若后续有已核验正式公告，直接证明同一人物曾完成一个完整三年班主任周期，新建或修订对应周期 claim，分型可更新为 B，并重审所有“缺完整周期证据”的个人/团队文字。c004 的成绩说法并不因这个公告自动确认。
 
-## Revision Example（修订示例）
+## 修订示例（Revision Example）
 
 claim c010：“教师丙完成某届完整高中班主任周期”。revision 1 是 STRONGLY_INFERRED，依据高一、高二、高三记录；新材料显示高二记录实际属于另一个同名人，则追加 revision 2，改为 UNVERIFIED，标记旧推断链断裂。只有证据明确排除完整周期本身，才 REJECTED。
 
 同步重审 conclusion k010（暂定 B）与 k011（团队具备完整周期班主任配置），把受影响结论置 NEEDS_REVIEW，改写或撤回后再交付。corrections 记录 c010 的 from_revision=1、to_revision=2、受影响结论及理由；不删除旧记录。
 
-## Behavior Cases（行为用例）
+## 行为用例（Behavior Cases）
 
 以下均为预期，真实宿主执行状态均为 NOT_CHECKED。日后测试须记录宿主/版本、入口 hash、输入、实际输出与证据位置。
 

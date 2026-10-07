@@ -1,6 +1,6 @@
-# Source Provenance（来源与许可）
+# 来源与许可（Source Provenance）
 
-## Bundled Guides（包内指南）
+## 包内指南（Bundled Guides）
 
 | 上游 | 包内位置 | 上游 commit | 许可与范围 |
 | --- | --- | --- | --- |
@@ -9,6 +9,6 @@
 
 包内文件从 KnowledgeWiki `guidelines/` 的对应快照逐字节复制。更新上游版本时先核实来源、许可和差异，再同步两处副本；不在原文上直接加入本 Skill 的写作规则。包内原文可随 Skill 单独携带，运行时不依赖仓库级 `guidelines/`。
 
-## Design References（设计参考）
+## 设计参考（Design References）
 
 [leter/zh-tech-writing](https://github.com/leter/zh-tech-writing) 启发了写作后再做 Agent 语气自检、排版工具辅助和人工复核的流程。本包的 [Agent 写作自检](agent-review.md)与 [AutoCorrect 流程](autocorrect-workflow.md)为独立编写，不收录该项目原文。`autocorrect` 的能力与命令以其[官方仓库](https://github.com/huacnlee/autocorrect)为参考。

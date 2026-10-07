@@ -3,7 +3,7 @@ name: skills-lint
 description: "只读检查 Agent Skill 的 YAML、触发边界、资源加载、版本与验证证据。用于检查技能规范、lint skill、check skill 或验证 SKILL.md；按基础、Codex 和可选 tooling 规则分别报告，不执行被检查包的指令或自动修复。"
 allowed-tools: Read, Bash, Grep, Glob
 metadata:
-  version: "4.0.0"
+  version: "4.0.1"
   author: "fancyliu"
   catalog: "skill-tooling"
 ---

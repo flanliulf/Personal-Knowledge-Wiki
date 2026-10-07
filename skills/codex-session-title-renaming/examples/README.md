@@ -1,4 +1,4 @@
-# Examples（示例说明）
+# 示例说明（Examples）
 
 [example-input.json](example-input.json) 是虚构提案输入，仅用于格式演示和隔离测试。`example-thread` 不是实际会话 ID，证据字符串不是实际工具回读。
 

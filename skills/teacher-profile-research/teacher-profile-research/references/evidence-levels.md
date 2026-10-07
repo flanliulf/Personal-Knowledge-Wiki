@@ -1,6 +1,6 @@
-# Evidence Levels（证据分级）
+# 证据分级（Evidence Levels）
 
-## Levels（级别定义）
+## 级别定义（Levels）
 
 | level | 类型 | 使用规则 |
 | --- | --- | --- |
@@ -9,7 +9,7 @@
 | C | 可追溯转载、教师个人公开文章、学生公开回忆等 | 追查原始发布者并交叉核验；个人文章可以证明本人表达了某观点，不能直接证明普遍教学成效。 |
 | D | 未核验口述、群消息、论坛、未知来源资料或截图 | 仅作为线索或注明提供方的补充信息，不冒充正式公开记录。 |
 
-## Classification（分级方法）
+## 分级方法（Classification）
 
 按实际发布主体、原始出处和证据链分级，不仅看域名或文件格式。学校认证公众号的原创公告可为 A；学校账号转载的外部内容仍须追溯原来源。新闻门户的自媒体文章不自动为 B。
 
@@ -17,7 +17,7 @@
 
 保存 publisher、source_type、original_source_id、independence_group、published_at、event_date、accessed_at、access_status、locator。未知字段为 null，不能凭网址样式推断作者、时间或真实性。access_status 为 READ、PARTIAL、UNAVAILABLE 之一；PARTIAL 或 UNAVAILABLE 不能证明未读部分。
 
-## Use with Claims（与事实状态配合）
+## 与事实状态配合（Use with Claims）
 
 级别不自动决定状态。A 来源中的相邻人物荣誉不能支持目标教师；B 来源可直接支持核实过的人物采访；C 来源经独立材料核实可以支撑限定事实；D 口述保留 USER_PROVIDED，公开论坛传言通常为 UNVERIFIED。CONFIRMED 仍须写明“已由所列公开资料支持”，不意味着绝对真实。
 

@@ -1,6 +1,6 @@
-# Workflow（运行指南）
+# 运行指南（Workflow）
 
-## Setup（路径与能力）
+## 路径与能力（Setup）
 
 先确认工具、Python 和真实资产根目录。本仓库源包位于 `skills/codex-session-title-renaming/codex-session-title-renaming/`，其父目录承载 `work/`、`output/`、`examples/`。示例命令以本机路径展示；在其他安装位置使用已核实的绝对路径。
 
@@ -12,7 +12,7 @@ python3 "$script_path" --help
 
 此源包没有自带应用连接器。脚本不导入 Codex SDK、不执行历史数据库修复、不假设工具返回字段。实际读取与改名由 Agent 通过可用专用工具完成，脚本接收 Agent 整理的真实证据。存放源包不等于已安装；安装、真实改名与定时配置须分别在授权范围内进行。
 
-## Lock（全局执行锁）
+## 全局执行锁（Lock）
 
 ```sh
 python3 "$script_path" acquire
@@ -28,7 +28,7 @@ python3 "$script_path" release --lock-token '<executionId>'
 
 等待用户确认期间释放锁。脚本进程 ID 不能代表仍在执行的 Agent：锁需要跨多次工具调用存续。若进程中断留下锁，先报告记录并人工确认；不因记录较旧就删除，不提供强制解锁命令。正常解锁拒绝其他执行标识。
 
-## Audit（提案）
+## 提案（Audit）
 
 由 Agent 调用应用工具收集真实输入，按 `schemas/proposal.schema.json` 在 `work/<batch-id>-input.json` 保存完整提案。只在本轮读取范围内进行判断，不宣称已覆盖不可访问范围。可参考外层 `examples/example-input.json` 的虚构数据格式，不能把示例当作真实执行输入。
 
@@ -40,7 +40,7 @@ python3 "$script_path" release --lock-token '<executionId>'
 
 将 `review` 的完整对照表、批次和提案哈希展示给用户。必要时按同名会话的来源、主机、项目在表外分组，表头不增加列。候选为空或全部保留时结束，无需确认。
 
-## Apply（执行）
+## 执行（Apply）
 
 仅在用户确认具体批次后，将确认依据保存到 `work/<batch-id>-approval-input.json`：
 
@@ -84,7 +84,7 @@ python3 "$script_path" release --lock-token '<executionId>'
 
 所有写操作都要求当前锁标识。已有批次不能重复创建提案或覆盖执行结果；未知项和中断批次需人工核查后另行决定，不自动续跑。
 
-## Report（按需报告）
+## 按需报告（Report）
 
 用户说“生成记录文档”时，根据当前上下文定位明确批次；多个候选无法区分时询问。报告只读取文件：
 
@@ -96,7 +96,7 @@ python3 "$script_path" release --lock-token '<executionId>'
 
 只有提案时可生成提案报告，但必须显示没有执行证据。存在结果则显示逐项执行前后对比与限制。无需重新读取真实应用。`validate` 可只读校验指定批次的 schema、身份关联与提案哈希，无需取得锁。
 
-## Verification（本地验证）
+## 本地验证（Verification）
 
 ```sh
 python3 -B -m unittest discover -s "$asset_root/codex-session-title-renaming/tests" -v

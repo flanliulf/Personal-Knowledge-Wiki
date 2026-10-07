@@ -20,7 +20,7 @@
 1. `prompts/` 和 `skills/` 的下一级必须全部是子目录，每个子目录承载一项资产的所有相关信息，禁止直接放置文件。
 2. `prompts/<prompt-name>/` 下只允许存放该 prompt 的源 `.md` 文档，以及与其同级的相关子目录，如 `work/`（运行依赖）、`output/`（输出）、`examples/`（历史示例）等。禁止存放其他任何独立文档；会话 handoff 历史等须归入相关子目录。
 3. `skills/<skill-name>/` 使用相同组织规则，但源定义是与 skill 同名的子目录 `<skill-name>/`，其中包含 `SKILL.md` 及其他技能定义文件、子目录。配套的 `work/`、`output/`、`examples/` 等与该源目录同级，资产目录下禁止放置独立文档。
-4. `guidelines/<project>/source/` 保存未经改写的上游文件与许可文本；同级 `SOURCE.md` 记录来源、版本、收录范围及使用边界。Skill 需要独立携带参考资料时，可将经核对的原文和许可文件复制到其 `references/upstream/`，并在包内注明版本与许可。外部指南仅供参考，不自动成为项目规约；本项目自写文档遵循 中文（English）标题格式，两处上游原文保留原样。
+4. `guidelines/<project>/source/` 保存未经改写的上游文件与许可文本；同级 `SOURCE.md` 记录来源、版本、收录范围及使用边界。Skill 需要独立携带参考资料时，可将经核对的原文和许可文件复制到其 `references/upstream/`，并在包内注明版本与许可。外部指南仅供参考，不自动成为项目规约；本项目自写文档遵循 中文（English）标题格式，两处上游原文保留原样；CHANGELOG 的历史条目按原样保留。
 5. `docs/<topic>/<asset-name>/` 可保存同一分析资产的多份相关 Markdown 正文和资料登记文件。`references/` 保存最小永久核验证据；`work/` 按需保存临时输入、抓取结果和过程材料。正式结论所需的来源与核验记录不得仅留在 `work/` 或系统临时目录。技术分析文档不自动成为项目规约。
 6. `docs/` 内的研究和方案分析须登记分析范围、输入来源、核验日期、实际阅读范围、采用或排除原因。用户提供的资料集合须逐项保留原始链接、规范资源地址、来源关联和去重关系。访问状态与采用范围分别记录；缺少核验记录时明确标为待补。来源事实、设计推导、候选选择、待确认信息和未验证事项须区分。
 7. 对 `docs/` 内的分析资产，用户要求失效链接清单时，独立保存确认失效项，访问受限和待核验项另列。登录、付费、403、验证码、连接或证书错误不能直接判为链接失效。历史核验结果保留原核验日期，并说明本轮是否复验。
@@ -128,10 +128,10 @@ docs/
 | --- | --- |
 | [Codex 会话标题整理提示词](prompts/codex-session-title-renaming/codex-session-title-renaming.md) | 历史源资产，原文与历史执行证据保留；后续运行规则由同名 Skill 维护。 |
 | [Codex 会话标题整理 Skill](skills/codex-session-title-renaming/codex-session-title-renaming/SKILL.md) | 人工或定期调用的简化流程：一个全局执行锁、每批 `proposal.json` / `execution.json`、用户确认后逐条改名与回读、按需生成 Markdown 记录。源包已建立，未安装，未运行真实改名或配置定时任务。 |
-| [skills-creator](skills/skills-creator/skills-creator/SKILL.md) | 3.0.0：通用 Skill 创建与迭代，按基础、宿主与可选 tooling 约定生成源包；与 skills-lint 4.0.0 共享规则契约，tooling 入口标题为 中文（English）。由旧 forge 1.5.0 迁入。 |
-| [skills-lint](skills/skills-lint/skills-lint/SKILL.md) | 4.0.0：只读规则审查、动态规则清单、密度 schema v2 和行为证据边界；密度脚本识别中英文两种顺序的 Workflow 标题。由旧 forge 2.3.0 迁入。 |
-| [teacher-profile-research](skills/teacher-profile-research/teacher-profile-research/SKILL.md) | 1.0.0：教师公开信息画像与教学决策研究；身份消歧、A–D 来源分级、五态逐条核验、任教与班主任轨迹、团队分析及多轮纠错。单 Skill 源包，采用 base；未安装，已按源入口完成首轮公开信息研究。 |
-| [chinese-technical-writing](skills/chinese-technical-writing/chinese-technical-writing/SKILL.md) | 1.1.1：基于项目事实写作和定点修订中文技术文档；包内直接引用两份指南原文，重叠规则以 `document-style-guide` 为准，增加 Agent 写作自检和可选 `autocorrect` 检查。采用 base；未安装，真实宿主行为未验证。 |
+| [skills-creator](skills/skills-creator/skills-creator/SKILL.md) | 3.0.1：通用 Skill 创建与迭代，按基础、宿主与可选 tooling 约定生成源包；与 skills-lint 4.0.1 共享规则契约，tooling 入口标题为 中文（English）。由旧 forge 1.5.0 迁入。 |
+| [skills-lint](skills/skills-lint/skills-lint/SKILL.md) | 4.0.1：只读规则审查、动态规则清单、密度 schema v2 和行为证据边界；密度脚本识别中英文两种顺序的 Workflow 标题。由旧 forge 2.3.0 迁入。 |
+| [teacher-profile-research](skills/teacher-profile-research/teacher-profile-research/SKILL.md) | 1.1.0：教师公开信息画像与教学决策研究；身份消歧、A–D 来源分级、五态逐条核验、任教与班主任轨迹、团队分析及多轮纠错。单 Skill 源包，采用 base；未安装，已按源入口完成首轮公开信息研究。 |
+| [chinese-technical-writing](skills/chinese-technical-writing/chinese-technical-writing/SKILL.md) | 1.1.2：基于项目事实写作和定点修订中文技术文档；包内直接引用两份指南原文，重叠规则以 `document-style-guide` 为准，增加 Agent 写作自检和可选 `autocorrect` 检查。采用 base；未安装，真实宿主行为未验证。 |
 | [ddd-event-storming](skills/ddd-event-storming/ddd-event-storming/SKILL.md) | 1.0.0：分析领域事件、命令、角色、查询与功能覆盖；支持已有用例，交付候选概念、规则和未决问题。基于第 03–04 讲，采用 base；未安装，真实宿主行为未验证。 |
 | [ddd-domain-relationships](skills/ddd-domain-relationships/ddd-domain-relationships/SKILL.md) | 1.0.0：分析双向多重性、角色、关系属性、有效期、历史和限定符。基于第 05–06、20–21、24 讲，并核对第 33 讲演进反例；采用 base，未安装，真实宿主行为未验证。 |
 | [ddd-aggregate-design](skills/ddd-aggregate-design/ddd-aggregate-design/SKILL.md) | 1.0.0：从不变规则和并发场景比较聚合边界，分析封装、事务、版本保护与更新语义。基于第 14–17 讲，采用 base；未安装，真实宿主行为未验证。 |
@@ -188,7 +188,7 @@ list_rules 只生成待检查清单，density 只提供统计，不等于完整 
 - [研究总约束](skills/teacher-profile-research/teacher-profile-research/references/research-principles.md)与[详细工作流](skills/teacher-profile-research/teacher-profile-research/references/teacher-profile-research-workflow.md)：先身份、再证据、后评价。
 - [事实库契约](skills/teacher-profile-research/teacher-profile-research/references/fact-registry.md)与[报告模板](skills/teacher-profile-research/teacher-profile-research/assets/report-template.md)：逐条追溯、保留修订、同步重审受影响结论。
 - [虚构案例与行为用例](skills/teacher-profile-research/teacher-profile-research/references/teacher-team-example.md)：不包含本次核实过的真实教师数据。
-- 创建验证报告（`skills/teacher-profile-research/output/creation-validation.md`）：静态检查、密度统计与尚未执行的宿主行为验证分开报告。
+- 创建验证报告（`skills/teacher-profile-research/output/creation-validation.md`）与 1.1.0 标题迁移检查（`skills/teacher-profile-research/output/revision-1.1.0/validation.md`）：静态检查、密度统计与尚未执行的宿主行为验证分开报告。
 - 武汉中学2026级15班首轮研究（`skills/teacher-profile-research/output/research-20260909-001/report.md`）：2026年秋季入学、武华班型；六人画像、事实库、检索日志与最小核验摘记。任课名单由用户提供，同名候选与已确认职业记录分开。
 - 武汉中学2026级15班官网补证版（当前，`skills/teacher-profile-research/output/research-20260909-002/report.md`）：补足物理、英语身份与多位教师履历，保留生物职称冲突和化学身份缺口；修订日志与事实历史完整保留。
 
@@ -197,7 +197,7 @@ list_rules 只生成待检查清单，density 只提供统计，不等于完整 
 - [Skill 入口](skills/chinese-technical-writing/chinese-technical-writing/SKILL.md)：写作、定点修改或只读审阅中文技术文档；仅提问时不写回文件。
 - [包内技术文档指南](skills/chinese-technical-writing/chinese-technical-writing/references/upstream/document-style-guide/README.md)与[包内中文排版指南](skills/chinese-technical-writing/chinese-technical-writing/references/upstream/chinese-copywriting-guidelines/README.zh-Hans.md)：保留上游规范和示例；[来源与许可](skills/chinese-technical-writing/chinese-technical-writing/references/source-provenance.md)记录收录版本。
 - [指南适用说明](skills/chinese-technical-writing/chinese-technical-writing/references/writing-rules.md)、[文档类型指引](skills/chinese-technical-writing/chinese-technical-writing/references/document-types.md)、[Agent 写作自检](skills/chinese-technical-writing/chinese-technical-writing/references/agent-review.md)与[autocorrect 流程](skills/chinese-technical-writing/chinese-technical-writing/references/autocorrect-workflow.md)：先核实事实，再依原文组织内容，最后审稿和校对排版。
-- 检查结果保存在本机 `skills/chinese-technical-writing/output/`，按创建与修订版本留存；该目录遵循 `.gitignore`，不随源包推送。最新 `revision-1.1.0/validation.md` 区分静态检查和未执行的真实宿主行为验证。
+- 检查结果保存在本机 `skills/chinese-technical-writing/output/`，按创建与修订版本留存；该目录遵循 `.gitignore`，不随源包推送。最新 `revision-1.1.2/validation.md` 记录标题迁移检查，区分静态检查和未执行的真实宿主行为验证。
 
 ### DDD 分析（DDD Analysis）
 

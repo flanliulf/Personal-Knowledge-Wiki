@@ -3,7 +3,7 @@ name: skills-creator
 description: "创建或更新完整 Agent Skill 源包。用于创建技能、封装工作流、create skill、update skill 或编写 SKILL.md；明确目标、触发边界、输入输出与资源加载，按目标宿主和所选项目规则验证。仅检查已有 Skill 时使用 skills-lint。"
 allowed-tools: Read, Write, Bash, Grep, Glob
 metadata:
-  version: "3.0.0"
+  version: "3.0.1"
   author: "fancyliu"
   catalog: "skill-tooling"
 ---

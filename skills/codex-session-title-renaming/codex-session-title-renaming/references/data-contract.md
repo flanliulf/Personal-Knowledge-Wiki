@@ -1,6 +1,6 @@
-# Data Contract（数据契约）
+# 数据契约（Data Contract）
 
-## Ownership（数据职责）
+## 数据职责（Ownership）
 
 - 每批核心数据仅为 `proposal.json` 和 `execution.json`，分别受 `schemas/` 中同名 JSON Schema 约束。
 - `proposal.json`：已展示的提案，冻结后不改写；建议变化或部分批准时另建批次。
@@ -8,7 +8,7 @@
 - 不建立 `approval.json`、事件日志、全局增量索引或会话级状态。全局锁只协调当前操作，保存 `executionId`、`startedAt`。
 - JSON 的哈希、schema 校验和 `approval.evidence` 字段都不能自行证明真实授权；Agent 必须依据当前用户消息识别批准。文档渲染脚本仅转述记录中的证据。
 
-## Proposal（待确认清单）
+## 待确认清单（Proposal）
 
 | 字段 | 含义 |
 | --- | --- |
@@ -27,7 +27,7 @@
 
 `baseline.title` 必须等于 `oldTitle`。改名项必须有可靠创建时间且 `running` 为 `false`；无法确定则本轮保留，不建立等待状态。运行中的记录可以作为 `keep` 保留在本批清单中。
 
-## Observations（观察快照）
+## 观察快照（Observations）
 
 快照包含 `observedAt`、`title`、`createdAt`、`running`、`protected`、`unavailableProtection`、`evidence`。
 
@@ -37,7 +37,7 @@
 - `contentFingerprint` 仅在可通过允许的只读路径取得时记录；不能为追求完整快照而超范围读取全部正文。不能取得时明确列为未核验。
 - `evidence` 写必要的工具调用或证据文件引用，不复制完整会话内容。补充证据按需保存在同批 `evidence/`；临时输入在资产 `work/`，不放到源目录内。
 
-## Execution（执行结果）
+## 执行结果（Execution）
 
 根字段包括 `schemaVersion`、`batchId`、`proposalSha256`、`approval`、`startedAt`、`finishedAt`、`items`。`approval` 只有 `confirmedAt` 和 `evidence`；记录真实确认时间和用户消息依据，不支持伪造或自行推断批准。初版只接受完整批准批次，部分批准先生成只包含获批候选的新提案并确认其映射。
 
@@ -55,13 +55,13 @@
 
 `checks` 保留标题匹配、创建时间匹配、保护字段匹配、差异键及未取得键；布尔值 `null` 代表证据不足。标题写入后发现创建时间或保护字段变化时停止本批后续写入，不自动回滚其他活动。根级 `finishedAt` 仅表示本轮执行结束，不表示全部成功。报告统计从逐条状态计算，不存储另一份手工计数。
 
-## Persistence（保存与中断）
+## 保存与中断（Persistence）
 
 全局锁使用独占创建；真实入口固定使用 `~/.codex/locks/codex-session-title-renaming.lock`，不按项目、批次或安装副本各建一把锁。锁文件不设 TTL，不自动接管；锁损坏或异常遗留须人工核查后清理。
 
 提案目录独占创建，已有批次不覆盖；JSON 更新采用同目录临时文件、刷新后替换。写入请求发出前先保存 `unknown`，每条回读后立即更新。文件与应用不是同一个原子事务，无法消除中断窗口；未知项通过后续人工核查处理。已有执行文件不能再次 `start`，不提供自动恢复与重试功能。
 
-## Report（派生文档）
+## 派生文档（Report）
 
 可读确认表从提案即时渲染；完整 Markdown 按需生成到同批 `reports/`。每次报告使用新文件名，不改写历史文档，包含源数据哈希、批次、时间、建议、实际观察、状态与限制。报告器不调用应用、没有改名能力，也不因发现结果缺失而执行修复。
 

@@ -335,15 +335,15 @@ def review(directory):
 
 def report(directory):
     proposal, digest = load_batch(directory)
-    lines = ['# Rename Record（改名记录）', '报告生成时间：' + now(),
+    lines = ['# 改名记录（Rename Record）', '报告生成时间：' + now(),
              '本报告仅根据保存的数据生成，不代表应用当前状态。', review(directory),
-             '## Proposal Details（提案明细）',
+             '## 提案明细（Proposal Details）',
              '| itemId | 来源 / 主机 / 会话 | 决定 | 原因 |', '| --- | --- | --- | --- |']
     for item in proposal['items']:
         lines.append('| ' + ' | '.join(cell(v) for v in (item['itemId'], '/'.join((item['source'], item['hostId'], item['threadId'])), item['decision'], item['reason'])) + ' |')
     if (Path(directory) / 'execution.json').exists():
         _, result = load_execution(directory)
-        lines += ['## Execution（执行结果）', '确认依据：' + cell(result['approval']['evidence']),
+        lines += ['## 执行结果（Execution）', '确认依据：' + cell(result['approval']['evidence']),
                   '确认时间：' + result['approval']['confirmedAt'], '执行开始：' + result['startedAt'],
                   '执行结束：' + (result['finishedAt'] or '未结束，以下为已保存进度'),
                   '统计：' + json.dumps(dict(Counter(x['status'] for x in result['items'])), ensure_ascii=False),
@@ -357,7 +357,7 @@ def report(directory):
             lines.append('| ' + ' | '.join(cell(x) for x in values) + ' |')
         lines.append('执行数据 SHA-256：' + hashlib.sha256((Path(directory) / 'execution.json').read_bytes()).hexdigest())
     else:
-        lines += ['## Execution（执行结果）', '没有 execution.json；没有本批已批准或已执行的结构化证据。']
+        lines += ['## 执行结果（Execution）', '没有 execution.json；没有本批已批准或已执行的结构化证据。']
     destination = Path(directory) / 'reports' / ('record-' + datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S') + '-' + uuid.uuid4().hex[:8] + '.md')
     # 每个段落分开，表格行保持连续。
     content = '\n\n'.join(lines).replace(' |\n\n|', ' |\n|') + '\n'

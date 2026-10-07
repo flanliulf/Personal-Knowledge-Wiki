@@ -1,4 +1,4 @@
-# Teacher Profile Research（教师公开信息画像与教学决策研究）
+# 教师公开信息画像与教学决策研究（Teacher Profile Research）
 
 - 研究范围：{{学校/校区、教师或班级}}
 - 研究问题：{{用户实际问题}}
@@ -6,63 +6,63 @@
 - 执行模式：{{公开检索+材料核验 / 仅材料核验}}
 - 当前结论：{{最重要且有证据的回答；标明条件与局限}}
 
-## Part A Fact Verification（事实核验表）
+## 事实核验表（Part A Fact Verification）
 
 | claim_id | 教师/角色 | 原子断言及适用时间 | status | 来源级别 | 证据位置与直接链接 | 核验理由/冲突 |
 | --- | --- | --- | --- | --- | --- | --- |
 
 分别保留已确认、较强推断、用户补充、未验证和被排除的关键断言。不要用来源 A–D 替代事实状态。
 
-## Part B Individual Profiles（教师个人画像）
+## 教师个人画像（Part B Individual Profiles）
 
 为每位教师重复以下 11 节；没有证据时写“未验证/信息不足”，不要补造。每个实质陈述附状态、claim_id 和直接来源链接。
 
-### Identity（身份）
+### 身份（Identity）
 
 {{姓名、person_id、学校/校区、学科、角色、身份置信度及消歧边界}}
 
-### Education and Titles（学历与职称）
+### 学历与职称（Education and Titles）
 
 {{院校、学历、专业、职称、资格分别列明}}
 
-### Career Path（职业轨迹）
+### 职业轨迹（Career Path）
 
 {{任职、调动、交流、援教及其时间范围}}
 
-### Teaching Timeline（任教历史）
+### 任教历史（Teaching Timeline）
 
 | 事件年份/学年 | 届别 | 年级 | 班级原称 | 班型原称 | 角色 | status | claim_id / 来源 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 
-### Class Types（班型经历）
+### 班型经历（Class Types）
 
 {{本校当年定义、可确认经历与未知含义}}
 
-### Homeroom Experience（班主任经历）
+### 班主任经历（Homeroom Experience）
 
 {{完整周期、中途接班、出口、家校沟通等分别列证据；经历分型或信息不足；分型状态与局限}}
 
-### Teaching Style（教学风格）
+### 教学风格（Teaching Style）
 
 {{直接教学案例、自述、较强推断、一般待验证假设分开；单课观察不推广为长期表现}}
 
-### Research and Competitions（教研与竞赛）
+### 教研与竞赛（Research and Competitions）
 
 {{活动/赛事、年份、角色、指导归属及明确成果}}
 
-### Documented Outcomes（明确成果）
+### 明确成果（Documented Outcomes）
 
 {{成果口径、来源、时间、样本与可比性；不无证据推因果}}
 
-### Unresolved Claims（未确认信息）
+### 未确认信息（Unresolved Claims）
 
 {{待核实说法、冲突、不可读来源及补证问题}}
 
-### Decision Labels（教学决策标签）
+### 教学决策标签（Decision Labels）
 
 {{基于哪些 claim、属于何种事实/推断/用户背景、适用范围与局限；不足则不贴标签}}
 
-## Part C Team Profile（团队画像）
+## 团队画像（Part C Team Profile）
 
 单人任务写“不适用：本次为单人调研”。团队任务填写下表，未知不要改写成负面结论。
 
@@ -77,7 +77,7 @@
 
 {{围绕用户目标的条件性建议；已证实约束与信息缺口分开}}
 
-## Part D Research Boundaries（研究边界）
+## 研究边界（Part D Research Boundaries）
 
 - 未解决身份冲突：{{内容或无}}
 - 尚未验证的关键结论：{{内容或无}}
@@ -87,7 +87,7 @@
 - 本轮纠错：{{旧→新、依据、受影响章节；无修订则写无}}
 - 后续核实问题：{{能填补实质缺口的问题；不自动联系他人}}
 
-### Source Index（来源索引）
+### 来源索引（Source Index）
 
 | source_id | 标题/发布主体及直接链接或本地材料编号 | level | 发布日期/事件日期 | 访问日期/状态 | 原始出处及独立来源组 |
 | --- | --- | --- | --- | --- | --- |

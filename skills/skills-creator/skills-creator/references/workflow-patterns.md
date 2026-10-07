@@ -1,23 +1,23 @@
-# Workflow Patterns（工作流模式）
+# 工作流模式（Workflow Patterns）
 
-## Overview（概述）
+## 概述（Overview）
 以下为可选设计模式，不是官方强制分类；示例路径从实际 Skill 根解析，外部写入按已有用户授权执行。根据业务特征，帮助用户匹配最合适的工作流模式。每种模式有其适用场景和设计要点，选择正确的模式能让 Skill 的执行流程更加清晰高效。
 
-## 1. Sequential Workflow Orchestration（顺序工作流编排）
+## 1. 顺序工作流编排（Sequential Workflow Orchestration）
 
-### Applicability（适用场景）
+### 适用场景（Applicability）
 业务必须严格按特定 1-2-3 步骤执行
 
-### Examples（典型案例）
+### 典型案例（Examples）
 新客户入职、标准化表单创建、部署流程
 
-### Design（设计要点）
+### 设计要点（Design）
 - 使用明确的步骤编号（Step 1、Step 2）
 - 指明数据依赖关系（"customer_id from Step 1"）
 - 关键节点设置验证等待（"Wait for: payment verification"）
 - 提供失败回滚指令
 
-### Workflow Example（流程示例）
+### 流程示例（Workflow Example）
 ```
 Step 1：<步骤名称>
     - <具体操作>
@@ -34,21 +34,21 @@ Step N：<最终步骤>
     - 如果 Step X 失败：<回滚指令>
 ```
 
-## 2. Multi-MCP Coordination（多 MCP 协调）
+## 2. 多 MCP 协调（Multi-MCP Coordination）
 
-### Applicability（适用场景）
+### 适用场景（Applicability）
 工作流跨越多个独立服务或平台
 
-### Examples（典型案例）
+### 典型案例（Examples）
 设计到开发交接（Figma→Drive→Tapd→Slack）
 
-### Design（设计要点）
+### 设计要点（Design）
 - 清晰划分阶段（Phase 1、Phase 2）
 - 明确数据在 MCP 间的流转方式
 - 上一阶段输出作为下一阶段输入参数
 - 集中的错误处理机制
 
-### Workflow Example（流程示例）
+### 流程示例（Workflow Example）
 ```
 Phase 1：<阶段名称>（使用 <MCP-A>）
     - <操作>
@@ -66,20 +66,20 @@ Phase N：<最终阶段>
     - Phase X 失败时：<应对方案>
 ```
 
-## 3. Iterative Refinement（迭代优化）
+## 3. 迭代优化（Iterative Refinement）
 
-### Applicability（适用场景）
+### 适用场景（Applicability）
 输出质量可通过多次迭代提升
 
-### Examples（典型案例）
+### 典型案例（Examples）
 报告生成、代码编写、长文档创建
 
-### Design（设计要点）
+### 设计要点（Design）
 - "初稿→质量检查→定点修复→重新验证"循环
 - 引入脚本进行客观验证（不依赖 AI 主观判断）
 - **必须明确停止条件**（防止无限循环）
 
-### Workflow Example（流程示例）
+### 流程示例（Workflow Example）
 ```
 初稿阶段：
     1. <获取数据>
@@ -101,20 +101,20 @@ Phase N：<最终阶段>
     11. 保存最终版本
 ```
 
-## 4. Context-Aware Tool Selection（上下文感知工具选择）
+## 4. 上下文感知工具选择（Context-Aware Tool Selection）
 
-### Applicability（适用场景）
+### 适用场景（Applicability）
 目标相同但需根据条件选择不同工具
 
-### Examples（典型案例）
+### 典型案例（Examples）
 智能文件存储、工单路由、格式转换
 
-### Design（设计要点）
+### 设计要点（Design）
 - 建立清晰的决策树（条件→工具映射）
 - 提供备用/兜底选项（Fallback）
 - 向用户解释选择原因（透明度）
 
-### Workflow Example（流程示例）
+### 流程示例（Workflow Example）
 ```
 决策判断：
     - 检查 <条件 1>：如果满足 → 使用 <方案 A>
@@ -126,21 +126,21 @@ Phase N：<最终阶段>
     - 向用户解释选择原因
 ```
 
-## 5. Domain-Specific Intelligence（领域专有智能）
+## 5. 领域专有智能（Domain-Specific Intelligence）
 
-### Applicability（适用场景）
+### 适用场景（Applicability）
 需要注入特定领域的专业知识、规则或合规性要求
 
-### Examples（典型案例）
+### 典型案例（Examples）
 支付合规检查、法务合同审批、医疗数据处理
 
-### Design（设计要点）
+### 设计要点（Design）
 - "先合规后行动"原则
 - 在执行操作前强制规则检查
 - IF/ELSE 条件分支处理合规与不合规情况
 - 完整的审计追踪记录
 
-### Workflow Example（流程示例）
+### 流程示例（Workflow Example）
 ```
 合规检查（处理前）：
     1. <规则检查 1>
@@ -156,7 +156,7 @@ Phase N：<最终阶段>
     - 生成审计报告
 ```
 
-## Selection（模式选择）
+## 模式选择（Selection）
 
 | 业务特征 | 推荐模式 | 关键标志 |
 |:---------|:---------|:---------|
@@ -167,5 +167,5 @@ Phase N：<最终阶段>
 | 有行业规则约束 | 领域专有智能 | 必须先检查再执行 |
 | 简单直接 | 不使用复杂模式 | 无复杂依赖或分支 |
 
-## History（历史说明）
+## 历史说明（History）
 - v1.0 (2026-03-25): 初始版本

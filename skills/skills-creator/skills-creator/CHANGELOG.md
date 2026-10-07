@@ -4,6 +4,11 @@
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/)，版本号遵循 [Semantic Versioning](https://semver.org/)。
 
+## [3.0.1] - 2026-10-07
+
+### 变更（Changed）
+- references 文档的章节标题改为 中文（English）形式；配套契约核实的 lint 版本同步为 4.0.1，创建流程与模板语义不变。
+
 ## [3.0.0] - 2026-10-07
 
 ### 变更（Changed）

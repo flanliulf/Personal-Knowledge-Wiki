@@ -1,6 +1,6 @@
-# Design Provenance（方案来源与映射）
+# 方案来源与映射（Design Provenance）
 
-## Source（来源）
+## 来源（Source）
 
 设计依据：用户在本次任务补充的完整粘贴方案，主题为教师公开信息画像与教学决策研究。其对应分享链接为 https://chatgpt.com/share/6aa0c28d-744c-83e9-9165-87363bd643c4 。创建时分享正文无法读取，以用户提供文本为实际依据，不宣称已核验完整历史。
 
@@ -8,7 +8,7 @@
 
 用户指定的旧 skills-creator forge 入口已声明停止维护并指向本项目新源，因此实际使用 KnowledgeWiki skills-creator 2.0.0 与 skills-lint 3.0.0 的 contract_version 1.0.0。采用 base profile、宿主 unspecified，不强制双语 tooling 约定，不安装或同步任何副本。
 
-## Mapping（需求映射）
+## 需求映射（Mapping）
 
 | 方案要点 | 本包落点 |
 | --- | --- |
@@ -25,7 +25,7 @@
 | A–D 四部分报告、每人 11 个维度 | assets/report-template.md |
 | 示例与反例 | references/teacher-team-example.md，全部虚构 |
 
-## Clarifications（实施澄清）
+## 实施澄清（Clarifications）
 
 - “confirmed by user context”在五态契约中统一为 USER_PROVIDED，避免将用户确认偷换成公开确认。
 - 截图按可验证出处评级，不按文件格式永久定 D；学校侧口述保持 D。

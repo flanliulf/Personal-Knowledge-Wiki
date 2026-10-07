@@ -213,6 +213,8 @@ class RecordsTests(unittest.TestCase):
         self.assertIn('260101', text)
         self.assertNotIn('344', text)
         self.assertIn('| 原名 |修改后名|\n| --- | --- |', text)
+        for heading in ('# 改名记录（Rename Record）', '## 提案明细（Proposal Details）', '## 执行结果（Execution）'):
+            self.assertIn('\n' + heading + '\n', '\n' + text)
 
     def test_proposal_only_report_cannot_claim_execution(self):
         records.prepare(self.directory, self.proposal)

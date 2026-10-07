@@ -3,7 +3,7 @@ name: skills-creator
 description: "Create or update complete Agent Skill source packages. Use for create skill, update skill, workflow packaging, or authoring SKILL.md; define goals, trigger boundaries, inputs, outputs, and resource loading, then validate the selected host and project profile. Use skills-lint when only reviewing an existing skill."
 allowed-tools: Read, Write, Bash, Grep, Glob
 metadata:
-  version: "3.0.0"
+  version: "3.0.1"
   author: "fancyliu"
   catalog: "skill-tooling"
 ---
