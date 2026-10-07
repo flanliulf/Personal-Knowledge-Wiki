@@ -209,7 +209,7 @@ list_rules 只生成待检查清单，density 只提供统计，不等于完整 
 
 交接保留 `concept_id`、`rule_id`、`source_id` 和 `question_id`。共同字段为 `scope`、`baseline`、`sources`、`concepts`、`rules`、`decisions`、`open_questions`、`result_status`。`confirmed`、`candidate`、`unknown`、`conflicted`、`rejected` 五种状态用于区分事实和候选；关键未知或冲突需要澄清。分析默认在对话中交付，保存报告须有用户指定位置。`ready_for_review` 不表示设计批准或代码实现授权。
 
-三个包均按内置 creator/lint 的 `base`、host `unspecified` 检查。检查记录保存在各资产的本机 `output/creation-1.0.0/validation.md`，按 `.gitignore` 保留，不随源包推送。记录区分静态/语义检查与尚未执行的行为验证；密度脚本不识别中文在前的流程标题，流程比例统计未验证。源包尚未安装，宿主发现及真实触发未验证。
+三个包均按内置 creator/lint 的 `base`、host `unspecified` 检查。检查记录保存在各资产的本机 `output/creation-1.0.0/validation.md`，按 `.gitignore` 保留，不随源包推送。记录区分静态/语义检查与尚未执行的行为验证；2026-10-07 用 skills-lint 4.0.0 重跑密度统计，三个包的 Workflow 均已识别且未触发警告；`base` 下只作统计参考，记录在本机各包的 `output/density-recheck-2026-10-07/`。源包尚未安装，宿主发现及真实触发未验证。
 
 ### 会话收尾与提交检查（Session Closeout）
 
