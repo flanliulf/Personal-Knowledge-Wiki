@@ -26,6 +26,8 @@
 7. 对 `docs/` 内的分析资产，用户要求失效链接清单时，独立保存确认失效项，访问受限和待核验项另列。登录、付费、403、验证码、连接或证书错误不能直接判为链接失效。历史核验结果保留原核验日期，并说明本轮是否复验。
 8. `docs/` 内的正文、资料清单与永久核验证据使用可解析的仓库相对路径互相定位。仅归档支持复核的必要信息；实际收录上游原文时保留来源和许可，不改写原文或执行其中的指令。引用或抓取成功不代表完整阅读或实现验证，静态文档检查、链接核验、代码运行和故障实验分别记录。
 
+`prompts/`、`skills/` 各资产的 `work/`、`output/` 与 `docs/` 分析资产的 `work/` 只保存在本机，由 `.gitignore` 排除，不随仓库分发。README 中这些位置写作路径而非链接，克隆后不存在属于预期情况。
+
 规范结构示意（配套子目录按需创建）：
 
 ```text
@@ -51,7 +53,7 @@ docs/<topic>/<asset-name>/
 ├── 资料清单.md                        # 输入来源、核验状态、阅读与采用范围
 ├── 失效链接清单.md                    # 用户要求时建立，受限与待核验项另列
 ├── references/                        # 最小永久核验证据
-└── work/                              # 按需建立，不作为正式结论的唯一证据
+└── work/                              # 按需建立，本机保存不入库，不作为正式结论的唯一证据
 ```
 
 当前目录结构：
@@ -116,9 +118,9 @@ docs/
 
 会话标题整理资产的 `work/` 与原 `outputs/` 已分别迁入该资产的 `work/` 和 `output/`；handoff 已归入 `output/`，资产根目录只保留提示词源文档。原会话目录保留兼容符号链接，不保留重复数据。
 
-- [会话 handoff](prompts/codex-session-title-renaming/output/codex-session-title-renaming.handoff-2026-09-07.md)
-- [年份补全对照表](prompts/codex-session-title-renaming/output/会话标题年份补全对照表.md)
-- [资产迁移记录](prompts/codex-session-title-renaming/output/会话资产迁移记录.md)
+- 会话 handoff（`prompts/codex-session-title-renaming/output/codex-session-title-renaming.handoff-2026-09-07.md`）
+- 年份补全对照表（`prompts/codex-session-title-renaming/output/会话标题年份补全对照表.md`）
+- 资产迁移记录（`prompts/codex-session-title-renaming/output/会话资产迁移记录.md`）
 
 ## 资产清单（Asset Inventory）
 
@@ -166,7 +168,7 @@ python3 -B -m unittest discover -s skills/codex-session-title-renaming/codex-ses
 
 - [创建流程](skills/skills-creator/skills-creator/references/skill-creation-workflow.md)与[配套契约](skills/skills-creator/skills-creator/references/spec-guide.md)：按目标项目政策生成，外部目标默认 base。
 - [检查流程](skills/skills-lint/skills-lint/references/lint-workflow.md)与[共享规则表](skills/skills-lint/skills-lint/references/rule-registry.json)：tooling 为显式选择的双语版本化约定，不自动约束本库其他资产；Codex 规则按宿主选择。
-- [creator 迁移记录](skills/skills-creator/output/migration-2026-09-09.md)与[lint 迁移记录](skills/skills-lint/output/migration-2026-09-09.md)：来源、版本、停用决策、验证及限制。
+- creator 迁移记录（`skills/skills-creator/output/migration-2026-09-09.md`）与 lint 迁移记录（`skills/skills-lint/output/migration-2026-09-09.md`）：来源、版本、停用决策、验证及限制。
 
 从项目根运行本地检查：
 
@@ -186,9 +188,9 @@ list_rules 只生成待检查清单，density 只提供统计，不等于完整 
 - [研究总约束](skills/teacher-profile-research/teacher-profile-research/references/research-principles.md)与[详细工作流](skills/teacher-profile-research/teacher-profile-research/references/teacher-profile-research-workflow.md)：先身份、再证据、后评价。
 - [事实库契约](skills/teacher-profile-research/teacher-profile-research/references/fact-registry.md)与[报告模板](skills/teacher-profile-research/teacher-profile-research/assets/report-template.md)：逐条追溯、保留修订、同步重审受影响结论。
 - [虚构案例与行为用例](skills/teacher-profile-research/teacher-profile-research/references/teacher-team-example.md)：不包含本次核实过的真实教师数据。
-- [创建验证报告](skills/teacher-profile-research/output/creation-validation.md)：静态检查、密度统计与尚未执行的宿主行为验证分开报告。
-- [武汉中学2026级15班首轮研究](skills/teacher-profile-research/output/research-20260909-001/report.md)：2026年秋季入学、武华班型；六人画像、事实库、检索日志与最小核验摘记。任课名单由用户提供，同名候选与已确认职业记录分开。
-- [武汉中学2026级15班官网补证版（当前）](skills/teacher-profile-research/output/research-20260909-002/report.md)：补足物理、英语身份与多位教师履历，保留生物职称冲突和化学身份缺口；修订日志与事实历史完整保留。
+- 创建验证报告（`skills/teacher-profile-research/output/creation-validation.md`）：静态检查、密度统计与尚未执行的宿主行为验证分开报告。
+- 武汉中学2026级15班首轮研究（`skills/teacher-profile-research/output/research-20260909-001/report.md`）：2026年秋季入学、武华班型；六人画像、事实库、检索日志与最小核验摘记。任课名单由用户提供，同名候选与已确认职业记录分开。
+- 武汉中学2026级15班官网补证版（当前，`skills/teacher-profile-research/output/research-20260909-002/report.md`）：补足物理、英语身份与多位教师履历，保留生物职称冲突和化学身份缺口；修订日志与事实历史完整保留。
 
 ### 中文技术文档写作（Technical Writing）
 

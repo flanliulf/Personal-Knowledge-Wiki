@@ -7,5 +7,6 @@ prompts/*/work/
 prompts/*/output/
 skills/*/work/
 skills/*/output/
+docs/*/*/work/
 *.tmp
 *~
