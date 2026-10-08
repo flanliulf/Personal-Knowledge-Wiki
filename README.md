@@ -83,7 +83,7 @@ skills/
 │   ├── work/                         # 用户原方案与创建前 README 快照
 │   └── output/                       # 创建验证证据及按独立批次保存的教师研究报告
 ├── chinese-technical-writing/
-│   ├── chinese-technical-writing/    # 中文入口、写作自检、文档类型指引与包内指南原文
+│   ├── chinese-technical-writing/    # 中文入口、写作流程、写作自检、文档类型指引与包内指南原文
 │   │   └── references/upstream/      # 两份指南的原文副本及许可文件
 │   └── output/                       # 创建、历次修订与检查结果
 ├── ddd-event-storming/
@@ -131,7 +131,7 @@ docs/
 | [skills-creator](skills/skills-creator/skills-creator/SKILL.md) | 3.0.1：通用 Skill 创建与迭代，按基础、宿主与可选 tooling 约定生成源包；与 skills-lint 4.0.1 共享规则契约，tooling 入口标题为 中文（English）。由旧 forge 1.5.0 迁入。 |
 | [skills-lint](skills/skills-lint/skills-lint/SKILL.md) | 4.0.1：只读规则审查、动态规则清单、密度 schema v2 和行为证据边界；密度脚本识别中英文两种顺序的 Workflow 标题。由旧 forge 2.3.0 迁入。 |
 | [teacher-profile-research](skills/teacher-profile-research/teacher-profile-research/SKILL.md) | 1.1.0：教师公开信息画像与教学决策研究；身份消歧、A–D 来源分级、五态逐条核验、任教与班主任轨迹、团队分析及多轮纠错。单 Skill 源包，采用 base；未安装，已按源入口完成首轮公开信息研究。 |
-| [chinese-technical-writing](skills/chinese-technical-writing/chinese-technical-writing/SKILL.md) | 1.1.2：基于项目事实写作和定点修订中文技术文档；包内直接引用两份指南原文，重叠规则以 `document-style-guide` 为准，增加 Agent 写作自检和可选 `autocorrect` 检查。采用 base；未安装，真实宿主行为未验证。 |
+| [chinese-technical-writing](skills/chinese-technical-writing/chinese-technical-writing/SKILL.md) | 1.1.3：基于项目事实写作和定点修订中文技术文档；包内直接引用两份指南原文，重叠规则以 `document-style-guide` 为准，增加 Agent 写作自检和可选 `autocorrect` 检查。采用 base；未安装，真实宿主行为未验证。 |
 | [ddd-event-storming](skills/ddd-event-storming/ddd-event-storming/SKILL.md) | 1.0.0：分析领域事件、命令、角色、查询与功能覆盖；支持已有用例，交付候选概念、规则和未决问题。基于第 03–04 讲，采用 base；未安装，真实宿主行为未验证。 |
 | [ddd-domain-relationships](skills/ddd-domain-relationships/ddd-domain-relationships/SKILL.md) | 1.0.0：分析双向多重性、角色、关系属性、有效期、历史和限定符。基于第 05–06、20–21、24 讲，并核对第 33 讲演进反例；采用 base，未安装，真实宿主行为未验证。 |
 | [ddd-aggregate-design](skills/ddd-aggregate-design/ddd-aggregate-design/SKILL.md) | 1.0.0：从不变规则和并发场景比较聚合边界，分析封装、事务、版本保护与更新语义。基于第 14–17 讲，采用 base；未安装，真实宿主行为未验证。 |
@@ -196,8 +196,9 @@ list_rules 只生成待检查清单，density 只提供统计，不等于完整 
 
 - [Skill 入口](skills/chinese-technical-writing/chinese-technical-writing/SKILL.md)：写作、定点修改或只读审阅中文技术文档；仅提问时不写回文件。
 - [包内技术文档指南](skills/chinese-technical-writing/chinese-technical-writing/references/upstream/document-style-guide/README.md)与[包内中文排版指南](skills/chinese-technical-writing/chinese-technical-writing/references/upstream/chinese-copywriting-guidelines/README.zh-Hans.md)：保留上游规范和示例；[来源与许可](skills/chinese-technical-writing/chinese-technical-writing/references/source-provenance.md)记录收录版本。
+- [写作流程](skills/chinese-technical-writing/chinese-technical-writing/references/writing-workflow.md)：入口执行流程的 7 个详细步骤，开始写作、修改或审阅前读取。
 - [指南适用说明](skills/chinese-technical-writing/chinese-technical-writing/references/writing-rules.md)、[文档类型指引](skills/chinese-technical-writing/chinese-technical-writing/references/document-types.md)、[Agent 写作自检](skills/chinese-technical-writing/chinese-technical-writing/references/agent-review.md)与[autocorrect 流程](skills/chinese-technical-writing/chinese-technical-writing/references/autocorrect-workflow.md)：先核实事实，再依原文组织内容，最后审稿和校对排版。
-- 检查结果保存在本机 `skills/chinese-technical-writing/output/`，按创建与修订版本留存；该目录遵循 `.gitignore`，不随源包推送。最新 `revision-1.1.2/validation.md` 记录标题迁移检查，区分静态检查和未执行的真实宿主行为验证。
+- 检查结果保存在本机 `skills/chinese-technical-writing/output/`，按创建与修订版本留存；该目录遵循 `.gitignore`，不随源包推送。最新 `revision-1.1.3/validation.md` 记录入口流程抽取检查，区分静态检查和未执行的真实宿主行为验证。
 
 ### DDD 分析（DDD Analysis）
 
