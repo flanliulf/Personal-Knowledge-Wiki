@@ -148,6 +148,7 @@ docs/
 
 ### 会话标题整理（Session Titles）
 
+- [操作规则](skills/codex-session-title-renaming/codex-session-title-renaming/references/operation-rules.md)：`audit`、`apply`、`report` 三个入口的详细规则，执行对应入口前读取。
 - [运行指南](skills/codex-session-title-renaming/codex-session-title-renaming/references/workflow.md)：`audit`、`apply`、`report` 三个入口及辅助脚本命令。
 - [数据契约](skills/codex-session-title-renaming/codex-session-title-renaming/references/data-contract.md)：提案、批准绑定、实际回读、保护字段与结果限制。
 - [虚构输入示例](skills/codex-session-title-renaming/examples/example-input.json)：仅供格式参考，不代表真实会话或授权。
