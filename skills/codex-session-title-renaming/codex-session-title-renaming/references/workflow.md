@@ -2,10 +2,10 @@
 
 ## 路径与能力（Setup）
 
-先确认工具、Python 和真实资产根目录。本仓库源包位于 `skills/codex-session-title-renaming/codex-session-title-renaming/`，其父目录承载 `work/`、`output/`、`examples/`。示例命令以本机路径展示；在其他安装位置使用已核实的绝对路径。
+先确认工具、Python 和真实资产根目录。本仓库源包位于 `skills/codex-session-title-renaming/codex-session-title-renaming/`，其父目录承载 `work/`、`output/`、`examples/`。示例命令中的 `<资产根目录绝对路径>` 是占位符，运行前替换为已核实的 `skills/codex-session-title-renaming/` 实际绝对路径；安装到其他位置时同样使用核实后的路径。
 
 ```sh
-asset_root='/Users/fancyliu/AIBase/KnowledgeWiki/skills/codex-session-title-renaming'
+asset_root='<资产根目录绝对路径>'
 script_path="$asset_root/codex-session-title-renaming/scripts/title_records.py"
 python3 "$script_path" --help
 ```

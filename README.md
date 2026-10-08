@@ -66,7 +66,7 @@ prompts/
     └── output/                       # 两版对照表、执行结果、handoff 与迁移记录
 skills/
 ├── codex-session-title-renaming/
-│   ├── codex-session-title-renaming/  # 入口、references、schemas、scripts、tests
+│   ├── codex-session-title-renaming/  # 入口、CHANGELOG、references、schemas、scripts、tests
 │   ├── work/                         # 后续运行的临时输入，当前为空
 │   ├── output/                       # 后续批次数据与按需报告，当前为空
 │   └── examples/                     # 虚构提案输入示例
@@ -127,7 +127,7 @@ docs/
 | 资产 | 内容摘要 |
 | --- | --- |
 | [Codex 会话标题整理提示词](prompts/codex-session-title-renaming/codex-session-title-renaming.md) | 历史源资产，原文与历史执行证据保留；后续运行规则由同名 Skill 维护。 |
-| [Codex 会话标题整理 Skill](skills/codex-session-title-renaming/codex-session-title-renaming/SKILL.md) | 人工或定期调用的简化流程：一个全局执行锁、每批 `proposal.json` / `execution.json`、用户确认后逐条改名与回读、按需生成 Markdown 记录。源包已建立，未安装，未运行真实改名或配置定时任务。 |
+| [Codex 会话标题整理 Skill](skills/codex-session-title-renaming/codex-session-title-renaming/SKILL.md) | 1.0.0：人工或定期调用的简化流程：一个全局执行锁、每批 `proposal.json` / `execution.json`、用户确认后逐条改名与回读、按需生成 Markdown 记录。源包已建立，未安装，未运行真实改名或配置定时任务。 |
 | [skills-creator](skills/skills-creator/skills-creator/SKILL.md) | 3.0.1：通用 Skill 创建与迭代，按基础、宿主与可选 tooling 约定生成源包；与 skills-lint 4.0.1 共享规则契约，tooling 入口标题为 中文（English）。由旧 forge 1.5.0 迁入。 |
 | [skills-lint](skills/skills-lint/skills-lint/SKILL.md) | 4.0.1：只读规则审查、动态规则清单、密度 schema v2 和行为证据边界；密度脚本识别中英文两种顺序的 Workflow 标题。由旧 forge 2.3.0 迁入。 |
 | [teacher-profile-research](skills/teacher-profile-research/teacher-profile-research/SKILL.md) | 1.1.0：教师公开信息画像与教学决策研究；身份消歧、A–D 来源分级、五态逐条核验、任教与班主任轨迹、团队分析及多轮纠错。单 Skill 源包，采用 base；未安装，已按源入口完成首轮公开信息研究。 |
