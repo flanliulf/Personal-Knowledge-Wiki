@@ -3,7 +3,7 @@ name: skills-creator
 description: "创建或更新完整 Agent Skill 源包。用于创建技能、封装工作流、create skill、update skill 或编写 SKILL.md；明确目标、触发边界、输入输出与资源加载，按目标宿主和所选项目规则验证。仅检查已有 Skill 时使用 skills-lint。"
 allowed-tools: Read, Write, Bash, Grep, Glob
 metadata:
-  version: "3.0.1"
+  version: "3.1.0"
   author: "fancyliu"
   catalog: "skill-tooling"
 ---
@@ -24,7 +24,7 @@ metadata:
 1. 读取 `references/skill-creation-workflow.md`，核对用户授权、目标路径、宿主及 profile；只询问影响交付的缺失信息，已有授权不重复确认。
 2. 读取 `references/spec-guide.md`，定位实际 `{lint-root}` 并消费共享规则表。需要选择流程模式时读取 `references/workflow-patterns.md`。
 3. 读取 `references/templates.md`，按所选 profile 生成或修订入口及必要资源；保留已有作者和有效扩展字段。
-4. 用已核验的 `{lint-root}/scripts/check_skill_density.py` 统计入口。`tooling` 下命中密度预算时提取详细流程；缺失或歧义不能判为通过。
+4. 用已核验的 `{lint-root}/scripts/check_skill_density.py` 统计入口，`check_absolute_paths.py` 列出本机绝对路径候选。`tooling` 下命中密度预算时提取详细流程；缺失或歧义不能判为通过。
 5. 读取 `references/testing-guide.md`，按规则清单逐条记录检查证据；行为用例未经真实宿主执行时标记 `NOT_CHECKED`。
 6. 交付文件树、版本变化、规则契约和验证结果。KnowledgeWiki 内遵循同名双层目录；安装或分发按用户明确范围另行执行。
 

@@ -8,11 +8,11 @@
 
 规则的唯一权威是配套 skills-lint 的 `references/rule-registry.json`；本文件不复制另一套规则。当前兼容 contract_version `1.0.0`。按以下证据定位 `{lint-root}`：
 
-1. 用户指定配套源包时核实其 SKILL.md 的 name 为 skills-lint、version 为 4.0.1，以及 registry 契约。
+1. 用户指定配套源包时核实其 SKILL.md 的 name 为 skills-lint、主版本为 4（当前源包为 4.1.0），以及 registry 的 contract_version 为 `1.0.0`。
 2. KnowledgeWiki 中，源包相对路径为 `../../skills-lint/skills-lint`（从本 Skill 根计算）；从本参考文件可访问 [共享规则表](../../../skills-lint/skills-lint/references/rule-registry.json)。
 3. 安装环境中读取实际可用 Skill 清单或已知安装根；同级 skills-lint 只作为候选，核验后才采用。不得依赖 CWD，也不得退回已停止维护的 forge 副本。
 
-记录最终绝对路径、版本和 registry SHA-256。配套缺失、版本不符或契约不兼容时保留已完成草稿，将依赖检查标记 NOT_CHECKED 并报告缺口；不得从旧文档重建猜测规则。未来配套升级应先更新此契约与验收。
+记录最终绝对路径、版本和 registry SHA-256。配套缺失、版本不符或契约不兼容时保留已完成草稿，将依赖检查标记 NOT_CHECKED 并报告缺口；不得从旧文档重建猜测规则。lint 修订版本或次版本升级且契约不变时，本文件无需修改；主版本或 contract_version 变化时，先更新此契约与验收。
 
 ## 规则范围（Profiles）
 

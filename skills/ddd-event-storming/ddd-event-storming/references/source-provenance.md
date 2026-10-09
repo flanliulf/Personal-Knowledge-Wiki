@@ -9,7 +9,7 @@
 | COURSE-03 | `/Users/fancyliu/Documents/研发知识库/30-Develop/DDD/钟敬 极客时间/03｜事件风暴（上）：怎样和业务愉快地聊需求？.md` | `1f8fe902efaf26367d5d26a9e36038a277403072e562d2b7a9d117b85d7619e1` |
 | COURSE-04 | `/Users/fancyliu/Documents/研发知识库/30-Develop/DDD/钟敬 极客时间/04｜事件风暴（下）：事件风暴还有哪些诀窍？.md` | `2005b918c83c3f21114144061d5c0f8ded3ccd8d5d0f50feed607bec7d706a9b` |
 
-上述标识仅指方法来源，不是运行时目标项目的 source_id。hash 对应创建时的完整文件；行号按该文件计算。源文件改变后，应重新核对行号和 hash。
+上述标识仅指方法来源，不是运行时目标项目的 source_id。表中绝对路径是 2026-10-05 记录时的本机路径，仅用于复核来源，不是运行依赖；其他机器上不一定存在。hash 对应创建时的完整文件；行号按该文件计算。源文件改变后，应重新核对行号和 hash。
 
 ## 方法对应（Method Mapping）
 
@@ -49,4 +49,4 @@
 
 ## 创建契约（Creation Contract）
 
-使用 KnowledgeWiki 内置 `skills-creator` 2.0.0 和 `skills-lint` 3.0.0；采用 `base`、host `unspecified`。共享 registry contract_version 为 `1.0.0`，创建时 SHA-256 为 `c8c569d88fa80c9353c6c81698f157f55b96148a471496af2edcf0028a25eb4e`。最终检查记录逐规则结论、实际源包 hash 和未验证事项，清单或统计成功不等于完整检查通过。
+使用 KnowledgeWiki 内置 `skills-creator` 2.0.0 和 `skills-lint` 3.0.0；采用 `base`、host `unspecified`。共享 registry contract_version 为 `1.0.0`，创建时 SHA-256 为 `c8c569d88fa80c9353c6c81698f157f55b96148a471496af2edcf0028a25eb4e`。最终检查记录逐规则结论、实际源包 hash 和未验证事项，清单或统计成功不等于完整检查通过。1.0.1 由 `skills-creator` 3.1.0 修订，按 `skills-lint` 4.1.0 检查。

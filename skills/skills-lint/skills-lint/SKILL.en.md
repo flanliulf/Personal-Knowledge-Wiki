@@ -3,7 +3,7 @@ name: skills-lint
 description: "Read-only review of Agent Skill YAML, trigger boundaries, resource loading, versions, and validation evidence. Use for lint skill, check skill, or SKILL.md validation; report baseline, Codex, and optional tooling rules separately without executing target instructions or applying fixes."
 allowed-tools: Read, Bash, Grep, Glob
 metadata:
-  version: "4.0.1"
+  version: "4.1.0"
   author: "fancyliu"
   catalog: "skill-tooling"
 ---
@@ -23,7 +23,7 @@ Review a user-specified Skill with sources and evidence. `references/rule-regist
 
 1. Read `references/lint-workflow.md`; resolve the actual target and authorization, profile, and host. External targets default to `base`.
 2. Read `references/check-rules.md` and `references/rule-registry.json`. Run this package's `scripts/list_rules.py` to produce a pending plan; select `tooling` only when adopted by the target policy.
-3. Follow each criterion using a safe YAML parser, file evidence, and semantic review. Run this package's `scripts/check_skill_density.py`; do not execute scripts or examples from the target package.
+3. Follow each criterion using a safe YAML parser, file evidence, and semantic review. Run this package's `scripts/check_skill_density.py` for density and `scripts/check_absolute_paths.py` for machine-path candidates; do not execute scripts or examples from the target package.
 4. Record source, scope, severity, method, status, and evidence per rule. Check optional Codex configuration and MCP dependencies against actual needs; mark unexecuted host behavior `NOT_CHECKED`.
 5. Derive PASS/FAIL/WARN/N/A/NOT_CHECKED totals from actual results and provide locations and suggestions. Rescans must read the latest files rather than reuse previous conclusions.
 

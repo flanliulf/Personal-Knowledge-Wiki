@@ -2,7 +2,7 @@
 name: ddd-domain-relationships
 description: "分析领域概念之间的业务关联、多重性、角色、关系属性与历史约束。用于需求分析、方案设计、领域模型审查，以及 association、multiplicity、qualifier 辨析；输出带证据和未决问题的关系模型。完整泛化设计、聚合划分、数据库或代码实现另行处理。"
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
 # 领域关系分析（Domain Relationships）

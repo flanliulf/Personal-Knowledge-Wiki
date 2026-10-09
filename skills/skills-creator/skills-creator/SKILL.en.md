@@ -3,7 +3,7 @@ name: skills-creator
 description: "Create or update complete Agent Skill source packages. Use for create skill, update skill, workflow packaging, or authoring SKILL.md; define goals, trigger boundaries, inputs, outputs, and resource loading, then validate the selected host and project profile. Use skills-lint when only reviewing an existing skill."
 allowed-tools: Read, Write, Bash, Grep, Glob
 metadata:
-  version: "3.0.1"
+  version: "3.1.0"
   author: "fancyliu"
   catalog: "skill-tooling"
 ---
@@ -24,7 +24,7 @@ Turn user requirements into maintainable Skill source packages. Separate baselin
 1. Read `references/skill-creation-workflow.md`; establish authorization, destination, host, and profile. Ask only for material missing information; do not reconfirm existing authorization.
 2. Read `references/spec-guide.md`, resolve the actual `{lint-root}`, and consume its shared registry. Read `references/workflow-patterns.md` when selecting a workflow pattern.
 3. Read `references/templates.md`; generate or update entries and necessary resources for the selected profile. Preserve the author and valid extension fields.
-4. Measure entries using the verified `{lint-root}/scripts/check_skill_density.py`. Under `tooling`, extract detailed steps when the density budget is exceeded; missing or ambiguous sections cannot pass.
+4. Measure entries using the verified `{lint-root}/scripts/check_skill_density.py` and list machine-path candidates with `check_absolute_paths.py`. Under `tooling`, extract detailed steps when the density budget is exceeded; missing or ambiguous sections cannot pass.
 5. Read `references/testing-guide.md`; record evidence for each rule. Mark behavior cases `NOT_CHECKED` until executed in a real host.
 6. Deliver the file tree, version changes, rule contract, and validation results. Follow the nested same-name layout inside KnowledgeWiki; installation and distribution require the user's explicit scope.
 

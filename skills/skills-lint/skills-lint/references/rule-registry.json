@@ -423,6 +423,33 @@
       "severity": "Warning",
       "method": "behavior-review",
       "criteria": "检查直接、同义、输入缺失、不应触发、边界请求，验证输出质量、未虚构事实与依赖缺失处理；无真实宿主执行记录时 NOT_CHECKED。记录宿主、版本、输入、预期与实际结果，不将建议用例或静态 PASS 当作行为通过。"
+    },
+    {
+      "id": "VER-06",
+      "title": "base 版本记录一致",
+      "scope": "base",
+      "source": "tooling-quality",
+      "severity": "Warning",
+      "method": "static-review",
+      "criteria": "base 包声明 metadata.version 时须符合 SemVer；同时存在 CHANGELOG.md 时，最新条目使用 `## [x.y.z] - YYYY-MM-DD` 且版本与入口一致。未声明 metadata.version 时 N/A；base 不强制声明版本或作者。"
+    },
+    {
+      "id": "VER-07",
+      "title": "版本升级与改动相符",
+      "scope": "base",
+      "source": "tooling-quality",
+      "severity": "Warning",
+      "method": "semantic-review",
+      "criteria": "修订已声明版本的 Skill 时，版本变化与 CHANGELOG 说明的改动相符：触发或排除边界、必需输入或依赖、检查判定方向变化，或输出格式需消费方调整时升主版本；新增能力、资源、规则或向后兼容的输出变化升次版本；措辞、结构、标题调整及不改变行为的修正升修订版本。仅规范版本记录格式、不改动入口和资源时可不升版本，需在检查记录中说明。未编号但已有历史的包从 1.0.0 开始记录，并在首条 CHANGELOG 概述此前变更。"
+    },
+    {
+      "id": "PATH-01",
+      "title": "本机绝对路径",
+      "scope": "base",
+      "source": "tooling-quality",
+      "severity": "Warning",
+      "method": "path-script+semantic-review",
+      "criteria": "源包不写入本机绝对路径（如 `/Users/<name>/`、`/home/<name>/`、`C:\\Users\\<name>\\`）。可运行的示例命令使用 `<...>` 占位符，并在同处说明运行前替换为已核实路径。来源或核验记录中的历史路径，所在文档说明其为记录时的本机路径、仅用于复核且不是运行依赖时 N/A。用 check_absolute_paths.py 列出候选，逐条人工判定；脚本退出 0 不等于 PASS。"
     }
   ]
 }
