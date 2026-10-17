@@ -2,7 +2,7 @@
 name: ddd-aggregate-design
 description: "从业务不变规则和并发场景分析聚合根、一致性边界及事务要求。用于聚合设计、aggregate design、事务边界分析或聚合实现的只读审阅；输出有证据的边界候选与验证计划。单纯分析实体关联时使用关联分析方法；本技能不直接实现或修改代码。"
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
 # 聚合边界与不变规则分析（Aggregate Design）

@@ -35,9 +35,10 @@ skills/<skill-name>/
 ```sh
 python3 "{lint-root}/scripts/list_rules.py" "{target}" --profile base
 python3 "{lint-root}/scripts/check_skill_density.py" "{target}"
+python3 "{lint-root}/scripts/check_absolute_paths.py" "{target}"
 ```
 
-`tooling` 目标显式替换 profile；Codex 目标加 `--host codex`。第一条只生成待检查清单。随后依 testing-guide.md 执行安全 YAML 解析、资源和语义审查；不把清单当 lint 执行结果。
+`tooling` 目标显式替换 profile；Codex 目标加 `--host codex`。第一条只生成待检查清单；路径脚本只列出 PATH-01 候选，逐条按 criteria 处理。随后依 testing-guide.md 执行安全 YAML 解析、资源和语义审查；不把清单当 lint 执行结果。
 
 density JSON schema_version 为 2。仅 `workflow_status: identified` 可用于比例判断；missing/ambiguous 的 workflow_chars、workflow_ratio、triggered_density_warning 为 null，需说明未判定原因。`tooling` 中字符数 >1500 且占比 >0.5 时把实际详细流程提到 reference，并回读内容及入口加载条件；4500 为接近 5000 正文预算提示。脚本退出 0 只代表统计完成。
 

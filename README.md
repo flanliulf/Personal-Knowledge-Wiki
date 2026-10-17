@@ -66,7 +66,7 @@ prompts/
     └── output/                       # 两版对照表、执行结果、handoff 与迁移记录
 skills/
 ├── codex-session-title-renaming/
-│   ├── codex-session-title-renaming/  # 入口、references、schemas、scripts、tests
+│   ├── codex-session-title-renaming/  # 入口、CHANGELOG、references、schemas、scripts、tests
 │   ├── work/                         # 后续运行的临时输入，当前为空
 │   ├── output/                       # 后续批次数据与按需报告，当前为空
 │   └── examples/                     # 虚构提案输入示例
@@ -127,14 +127,14 @@ docs/
 | 资产 | 内容摘要 |
 | --- | --- |
 | [Codex 会话标题整理提示词](prompts/codex-session-title-renaming/codex-session-title-renaming.md) | 历史源资产，原文与历史执行证据保留；后续运行规则由同名 Skill 维护。 |
-| [Codex 会话标题整理 Skill](skills/codex-session-title-renaming/codex-session-title-renaming/SKILL.md) | 人工或定期调用的简化流程：一个全局执行锁、每批 `proposal.json` / `execution.json`、用户确认后逐条改名与回读、按需生成 Markdown 记录。源包已建立，未安装，未运行真实改名或配置定时任务。 |
-| [skills-creator](skills/skills-creator/skills-creator/SKILL.md) | 3.0.1：通用 Skill 创建与迭代，按基础、宿主与可选 tooling 约定生成源包；与 skills-lint 4.0.1 共享规则契约，tooling 入口标题为 中文（English）。由旧 forge 1.5.0 迁入。 |
-| [skills-lint](skills/skills-lint/skills-lint/SKILL.md) | 4.0.1：只读规则审查、动态规则清单、密度 schema v2 和行为证据边界；密度脚本识别中英文两种顺序的 Workflow 标题。由旧 forge 2.3.0 迁入。 |
+| [Codex 会话标题整理 Skill](skills/codex-session-title-renaming/codex-session-title-renaming/SKILL.md) | 1.0.0：人工或定期调用的简化流程：一个全局执行锁、每批 `proposal.json` / `execution.json`、用户确认后逐条改名与回读、按需生成 Markdown 记录。源包已建立，未安装，未运行真实改名或配置定时任务。 |
+| [skills-creator](skills/skills-creator/skills-creator/SKILL.md) | 3.1.0：通用 Skill 创建与迭代，按基础、宿主与可选 tooling 约定生成源包；与 skills-lint 4.x（规则契约 1.0.0）共享规则契约，tooling 入口标题为 中文（English）；规定版本记录与升级判定、示例路径占位写法。由旧 forge 1.5.0 迁入。 |
+| [skills-lint](skills/skills-lint/skills-lint/SKILL.md) | 4.1.0：只读规则审查、动态规则清单、密度 schema v2 和行为证据边界；密度脚本识别中英文两种顺序的 Workflow 标题；新增版本记录一致性、版本升级判定和本机绝对路径检查（VER-06、VER-07、PATH-01）及路径扫描脚本。由旧 forge 2.3.0 迁入。 |
 | [teacher-profile-research](skills/teacher-profile-research/teacher-profile-research/SKILL.md) | 1.1.0：教师公开信息画像与教学决策研究；身份消歧、A–D 来源分级、五态逐条核验、任教与班主任轨迹、团队分析及多轮纠错。单 Skill 源包，采用 base；未安装，已按源入口完成首轮公开信息研究。 |
 | [chinese-technical-writing](skills/chinese-technical-writing/chinese-technical-writing/SKILL.md) | 1.1.3：基于项目事实写作和定点修订中文技术文档；包内直接引用两份指南原文，重叠规则以 `document-style-guide` 为准，增加 Agent 写作自检和可选 `autocorrect` 检查。采用 base；未安装，真实宿主行为未验证。 |
-| [ddd-event-storming](skills/ddd-event-storming/ddd-event-storming/SKILL.md) | 1.0.0：分析领域事件、命令、角色、查询与功能覆盖；支持已有用例，交付候选概念、规则和未决问题。基于第 03–04 讲，采用 base；未安装，真实宿主行为未验证。 |
-| [ddd-domain-relationships](skills/ddd-domain-relationships/ddd-domain-relationships/SKILL.md) | 1.0.0：分析双向多重性、角色、关系属性、有效期、历史和限定符。基于第 05–06、20–21、24 讲，并核对第 33 讲演进反例；采用 base，未安装，真实宿主行为未验证。 |
-| [ddd-aggregate-design](skills/ddd-aggregate-design/ddd-aggregate-design/SKILL.md) | 1.0.0：从不变规则和并发场景比较聚合边界，分析封装、事务、版本保护与更新语义。基于第 14–17 讲，采用 base；未安装，真实宿主行为未验证。 |
+| [ddd-event-storming](skills/ddd-event-storming/ddd-event-storming/SKILL.md) | 1.0.1：分析领域事件、命令、角色、查询与功能覆盖；支持已有用例，交付候选概念、规则和未决问题。基于第 03–04 讲，采用 base；未安装，真实宿主行为未验证。 |
+| [ddd-domain-relationships](skills/ddd-domain-relationships/ddd-domain-relationships/SKILL.md) | 1.0.1：分析双向多重性、角色、关系属性、有效期、历史和限定符。基于第 05–06、20–21、24 讲，并核对第 33 讲演进反例；采用 base，未安装，真实宿主行为未验证。 |
+| [ddd-aggregate-design](skills/ddd-aggregate-design/ddd-aggregate-design/SKILL.md) | 1.0.1：从不变规则和并发场景比较聚合边界，分析封装、事务、版本保护与更新语义。基于第 14–17 讲，采用 base；未安装，真实宿主行为未验证。 |
 | [session-closeout-policy-check](skills/session-closeout-policy-check/session-closeout-policy-check/SKILL.md) | 1.0.0：会话收尾、提交前的通用规约审查；共享 Skill 评估符合性与规约演进，Codex/Claude Code 命令型 Hooks 显式触发，可选 Git 入口核对实际 index。采用 base；源包未安装，真实宿主事件未验证。 |
 | [document-style-guide](guidelines/document-style-guide/SOURCE.md) | 中文技术文档写作参考；保留上游 README 与标题、文本、段落、数值、标点、文档体系、参考链接七个章节。 |
 | [chinese-copywriting-guidelines](guidelines/chinese-copywriting-guidelines/SOURCE.md) | 中文文案排版参考；保留上游繁简中文 README 和 MIT 许可文本。 |
@@ -149,6 +149,7 @@ docs/
 
 ### 会话标题整理（Session Titles）
 
+- [操作规则](skills/codex-session-title-renaming/codex-session-title-renaming/references/operation-rules.md)：`audit`、`apply`、`report` 三个入口的详细规则，执行对应入口前读取。
 - [运行指南](skills/codex-session-title-renaming/codex-session-title-renaming/references/workflow.md)：`audit`、`apply`、`report` 三个入口及辅助脚本命令。
 - [数据契约](skills/codex-session-title-renaming/codex-session-title-renaming/references/data-contract.md)：提案、批准绑定、实际回读、保护字段与结果限制。
 - [虚构输入示例](skills/codex-session-title-renaming/examples/example-input.json)：仅供格式参考，不代表真实会话或授权。
@@ -176,11 +177,12 @@ python3 -B -m unittest discover -s skills/codex-session-title-renaming/codex-ses
 ```sh
 python3 -B skills/skills-lint/skills-lint/scripts/list_rules.py skills/skills-creator/skills-creator --profile tooling --host codex
 python3 -B skills/skills-lint/skills-lint/scripts/check_skill_density.py skills/skills-creator/skills-creator
+python3 -B skills/skills-lint/skills-lint/scripts/check_absolute_paths.py skills/skills-creator/skills-creator
 python3 -B skills/skills-lint/skills-lint/scripts/test_skill_tools.py
 python3 -B -m unittest discover -s skills/skills-lint/skills-lint/scripts/tests -v
 ```
 
-list_rules 只生成待检查清单，density 只提供统计，不等于完整 lint 或真实宿主行为通过。源包已迁入，安装副本未同步；使用时读取本项目源入口，若要通过宿主发现则按另行授权安装内层完整包，creator 和 lint 应配套提供。
+list_rules 只生成待检查清单，density 只提供统计，路径脚本只列出候选，不等于完整 lint 或真实宿主行为通过。源包已迁入，安装副本未同步；使用时读取本项目源入口，若要通过宿主发现则按另行授权安装内层完整包，creator 和 lint 应配套提供。
 
 ### 教师公开信息研究（Teacher Research）
 
@@ -213,7 +215,7 @@ list_rules 只生成待检查清单，density 只提供统计，不等于完整 
 
 交接保留 `concept_id`、`rule_id`、`source_id` 和 `question_id`。共同字段为 `scope`、`baseline`、`sources`、`concepts`、`rules`、`decisions`、`open_questions`、`result_status`。`confirmed`、`candidate`、`unknown`、`conflicted`、`rejected` 五种状态用于区分事实和候选；关键未知或冲突需要澄清。分析默认在对话中交付，保存报告须有用户指定位置。`ready_for_review` 不表示设计批准或代码实现授权。
 
-三个包均按内置 creator/lint 的 `base`、host `unspecified` 检查。检查记录保存在各资产的本机 `output/creation-1.0.0/validation.md`，按 `.gitignore` 保留，不随源包推送。记录区分静态/语义检查与尚未执行的行为验证；2026-10-07 用 skills-lint 4.0.0 重跑密度统计，三个包的 Workflow 均已识别且未触发警告；`base` 下只作统计参考，记录在本机各包的 `output/density-recheck-2026-10-07/`。源包尚未安装，宿主发现及真实触发未验证。
+三个包均按内置 creator/lint 的 `base`、host `unspecified` 检查。检查记录保存在各资产的本机 `output/creation-1.0.0/validation.md`，按 `.gitignore` 保留，不随源包推送。记录区分静态/语义检查与尚未执行的行为验证；2026-10-07 用 skills-lint 4.0.0 重跑密度统计，三个包的 Workflow 均已识别且未触发警告；`base` 下只作统计参考，记录在本机各包的 `output/density-recheck-2026-10-07/`。1.0.1 在来源记录中注明课程路径为记录时的本机路径，CHANGELOG 统一为 `## [x.y.z] - YYYY-MM-DD` 格式，检查记录见本机 `output/revision-1.0.1/`。源包尚未安装，宿主发现及真实触发未验证。
 
 ### 会话收尾与提交检查（Session Closeout）
 

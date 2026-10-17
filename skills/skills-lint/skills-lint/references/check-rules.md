@@ -20,6 +20,12 @@ tooling 中不创建冗余包内 README；宿主或项目有明确用途时允�
 
 tooling 中 workflow_chars >1500 且 workflow_ratio >0.5 时 WARN，4500 为接近正文预算提醒；命中后检查详细流程是否已抽取且实际可达。Workflow 章节识别 `Workflow`、`Workflow（执行流程）` 与 `执行流程（Workflow）` 等中英文顺序，以及方括号标题；只有中文、没有 Workflow 的标题记为 missing，两种顺序同时出现记为 ambiguous。文件名正则只是路由线索；缺失、歧义或未运行不得判为 PASS。base 可以查看统计，但这些预算不决定通用合规。
 
+## 版本与路径（Versions and Paths）
+
+VER-06、VER-07 与 PATH-01 适用于 base，因此也适用于 tooling 包。base 不强制声明版本；一旦声明，VER-06 检查格式与 CHANGELOG 一致，VER-07 按改动类型判断升级是否相符。升级判定以 registry 中 VER-07 的 criteria 为准，creator 不另抄一份。
+
+PATH-01 只用本包 scripts/check_absolute_paths.py 的 JSON 作为候选来源。脚本匹配 `/Users/`、`/home/` 和 `C:\Users\` 后接具体用户名的写法；`<name>`、`{user}`、`$HOME`、`~` 等占位写法不匹配。退出 0 只表示扫描完成，2 表示目录不存在。候选逐条判定：可运行示例应改用占位符；来源或核验记录说明了“记录时的本机路径、仅用于复核”时为 N/A；测试夹具应在运行时拼接路径，避免成为候选。
+
 ## 证据与状态（Evidence）
 
 | 状态 | 含义 |
@@ -34,6 +40,6 @@ list_rules.py 只生成候选清单，executed_count 恒为 0。实际报告应�
 
 ## 规则演进（Evolution）
 
-保留原通用 36 个 rule id，修正旧文档写成 34 条的漂移；新增 YML-06、BODY-11、CDX-01 至 CDX-04、TEST-01。不引入派生业务包的 ECO 规则、BODY-09/10 实现路径门禁。计数以 registry 为准。
+保留原通用 36 个 rule id，修正旧文档写成 34 条的漂移；新增 YML-06、BODY-11、CDX-01 至 CDX-04、TEST-01；4.1.0 新增 VER-06、VER-07、PATH-01。不引入派生业务包的 ECO 规则、BODY-09/10 实现路径门禁。计数以 registry 为准。
 
 这些 id 保留不代表旧 criteria 不变：YML-01 改为 name 存在性，格式由 FILE-02 承担；FILE-05 改为基于证据的命名边界；YML-05 改为安全解析。升级使用者需接受 density schema v2 的 null，并重新选择 profile，不能沿用全项默认合规假设。

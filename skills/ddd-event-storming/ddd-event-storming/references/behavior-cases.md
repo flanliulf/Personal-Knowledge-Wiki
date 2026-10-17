@@ -4,7 +4,7 @@
 
 以下为虚构输入，仅验证方法和触发边界，不是目标业务事实。全部用例尚未在真实目标宿主执行，status 为 NOT_CHECKED。未安装或执行不应报告 PASS。
 
-执行时逐例记录 host、host_version、skill_version、skill_hash、input、expected、actual、status 和 evidence_locator。当前 host、host_version、actual 和 evidence_locator 均为未取得；skill_version 为 1.0.0。skill_hash 应在真实执行前重新计算，不能使用旧包 hash。
+执行时逐例记录 host、host_version、skill_version、skill_hash、input、expected、actual、status 和 evidence_locator。当前 host、host_version、actual 和 evidence_locator 均为未取得；skill_version 为 1.0.1。skill_hash 应在真实执行前重新计算，不能使用旧包 hash。
 
 ## 用例表（Case Matrix）
 

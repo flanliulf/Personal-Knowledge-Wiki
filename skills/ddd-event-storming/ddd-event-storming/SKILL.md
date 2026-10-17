@@ -2,7 +2,7 @@
 name: ddd-event-storming
 description: "用事件风暴分析业务需求，识别领域事件、命令、执行角色、查询和候选领域名词，并核对功能覆盖。用于需求不清晰、理解不一致、Event Storming 或复核事件分析；已有用例和用户故事可直接补齐分析。仅分析和交接，不用于纯技术重构、直接编码或消息队列实现。"
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
 # 业务事件分析（Event Storming）

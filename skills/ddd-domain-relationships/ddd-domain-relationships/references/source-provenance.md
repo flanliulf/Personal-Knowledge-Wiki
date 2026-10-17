@@ -2,7 +2,7 @@
 
 ## 来源范围（Source Scope）
 
-方法主要提炼自钟敬《手把手教你落地 DDD》本地 Markdown。2026-10-05 精读05、06、20、21、24正文；33仅核对员工多组织的演进反例，不据此宣称覆盖全部分析模式。下列绝对路径、行号及 SHA-256 用于复核来源，不是运行依赖。本包携带必要操作规则，不要求用户拥有课程目录、网络图片或其他 Skill。
+方法主要提炼自钟敬《手把手教你落地 DDD》本地 Markdown。2026-10-05 精读05、06、20、21、24正文；33仅核对员工多组织的演进反例，不据此宣称覆盖全部分析模式。下列绝对路径、行号及 SHA-256 用于复核来源，不是运行依赖。这些绝对路径是 2026-10-05 记录时的本机路径，其他机器上不一定存在。本包携带必要操作规则，不要求用户拥有课程目录、网络图片或其他 Skill。
 
 | source_id | 本地路径 | SHA-256 | 已使用正文范围与内容 |
 | --- | --- | --- | --- |
@@ -30,4 +30,4 @@
 
 ## 创建契约（Creation Contract）
 
-由 KnowledgeWiki 内置 `skills-creator` 2.0.0 流程维护，按 `skills-lint` 3.0.0 检查；采用 `base`、host `unspecified`，共享 registry contract_version `1.0.0`。创建时 registry SHA-256 为 `c8c569d88fa80c9353c6c81698f157f55b96148a471496af2edcf0028a25eb4e`。脚本统计成功不等于完整lint或真实宿主行为通过；最终逐规则证据由本次源包检查报告保存。
+由 KnowledgeWiki 内置 `skills-creator` 2.0.0 流程维护，按 `skills-lint` 3.0.0 检查；采用 `base`、host `unspecified`，共享 registry contract_version `1.0.0`。创建时 registry SHA-256 为 `c8c569d88fa80c9353c6c81698f157f55b96148a471496af2edcf0028a25eb4e`。脚本统计成功不等于完整lint或真实宿主行为通过；最终逐规则证据由本次源包检查报告保存。1.0.1 由 `skills-creator` 3.1.0 修订，按 `skills-lint` 4.1.0 检查。

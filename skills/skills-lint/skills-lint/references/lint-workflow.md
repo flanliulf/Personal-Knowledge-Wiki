@@ -13,9 +13,10 @@
 ```sh
 python3 "{lint-root}/scripts/list_rules.py" "{target}" --profile base
 python3 "{lint-root}/scripts/check_skill_density.py" "{target}"
+python3 "{lint-root}/scripts/check_absolute_paths.py" "{target}"
 ```
 
-按已确认范围替换 `--profile tooling`、添加 `--host codex`。list_rules.py 校验 registry 契约及唯一 ID，输出所有规则：选中 scope 为 NOT_CHECKED，其余 N/A。命令成功不是 lint 完成。记录 registry 版本、路径、hash，按每条 criteria 继续执行。
+按已确认范围替换 `--profile tooling`、添加 `--host codex`。list_rules.py 校验 registry 契约及唯一 ID，输出所有规则：选中 scope 为 NOT_CHECKED，其余 N/A。命令成功不是 lint 完成；路径脚本只列出 PATH-01 候选，逐条按 criteria 判定。记录 registry 版本、路径、hash，按每条 criteria 继续执行。
 
 ## 执行检查（Review）
 

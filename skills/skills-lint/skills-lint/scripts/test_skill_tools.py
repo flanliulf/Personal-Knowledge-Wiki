@@ -140,6 +140,11 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(plan["registered_count"], len(rows))
         self.assertEqual(plan["candidate_count"], sum(r["status"] == "NOT_CHECKED" for r in plan["rules"]))
 
+    def test_version_and_path_rules_apply_to_base(self):
+        rows = {r["id"]: r["status"] for r in self.plan()["rules"]}
+        for rid in ("VER-06", "VER-07", "PATH-01"):
+            self.assertEqual(rows[rid], "NOT_CHECKED")
+
     def test_directory_does_not_enable_tooling(self):
         plan = self.plan("KnowledgeWiki/skills/example/example")
         self.assertEqual(plan["scopes"], ["base"])

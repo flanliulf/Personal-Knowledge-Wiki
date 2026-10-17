@@ -4,6 +4,17 @@
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/)，版本号遵循 [Semantic Versioning](https://semver.org/)。
 
+## [4.1.0] - 2026-10-09
+
+### 新增（Added）
+- VER-06：base 包声明 metadata.version 时检查 SemVer 格式，并与 `## [x.y.z] - YYYY-MM-DD` 格式的 CHANGELOG 最新条目一致。
+- VER-07：版本变化须与改动类型相符，定义主、次、修订版本的判定标准、仅规范版本记录时的例外，以及未编号包从 1.0.0 补记的做法。
+- PATH-01 与 `scripts/check_absolute_paths.py`：扫描并逐条判定源包中的本机绝对路径；示例改用占位符，标明的历史来源路径为 N/A。新增对应测试。
+
+### 兼容性（Compatibility）
+- 新规则均为 Warning，规则契约 1.0.0 与密度 schema_version=2 不变；已有 base 包可能新增 WARN。配套 creator 3.1.0 按主版本与契约兼容，不再锁定 lint 修订号。
+- 未执行真实宿主行为验收，安装副本未同步。
+
 ## [4.0.1] - 2026-10-07
 
 ### 变更（Changed）

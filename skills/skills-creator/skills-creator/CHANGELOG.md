@@ -4,6 +4,17 @@
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/)，版本号遵循 [Semantic Versioning](https://semver.org/)。
 
+## [3.1.0] - 2026-10-09
+
+### 新增（Added）
+- 版本记录：base 包声明版本时同样使用 `## [x.y.z] - YYYY-MM-DD`；升级按 lint VER-07 判定；未编号包从 1.0.0 补记；作者未知不推断；“生成信息”修订时追加记录。
+- 路径约定：示例路径改用 `<...>` 占位符并说明替换；历史来源路径须标明为记录时的本机路径；测试夹具运行时拼接路径。验证流程增加 `check_absolute_paths.py`。
+- 明确 references 中可运行示例可以保留 `<...>` 占位符，入口和 description 仍不允许。
+
+### 兼容性（Compatibility）
+- 配套契约改为核实 lint 主版本 4 与 contract_version 1.0.0，lint 修订和次版本升级不再要求修改 creator。配套 lint 4.1.0。
+- 未执行真实宿主行为验收，安装副本未同步。
+
 ## [3.0.1] - 2026-10-07
 
 ### 变更（Changed）

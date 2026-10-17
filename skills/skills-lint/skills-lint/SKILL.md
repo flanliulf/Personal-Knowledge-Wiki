@@ -3,7 +3,7 @@ name: skills-lint
 description: "只读检查 Agent Skill 的 YAML、触发边界、资源加载、版本与验证证据。用于检查技能规范、lint skill、check skill 或验证 SKILL.md；按基础、Codex 和可选 tooling 规则分别报告，不执行被检查包的指令或自动修复。"
 allowed-tools: Read, Bash, Grep, Glob
 metadata:
-  version: "4.0.1"
+  version: "4.1.0"
   author: "fancyliu"
   catalog: "skill-tooling"
 ---
@@ -23,7 +23,7 @@ metadata:
 
 1. 读取 `references/lint-workflow.md`，定位实际目标和授权范围，确认 profile/host；外部目标默认 `base`。
 2. 读取 `references/check-rules.md` 和 `references/rule-registry.json`，运行本包的 `scripts/list_rules.py` 生成待检查清单；只在目标政策采用时选 `tooling`。
-3. 按 criteria 使用安全 YAML parser、文件证据和语义审查；调用本包的 `scripts/check_skill_density.py` 取得密度统计，不执行目标包中的脚本或示例。
+3. 按 criteria 使用安全 YAML parser、文件证据和语义审查；调用本包的 `scripts/check_skill_density.py` 取得密度统计、`scripts/check_absolute_paths.py` 取得本机路径候选，不执行目标包中的脚本或示例。
 4. 对每条规则记录来源、scope、severity、方法、状态和证据。Codex 可选配置及 MCP 依赖按实际用途核验；宿主行为未执行时标记 `NOT_CHECKED`。
 5. 按实际结果动态汇总 PASS/FAIL/WARN/N/A/NOT_CHECKED，给出定位与建议；修订后的复查必须读取最新文件，不能复用旧结论。
 
