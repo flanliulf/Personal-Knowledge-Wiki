@@ -1,0 +1,68 @@
+[
+  {
+    "style": 1,
+    "source": "output/LMP-部署架构-目标1-20261014.drawio",
+    "source_sha256": "5278860b18a887cd8da90804cca0da7f68976f547630d6714422b6839b2d8648",
+    "format": "png",
+    "output": "output/LMP-部署架构-目标1-20261014.png",
+    "output_sha256": "696bcb383f2fe45cfc8af99cad4b7e0ee2be4b8d7065f0cb56abdf06a94c4ee1",
+    "exit_code": 0,
+    "tool": "draw.io 24.7.17 / Electron 32.0.1",
+    "date": "2026-10-14"
+  },
+  {
+    "style": 1,
+    "source": "output/LMP-部署架构-目标1-20261014.drawio",
+    "source_sha256": "5278860b18a887cd8da90804cca0da7f68976f547630d6714422b6839b2d8648",
+    "format": "svg",
+    "output": "output/LMP-部署架构-目标1-20261014.svg",
+    "output_sha256": "de565cd4c046f87fce06f06f624e9df19ac9d4bff7e56a34d149475837f13064",
+    "exit_code": 0,
+    "tool": "draw.io 24.7.17 / Electron 32.0.1",
+    "date": "2026-10-14"
+  },
+  {
+    "style": 3,
+    "source": "output/LMP-部署架构-目标3-20261014.drawio",
+    "source_sha256": "7a26de7db53972c92ebabaff4637b53dd93f8a4b46756bf8ba9d9ab9b99e2d2f",
+    "format": "png",
+    "output": "output/LMP-部署架构-目标3-20261014.png",
+    "output_sha256": "991cf6390f053f0dfb357c29a715adf525fcf16cbd9c72dd49a42a28f1032b4e",
+    "exit_code": 0,
+    "tool": "draw.io 24.7.17 / Electron 32.0.1",
+    "date": "2026-10-14"
+  },
+  {
+    "style": 3,
+    "source": "output/LMP-部署架构-目标3-20261014.drawio",
+    "source_sha256": "7a26de7db53972c92ebabaff4637b53dd93f8a4b46756bf8ba9d9ab9b99e2d2f",
+    "format": "svg",
+    "output": "output/LMP-部署架构-目标3-20261014.svg",
+    "output_sha256": "bfd081bd5e47f23e9cfe58025ebf7b7421282aa279a629060ec898938698836c",
+    "exit_code": 0,
+    "tool": "draw.io 24.7.17 / Electron 32.0.1",
+    "date": "2026-10-14"
+  },
+  {
+    "style": 2,
+    "source": "output/LMP-部署架构-目标2-20261014.drawio",
+    "source_sha256": "dfc4122e034a5cf541fbf9c1ebdca58b9dfd51dda707199cbe0b0fc8717a1d2c",
+    "format": "png",
+    "output": "output/LMP-部署架构-目标2-20261014.png",
+    "output_sha256": "ae7275b260b051a44111a1d96d055a17fd99c8514e633be020b7036e8b458786",
+    "exit_code": 0,
+    "tool": "draw.io 24.7.17 / Electron 32.0.1",
+    "date": "2026-10-14"
+  },
+  {
+    "style": 2,
+    "source": "output/LMP-部署架构-目标2-20261014.drawio",
+    "source_sha256": "dfc4122e034a5cf541fbf9c1ebdca58b9dfd51dda707199cbe0b0fc8717a1d2c",
+    "format": "svg",
+    "output": "output/LMP-部署架构-目标2-20261014.svg",
+    "output_sha256": "11afc25acb70c6f6a4a0778d54e4547559c9d4ed12bbd43f4a28e59f31a6044c",
+    "exit_code": 0,
+    "tool": "draw.io 24.7.17 / Electron 32.0.1",
+    "date": "2026-10-14"
+  }
+]

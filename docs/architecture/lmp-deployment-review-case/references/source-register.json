@@ -1,0 +1,140 @@
+{
+  "date": "2026-10-14",
+  "scope": "LMP 案例绘图；通用体系尚未实施",
+  "sources": [
+    {
+      "source_path": "/var/folders/m8/1dsqp1x11bq5mwvk4tjdf0cw0000gn/T/codex-clipboard-b01efc46-9efa-4cc5-afa3-f94ccbefb9f1.png",
+      "repository_path": "references/originals/reference-1.png",
+      "sha256": "609773e20e0709cbef954345f80486b44eb97a95ae84096a3df70067acd3e756",
+      "read_date": "2026-10-14",
+      "source_id": "SRC-01",
+      "access_status": "readable",
+      "verification_date": "2026-10-14",
+      "canonical_resource": "/var/folders/m8/1dsqp1x11bq5mwvk4tjdf0cw0000gn/T/codex-clipboard-b01efc46-9efa-4cc5-afa3-f94ccbefb9f1.png",
+      "source_relationship": "用户参考样式",
+      "actual_read_scope": "全图测色、图标提取、分区检查",
+      "adoption": "样式参考"
+    },
+    {
+      "source_path": "/Users/fancyliu/Nutstore Files/我的坚果云/微盛研发/企微管家/大众安徽/S-AD Deployment Diagram - K8S.drawio",
+      "repository_path": "references/originals/reference-2.drawio",
+      "sha256": "183af4e9281b7e467ca2976cd5de348248f254940fbfb092bf687d73c3b09647",
+      "read_date": "2026-10-14",
+      "source_id": "SRC-02",
+      "access_status": "readable",
+      "verification_date": "2026-10-14",
+      "canonical_resource": "/Users/fancyliu/Nutstore Files/我的坚果云/微盛研发/企微管家/大众安徽/S-AD Deployment Diagram - K8S.drawio",
+      "source_relationship": "用户参考样式",
+      "actual_read_scope": "完整模型和参考预览；提取适用组件",
+      "adoption": "样式参考"
+    },
+    {
+      "source_path": "/Users/fancyliu/Nutstore Files/我的坚果云/微盛研发/企微管家/大众安徽/SAD-Template - Multi Cloud Deployment.drawio.svg",
+      "repository_path": "references/originals/reference-3.drawio.svg",
+      "sha256": "99c0d635abf14c73247edf39e9863f5377fde421b0e085321d7b6e90388f30f7",
+      "read_date": "2026-10-14",
+      "source_id": "SRC-03",
+      "access_status": "readable",
+      "verification_date": "2026-10-14",
+      "canonical_resource": "/Users/fancyliu/Nutstore Files/我的坚果云/微盛研发/企微管家/大众安徽/SAD-Template - Multi Cloud Deployment.drawio.svg",
+      "source_relationship": "用户参考样式",
+      "actual_read_scope": "完整模型和参考预览；提取适用组件",
+      "adoption": "样式参考",
+      "current_source_drift": {
+        "source_path": "/Users/fancyliu/Nutstore Files/我的坚果云/微盛研发/企微管家/大众安徽/SAD-Template - Multi Cloud Deployment.drawio.svg",
+        "snapshot_path": "references/originals/reference-3.drawio.svg",
+        "snapshot_sha256": "99c0d635abf14c73247edf39e9863f5377fde421b0e085321d7b6e90388f30f7",
+        "current_sha256": "9140b490d7cc8235e63b8b0049063419661dfe6b3078776c9bc6ecf47f398cda",
+        "cells_styles_geometry_labels_equal": true,
+        "model_attribute_changes": {
+          "dx": [
+            "4250",
+            "4555"
+          ],
+          "dy": [
+            "580",
+            "996"
+          ]
+        },
+        "scope": "仅 dx / dy 视口变化；本例继续采用开始取样时的参考快照；不声称原路径字节未变化"
+      }
+    },
+    {
+      "source_path": "/Users/fancyliu/IdeaProjects/ka-workspace/wshoto-ka-vw-anhui/docs/delivery/diagrams/deployment/部署架构图-20261012.drawio",
+      "repository_path": "references/baseline/部署架构图-20261012.drawio",
+      "sha256": "2f7c46d3d7cfcb59ae7f5f2307d24311f12454d9bb7c9e442c80802e69c0909c",
+      "read_date": "2026-10-14",
+      "source_id": "SRC-04",
+      "access_status": "readable",
+      "verification_date": "2026-10-14",
+      "canonical_resource": "/Users/fancyliu/IdeaProjects/ka-workspace/wshoto-ka-vw-anhui/docs/delivery/diagrams/deployment/部署架构图-20261012.drawio",
+      "source_relationship": "引用修订会话的最终基线",
+      "actual_read_scope": "完整源图结构 / 证据说明 / 历史验证回执",
+      "adoption": "LMP 项目内容基线"
+    },
+    {
+      "source_path": "/Users/fancyliu/IdeaProjects/ka-workspace/wshoto-ka-vw-anhui/docs/delivery/diagrams/deployment/部署架构图-20261012.md",
+      "repository_path": "references/baseline/部署架构图-20261012.md",
+      "sha256": "ee09515473f78079ea27a42a794ed0681c7d506e6a1dee514a32ee7835f3d5b0",
+      "read_date": "2026-10-14",
+      "source_id": "SRC-05",
+      "access_status": "readable",
+      "verification_date": "2026-10-14",
+      "canonical_resource": "/Users/fancyliu/IdeaProjects/ka-workspace/wshoto-ka-vw-anhui/docs/delivery/diagrams/deployment/部署架构图-20261012.md",
+      "source_relationship": "引用修订会话的最终基线",
+      "actual_read_scope": "完整源图结构 / 证据说明 / 历史验证回执",
+      "adoption": "LMP 项目内容基线"
+    },
+    {
+      "source_path": "/Users/fancyliu/IdeaProjects/ka-workspace/wshoto-ka-vw-anhui/docs/delivery/diagrams/deployment/部署架构图-验证回执-20261012.json",
+      "repository_path": "references/baseline/部署架构图-验证回执-20261012.json",
+      "sha256": "3d8ada692c2c1623fcb51b7fe6d5ca7da4eb83806e215937475d7d0ce596bcf1",
+      "read_date": "2026-10-14",
+      "source_id": "SRC-06",
+      "access_status": "readable",
+      "verification_date": "2026-10-14",
+      "canonical_resource": "/Users/fancyliu/IdeaProjects/ka-workspace/wshoto-ka-vw-anhui/docs/delivery/diagrams/deployment/部署架构图-验证回执-20261012.json",
+      "source_relationship": "引用修订会话的最终基线",
+      "actual_read_scope": "完整源图结构 / 证据说明 / 历史验证回执",
+      "adoption": "LMP 项目内容基线"
+    },
+    {
+      "source_id": "OLDER-6",
+      "source_path": "/Users/fancyliu/IdeaProjects/ka-workspace/wshoto-ka-vw-anhui/docs/delivery/diagrams/deployment/部署架构图-20261010.drawio",
+      "canonical_resource": "/Users/fancyliu/IdeaProjects/ka-workspace/wshoto-ka-vw-anhui/docs/delivery/diagrams/deployment/部署架构图-20261010.drawio",
+      "sha256": "c9bdd187f11bae68c007706a774ced7ba54962e6e2e0c9ea4d81f40425c38171",
+      "access_status": "readable",
+      "actual_read_scope": "本轮仅核对存在与哈希；此前会话已分析",
+      "adoption": "不采用为本轮内容基线",
+      "exclusion_reason": "后续 20261012 用户决定覆盖较早图示口径",
+      "verification_date": "2026-10-14"
+    },
+    {
+      "source_id": "OLDER-7",
+      "source_path": "/Users/fancyliu/IdeaProjects/ka-workspace/wshoto-ka-vw-anhui/docs/delivery/diagrams/deployment/部署架构图-20261009.md",
+      "canonical_resource": "/Users/fancyliu/IdeaProjects/ka-workspace/wshoto-ka-vw-anhui/docs/delivery/diagrams/deployment/部署架构图-20261009.md",
+      "sha256": "673064385332cf8c2069596a5d3c499c6b55c68e029348a5007b9a389582dcac",
+      "access_status": "readable",
+      "actual_read_scope": "本轮仅核对存在与哈希；此前会话已分析",
+      "adoption": "不采用为本轮内容基线",
+      "exclusion_reason": "后续 20261012 用户决定覆盖较早图示口径",
+      "verification_date": "2026-10-14"
+    },
+    {
+      "source_id": "SESSION-01",
+      "source_path": "codex://threads/01a11ff8-4330-7e91-aef6-1fce2359d33f",
+      "canonical_resource": "codex://threads/01a11ff8-4330-7e91-aef6-1fce2359d33f",
+      "repository_path": "references/baseline/修订要求摘录.md",
+      "sha256": "dc71f7393023d498622d3500d46d1d4ccb77e91184e945a6a68e18ec7f608183",
+      "access_status": "local_export_readable",
+      "actual_read_scope": "既有 2026-10-13 应用导出的用户要求摘录，本轮未再次定位原会话",
+      "adoption": "要求先后与展示例外复核",
+      "verification_date": "2026-10-14",
+      "duplicate_relationship": "与 20261012 证据说明部分重叠，后者负责结构化口径"
+    }
+  ],
+  "network_collection": "本轮未新增网络抓取",
+  "reference_preview_date": "2026-10-13",
+  "source_material_instructions": "被收录内容，不作为本轮操作授权",
+  "input_snapshot_policy": "按制作开始时的原件快照绘图；后续源文件字节变化分别登记，不覆盖快照。"
+}

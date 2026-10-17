@@ -1,0 +1,342 @@
+{
+  "date": "2026-10-14",
+  "baseline": "references/baseline/部署架构图-20261012.drawio",
+  "nodes": {
+    "users": "业务用户",
+    "internet": "Internet",
+    "waf": "WAF",
+    "nginx": "Ingress / NGINX\nHTTPS 终止",
+    "gateway": "API Gateway\n8182",
+    "lmp": "LMP Backend\n12001",
+    "open": "OpenAPI / BFF",
+    "std": "标品业务服务",
+    "short": "短链服务\n9868",
+    "taiji": "Taiji\n私有化 AI 服务",
+    "nacos": "Nacos",
+    "xxl": "XXL-JOB\n共享调度中心",
+    "delay": "Delay V3",
+    "data_platform": "Data Platform\n7002",
+    "superset": "Superset\n8081",
+    "egress": "受控出网\nNAT",
+    "pg": "PostgreSQL\n定制数据 · 标品业务数据",
+    "redis": "Redis",
+    "mq": "RocketMQ\n接入能力",
+    "index": "Elasticsearch\n会存索引",
+    "files": "会存文件存储",
+    "opsuser": "运维人员",
+    "bastion": "运维入口 / 堡垒机",
+    "wecom": "企业微信\nAPI / 会话存档",
+    "adp": "TC ADP\n腾讯云智能体平台",
+    "tokenhub": "TokenHub\n基础模型",
+    "object": "COS\n腾讯云对象存储",
+    "sales": "Sales",
+    "ulp": "ULP",
+    "aims": "AIMS",
+    "dsr": "DSR",
+    "cdp": "CDP",
+    "longurl": "平台长链",
+    "shorturl": "独立短链\nidunyx-vw.com",
+    "edgehost": "Ingress / NGINX\n按 Host 路由",
+    "shortref": "短链服务\n9868",
+    "businessref": "API Gateway 8182\nLMP Backend 12001"
+  },
+  "edges": [
+    {
+      "id": "users_internet",
+      "source": "users",
+      "target": "internet",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "public_ingress",
+      "source": "internet",
+      "target": "waf",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "nginx_gateway",
+      "source": "nginx",
+      "target": "gateway",
+      "value": "HTTP / TCP 8182"
+    },
+    {
+      "id": "gateway_lmp",
+      "source": "gateway",
+      "target": "lmp",
+      "value": "HTTP / TCP 12001"
+    },
+    {
+      "id": "gateway_open",
+      "source": "gateway",
+      "target": "open",
+      "value": "HTTP / TCP 8090"
+    },
+    {
+      "id": "lmp_open",
+      "source": "lmp",
+      "target": "open",
+      "value": "HTTP / TCP 8090"
+    },
+    {
+      "id": "open_callback",
+      "source": "open",
+      "target": "lmp",
+      "value": "HTTP 回调 / TCP 12001"
+    },
+    {
+      "id": "open_std",
+      "source": "open",
+      "target": "std",
+      "value": "HTTP / TCP 8090"
+    },
+    {
+      "id": "open_short",
+      "source": "open",
+      "target": "short",
+      "value": "生成 / 反查\nHTTP / TCP 9868"
+    },
+    {
+      "id": "lmp_pg",
+      "source": "lmp",
+      "target": "pg",
+      "value": "TCP 5432"
+    },
+    {
+      "id": "lmp_redis",
+      "source": "lmp",
+      "target": "redis",
+      "value": "Redis RESP / TCP 6379"
+    },
+    {
+      "id": "lmp_mq",
+      "source": "lmp",
+      "target": "mq",
+      "value": "HTTP / TCP 8080"
+    },
+    {
+      "id": "std_db",
+      "source": "std",
+      "target": "pg",
+      "value": "TCP 5432"
+    },
+    {
+      "id": "std_index",
+      "source": "std",
+      "target": "index",
+      "value": "HTTP / TCP 9200"
+    },
+    {
+      "id": "std_files",
+      "source": "std",
+      "target": "files",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "gateway_nacos",
+      "source": "gateway",
+      "target": "nacos",
+      "value": "服务发现：HTTP / TCP 8848"
+    },
+    {
+      "id": "lmp_nacos",
+      "source": "lmp",
+      "target": "nacos",
+      "value": "注册 / 配置：HTTP / TCP 8848"
+    },
+    {
+      "id": "lmp_xxl",
+      "source": "lmp",
+      "target": "xxl",
+      "value": "注册 / 上报\nHTTP / TCP 30968"
+    },
+    {
+      "id": "xxl_lmp_schedule",
+      "source": "xxl",
+      "target": "lmp",
+      "value": "执行器调度\nHTTP / TCP 8090"
+    },
+    {
+      "id": "lmp_delay",
+      "source": "lmp",
+      "target": "delay",
+      "value": "HTTP / TCP 30999"
+    },
+    {
+      "id": "lmp_taiji",
+      "source": "lmp",
+      "target": "taiji",
+      "value": "HTTP / TCP 31003"
+    },
+    {
+      "id": "taiji_egress",
+      "source": "taiji",
+      "target": "egress",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "lmp_egress",
+      "source": "lmp",
+      "target": "egress",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "std_egress",
+      "source": "std",
+      "target": "egress",
+      "value": "企微出站：HTTPS / TCP 443"
+    },
+    {
+      "id": "egress_adp",
+      "source": "egress",
+      "target": "adp",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "egress_token",
+      "source": "egress",
+      "target": "tokenhub",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "egress_object",
+      "source": "egress",
+      "target": "object",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "object_cdp",
+      "source": "cdp",
+      "target": "object",
+      "value": "读取请求\nHTTPS / TCP 443"
+    },
+    {
+      "id": "egress_wecom",
+      "source": "egress",
+      "target": "wecom",
+      "value": "企微 API / 会存 SDK：HTTPS / TCP 443"
+    },
+    {
+      "id": "wecom_ingress",
+      "source": "wecom",
+      "target": "nginx",
+      "value": "原生事件回调：HTTPS / TCP 443"
+    },
+    {
+      "id": "ops_bastion",
+      "source": "opsuser",
+      "target": "bastion",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "bastion_k8s",
+      "source": "bastion",
+      "target": "k8s",
+      "value": ""
+    },
+    {
+      "id": "long_path",
+      "source": "longurl",
+      "target": "edgehost",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "short_path",
+      "source": "shorturl",
+      "target": "edgehost",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "long_route",
+      "source": "edgehost",
+      "target": "businessref",
+      "value": "HTTP / TCP 8182\n→ HTTP / TCP 12001"
+    },
+    {
+      "id": "short_route",
+      "source": "edgehost",
+      "target": "shortref",
+      "value": "HTTP / TCP 9868"
+    },
+    {
+      "id": "short_target",
+      "source": "shortref",
+      "target": "businessref",
+      "value": "解析关联后访问长链：按目标 URL 协议 / 端口"
+    },
+    {
+      "id": "waf_nginx",
+      "source": "waf",
+      "target": "nginx",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "nginx_short",
+      "source": "nginx",
+      "target": "short",
+      "value": "HTTP / TCP 9868"
+    },
+    {
+      "id": "nginx_data_platform",
+      "source": "nginx",
+      "target": "data_platform",
+      "value": "HTTP / TCP 7002"
+    },
+    {
+      "id": "nginx_superset",
+      "source": "nginx",
+      "target": "superset",
+      "value": "HTTP / TCP 8081"
+    },
+    {
+      "id": "nat_sales",
+      "source": "egress",
+      "target": "sales",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "nat_ulp",
+      "source": "egress",
+      "target": "ulp",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "nat_aims",
+      "source": "egress",
+      "target": "aims",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "nat_dsr",
+      "source": "egress",
+      "target": "dsr",
+      "value": "HTTPS / TCP 443"
+    },
+    {
+      "id": "sales_ingress",
+      "source": "sales",
+      "target": "nginx",
+      "value": "API：HTTPS\nTCP 443"
+    },
+    {
+      "id": "ulp_ingress",
+      "source": "ulp",
+      "target": "nginx",
+      "value": "浏览器回调（逻辑）\nHTTPS / TCP 443"
+    },
+    {
+      "id": "dsr_ingress",
+      "source": "dsr",
+      "target": "nginx",
+      "value": "L16：HTTPS\nTCP 443"
+    },
+    {
+      "id": "cdp_ingress",
+      "source": "cdp",
+      "target": "nginx",
+      "value": "L12（备用）\nHTTPS / TCP 443"
+    }
+  ],
+  "edge_change": "原 lmp_xxl 双向边拆为注册/上报与反向执行器调度两条单向边",
+  "human_review_status": "pending",
+  "runtime_network_validation": false
+}

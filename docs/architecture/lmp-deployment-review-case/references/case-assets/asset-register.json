@@ -1,0 +1,156 @@
+{
+  "pg": {
+    "source": "references/originals/reference-1.png",
+    "inspection_box": [
+      960,
+      675,
+      1050,
+      790
+    ],
+    "local_foreground_box": [
+      3,
+      6,
+      54,
+      71
+    ],
+    "operation": "Generic RGB Profile 转 sRGB；提取图标区域；只移除近似底色，保留文字与连线在原参考中",
+    "path": "references/case-assets/pg.png",
+    "size": [
+      51,
+      65
+    ],
+    "sha256": "f32da32a27761b0d5176a1c02d2a15a51e73834186abbf726d1f959909dc3046"
+  },
+  "redis": {
+    "source": "references/originals/reference-1.png",
+    "inspection_box": [
+      1060,
+      675,
+      1160,
+      790
+    ],
+    "local_foreground_box": [
+      14,
+      10,
+      69,
+      70
+    ],
+    "operation": "Generic RGB Profile 转 sRGB；提取图标区域；只移除近似底色，保留文字与连线在原参考中",
+    "path": "references/case-assets/redis.png",
+    "size": [
+      55,
+      60
+    ],
+    "sha256": "3cdca546a528cbb739c2898efbc602b795217f6f1ef0cca1a84c88e52657c06c"
+  },
+  "index": {
+    "source": "references/originals/reference-1.png",
+    "inspection_box": [
+      1155,
+      675,
+      1260,
+      790
+    ],
+    "local_foreground_box": [
+      24,
+      10,
+      77,
+      76
+    ],
+    "operation": "Generic RGB Profile 转 sRGB；提取图标区域；只移除近似底色，保留文字与连线在原参考中",
+    "path": "references/case-assets/index.png",
+    "size": [
+      53,
+      66
+    ],
+    "sha256": "2054009644d93f92d3b3938fe90696c06000dd6b8d222d23a79f537784b84911"
+  },
+  "mq": {
+    "source": "references/originals/reference-1.png",
+    "inspection_box": [
+      1340,
+      675,
+      1450,
+      790
+    ],
+    "local_foreground_box": [
+      35,
+      10,
+      88,
+      76
+    ],
+    "operation": "Generic RGB Profile 转 sRGB；提取图标区域；只移除近似底色，保留文字与连线在原参考中",
+    "path": "references/case-assets/mq.png",
+    "size": [
+      53,
+      66
+    ],
+    "sha256": "2054009644d93f92d3b3938fe90696c06000dd6b8d222d23a79f537784b84911"
+  },
+  "service": {
+    "source": "references/originals/reference-1.png",
+    "inspection_box": [
+      1350,
+      390,
+      1460,
+      490
+    ],
+    "local_foreground_box": [
+      11,
+      14,
+      77,
+      72
+    ],
+    "operation": "Generic RGB Profile 转 sRGB；提取图标区域；只移除近似底色，保留文字与连线在原参考中",
+    "path": "references/case-assets/service.png",
+    "size": [
+      66,
+      58
+    ],
+    "sha256": "b813843490d2330ee54a01eb97dfe5ed09c7d1c94a1a91a55b23eb8585a748f6"
+  },
+  "gateway": {
+    "source": "references/originals/reference-1.png",
+    "inspection_box": [
+      1180,
+      390,
+      1280,
+      490
+    ],
+    "local_foreground_box": [
+      16,
+      10,
+      83,
+      77
+    ],
+    "operation": "Generic RGB Profile 转 sRGB；提取图标区域；只移除近似底色，保留文字与连线在原参考中",
+    "path": "references/case-assets/gateway.png",
+    "size": [
+      67,
+      67
+    ],
+    "sha256": "c927a423acd68b7560cf84dbfb4ac30c7454f2d49fe0f6ee6c952d194354a1f5"
+  },
+  "waf": {
+    "source": "references/originals/reference-1.png",
+    "inspection_box": [
+      540,
+      390,
+      635,
+      490
+    ],
+    "local_foreground_box": [
+      19,
+      12,
+      72,
+      65
+    ],
+    "operation": "Generic RGB Profile 转 sRGB；提取图标区域；只移除近似底色，保留文字与连线在原参考中",
+    "path": "references/case-assets/waf.png",
+    "size": [
+      53,
+      53
+    ],
+    "sha256": "8c6986ef1f0f86088eea505cbed3882d31a8cceceff99f2dcee92c35f00cada0"
+  }
+}

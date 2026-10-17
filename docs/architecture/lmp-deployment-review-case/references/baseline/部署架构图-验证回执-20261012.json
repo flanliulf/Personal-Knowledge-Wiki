@@ -1,0 +1,302 @@
+{
+  "date": "2026-10-12",
+  "source": "部署架构图-20261012.drawio",
+  "source_sha256": "2f7c46d3d7cfcb59ae7f5f2307d24311f12454d9bb7c9e442c80802e69c0909c",
+  "bytes": 75090,
+  "page_count": 1,
+  "pages": [
+    {
+      "name": "通用部署与网络架构",
+      "width": "3540",
+      "height": "2400",
+      "vertices": 106,
+      "edges": 48
+    }
+  ],
+  "structure_errors": [],
+  "network_checks": {
+    "protocol_label_count": 47,
+    "connection_count": 48,
+    "containment_checks": [
+      {
+        "node": "business_subnet",
+        "inside": "vpc",
+        "passed": true
+      },
+      {
+        "node": "data_subnet",
+        "inside": "vpc",
+        "passed": true
+      },
+      {
+        "node": "k8s",
+        "inside": "business_subnet",
+        "passed": true
+      },
+      {
+        "node": "custom",
+        "inside": "k8s",
+        "passed": true
+      },
+      {
+        "node": "standard",
+        "inside": "k8s",
+        "passed": true
+      },
+      {
+        "node": "lmp",
+        "inside": "custom",
+        "passed": true
+      },
+      {
+        "node": "open",
+        "inside": "standard",
+        "passed": true
+      },
+      {
+        "node": "std",
+        "inside": "standard",
+        "passed": true
+      },
+      {
+        "node": "short",
+        "inside": "standard",
+        "passed": true
+      },
+      {
+        "node": "taiji",
+        "inside": "k8s",
+        "passed": true
+      },
+      {
+        "node": "nacos",
+        "inside": "k8s",
+        "passed": true
+      },
+      {
+        "node": "xxl",
+        "inside": "k8s",
+        "passed": true
+      },
+      {
+        "node": "delay",
+        "inside": "k8s",
+        "passed": true
+      },
+      {
+        "node": "data_platform",
+        "inside": "k8s",
+        "passed": true
+      },
+      {
+        "node": "superset",
+        "inside": "k8s",
+        "passed": true
+      },
+      {
+        "node": "pg",
+        "inside": "data_subnet",
+        "passed": true
+      },
+      {
+        "node": "redis",
+        "inside": "data_subnet",
+        "passed": true
+      },
+      {
+        "node": "mq",
+        "inside": "data_subnet",
+        "passed": true
+      },
+      {
+        "node": "index",
+        "inside": "data_subnet",
+        "passed": true
+      },
+      {
+        "node": "files",
+        "inside": "data_subnet",
+        "passed": true
+      }
+    ],
+    "subnets_do_not_overlap": true,
+    "user_confirmed_routes_checked": [
+      "public_ingress",
+      "waf_nginx",
+      "ops_bastion",
+      "nginx_gateway",
+      "gateway_lmp",
+      "open_callback",
+      "nginx_short",
+      "nginx_data_platform",
+      "nginx_superset",
+      "lmp_pg",
+      "std_db",
+      "std_index",
+      "std_files"
+    ],
+    "protocol_label_font_size": 18,
+    "unlabeled_connection": "bastion_k8s（按用户要求移除管理待确认标签）",
+    "connection_directions_unchanged": true,
+    "external_directions_reviewed": true
+  },
+  "render": {
+    "tool": "draw.io CLI",
+    "format": "png",
+    "page_index": 0,
+    "exit_code": 0,
+    "preview_path": "/tmp/vw-deployment-final-labels-20261012/部署架构图-20261012.png",
+    "preview_sha256": "8394f495d5357cb27e6624233910bbb4f2ddcde8c50b3a440dfc376108ebe0e3"
+  },
+  "visual_review": {
+    "passed": true,
+    "scope": "最终源图实际draw.io导出检查：TC ADP与COS名称、短链标签和实线图例可读。"
+  },
+  "semantic_review": {
+    "passed": true,
+    "scope": "已复核本轮最终节点名称、短链标签、实线图例；已有独立审核的协议、端口和方向保持。",
+    "vpc_count": 1,
+    "subnet_count": 2,
+    "k8s_scope": "业务Subnet，Kubernetes · 腾讯云 TKE",
+    "removed_visible_terms": [
+      "Secret / 配置",
+      "VPN",
+      "VPC ID",
+      "CIDR",
+      "防火墙"
+    ],
+    "standard_zone": "LMP 标品服务区（Standard Product）",
+    "shortlink_component_present": true,
+    "shortlink_domains": [
+      "idunyx-vw.com",
+      "idunyx-vw.com"
+    ],
+    "platform_domains": [
+      "lmp-uat.vgcserv.com.cn",
+      "lmp-prod.vgcserv.com.cn"
+    ],
+    "user_confirmed_application_ports": {
+      "gateway": 8182,
+      "lmp_backend": 12001,
+      "shortlink": 9868,
+      "data_platform": 7002,
+      "superset": 8081
+    },
+    "storage_protocols": {
+      "postgresql": "TCP 5432，承载定制与标品，逻辑隔离",
+      "elasticsearch": "HTTP / TCP 9200",
+      "files": "HTTPS / TCP 443",
+      "rocketmq": "HTTP / TCP 8080"
+    },
+    "port_scope": "用户确认端口与协议用于本次图示；图内移除全部连接角标及角标说明，未运行验证客户环境。",
+    "pending_fields": "SaaS具体URL、短链公开解析，以及实际网络与运行配置。",
+    "saas_protocol": "HTTPS / TCP 443",
+    "superscript_annotations_removed": true,
+    "external_saas": [
+      "TC ADP（腾讯云智能体平台）",
+      "TokenHub",
+      "COS（腾讯云对象存储）"
+    ],
+    "customer_external_systems": [
+      "Sales",
+      "ULP",
+      "AIMS",
+      "DSR",
+      "CDP"
+    ],
+    "object_storage_parent": "saas",
+    "cdp_parent": "external",
+    "network_pending_text_removed": true,
+    "internal_http_label_resolution": "用户确认未单独指定的内部服务端口默认8090，相关待确认标签已替换。",
+    "cdp_l12_optional": true,
+    "external_edges": [
+      {
+        "id": "egress_adp",
+        "source": "egress",
+        "target": "adp",
+        "protocol": "HTTPS / TCP 443"
+      },
+      {
+        "id": "egress_token",
+        "source": "egress",
+        "target": "tokenhub",
+        "protocol": "HTTPS / TCP 443"
+      },
+      {
+        "id": "egress_object",
+        "source": "egress",
+        "target": "object",
+        "protocol": "HTTPS / TCP 443"
+      },
+      {
+        "id": "object_cdp",
+        "source": "cdp",
+        "target": "object",
+        "protocol": "读取请求\nHTTPS / TCP 443"
+      },
+      {
+        "id": "nat_sales",
+        "source": "egress",
+        "target": "sales",
+        "protocol": "HTTPS / TCP 443"
+      },
+      {
+        "id": "nat_ulp",
+        "source": "egress",
+        "target": "ulp",
+        "protocol": "HTTPS / TCP 443"
+      },
+      {
+        "id": "nat_aims",
+        "source": "egress",
+        "target": "aims",
+        "protocol": "HTTPS / TCP 443"
+      },
+      {
+        "id": "nat_dsr",
+        "source": "egress",
+        "target": "dsr",
+        "protocol": "HTTPS / TCP 443"
+      },
+      {
+        "id": "sales_ingress",
+        "source": "sales",
+        "target": "nginx",
+        "protocol": "API：HTTPS\nTCP 443"
+      },
+      {
+        "id": "ulp_ingress",
+        "source": "ulp",
+        "target": "nginx",
+        "protocol": "浏览器回调（逻辑）\nHTTPS / TCP 443"
+      },
+      {
+        "id": "dsr_ingress",
+        "source": "dsr",
+        "target": "nginx",
+        "protocol": "L16：HTTPS\nTCP 443"
+      },
+      {
+        "id": "cdp_ingress",
+        "source": "cdp",
+        "target": "nginx",
+        "protocol": "L12（备用）\nHTTPS / TCP 443"
+      }
+    ],
+    "internal_default_port": 8090,
+    "internal_default_protocol": "HTTP / TCP",
+    "internal_default_port_edges": [
+      "gateway_open",
+      "lmp_open",
+      "open_std",
+      "lmp_xxl反向执行器调度"
+    ],
+    "uncertainty_descriptions_removed_from_diagram": true,
+    "all_dashed_styles_changed_to_solid": true
+  },
+  "protected_existing_files": {
+    "checked": 401,
+    "changed": []
+  },
+  "environment_runtime_validation": false
+}

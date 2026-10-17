@@ -1,0 +1,217 @@
+{
+  "date": "2026-10-14",
+  "status": "ready_for_user_review",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3513,
+      "sha256": "744dc3844a737710d2df6ca086e5fc77f680e5b3a2b5b2f40932965828a9911c"
+    },
+    {
+      "path": "output/LMP-部署架构-目标1-20261014.drawio",
+      "bytes": 168160,
+      "sha256": "5278860b18a887cd8da90804cca0da7f68976f547630d6714422b6839b2d8648"
+    },
+    {
+      "path": "output/LMP-部署架构-目标1-20261014.png",
+      "bytes": 1030418,
+      "sha256": "696bcb383f2fe45cfc8af99cad4b7e0ee2be4b8d7065f0cb56abdf06a94c4ee1"
+    },
+    {
+      "path": "output/LMP-部署架构-目标1-20261014.svg",
+      "bytes": 438274,
+      "sha256": "de565cd4c046f87fce06f06f624e9df19ac9d4bff7e56a34d149475837f13064"
+    },
+    {
+      "path": "output/LMP-部署架构-目标2-20261014.drawio",
+      "bytes": 100521,
+      "sha256": "dfc4122e034a5cf541fbf9c1ebdca58b9dfd51dda707199cbe0b0fc8717a1d2c"
+    },
+    {
+      "path": "output/LMP-部署架构-目标2-20261014.png",
+      "bytes": 550981,
+      "sha256": "ae7275b260b051a44111a1d96d055a17fd99c8514e633be020b7036e8b458786"
+    },
+    {
+      "path": "output/LMP-部署架构-目标2-20261014.svg",
+      "bytes": 320381,
+      "sha256": "11afc25acb70c6f6a4a0778d54e4547559c9d4ed12bbd43f4a28e59f31a6044c"
+    },
+    {
+      "path": "output/LMP-部署架构-目标3-20261014.drawio",
+      "bytes": 99357,
+      "sha256": "7a26de7db53972c92ebabaff4637b53dd93f8a4b46756bf8ba9d9ab9b99e2d2f"
+    },
+    {
+      "path": "output/LMP-部署架构-目标3-20261014.png",
+      "bytes": 681589,
+      "sha256": "991cf6390f053f0dfb357c29a715adf525fcf16cbd9c72dd49a42a28f1032b4e"
+    },
+    {
+      "path": "output/LMP-部署架构-目标3-20261014.svg",
+      "bytes": 431161,
+      "sha256": "bfd081bd5e47f23e9cfe58025ebf7b7421282aa279a629060ec898938698836c"
+    },
+    {
+      "path": "output/评审.html",
+      "bytes": 3106629,
+      "sha256": "a8ef3a15db2b6c27e9adf32da9588ea1f6f65efcafb8a45136eb59a476731a85"
+    },
+    {
+      "path": "references/baseline/修订要求摘录.md",
+      "bytes": 18971,
+      "sha256": "dc71f7393023d498622d3500d46d1d4ccb77e91184e945a6a68e18ec7f608183"
+    },
+    {
+      "path": "references/baseline/部署架构图-20261012.drawio",
+      "bytes": 75090,
+      "sha256": "2f7c46d3d7cfcb59ae7f5f2307d24311f12454d9bb7c9e442c80802e69c0909c"
+    },
+    {
+      "path": "references/baseline/部署架构图-20261012.md",
+      "bytes": 11623,
+      "sha256": "ee09515473f78079ea27a42a794ed0681c7d506e6a1dee514a32ee7835f3d5b0"
+    },
+    {
+      "path": "references/baseline/部署架构图-验证回执-20261012.json",
+      "bytes": 7541,
+      "sha256": "3d8ada692c2c1623fcb51b7fe6d5ca7da4eb83806e215937475d7d0ce596bcf1"
+    },
+    {
+      "path": "references/browser-validation.json",
+      "bytes": 1898,
+      "sha256": "6169f81aabcc1bf647fafea2e14155d1434863a6988e3e6e4b0a978b2d599142"
+    },
+    {
+      "path": "references/case-assets/asset-register.json",
+      "bytes": 3671,
+      "sha256": "41f3c93721c8af4a8c9fb3ccabac4b9ac3cfdd709f1c82cad7b49f65faa8fe09"
+    },
+    {
+      "path": "references/case-assets/gateway.png",
+      "bytes": 3361,
+      "sha256": "c927a423acd68b7560cf84dbfb4ac30c7454f2d49fe0f6ee6c952d194354a1f5"
+    },
+    {
+      "path": "references/case-assets/index.png",
+      "bytes": 3319,
+      "sha256": "2054009644d93f92d3b3938fe90696c06000dd6b8d222d23a79f537784b84911"
+    },
+    {
+      "path": "references/case-assets/mq.png",
+      "bytes": 3319,
+      "sha256": "2054009644d93f92d3b3938fe90696c06000dd6b8d222d23a79f537784b84911"
+    },
+    {
+      "path": "references/case-assets/pg.png",
+      "bytes": 3375,
+      "sha256": "f32da32a27761b0d5176a1c02d2a15a51e73834186abbf726d1f959909dc3046"
+    },
+    {
+      "path": "references/case-assets/redis.png",
+      "bytes": 3546,
+      "sha256": "3cdca546a528cbb739c2898efbc602b795217f6f1ef0cca1a84c88e52657c06c"
+    },
+    {
+      "path": "references/case-assets/service.png",
+      "bytes": 3324,
+      "sha256": "b813843490d2330ee54a01eb97dfe5ed09c7d1c94a1a91a55b23eb8585a748f6"
+    },
+    {
+      "path": "references/case-assets/waf.png",
+      "bytes": 3441,
+      "sha256": "8c6986ef1f0f86088eea505cbed3882d31a8cceceff99f2dcee92c35f00cada0"
+    },
+    {
+      "path": "references/delivery-checks.json",
+      "bytes": 3014,
+      "sha256": "a3d9e59c67dbdeb9e0b274e1369949f80c48f1daec4ddbcf211d33a7c1dff502"
+    },
+    {
+      "path": "references/final-style-1-services.png",
+      "bytes": 356627,
+      "sha256": "2698ea076eec75777498be95cd693316fdeab96ca48e52b552ba6b75f7a0a6fd"
+    },
+    {
+      "path": "references/final-style-2-services.png",
+      "bytes": 135071,
+      "sha256": "343a2353fe40223a9b89ba01088c69f775fe92fb71492b7322ad0465847378ff"
+    },
+    {
+      "path": "references/final-style-3-services.png",
+      "bytes": 228508,
+      "sha256": "8becdb342e785d5e4129a5ca38bd3c00d20091090f970776b44690761870c576"
+    },
+    {
+      "path": "references/native-style-comparison.json",
+      "bytes": 622,
+      "sha256": "27a50c83fc8ac8e4f8a93ba1f460f88e4195268f9764e092940171a782022935"
+    },
+    {
+      "path": "references/originals/reference-1.png",
+      "bytes": 751464,
+      "sha256": "609773e20e0709cbef954345f80486b44eb97a95ae84096a3df70067acd3e756"
+    },
+    {
+      "path": "references/originals/reference-2-preview.png",
+      "bytes": 130439,
+      "sha256": "914cde3c1c1a54f79c32844977766d013c27595bd5c35dcb0fa048fbad0a7ca7"
+    },
+    {
+      "path": "references/originals/reference-2.drawio",
+      "bytes": 15872,
+      "sha256": "183af4e9281b7e467ca2976cd5de348248f254940fbfb092bf687d73c3b09647"
+    },
+    {
+      "path": "references/originals/reference-3-preview.png",
+      "bytes": 887596,
+      "sha256": "9155f9f6efe891d005ecc19550f4b2243db8e44e65a007b0af375a6341e19596"
+    },
+    {
+      "path": "references/originals/reference-3.drawio.svg",
+      "bytes": 2191612,
+      "sha256": "99c0d635abf14c73247edf39e9863f5377fde421b0e085321d7b6e90388f30f7"
+    },
+    {
+      "path": "references/project-model.json",
+      "bytes": 7896,
+      "sha256": "9d483e3d1a096f4c299c65f2e1a32a29bf2983b45ba423f6b3d54492612d3969"
+    },
+    {
+      "path": "references/render-receipts.json",
+      "bytes": 2672,
+      "sha256": "934610bedb0e4d5b948ee71a7957266233f9c15794769d718b670adbce0601e3"
+    },
+    {
+      "path": "references/review-ui-style-1.png",
+      "bytes": 237419,
+      "sha256": "ecd2238cfea53875fd22f32812af01baf8e3b29dd20b6cf6ba16e3c6ad2703ad"
+    },
+    {
+      "path": "references/review-ui-style-2.png",
+      "bytes": 153741,
+      "sha256": "1ab88b0c5074e3266c7e7c502ba3286f73011092872a3fe3917e05b20aa1cf17"
+    },
+    {
+      "path": "references/review-ui-style-3.png",
+      "bytes": 185703,
+      "sha256": "906e18a1fec6b387976a71dc3cebe7a67b154cb33b51a1e7f50e10431a1166dc"
+    },
+    {
+      "path": "references/source-register.json",
+      "bytes": 8182,
+      "sha256": "9ca8c31538151d8acfcd3ad93c41b8aeaa8d62f9ab759e735fe4bc9a779d54ea"
+    },
+    {
+      "path": "references/validation.json",
+      "bytes": 5309,
+      "sha256": "f920675424f7725c8143b836b1de34072881d9288985bd565ac1aeaa7f5b2df6"
+    },
+    {
+      "path": "评审说明.md",
+      "bytes": 11246,
+      "sha256": "77506bf7d4e074b6aafde453e0f5e784e3edf242ffc6473600a3fbcd72ebdca9"
+    }
+  ],
+  "note": "覆盖正式源文件、预览与永久核验证据；work 为绘制过程材料。"
+}

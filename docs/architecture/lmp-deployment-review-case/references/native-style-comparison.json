@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-14",
+  "style": 2,
+  "reference_resource": "references/originals/reference-2.drawio",
+  "reference_render_observation": {
+    "shape": "rounded Application Service",
+    "width": 120,
+    "height": 275,
+    "rx": 18,
+    "ry": 18
+  },
+  "adapted_render_observation": {
+    "cards": [
+      "custom",
+      "standard"
+    ],
+    "rx": [
+      "18",
+      "18"
+    ],
+    "ry": [
+      "18",
+      "18"
+    ],
+    "configuration": "absoluteArcSize=1;arcSize=36"
+  },
+  "method": "原参考 SVG 中的 rect rx / ry 与当前实际导出 SVG 对照；不将 arcSize 属性值直接当作可见半径。"
+}

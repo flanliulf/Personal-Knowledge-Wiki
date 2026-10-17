@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-14",
+  "relative_links_errors": [],
+  "protected_sources": [
+    {
+      "path": "/var/folders/m8/1dsqp1x11bq5mwvk4tjdf0cw0000gn/T/codex-clipboard-b01efc46-9efa-4cc5-afa3-f94ccbefb9f1.png",
+      "unchanged": true
+    },
+    {
+      "path": "/Users/fancyliu/Nutstore Files/我的坚果云/微盛研发/企微管家/大众安徽/S-AD Deployment Diagram - K8S.drawio",
+      "unchanged": true
+    },
+    {
+      "path": "/Users/fancyliu/Nutstore Files/我的坚果云/微盛研发/企微管家/大众安徽/SAD-Template - Multi Cloud Deployment.drawio.svg",
+      "unchanged": false
+    },
+    {
+      "path": "/Users/fancyliu/IdeaProjects/ka-workspace/wshoto-ka-vw-anhui/docs/delivery/diagrams/deployment/部署架构图-20261012.drawio",
+      "unchanged": true
+    },
+    {
+      "path": "/Users/fancyliu/IdeaProjects/ka-workspace/wshoto-ka-vw-anhui/docs/delivery/diagrams/deployment/部署架构图-20261012.md",
+      "unchanged": true
+    },
+    {
+      "path": "/Users/fancyliu/IdeaProjects/ka-workspace/wshoto-ka-vw-anhui/docs/delivery/diagrams/deployment/部署架构图-验证回执-20261012.json",
+      "unchanged": true
+    },
+    {
+      "path": "/Users/fancyliu/IdeaProjects/ka-workspace/wshoto-ka-vw-anhui/docs/delivery/diagrams/deployment/部署架构图-20261010.drawio",
+      "unchanged": true
+    },
+    {
+      "path": "/Users/fancyliu/IdeaProjects/ka-workspace/wshoto-ka-vw-anhui/docs/delivery/diagrams/deployment/部署架构图-20261009.md",
+      "unchanged": true
+    }
+  ],
+  "passed": true,
+  "source_snapshots_integrity": [
+    {
+      "path": "references/originals/reference-1.png",
+      "passed": true
+    },
+    {
+      "path": "references/originals/reference-2.drawio",
+      "passed": true
+    },
+    {
+      "path": "references/originals/reference-3.drawio.svg",
+      "passed": true
+    },
+    {
+      "path": "references/baseline/部署架构图-20261012.drawio",
+      "passed": true
+    },
+    {
+      "path": "references/baseline/部署架构图-20261012.md",
+      "passed": true
+    },
+    {
+      "path": "references/baseline/部署架构图-验证回执-20261012.json",
+      "passed": true
+    }
+  ],
+  "input_source_drift": [
+    {
+      "source_path": "/Users/fancyliu/Nutstore Files/我的坚果云/微盛研发/企微管家/大众安徽/SAD-Template - Multi Cloud Deployment.drawio.svg",
+      "snapshot_path": "references/originals/reference-3.drawio.svg",
+      "snapshot_sha256": "99c0d635abf14c73247edf39e9863f5377fde421b0e085321d7b6e90388f30f7",
+      "current_sha256": "9140b490d7cc8235e63b8b0049063419661dfe6b3078776c9bc6ecf47f398cda",
+      "cells_styles_geometry_labels_equal": true,
+      "model_attribute_changes": {
+        "dx": [
+          "4250",
+          "4555"
+        ],
+        "dy": [
+          "580",
+          "996"
+        ]
+      },
+      "scope": "仅 dx / dy 视口变化；本例继续采用开始取样时的参考快照；不声称原路径字节未变化"
+    }
+  ],
+  "all_original_paths_byte_unchanged": false
+}

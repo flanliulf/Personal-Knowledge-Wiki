@@ -9,7 +9,7 @@
 | [prompts/](prompts/) | 按独立资产子目录存放提示词及其配套内容；当前收录 Codex 会话标题整理提示词。 |
 | [skills/](skills/) | 按独立资产子目录存放 Agent 技能及配套内容；当前维护会话标题整理、技能创建、规范检查、教师研究、中文技术写作、事件风暴、领域关系、聚合设计和会话收尾规约检查九个源包。 |
 | [guidelines/](guidelines/) | 按上游项目收录规范指南原文、许可与来源记录；当前收录两份中文写作指南，均为外部参考资料。 |
-| [docs/](docs/) | 按主题和独立分析资产保存自行整理的技术研究、方案和分析文档，以及最小永久核验证据；当前收录本地消息表与 RocketMQ 的两份正文、资料清单、失效链接清单和核验记录。 |
+| [docs/](docs/) | 按主题和独立分析资产保存自行整理的技术研究、方案和分析文档，以及最小永久核验证据；当前收录本地消息表与 RocketMQ 分析，以及 LMP 部署架构评审案例。 |
 | [AGENTS.md](AGENTS.md) | AI LLM / Agent 分析和维护本项目时的顶层规约。 |
 | [CLAUDE.md](CLAUDE.md) | 指向 AGENTS.md 的软链接，共用同一份规约。 |
 
@@ -143,6 +143,7 @@ docs/
 | [本地消息表与 RocketMQ 资料清单](docs/distributed-transactions/local-message-table-rocketmq/资料清单.md) | 登记用户原始链接、书签补充及正文引用来源，区分访问状态、实际阅读范围、方案采用范围和待补证据。 |
 | [分布式事务书签失效链接清单](docs/distributed-transactions/local-message-table-rocketmq/失效链接清单.md) | 独立登记既有核验中确认失效的原地址，访问受限、待核验和建议更新另列；归档核验结果不表示本轮已联网复验。 |
 | [本地消息表与 RocketMQ 来源核验记录](docs/distributed-transactions/local-message-table-rocketmq/references/source-audit.json) | 保存最小永久核验证据、来源关联与去重关系，支持清单和正文复核。 |
+| [LMP 部署架构评审案例](docs/architecture/lmp-deployment-review-case/README.md) | 三种参考样式的单页 drawio、PNG、SVG 和交互评审页面；包含项目事实、样式差异、来源与检查证据。待用户评审，通用原则和部署交付 Skill 尚未实施。 |
 
 ## 技能使用（Skill Usage）
 

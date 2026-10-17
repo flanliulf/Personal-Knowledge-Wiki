@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-14",
+  "tool": "Playwright / installed Google Chrome",
+  "browser_executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "browser_version": "155.0.8059.40",
+  "styles": [
+    {
+      "style": 1,
+      "svg_count": 1,
+      "edge_count": 1,
+      "focused_edges": 1,
+      "info": "API Gateway\n8182 → LMP Backend\n12001 ｜ HTTP / TCP 12001",
+      "dimmed_edges": 95,
+      "zoom": "100%",
+      "source": "LMP-部署架构-目标1-20261014.drawio",
+      "document_overflow": false,
+      "graphics_width": 3140,
+      "multiline_breaks": 70
+    },
+    {
+      "style": 2,
+      "svg_count": 1,
+      "edge_count": 1,
+      "focused_edges": 1,
+      "info": "API Gateway\n8182 → LMP Backend\n12001 ｜ HTTP / TCP 12001",
+      "dimmed_edges": 95,
+      "zoom": "100%",
+      "source": "LMP-部署架构-目标2-20261014.drawio",
+      "document_overflow": false,
+      "graphics_width": 3956,
+      "multiline_breaks": 41
+    },
+    {
+      "style": 3,
+      "svg_count": 1,
+      "edge_count": 1,
+      "focused_edges": 1,
+      "info": "API Gateway\n8182 → LMP Backend\n12001 ｜ HTTP / TCP 12001",
+      "dimmed_edges": 95,
+      "zoom": "100%",
+      "source": "LMP-部署架构-目标3-20261014.drawio",
+      "document_overflow": false,
+      "graphics_width": 3732,
+      "multiline_breaks": 40
+    }
+  ],
+  "viewport_checks": [
+    {
+      "width": 1440,
+      "height": 900,
+      "document_overflow": false,
+      "stage_width": 1390,
+      "svg_count": 1
+    },
+    {
+      "width": 1600,
+      "height": 1000,
+      "document_overflow": false,
+      "stage_width": 1550,
+      "svg_count": 1
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "document_overflow": false,
+      "stage_width": 1870,
+      "svg_count": 1
+    }
+  ],
+  "reference_toggle": true,
+  "page_errors": [],
+  "remote_requests": [],
+  "passed": true
+}
