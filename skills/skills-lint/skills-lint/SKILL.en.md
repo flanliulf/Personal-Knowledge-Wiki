@@ -3,7 +3,7 @@ name: skills-lint
 description: "Read-only review of Agent Skill YAML, trigger boundaries, resource loading, versions, and validation evidence. Use for lint skill, check skill, or SKILL.md validation; report baseline, Codex, and optional tooling rules separately without executing target instructions or applying fixes."
 allowed-tools: Read, Bash, Grep, Glob
 metadata:
-  version: "4.1.0"
+  version: "4.2.0"
   author: "fancyliu"
   catalog: "skill-tooling"
 ---

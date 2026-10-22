@@ -136,8 +136,8 @@ docs/
 | --- | --- |
 | [Codex 会话标题整理提示词](prompts/codex-session-title-renaming/codex-session-title-renaming.md) | 历史源资产，原文与历史执行证据保留；后续运行规则由同名 Skill 维护。 |
 | [Codex 会话标题整理 Skill](skills/codex-session-title-renaming/codex-session-title-renaming/SKILL.md) | 1.0.0：人工或定期调用的简化流程：一个全局执行锁、每批 `proposal.json` / `execution.json`、用户确认后逐条改名与回读、按需生成 Markdown 记录。源包已建立，未安装，未运行真实改名或配置定时任务。 |
-| [skills-creator](skills/skills-creator/skills-creator/SKILL.md) | 3.1.0：通用 Skill 创建与迭代，按基础、宿主与可选 tooling 约定生成源包；与 skills-lint 4.x（规则契约 1.0.0）共享规则契约，tooling 入口标题为 中文（English）；规定版本记录与升级判定、示例路径占位写法。由旧 forge 1.5.0 迁入。 |
-| [skills-lint](skills/skills-lint/skills-lint/SKILL.md) | 4.1.0：只读规则审查、动态规则清单、密度 schema v2 和行为证据边界；密度脚本识别中英文两种顺序的 Workflow 标题；新增版本记录一致性、版本升级判定和本机绝对路径检查（VER-06、VER-07、PATH-01）及路径扫描脚本。由旧 forge 2.3.0 迁入。 |
+| [skills-creator](skills/skills-creator/skills-creator/SKILL.md) | 3.1.1：通用 Skill 创建与迭代，按基础、宿主与可选 tooling 约定生成源包；与 skills-lint 4.x（规则契约 1.0.0）共享规则契约，tooling 入口标题为 中文（English）；规定版本记录与升级判定、示例路径占位写法。由旧 forge 1.5.0 迁入。 |
+| [skills-lint](skills/skills-lint/skills-lint/SKILL.md) | 4.2.0：只读规则审查、动态规则清单、密度 schema v2 和行为证据边界；密度脚本识别中英文两种顺序的 Workflow 标题；新增版本记录一致性、版本升级判定和本机绝对路径检查（VER-06、VER-07、PATH-01）及路径扫描脚本。由旧 forge 2.3.0 迁入。 |
 | [teacher-profile-research](skills/teacher-profile-research/teacher-profile-research/SKILL.md) | 1.1.0：教师公开信息画像与教学决策研究；身份消歧、A–D 来源分级、五态逐条核验、任教与班主任轨迹、团队分析及多轮纠错。单 Skill 源包，采用 base；未安装，已按源入口完成首轮公开信息研究。 |
 | [chinese-technical-writing](skills/chinese-technical-writing/chinese-technical-writing/SKILL.md) | 1.1.3：基于项目事实写作和定点修订中文技术文档；包内直接引用两份指南原文，重叠规则以 `document-style-guide` 为准，增加 Agent 写作自检和可选 `autocorrect` 检查。采用 base；未安装，真实宿主行为未验证。 |
 | [ddd-event-storming](skills/ddd-event-storming/ddd-event-storming/SKILL.md) | 1.0.1：分析领域事件、命令、角色、查询与功能覆盖；支持已有用例，交付候选概念、规则和未决问题。基于第 03–04 讲，采用 base；未安装，真实宿主行为未验证。 |

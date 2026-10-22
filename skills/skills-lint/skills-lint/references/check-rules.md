@@ -24,7 +24,7 @@ tooling 中 workflow_chars >1500 且 workflow_ratio >0.5 时 WARN，4500 为接�
 
 VER-06、VER-07 与 PATH-01 适用于 base，因此也适用于 tooling 包。base 不强制声明版本；一旦声明，VER-06 检查格式与 CHANGELOG 一致，VER-07 按改动类型判断升级是否相符。升级判定以 registry 中 VER-07 的 criteria 为准，creator 不另抄一份。
 
-PATH-01 只用本包 scripts/check_absolute_paths.py 的 JSON 作为候选来源。脚本匹配 `/Users/`、`/home/` 和 `C:\Users\` 后接具体用户名的写法；`<name>`、`{user}`、`$HOME`、`~` 等占位写法不匹配。退出 0 只表示扫描完成，2 表示目录不存在。候选逐条判定：可运行示例应改用占位符；来源或核验记录说明了“记录时的本机路径、仅用于复核”时为 N/A；测试夹具应在运行时拼接路径，避免成为候选。
+PATH-01 只用本包 scripts/check_absolute_paths.py 的 JSON 作为候选来源。脚本扫描 Markdown、脚本、JSON/YAML/TOML，以及 drawio、SVG、HTML、XML 等文本格式，跳过图片等二进制和缓存目录。脚本匹配 `/Users/`、`/home/` 和 `C:\Users\` 后接具体用户名的写法；`<name>`、`{user}`、`$HOME`、`~` 等占位写法不匹配。退出 0 只表示扫描完成，2 表示目录不存在。候选逐条判定：可运行示例应改用占位符；来源或核验记录说明了“记录时的本机路径、仅用于复核”时为 N/A；测试夹具应在运行时拼接路径，避免成为候选。
 
 ## 证据与状态（Evidence）
 

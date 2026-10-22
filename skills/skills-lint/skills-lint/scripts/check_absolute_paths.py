@@ -17,7 +17,8 @@ import sys
 from pathlib import Path
 
 
-TEXT_SUFFIXES = {".md", ".py", ".json", ".yaml", ".yml", ".toml", ".sh", ".txt", ".js", ".ts"}
+TEXT_SUFFIXES = {".md", ".py", ".json", ".yaml", ".yml", ".toml", ".sh", ".txt", ".js", ".ts",
+                 ".drawio", ".svg", ".html", ".htm", ".xml"}
 SKIP_DIRS = {"__pycache__", ".pytest_cache", ".git"}
 # 用户主目录下的具体用户名；<name>、{user}、$HOME 等占位写法不匹配。
 PATTERN = re.compile(r"(?<![\w.-])(?:/Users/|/home/|[A-Za-z]:\\Users\\)([A-Za-z0-9._-]+)")

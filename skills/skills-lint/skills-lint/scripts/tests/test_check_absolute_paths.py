@@ -60,6 +60,15 @@ class CliTests(unittest.TestCase):
         self.assertEqual(result["candidate_count"], 1)
         self.assertEqual(result["candidates"][0]["file"], "references/guide.md")
 
+    def test_cli_scans_diagram_and_page_formats(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_dir:
+            root = Path(temporary_dir)
+            for name in ("diagram.drawio", "figure.svg", "page.html", "data.xml"):
+                (root / name).write_text(f"<a href='{USERS}alice/{name}'/>\n", encoding="utf-8")
+            result = json.loads(self.run_cli(str(root)).stdout)
+        self.assertEqual(sorted(row["file"] for row in result["candidates"]),
+                         ["data.xml", "diagram.drawio", "figure.svg", "page.html"])
+
     def test_cli_missing_directory_fails(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_dir:
             self.assertEqual(self.run_cli(str(Path(temporary_dir) / "missing")).returncode, 2)

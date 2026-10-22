@@ -4,6 +4,11 @@
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/)，版本号遵循 [Semantic Versioning](https://semver.org/)。
 
+## [3.1.1] - 2026-10-22
+
+### 变更（Changed）
+- spec-guide 删除配套 lint “当前源包版本”的说明，只保留主版本 4 与 contract_version 1.0.0 的兼容条件，避免 lint 次版本升级时需要同步修改。配套 lint 4.2.0。
+
 ## [3.1.0] - 2026-10-09
 
 ### 新增（Added）

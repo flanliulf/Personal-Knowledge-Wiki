@@ -4,6 +4,14 @@
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/)，版本号遵循 [Semantic Versioning](https://semver.org/)。
 
+## [4.2.0] - 2026-10-22
+
+### 变更（Changed）
+- `check_absolute_paths.py` 扫描范围增加 `.drawio`、`.svg`、`.html`、`.htm`、`.xml`，新增对应测试；check-rules 写明扫描的文件类型。
+
+### 兼容性（Compatibility）
+- 扫描范围扩大后，同一目标可能出现更多 PATH-01 候选。规则契约 1.0.0 与 JSON 输出结构不变；配套 creator 3.1.1。未执行真实宿主行为验收。
+
 ## [4.1.0] - 2026-10-09
 
 ### 新增（Added）
