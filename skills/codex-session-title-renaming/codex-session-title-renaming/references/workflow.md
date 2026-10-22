@@ -10,7 +10,7 @@ script_path="$asset_root/codex-session-title-renaming/scripts/title_records.py"
 python3 "$script_path" --help
 ```
 
-此源包没有自带应用连接器。脚本不导入 Codex SDK、不执行历史数据库修复、不假设工具返回字段。实际读取与改名由 Agent 通过可用专用工具完成，脚本接收 Agent 整理的真实证据。存放源包不等于已安装；安装、真实改名与定时配置须分别在授权范围内进行。
+各来源的读取、改名工具与字段映射见 [平台映射](provider-mapping.md)。此源包没有自带应用连接器。脚本不导入 Codex SDK、不执行历史数据库修复、不假设工具返回字段。实际读取与改名由 Agent 通过可用专用工具完成，脚本接收 Agent 整理的真实证据。存放源包不等于已安装；安装、真实改名与定时配置须分别在授权范围内进行。
 
 ## 全局执行锁（Lock）
 
@@ -61,7 +61,7 @@ python3 "$script_path" start --asset-root "$asset_root" --batch-id '<batch-id>' 
 逐条执行以下步骤；不并行发出改名请求：
 
 1. 根据提案的主机和 ID 调用只读工具，收集最新 `snapshot.schema.json` 快照，保存在 `work/<batch-id>-<item-id>-before.json`。真实工具调用对象必须与输入的 `itemId` 对应，不能只靠原名匹配。
-2. 运行 `before`。只有输出 `eligible: true` 才调用 `set_thread_title`，使用返回的 `threadId`、`hostId` 和 `newTitle`；实际工具若没有主机参数，先确认当前工具确实能作用于该主机，不能静默改到其他主机。
+2. 运行 `before`。只有输出 `eligible: true` 才调用该来源的改名工具（Codex 为 `set_thread_title`，Claude 为 `set_session_title`，后者以 `threadId` 作为 `session_id`），使用返回的 `threadId`、`hostId` 和 `newTitle`；实际工具若没有主机参数，先确认当前工具确实能作用于该主机，不能静默改到其他主机。
 
 ```sh
 python3 "$script_path" before --asset-root "$asset_root" --batch-id '<batch-id>' --item-id '<item-id>' --input "$asset_root/work/<batch-id>-<item-id>-before.json" --lock-token '<executionId>'

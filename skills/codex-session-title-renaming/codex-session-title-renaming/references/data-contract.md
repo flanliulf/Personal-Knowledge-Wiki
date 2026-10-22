@@ -19,7 +19,7 @@
 | `scope.description` | 实际检查来源、范围、是否有限量，以及用户是否要求主题重评 |
 | `scope.unavailable` | 未读取或不支持的来源、目录及原因；空数组仅表示本次没有已知缺口，不代表全部账号历史 |
 | `items[].itemId` | 本批唯一行标识 |
-| `threadId`、`hostId`、`source` | 经工具确认的稳定身份；去重键为三者组合，首版 `source` 固定 `codex` |
+| `threadId`、`hostId`、`source` | 经工具确认的稳定身份；去重键为三者组合。`source` 为 `codex` 或 `claude`，同一批次只含一种来源；`claude` 的 `hostId` 固定为 `local`，映射见 [平台映射](provider-mapping.md) |
 | `createdAtSource` | 创建时间的真实工具字段/证据引用；缺失时为 `null`，不得替代推算 |
 | `oldTitle`、`newTitle` | 提案原标题与建议标题，保留项两者相同 |
 | `decision`、`reason` | `rename` 或 `keep`，以及有证据的理由 |

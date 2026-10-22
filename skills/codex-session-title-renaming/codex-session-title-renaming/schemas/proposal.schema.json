@@ -85,7 +85,8 @@
           },
           "source": {
             "enum": [
-              "codex"
+              "codex",
+              "claude"
             ]
           },
           "createdAtSource": {

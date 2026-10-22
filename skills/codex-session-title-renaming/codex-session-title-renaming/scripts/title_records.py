@@ -120,8 +120,10 @@ def check_snapshot(snapshot):
 
 def check_proposal(proposal):
     validate(proposal, schema('proposal'))
+    require(len({item['source'] for item in proposal['items']}) <= 1, '同一批次只能包含一种来源')
     ids, identities = set(), set()
     for item in proposal['items']:
+        require(item['source'] != 'claude' or item['hostId'] == 'local', 'Claude 桌面会话的 hostId 必须为 local')
         identity = (item['source'], item['hostId'], item['threadId'])
         require(item['itemId'] not in ids and identity not in identities, '会话身份或 itemId 重复')
         ids.add(item['itemId'])

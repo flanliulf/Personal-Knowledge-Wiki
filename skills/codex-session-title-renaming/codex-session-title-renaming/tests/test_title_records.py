@@ -106,6 +106,23 @@ class RecordsTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             records.check_proposal(changed)
 
+    def test_claude_source_requires_local_host_and_single_source_batch(self):
+        changed = copy.deepcopy(self.proposal)
+        changed['items'][0].update(source='claude', hostId='local', threadId='local_example-session')
+        records.check_proposal(changed)
+        changed['items'][0]['hostId'] = 'remote-host'
+        with self.assertRaises(ValueError):
+            records.check_proposal(changed)
+        changed = copy.deepcopy(self.proposal)
+        changed['items'].append(copy.deepcopy(changed['items'][0]))
+        changed['items'][1].update(itemId='claude-item', source='claude', hostId='local', threadId='local_example-session')
+        with self.assertRaises(ValueError):
+            records.check_proposal(changed)
+        changed = copy.deepcopy(self.proposal)
+        changed['items'][0]['source'] = 'chatgpt'
+        with self.assertRaises(ValueError):
+            records.check_proposal(changed)
+
     def test_keep_unknown_time_allowed_but_missing_protection_must_be_declared(self):
         changed = copy.deepcopy(self.proposal)
         item = changed['items'][0]
