@@ -22,7 +22,7 @@
 | `threadId`、`hostId`、`source` | 经工具确认的稳定身份；去重键为三者组合。`source` 为 `codex` 或 `claude`，同一批次只含一种来源；`claude` 的 `hostId` 固定为 `local`，映射见 [平台映射](provider-mapping.md) |
 | `createdAtSource` | 创建时间的真实工具字段/证据引用；缺失时为 `null`，不得替代推算 |
 | `oldTitle`、`newTitle` | 提案原标题与建议标题，保留项两者相同 |
-| `decision`、`reason` | `rename` 或 `keep`，以及有证据的理由 |
+| `decision`、`reason` | `rename` 或 `keep`，以及有证据的理由；低置信建议的 `reason` 以 `低置信：` 开头，`review` 据此在表外单独列出 |
 | `baseline` | 提案时观察快照，使用 `snapshot.schema.json` |
 
 `baseline.title` 必须等于 `oldTitle`。改名项必须有可靠创建时间且 `running` 为 `false`；无法确定则本轮保留，不建立等待状态。运行中的记录可以作为 `keep` 保留在本批清单中。

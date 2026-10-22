@@ -253,6 +253,21 @@ class RecordsTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             records.batch_path(self.root, '../outside')
 
+    def test_review_lists_low_confidence_outside_fixed_table(self):
+        records.prepare(self.directory, self.proposal)
+        self.assertNotIn('低置信建议', records.review(self.directory))
+        other = self.root / 'output' / 'low-batch'
+        changed = copy.deepcopy(self.proposal)
+        changed['batchId'] = 'low-batch'
+        changed['items'][0]['reason'] = records.LOW_CONFIDENCE + '首尾记录仅见收尾提交，主题沿用原标题'
+        records.prepare(other, changed)
+        text = records.review(other)
+        table, _, tail = text.partition('低置信建议（1 条')
+        self.assertIn('| 原名 |修改后名|', table)
+        self.assertIn('260101 \\| 分析 \\| 分析示例报告', tail)
+        self.assertIn('主题沿用原标题', tail)
+        self.assertNotIn(records.LOW_CONFIDENCE + '首尾', tail)
+
     def test_review_escapes_title_markup(self):
         changed = self.proposal['items'][0]
         changed['oldTitle'] = changed['baseline']['title'] = '<script>\n[a](x)|text'

@@ -135,7 +135,7 @@ docs/
 | 资产 | 内容摘要 |
 | --- | --- |
 | [Codex 会话标题整理提示词](prompts/codex-session-title-renaming/codex-session-title-renaming.md) | 历史源资产，原文与历史执行证据保留；后续运行规则由同名 Skill 维护。 |
-| [Codex 会话标题整理 Skill](skills/codex-session-title-renaming/codex-session-title-renaming/SKILL.md) | 2.0.0：支持 Codex 与 Claude Code 桌面本机会话（每批一种来源）；人工或定期调用的简化流程：一个全局执行锁、每批 `proposal.json` / `execution.json`、用户确认后逐条改名与回读、按需生成 Markdown 记录。源包已建立，未安装，未运行真实改名或配置定时任务；Claude 改名对活动时间的影响待首个单条试点确认。 |
+| [Codex 会话标题整理 Skill](skills/codex-session-title-renaming/codex-session-title-renaming/SKILL.md) | 3.0.0：支持 Codex 与 Claude Code 桌面本机会话（每批一种来源）；主题取证读会话首尾，证据不足时给出带标注的低置信建议；人工或定期调用的简化流程：一个全局执行锁、每批 `proposal.json` / `execution.json`、用户确认后逐条改名与回读、按需生成 Markdown 记录。源包已建立，未安装；已用 2.0.0 对本机 Claude 会话执行过一次 audit（仅提案），未运行真实改名或配置定时任务；Claude 改名对活动时间的影响待首个单条试点确认。 |
 | [skills-creator](skills/skills-creator/skills-creator/SKILL.md) | 3.1.1：通用 Skill 创建与迭代，按基础、宿主与可选 tooling 约定生成源包；与 skills-lint 4.x（规则契约 1.0.0）共享规则契约，tooling 入口标题为 中文（English）；规定版本记录与升级判定、示例路径占位写法。由旧 forge 1.5.0 迁入。 |
 | [skills-lint](skills/skills-lint/skills-lint/SKILL.md) | 4.2.0：只读规则审查、动态规则清单、密度 schema v2 和行为证据边界；密度脚本识别中英文两种顺序的 Workflow 标题；新增版本记录一致性、版本升级判定和本机绝对路径检查（VER-06、VER-07、PATH-01）及路径扫描脚本。由旧 forge 2.3.0 迁入。 |
 | [teacher-profile-research](skills/teacher-profile-research/teacher-profile-research/SKILL.md) | 1.1.0：教师公开信息画像与教学决策研究；身份消歧、A–D 来源分级、五态逐条核验、任教与班主任轨迹、团队分析及多轮纠错。单 Skill 源包，采用 base；未安装，已按源入口完成首轮公开信息研究。 |
@@ -160,7 +160,7 @@ docs/
 - [操作规则](skills/codex-session-title-renaming/codex-session-title-renaming/references/operation-rules.md)：`audit`、`apply`、`report` 三个入口的详细规则，执行对应入口前读取。
 - [运行指南](skills/codex-session-title-renaming/codex-session-title-renaming/references/workflow.md)：`audit`、`apply`、`report` 三个入口及辅助脚本命令。
 - [数据契约](skills/codex-session-title-renaming/codex-session-title-renaming/references/data-contract.md)：提案、批准绑定、实际回读、保护字段与结果限制。
-- [平台映射](skills/codex-session-title-renaming/codex-session-title-renaming/references/provider-mapping.md)：Codex 与 Claude Code 桌面会话的工具、字段到保护语义键的映射及已知限制。
+- [平台映射](skills/codex-session-title-renaming/codex-session-title-renaming/references/provider-mapping.md)：Codex 与 Claude Code 桌面会话的工具、首尾记录读法、字段到保护语义键的映射及已知限制。
 - [虚构输入示例](skills/codex-session-title-renaming/examples/example-input.json)：仅供格式参考，不代表真实会话或授权。
 
 会话标题整理 Skill 只维护运行规则和确定性辅助工具；实际改名依赖 Agent 环境中的专用工具（Codex 为 `set_thread_title`，Claude Code 桌面为 `set_session_title`）。其所有真实入口使用同一默认全局锁，等待人工确认期间释放锁。不维护增量索引、会话级状态、自动重试或事件日志。完整记录文档由用户要求后从已有 JSON 生成。

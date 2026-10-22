@@ -18,6 +18,7 @@ LOCK = Path.home() / '.codex' / 'locks' / 'codex-session-title-renaming.lock'
 PROTECTED = {'projectName', 'projectId', 'pinned', 'archived', 'sectionId',
              'order', 'updatedAt', 'contentFingerprint'}
 TITLE = re.compile(r'^(\d{6}) \| (功能|设计|整改|优化|发布|分析|文档) \| ([^|\r\n]+)$')
+LOW_CONFIDENCE = '低置信：'
 
 
 def require(condition, message):
@@ -332,7 +333,14 @@ def review(directory):
              '以下为提案建议；两列相同表示保留。实际执行情况以 execution.json 为准。',
              '| 原名 |修改后名|', '| --- | --- |']
     lines.extend('| ' + cell(x['oldTitle']) + ' | ' + cell(x['newTitle']) + ' |' for x in proposal['items'])
-    return '\n\n'.join(lines[:5]) + '\n\n' + '\n'.join(lines[5:]) + '\n'
+    text = '\n\n'.join(lines[:5]) + '\n\n' + '\n'.join(lines[5:]) + '\n'
+    low = [x for x in proposal['items'] if x['decision'] == 'rename' and x['reason'].startswith(LOW_CONFIDENCE)]
+    if low:
+        # 表头固定，低置信建议在表后单列，提醒确认时重点核对。
+        text += '\n低置信建议（' + str(len(low)) + ' 条，请重点核对）：\n\n'
+        text += ''.join('- ' + cell(x['oldTitle']) + ' → ' + cell(x['newTitle']) + '：'
+                        + cell(x['reason'][len(LOW_CONFIDENCE):]) + '\n' for x in low)
+    return text
 
 
 def report(directory):
