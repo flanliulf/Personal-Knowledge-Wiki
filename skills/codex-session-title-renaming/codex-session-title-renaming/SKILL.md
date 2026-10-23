@@ -2,7 +2,7 @@
 name: codex-session-title-renaming
 description: "整理 Codex 与 Claude Code 桌面本机会话标题：人工或定期触发检查，生成待确认对照表与 JSON，确认后改名并逐条核验，或从指定批次生成记录文档。适用于整理新增会话、会话标题规范化、执行已确认改名清单、生成改名记录；不用于项目重命名，不因仅讨论方案而执行，不自动创建定时任务。"
 metadata:
-  version: "3.0.0"
+  version: "3.1.0"
 ---
 
 # 会话标题整理（Session Title Renaming）

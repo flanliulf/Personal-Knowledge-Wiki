@@ -135,7 +135,7 @@ docs/
 | 资产 | 内容摘要 |
 | --- | --- |
 | [Codex 会话标题整理提示词](prompts/codex-session-title-renaming/codex-session-title-renaming.md) | 历史源资产，原文与历史执行证据保留；后续运行规则由同名 Skill 维护。 |
-| [Codex 会话标题整理 Skill](skills/codex-session-title-renaming/codex-session-title-renaming/SKILL.md) | 3.0.0：支持 Codex 与 Claude Code 桌面本机会话（每批一种来源）；主题取证读会话首尾，证据不足时给出带标注的低置信建议；人工或定期调用的简化流程：一个全局执行锁、每批 `proposal.json` / `execution.json`、用户确认后逐条改名与回读、按需生成 Markdown 记录。源包已建立，未安装；已用 2.0.0 对本机 Claude 会话执行过一次 audit（仅提案），未运行真实改名或配置定时任务；Claude 改名对活动时间的影响待首个单条试点确认。 |
+| [Codex 会话标题整理 Skill](skills/codex-session-title-renaming/codex-session-title-renaming/SKILL.md) | 3.1.0：支持 Codex 与 Claude Code 桌面本机会话（每批一种来源）；主题取证读会话首尾（含 `list_events` 500 条翻页、落盘与 `/compact` 处理），证据不足时给出带标注的低置信建议；人工或定期调用的简化流程：一个全局执行锁、每批 `proposal.json` / `execution.json`、用户确认后逐条改名与回读、按需生成 Markdown 记录。源包未安装；已对本机 Claude 会话完成两批真实改名（101 条核验通过），实测改名不改变活动时间；未配置定时任务，Codex 来源未实测。 |
 | [skills-creator](skills/skills-creator/skills-creator/SKILL.md) | 3.1.1：通用 Skill 创建与迭代，按基础、宿主与可选 tooling 约定生成源包；与 skills-lint 4.x（规则契约 1.0.0）共享规则契约，tooling 入口标题为 中文（English）；规定版本记录与升级判定、示例路径占位写法。由旧 forge 1.5.0 迁入。 |
 | [skills-lint](skills/skills-lint/skills-lint/SKILL.md) | 4.2.0：只读规则审查、动态规则清单、密度 schema v2 和行为证据边界；密度脚本识别中英文两种顺序的 Workflow 标题；新增版本记录一致性、版本升级判定和本机绝对路径检查（VER-06、VER-07、PATH-01）及路径扫描脚本。由旧 forge 2.3.0 迁入。 |
 | [teacher-profile-research](skills/teacher-profile-research/teacher-profile-research/SKILL.md) | 1.1.0：教师公开信息画像与教学决策研究；身份消歧、A–D 来源分级、五态逐条核验、任教与班主任轨迹、团队分析及多轮纠错。单 Skill 源包，采用 base；未安装，已按源入口完成首轮公开信息研究。 |
