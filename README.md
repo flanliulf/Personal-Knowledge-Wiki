@@ -12,6 +12,7 @@
 | [docs/](docs/) | 按主题和独立分析资产保存自行整理的技术研究、方案和分析文档，以及最小永久核验证据；当前收录本地消息表与 RocketMQ 分析，以及 LMP 部署架构评审案例。 |
 | [AGENTS.md](AGENTS.md) | AI LLM / Agent 分析和维护本项目时的顶层规约。 |
 | [CLAUDE.md](CLAUDE.md) | 指向 AGENTS.md 的软链接，共用同一份规约。 |
+| [LICENSE](LICENSE) | 本仓库的 MIT 许可文本；收录的上游原文适用各自许可，见对应 `SOURCE.md` 与包内许可文件。 |
 
 ## 资产组织（Asset Organization）
 
@@ -69,7 +70,7 @@ prompts/
 skills/
 ├── codex-session-title-renaming/
 │   ├── codex-session-title-renaming/  # 入口、CHANGELOG、references、schemas、scripts、tests
-│   ├── work/                         # 后续运行的临时输入，当前为空
+│   ├── work/                         # 各批次运行的临时输入、取证记录与逐条改名前后的中间文件
 │   ├── output/                       # 各版本修订检查记录；后续批次数据与按需报告
 │   └── examples/                     # 虚构提案输入示例
 ├── skills-creator/
@@ -135,7 +136,7 @@ docs/
 | 资产 | 内容摘要 |
 | --- | --- |
 | [Codex 会话标题整理提示词](prompts/codex-session-title-renaming/codex-session-title-renaming.md) | 历史源资产，原文与历史执行证据保留；后续运行规则由同名 Skill 维护。 |
-| [Codex 会话标题整理 Skill](skills/codex-session-title-renaming/codex-session-title-renaming/SKILL.md) | 3.1.0：支持 Codex 与 Claude Code 桌面本机会话（每批一种来源）；主题取证读会话首尾（含 `list_events` 500 条翻页、落盘与 `/compact` 处理），证据不足时给出带标注的低置信建议；人工或定期调用的简化流程：一个全局执行锁、每批 `proposal.json` / `execution.json`、用户确认后逐条改名与回读、按需生成 Markdown 记录。源包未安装；已对本机 Claude 会话完成两批真实改名（101 条核验通过），实测改名不改变活动时间；未配置定时任务，Codex 来源未实测。 |
+| [Codex 会话标题整理 Skill](skills/codex-session-title-renaming/codex-session-title-renaming/SKILL.md) | 3.1.0：支持 Codex 与 Claude Code 桌面本机会话（每批一种来源）；主题取证读会话首尾（含 `list_events` 500 条翻页、落盘与 `/compact` 处理），证据不足时给出带标注的低置信建议；人工或定期调用的简化流程：一个全局执行锁、每批 `proposal.json` / `execution.json`、用户确认后逐条改名与回读、按需生成 Markdown 记录。源包未安装；截至 2026-11-04，已对本机 Claude 会话完成六批真实改名（131 条核验通过），另有一批 60 条未执行、两批只有提案；实测改名不改变活动时间；未配置定时任务，Codex 来源未实测。 |
 | [skills-creator](skills/skills-creator/skills-creator/SKILL.md) | 3.1.1：通用 Skill 创建与迭代，按基础、宿主与可选 tooling 约定生成源包；与 skills-lint 4.x（规则契约 1.0.0）共享规则契约，tooling 入口标题为 中文（English）；规定版本记录与升级判定、示例路径占位写法。由旧 forge 1.5.0 迁入。 |
 | [skills-lint](skills/skills-lint/skills-lint/SKILL.md) | 4.2.0：只读规则审查、动态规则清单、密度 schema v2 和行为证据边界；密度脚本识别中英文两种顺序的 Workflow 标题；新增版本记录一致性、版本升级判定和本机绝对路径检查（VER-06、VER-07、PATH-01）及路径扫描脚本。由旧 forge 2.3.0 迁入。 |
 | [teacher-profile-research](skills/teacher-profile-research/teacher-profile-research/SKILL.md) | 1.1.0：教师公开信息画像与教学决策研究；身份消歧、A–D 来源分级、五态逐条核验、任教与班主任轨迹、团队分析及多轮纠错。单 Skill 源包，采用 base；未安装，已按源入口完成首轮公开信息研究。 |
