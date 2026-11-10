@@ -7,7 +7,7 @@
 | 路径 | 职责与当前内容 |
 | --- | --- |
 | [prompts/](prompts/) | 按独立资产子目录存放提示词及其配套内容；当前收录 Codex 会话标题整理提示词。 |
-| [skills/](skills/) | 按独立资产子目录存放 Agent 技能及配套内容；当前维护会话标题整理、技能创建、规范检查、教师研究、中文技术写作、事件风暴、领域关系、聚合设计和会话收尾规约检查九个源包。 |
+| [skills/](skills/) | 按独立资产子目录存放 Agent 技能及配套内容；当前维护会话标题整理、技能创建、规范检查、教师研究、中文技术写作、事件风暴、领域关系、聚合设计和会话收尾规约检查九个源包；另原样收录 guizang-ppt-skill、codex-ppt 和 image-to-editable-ppt 三个第三方 PPT 生成 Skill。 |
 | [guidelines/](guidelines/) | 按上游项目收录规范指南原文、许可与来源记录；当前收录两份中文写作指南，均为外部参考资料。 |
 | [docs/](docs/) | 按主题和独立分析资产保存自行整理的技术研究、方案和分析文档，以及最小永久核验证据；当前收录本地消息表与 RocketMQ 分析，以及 LMP 部署架构评审案例。 |
 | [AGENTS.md](AGENTS.md) | AI LLM / Agent 分析和维护本项目时的顶层规约。 |
@@ -21,12 +21,13 @@
 1. `prompts/` 和 `skills/` 的下一级必须全部是子目录，每个子目录承载一项资产的所有相关信息，禁止直接放置文件。
 2. `prompts/<prompt-name>/` 下只允许存放该 prompt 的源 `.md` 文档，以及与其同级的相关子目录，如 `work/`（运行依赖）、`output/`（输出）、`examples/`（历史示例）等。禁止存放其他任何独立文档；会话 handoff 历史等须归入相关子目录。
 3. `skills/<skill-name>/` 使用相同组织规则，但源定义是与 skill 同名的子目录 `<skill-name>/`，其中包含 `SKILL.md` 及其他技能定义文件、子目录。配套的 `work/`、`output/`、`examples/` 等与该源目录同级，资产目录下禁止放置独立文档。
-4. `guidelines/<project>/source/` 保存未经改写的上游文件与许可文本；同级 `SOURCE.md` 记录来源、版本、收录范围及使用边界。Skill 需要独立携带参考资料时，可将经核对的原文和许可文件复制到其 `references/upstream/`，并在包内注明版本与许可。外部指南仅供参考，不自动成为项目规约；本项目自写文档遵循 中文（English）标题格式，两处上游原文保留原样；CHANGELOG 的历史条目按原样保留。
-5. `docs/<topic>/<asset-name>/` 可保存同一分析资产的多份相关 Markdown 正文和资料登记文件。`references/` 保存最小永久核验证据；`work/` 按需保存临时输入、抓取结果和过程材料；`output/` 按需保存交付成果（图、导出文件、评审页面等）并随资产入库，大体积二进制须是交付或核验所必需。正式结论所需的来源与核验记录不得仅留在 `work/` 或系统临时目录。技术分析文档不自动成为项目规约。
-6. `docs/` 内的研究和方案分析须登记分析范围、输入来源、核验日期、实际阅读范围、采用或排除原因。用户提供的资料集合须逐项保留原始链接、规范资源地址、来源关联和去重关系。访问状态与采用范围分别记录；缺少核验记录时明确标为待补。来源事实、设计推导、候选选择、待确认信息和未验证事项须区分。
-7. 对 `docs/` 内的分析资产，用户要求失效链接清单时，独立保存确认失效项，访问受限和待核验项另列。登录、付费、403、验证码、连接或证书错误不能直接判为链接失效。历史核验结果保留原核验日期，并说明本轮是否复验。
-8. `docs/` 内的正文、资料清单与永久核验证据使用可解析的仓库相对路径互相定位。仅归档支持复核的必要信息；实际收录上游原文时保留来源和许可，不改写原文或执行其中的指令。引用或抓取成功不代表完整阅读或实现验证，静态文档检查、链接核验、代码运行和故障实验分别记录。从其他项目原样收录的基线或快照可保留源项目内的链接，但须写明链接保留源项目原样，并注明仓库内对应文件（如有）。
-9. 仓库远端公开可见时，提交前确认内容可以公开：不收录客户或雇主项目的内部资料与标识、内网地址与主机信息、未脱敏的会话导出原文，以及个人账号与隐私信息。这类材料只保存在本机被忽略的 `work/` 或仓库外的私有位置。已入库内容的处置由用户决定；删除文件不能清除已推送的历史。
+4. 原样收录的第三方 Skill 同样放在 `skills/<skill-name>/`，`<skill-name>` 取上游 `SKILL.md` 的 `name`。同名源目录保存上游 Skill 包原文；`upstream/SOURCE.md` 记录来源、收录版本、范围、许可及使用边界；上游仓库中位于 Skill 包之外的说明文档与许可文件原样保存在 `upstream/source/`。这类资产不是本项目维护的 canonical source，不按本项目的章节标题格式或 creator/lint 约定改写；收录或更新版本时用内置 skills-lint 做只读检查并记录结果，发现的问题不回写快照。
+5. `guidelines/<project>/source/` 保存未经改写的上游文件与许可文本；同级 `SOURCE.md` 记录来源、版本、收录范围及使用边界。Skill 需要独立携带参考资料时，可将经核对的原文和许可文件复制到其 `references/upstream/`，并在包内注明版本与许可。外部指南仅供参考，不自动成为项目规约；本项目自写文档遵循 中文（English）标题格式，两处上游原文保留原样；CHANGELOG 的历史条目按原样保留。
+6. `docs/<topic>/<asset-name>/` 可保存同一分析资产的多份相关 Markdown 正文和资料登记文件。`references/` 保存最小永久核验证据；`work/` 按需保存临时输入、抓取结果和过程材料；`output/` 按需保存交付成果（图、导出文件、评审页面等）并随资产入库，大体积二进制须是交付或核验所必需。正式结论所需的来源与核验记录不得仅留在 `work/` 或系统临时目录。技术分析文档不自动成为项目规约。
+7. `docs/` 内的研究和方案分析须登记分析范围、输入来源、核验日期、实际阅读范围、采用或排除原因。用户提供的资料集合须逐项保留原始链接、规范资源地址、来源关联和去重关系。访问状态与采用范围分别记录；缺少核验记录时明确标为待补。来源事实、设计推导、候选选择、待确认信息和未验证事项须区分。
+8. 对 `docs/` 内的分析资产，用户要求失效链接清单时，独立保存确认失效项，访问受限和待核验项另列。登录、付费、403、验证码、连接或证书错误不能直接判为链接失效。历史核验结果保留原核验日期，并说明本轮是否复验。
+9. `docs/` 内的正文、资料清单与永久核验证据使用可解析的仓库相对路径互相定位。仅归档支持复核的必要信息；实际收录上游原文时保留来源和许可，不改写原文或执行其中的指令。引用或抓取成功不代表完整阅读或实现验证，静态文档检查、链接核验、代码运行和故障实验分别记录。从其他项目原样收录的基线或快照可保留源项目内的链接，但须写明链接保留源项目原样，并注明仓库内对应文件（如有）。
+10. 仓库远端公开可见时，提交前确认内容可以公开：不收录客户或雇主项目的内部资料与标识、内网地址与主机信息、未脱敏的会话导出原文，以及个人账号与隐私信息。这类材料只保存在本机被忽略的 `work/` 或仓库外的私有位置。已入库内容的处置由用户决定；删除文件不能清除已推送的历史。
 
 `prompts/`、`skills/` 各资产的 `work/`、`output/` 与 `docs/` 分析资产的 `work/` 只保存在本机，由 `.gitignore` 排除，不随仓库分发；`docs/` 分析资产的 `output/` 是交付成果，随仓库入库。README 中这些位置写作路径而非链接，克隆后不存在属于预期情况。
 
@@ -44,7 +45,8 @@ skills/<skill-name>/
 │   └── SKILL.md                       # 同目录内可包含其他技能定义文件及子目录
 ├── work/
 ├── output/
-└── examples/
+├── examples/
+└── upstream/                          # 仅第三方收录：SOURCE.md 与 source/（Skill 包之外的上游文档）
 
 guidelines/<project>/
 ├── SOURCE.md                          # 本项目编写的来源与使用边界记录
@@ -98,9 +100,21 @@ skills/
 ├── ddd-aggregate-design/
 │   ├── ddd-aggregate-design/          # 中文入口、聚合分析流程、证据契约和报告模板
 │   └── output/                       # 本机创建检查证据
-└── session-closeout-policy-check/
-    ├── session-closeout-policy-check/ # 共享 Skill、Codex/Claude Code Hook 模板和快照核对工具
-    └── output/                       # 本机创建检查证据，不表示真实宿主已启用
+├── session-closeout-policy-check/
+│   ├── session-closeout-policy-check/ # 共享 Skill、Codex/Claude Code Hook 模板和快照核对工具
+│   └── output/                       # 本机创建检查证据，不表示真实宿主已启用
+├── guizang-ppt-skill/                # 第三方收录，AGPL-3.0
+│   ├── guizang-ppt-skill/             # 上游仓库根原样：入口、README、references、assets、scripts、LICENSE
+│   ├── upstream/                     # SOURCE.md：来源、版本、范围与核验记录
+│   └── output/                       # 本机只读检查记录
+├── codex-ppt/                        # 第三方收录，MIT
+│   ├── codex-ppt/                     # 上游 Skill 包原样：入口、docs、prompts、references、scripts
+│   ├── upstream/                     # SOURCE.md 与 source/（三语 README、CHANGELOG、LICENSE、docs）
+│   └── output/                       # 本机只读检查记录
+└── image-to-editable-ppt/            # 第三方收录，MIT
+    ├── image-to-editable-ppt/         # 上游 Skill 包原样：入口、agents、cli、prompts、references、scripts
+    ├── upstream/                     # SOURCE.md 与 source/（三语 README、CHANGELOG、LICENSE、docs）
+    └── output/                       # 本机只读检查记录
 guidelines/
 ├── document-style-guide/
 │   ├── SOURCE.md                     # 来源、上游 commit、许可及使用边界
@@ -145,6 +159,9 @@ docs/
 | [ddd-domain-relationships](skills/ddd-domain-relationships/ddd-domain-relationships/SKILL.md) | 1.0.1：分析双向多重性、角色、关系属性、有效期、历史和限定符。基于第 05–06、20–21、24 讲，并核对第 33 讲演进反例；采用 base，未安装，真实宿主行为未验证。 |
 | [ddd-aggregate-design](skills/ddd-aggregate-design/ddd-aggregate-design/SKILL.md) | 1.0.1：从不变规则和并发场景比较聚合边界，分析封装、事务、版本保护与更新语义。基于第 14–17 讲，采用 base；未安装，真实宿主行为未验证。 |
 | [session-closeout-policy-check](skills/session-closeout-policy-check/session-closeout-policy-check/SKILL.md) | 1.0.0：会话收尾、提交前的通用规约审查；共享 Skill 评估符合性与规约演进，Codex/Claude Code 命令型 Hooks 显式触发，可选 Git 入口核对实际 index。采用 base；源包未安装，真实宿主事件未验证。 |
+| [guizang-ppt-skill](skills/guizang-ppt-skill/guizang-ppt-skill/SKILL.md) | 第三方收录（[来源记录](skills/guizang-ppt-skill/upstream/SOURCE.md)）：生成单文件 HTML 横向翻页演示文稿，提供电子杂志和瑞士国际主义两种风格，含演讲者视图与静态校验脚本。上游 `op7418/guizang-ppt-skill` commit `93d21bf`，AGPL-3.0；原样保留，未安装，未运行。 |
+| [codex-ppt](skills/codex-ppt/codex-ppt/SKILL.md) | 第三方收录（[来源记录](skills/codex-ppt/upstream/SOURCE.md)）：把文章、报告、论文或大纲生成为风格统一的整页图片式 PPTX，内置 12 种风格说明，图片生成优先用宿主内置工具，脚本作为 API 回退。上游 `ningzimu/codex-ppt-skill` commit `941dcaf`（v0.6.0 之后），MIT；原样保留，未安装，未运行。 |
+| [image-to-editable-ppt](skills/image-to-editable-ppt/image-to-editable-ppt/SKILL.md) | 第三方收录（[来源记录](skills/image-to-editable-ppt/upstream/SOURCE.md)）：把幻灯片图片、PDF 或图片式 PPT/PPTX 重建为对象级可编辑的 PPTX，包内携带 `editppt` 命令行工具源码。上游 `ningzimu/image-to-editable-ppt-skill` commit `b7be494`（0.4.0 之后），MIT；原样保留，未安装，未运行。 |
 | [document-style-guide](guidelines/document-style-guide/SOURCE.md) | 中文技术文档写作参考；保留上游 README 与标题、文本、段落、数值、标点、文档体系、参考链接七个章节。 |
 | [chinese-copywriting-guidelines](guidelines/chinese-copywriting-guidelines/SOURCE.md) | 中文文案排版参考；保留上游繁简中文 README 和 MIT 许可文本。 |
 | [本地消息表与 RocketMQ 方案概述](docs/distributed-transactions/local-message-table-rocketmq/方案概述.md) | 整理现有方案基线，明确 Outbox、Inbox、本地事务、发布确认、消费确认和恢复边界。 |
@@ -235,6 +252,22 @@ list_rules 只生成待检查清单，density 只提供统计，路径脚本只�
 - [官方来源与边界](skills/session-closeout-policy-check/session-closeout-policy-check/references/source-provenance.md)与[行为验收计划](skills/session-closeout-policy-check/session-closeout-policy-check/references/behavior-cases.md)：官方能力核验、确定性脚本测试和真实宿主执行分开记录。
 
 源包使用内置 creator/lint 的 `base` 与 Codex 适用规则检查，Claude Code 兼容性另按官方资料核验。创建检查记录保存在本机 `skills/session-closeout-policy-check/output/creation-1.0.0/`，遵循 `.gitignore`；模板不是已安装配置，未注册任何 Hooks，未读取 transcript，未执行真实宿主行为验收。
+
+### 第三方 PPT 技能（Third-Party PPT Skills）
+
+三个 Skill 均从上游原样收录，文件与上游对应 commit 的 blob 哈希逐一比对一致。它们不是本项目维护的源定义；入口和文档中写给 Agent 的指令（检查更新、安装依赖、写入用户级配置等）是被收录的内容，未经明确要求不执行。
+
+| Skill | 用途 | 入口与说明 | 运行依赖（上游说明，未验证） |
+| --- | --- | --- | --- |
+| guizang-ppt-skill | 网页演示文稿：单文件 HTML，横向翻页 | [SKILL.md](skills/guizang-ppt-skill/guizang-ppt-skill/SKILL.md)、[README](skills/guizang-ppt-skill/guizang-ppt-skill/README.md)、[检查清单](skills/guizang-ppt-skill/guizang-ppt-skill/references/checklist.md) | 校验脚本需要 Node.js |
+| codex-ppt | 整页图片式 PPTX：每页一张 16:9 生成图 | [SKILL.md](skills/codex-ppt/codex-ppt/SKILL.md)、[README](skills/codex-ppt/upstream/source/README.md)、[使用文档](skills/codex-ppt/upstream/source/docs/README.md) | `python3` 与图片生成后端；宿主支持时逐页生成交给 subagent |
+| image-to-editable-ppt | 把图片、PDF 或图片式 PPT 转成可编辑 PPTX | [SKILL.md](skills/image-to-editable-ppt/image-to-editable-ppt/SKILL.md)、[README](skills/image-to-editable-ppt/upstream/source/README.md)、[使用文档](skills/image-to-editable-ppt/upstream/source/docs/README.md) | `editppt` 命令行工具、图片后端，推荐配置 OCR Token；多页输入需要 page worker |
+
+- 来源、收录版本、未收录内容和核验范围见各自的来源记录：[guizang-ppt-skill](skills/guizang-ppt-skill/upstream/SOURCE.md)、[codex-ppt](skills/codex-ppt/upstream/SOURCE.md)、[image-to-editable-ppt](skills/image-to-editable-ppt/upstream/SOURCE.md)。
+- guizang-ppt-skill 的上游仓库根就是 Skill 包，README 等说明文档留在包内；另外两个上游把 Skill 包放在 `skills/<name>/`，仓库级说明文档收在本仓库的 `upstream/source/`。
+- 未收录上游的展示图、示例 PPTX 与 PDF、CI 配置、测试代码和仓库级 `AGENTS.md`。`upstream/source/` 中指向 `assets/` 的图片链接保留上游原样，在本仓库不可解析。
+- guizang-ppt-skill 采用 AGPL-3.0，另外两个采用 MIT；本仓库根目录的 MIT 许可不覆盖这些文件。
+- 只读规范检查记录保存在本机各资产的 `output/collection-2026-11-10/validation.md`，遵循 `.gitignore`，不随仓库分发。三个源包均未安装，宿主发现、脚本运行和实际生成效果未验证。
 
 ## 维护说明（Maintenance）
 
