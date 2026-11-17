@@ -1,0 +1,109 @@
+# D4 子手法资格专项评审（Recipe Qualification Review）
+
+结论：D3R-02在已限定支持范围内closed_in_design；未确认P1/P2；有3项条件P3减负/实施加固建议。
+
+## 检查范围（Review Scope）
+
+- `output/java-springboot-refactoring-governance-d4-operations.md`：805行全文，补读截断的新构造表和OP-48末段；canonical资格卡逐条语义审阅。
+- `output/java-springboot-refactoring-governance-d4-acceptance.md`：390行全文，包括133治理/修订正文。
+- `d4-work/qualification-spec.json`：完整JSON程序解析；23recipe/76branch和4新case/22variant全部语义字段逐项读取。
+- `output/java-springboot-refactoring-governance-d4-cases.json`：完整JSON程序解析；全部引用和镜像结构核对；40个被引用旧OC语义字段、4新OC、R05/R06、CASE-D2-10-B完整语义字段精读，其余133正文以验收附册全文为准；不称逐字人工阅读全文43524行JSON。
+- `output/java-springboot-refactoring-governance-design-d4.md`：与资格/operation/对象结论有关段落定点阅读，重点490–532行。
+
+## 闭环判断（Closure Assessment）
+
+23 个 canonical recipe、76 个必要分支已逐项核对。58 个分支已有设计映射，18 个分支有明确待补原因。新 Builder/Factory 的 4 个 case 含 22 个正反 variant，展开为 26 个逻辑候选对象；这些数都不是执行次数。40 个旧 OC 的证明角色与所引用技术/治理层一致。
+
+D3R-02 的关键反例已闭合：原参数对象、CQS 或 owner 加载证据不能代替 Builder/Factory；State 不能退回 Strategy；OP-48 形态选择不会自动获得代码改写资格。待补分支只限制相应支持声明，普通任务仍按自己的义务实例选证据。
+
+负候选 `code_postimage:FAIL` 不构成问题。它是 verify 对错误代码的预期判断。错误实现若报告 PASS，便不匹配预期。现有 operation、授权与分层规则也禁止 verify 顺带 apply。未来能力摘要仍可更明确，见 Q-P3-02。
+
+## 剩余建议（Remaining Suggestions）
+
+### Q-P3-01：共享校验的待补说明遗漏已有技术正例，可能重复创建fixture（Conditional Improvement）
+
+等级：P3。
+
+反例：实现者照validation:both的pending_reason新增“同owner/时点/错误的共享校验正例”，会复制CASE-D2-10-B已有code_behavior规格。
+
+已有缓解：主文允许同性质充分证据复用；validation_unit仍缺信任边界/owner差异等拒绝分支，所以不能把它整体改mapped。
+
+不足：待补原因与已保留case库存不一致，导致额外工作，不是既有能力丢失或误授资格。
+
+采用条件：下一次获准修订设计或绑定validation_unit资格时采用；先复核所选共享校验fixture与原case相同对象性质、scope/profile和独立oracle。
+
+最小修订：在OP-15 canonical卡引用CASE-D2-10-B作为共享校验保持分支的受限证明，派生反向映射；待补理由只列尚缺的边界/owner差异拒绝规格，不复制正文或新增入口。
+
+回归验收：
+
+- 资格选择能复用CASE-D2-10-B的同语义保持范围。
+- 缺边界/owner拒绝分支时validation_unit仍qualification_pending。
+- 普通工程任务不因此多跑资格fixture。
+
+证据：
+
+- `output/java-springboot-refactoring-governance-d4-operations.md`，`252:252`。
+- `output/java-springboot-refactoring-governance-d4-acceptance.md`，`134:134`。
+- `d4-work/qualification-spec.json`，`/recipes/5/required_branches/5`。
+- `output/java-springboot-refactoring-governance-d4-cases.json`，`case_id=CASE-D2-10-B`。
+
+### Q-P3-02：实施绑定时显式限定资格结论的操作能力面（Conditional Improvement）
+
+等级：P3。
+
+反例：一个未来adapter仅把固定postimage交给验证器并得到正确PASS/FAIL，却在摘要中省略verify能力范围，可能让消费者误读为同recipe自动apply能力也已取得资格。
+
+已有缓解：每case已有operation、刺激、预期与实际证据；资格验收按实现版本、声明范围及证明角色分层；verify不能自动apply。错报PASS也不匹配负例expected FAIL。因此没有确认现规范允许该越界。
+
+不足：未来schema或adapter实现可能丢掉现有operation/角色限定，属于实现绑定加固而非本轮P2未闭环。
+
+采用条件：将来用户授权实施资格adapter或输出schema时采用；不作为当前设计交付的前置条件。
+
+最小修订：实现时复用既有operation与implementation identity，资格摘要显式携带analyze/plan/apply/verify能力面及被测输出证据引用。保留code_postimage FAIL与实现资格结论的分离，不另建资格流程。
+
+回归验收：
+
+- 仅verify的已运行正反例只能支持verify范围。
+- 错误候选被实际验证器报PASS应使资格检查失败。
+- 独立oracle识别失败不能被冒充为未运行改写引擎的拒绝证据。
+
+证据：
+
+- `output/java-springboot-refactoring-governance-design-d4.md`，`504:507`。
+- `output/java-springboot-refactoring-governance-design-d4.md`，`522:526`。
+- `output/java-springboot-refactoring-governance-d4-operations.md`，`310:310`。
+- `output/java-springboot-refactoring-governance-d4-acceptance.md`，`19:21`。
+
+### Q-P3-03：Builder复用oracle的清空状态表述可再收窄或补一个区别输入（Conditional Improvement）
+
+等级：P3。
+
+反例：每次build后清空某未重设字段的实现，可能仍通过setLabel(a)→build、setLabel(b)→build这个轨迹；现轨迹不单独观察该字段的跨build保留。
+
+已有缓解：当前范围明确只限定既定性质/输入；live_product_alias和一次性改写可由现有轨迹识别，目标项目真实协议仍需单独事实；独立语义证明也允许，不要求穷举故障变异。
+
+不足：“同时禁止无依据清空状态”可能被读为此fixture已证明全部状态保留，超出这条轨迹的区分力；没有证据显示当前窄支持因而错误。
+
+采用条件：若维护者要把跨build未重设字段保留也纳入builder_protocol_v1资格承诺，则扩展输入；否则只收窄表述。
+
+最小修订：二选一：把清空状态明确为真实项目协议的条件检查；若要声明本fixture覆盖状态保留，则加入未重设字段或无setter的第二次build输入，及reset_after_build候选。不要强加全部Builder协议。
+
+回归验收：
+
+- 窄支持摘要不声称未观察字段的保留。
+- 选择扩展fixture时，正确保留状态候选通过、reset_after_build候选被独立oracle识别。
+- 不增加普通任务必跑集合。
+
+证据：
+
+- `output/java-springboot-refactoring-governance-d4-operations.md`，`318:320`。
+- `d4-work/qualification-spec.json`，`/new_operation_cases/1/variants/4`。
+
+## 静态核验与限制（Static Checks and Limits）
+
+本专项独立执行 12 项静态检查，12 项 PASS。这里只验证设计记录和关联，不证明实际实现可用。详见同目录 `qualification-review.json`。
+
+- 未运行Java/Spring/数据库/宿主/性能fixture
+- 未验证实际Skill或资格选择器实现
+- 未重新阅读外部skills.sh定义或刷新排名
+- 未修改现有D4或任何实际Skill文件

@@ -1,0 +1,61 @@
+# D4 对象身份与证据复用专项评审（D4 Subject Identity and Evidence Reuse Review）
+
+评审日期：2026-10-18。评审范围：`D3R-01` 闭环、D4 验收对象/版本、组合证据与新版本复用。状态：只读设计评审完成；未回写 D4，未创建或修改实际 Skill。
+
+## 结论（Decision）
+
+**`D3R-01` 已在设计层闭环。本专项未确认需要追加的 P1/P2 设计问题。** 主文已明确实例身份、版本、去重条件、集合成员、部分覆盖、新版本失效及复用依据。验收附册和机器规格承接相同规则。未发现对象身份修订新增全仓 hash、每行实例、每次全量资格测试或独立报告的要求。
+
+本结论不代表实现 schema、真实对象绑定或证据复用引擎已验证。307 个设计用例仍为 `NOT_RUN`。本专项不对全部子手法资格覆盖作最终裁决；该维度由并行资格评审负责。
+
+## 原问题闭环证据（Original Finding Closure）
+
+| 核查点 | 当前证据 | 反例推演与裁决 |
+|---|---|---|
+| 身份包含对象与版本 | [主文](../output/java-springboot-refactoring-governance-design-d4.md#d4-subject-identity) L344、349—353 | 同路径/profile/stage 的 A@1、B@1、B@2 生成三种身份。旧键碰撞已消除。 |
+| 同义 ref 与内容 hash 分开 | 主文 L349、353；[验收](../output/java-springboot-refactoring-governance-d4-acceptance.md#case-d4-r02) L368 | 已证实同义引用可规范化为一个身份；仅内容 hash 相同不合并不同候选或用途。不存在强制重复存 hash 的要求。 |
+| 同条件多路由仍去重 | 主文 L353、363；验收 L313、368 | G01-A 与 R02 要求同对象/版本且规则、性质、scope/profile/stage 相同，归并理由。新增身份维度没有取消原减重规则。 |
+| 候选与未生成对象 | 主文 L351 | 尚未实施的候选可绑定不可变计划/patch 修订。未执行不虚构 postimage；未知绑定不共用一个 unknown identity，也不能记执行 PASS。 |
+| 组合检查不合并对象 | 主文 L357、367；验收 L370、374 | R04 一次执行，A PASS、B FAIL，各自有实例。无 manifest 不造集合，也不隐藏 B 的失败。 |
+| 显式集合 | 主文 L359；验收 L352、374；索引 R09 的 `subject_collection_binding` | R09 的 A/B 集合显式包含成员 identity 待绑定位、instance/supporting 映射和汇总目的；成员变化需新 manifest。不是把所有多对象检查都强制变成集合。 |
+| B→B2 证据复用 | 主文 L369、444—449；验收 L369、374 | p 相关变化使新实例 NOT_CHECKED；q 仅在依赖不变和原证据覆盖充分时显式映射新实例。复用保留 B 原始执行身份，不将 lineage 当同一对象。 |
+| 受评对象与活动完成分开 | 主文 L461—483；验收 L363—374 | R01/R03/R04 的治理记录可 PASS，supporting 代码仍 FAIL/NOT_CHECKED；verify 完整报告可 completed，apply 必需缺口仍阻断。 |
+
+### 机器核对结果（Machine Consistency Checks）
+
+新建的 [identity-audit.py](identity-audit.py) 只读取 D4 索引，输出 [identity-audit.json](identity-audit.json)。17 项检查全部通过：
+
+- 全部 307 个索引 ID 唯一，当前规格 revision 均为 D4；133 个治理正文与索引的主体、预期、oracle、supporting 和本轮关系字段一致。
+- 全部主对象含 kind/ref/scope，使用六种允许类型；`primary_subject` 与兼容字段 `verdict_subject` 没有冲突。
+- supporting verdict 引用可解析且标识唯一；R01 三个符号身份、R03 条件复用、R04 两个实例及 R09 集合映射符合契约。
+- 新四个 OC 的 22 个具名变体展开为 26 个独立候选逻辑 ref。`required_candidate_ids` 中的多个错误候选各有自己的对象；未把 variant 集合模板当一个 code_postimage。
+- 307 项索引以及新技术变体均为 NOT_RUN；未出现 apply completed 却同时给出 FAIL/NOT_CHECKED 的直接字段冲突。
+
+静态检查不能证明全部保护性质已充分覆盖，也没有执行被设计的选择器或资格 fixture。26 个候选是输入规格中实际列出的独立候选数，不是本轮执行次数。
+
+## 已排除的误报（Rejected False Positives）
+
+| 候选疑点 | 不列问题的原因 |
+|---|---|
+| 307 个逻辑对象未逐项写运行 hash | 当前是设计规格；主文 L351、验收 L28 和 L378 明确运行前绑定。统一契约足以限制实现，不能把真实文件尚未存在当设计缺陷。 |
+| B@1 的旧证据支持 B@2 等于跨版本冒用 | L369 要求受测内容、相关配置、消费者、oracle 不受影响及当前覆盖核对；不是复制 PASS。R03 的不足分支保持 NOT_CHECKED。 |
+| R04 没有对象集合 manifest | 它只要求逐实例结果，主对象是治理记录。只有新增集合结论时才须 manifest；强制补空集合会增加负担。 |
+| R01 的主结果 PASS 但 B 未验 | PASS 对应治理记录正确保留缺口；B@1/B@2 的 supporting 结论仍 NOT_CHECKED。主文禁止暗换对象。 |
+| PB-04-A 同一 case 出现 FAIL 和 PASS | 完整 JSON 有 `expected_per_variant`；失败候选与满足全部义务的候选分别绑定实际版本。简表不是单一运行结果。 |
+| R06 多个变体共用 governance-record ref | 当前固定的是同一逻辑 case 对象模板；验收 L374 要求分别判断且不合并对象，执行前版本绑定仍适用。它不能据此给 Builder 技术 PASS。 |
+| qualification_pending 阻止所有真实任务 | 主文 L529—537、操作库 L60—62 和验收 L19—22、L60—64 已分离资格集与工程检查集。仅依赖未核工具能力的动作按 GOV-05 停止，人工分析/计划和充分证明的真实任务不必补全库 fixture。 |
+
+## 后续实施建议（Implementation Follow-up）
+
+以下是已定契约的实现化建议，不作为本轮新增设计问题，也不要求现在创建文件或测试：
+
+1. 实施 schema 时，以 R01/R02 为中心加入 identity 规范化的参数化检查：只变 ref、只变 revision、已证实 alias、相同内容不同用途、未绑定 identity。保留必要维度，无须新增案例族。
+2. R03 绑定真实实现时，分别注入充分与不足的复用依据，确认 q 缺依据时为 NOT_CHECKED；同时保留原执行对象和当前覆盖引用。不能只验证字段存在。
+3. 若实现集合汇总，复用 R09/R04 验证成员版本变化导致 manifest 变化；单对象与组合执行不创建空 manifest。
+4. 原有复合 case 的 fixture 绑定阶段按其 variant 固定实际身份，继续复用已有 `expected_per_variant`；无需统一改成大量新的 case ID。
+
+## 阅读与验证边界（Reading and Verification Boundary）
+
+全文阅读 D4 主文 651 行、D4 验收 390 行。程序化解析全部 D4 cases JSON 及 307 项索引，核对 133 项正文/索引关键字段。逐项精读 G01-A、D2-24 系列、D3-R09/R12/R14、D4-R01—R06、四个新 OC 的全部 22 个技术变体及候选身份。节选复核 OP 通用身份/资格契约、OP-21/23 资格表、PB 共用记录与相关复合用例。读取 D3-R1 两项问题的正文、反例、建议和 findings JSON；未重新审计外部 Top 50 定义或目标项目。
+
+未刷新网络、榜单或技术版本；未执行历史生成/核验脚本；未运行 Java/Javadoc、数据库、事务、并发、宿主或实际 Skill。所有新文件仅写入 `/tmp/java-refactor-research/d4-review-work/identity-*`。

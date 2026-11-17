@@ -1,0 +1,81 @@
+{
+  "case_id": "CASE-D2-10-B",
+  "index_role": "governance_acceptance",
+  "validation_layer": "code_behavior",
+  "specification_ref": "java-springboot-refactoring-governance-d4-acceptance.md#case-d2-10-b",
+  "applicability": {
+    "condition": "两校验单元规则所有者/时点/错误一致，候选共享保持全部轨迹",
+    "selection_note": "仅按本例列出的条件和对应规范选择；关联不是无条件加载依赖。"
+  },
+  "associations": {
+    "route_refs": [
+      "RT-06"
+    ],
+    "operation_refs": [
+      "OP-07",
+      "OP-40"
+    ],
+    "playbook_refs": [],
+    "obligation_family_refs": [
+      "OB-05",
+      "OB-07",
+      "OB-17"
+    ],
+    "rule_refs": [
+      "DUP-04",
+      "ABS-01"
+    ],
+    "canonical_recipe_refs": [],
+    "recipe_branch_refs": []
+  },
+  "verdict_subject": {
+    "kind": "code_postimage",
+    "ref": "CASE-D2-10-B/verdict-subject",
+    "scope": "两校验单元规则所有者/时点/错误一致，候选共享保持全部轨迹",
+    "binding_note": "本ref为逻辑对象；执行前必须绑定对应计划/代码/候选/记录的实际版本与hash，不能省略或临时换对象。"
+  },
+  "expected": {
+    "activity_status": "completed",
+    "object_verdict": "PASS",
+    "action_and_gate_assertions": "成功、各单失败、双失败轨迹与异常消息逐项一致",
+    "operation": "verify"
+  },
+  "independent_oracle": "成功、各单失败、双失败轨迹与异常消息逐项一致",
+  "scenario_ref": "SCN-CASE-D2-10-B",
+  "evidence_relation": {
+    "mode": "case_specific",
+    "reuse_condition": "相同受评对象/保护性质/配置和覆盖充分时可引用既有证据；本case ID不自动生成独立运行计数。"
+  },
+  "execution_status": "NOT_RUN",
+  "association_inheritance": {
+    "common_obligation_families": [
+      "OB-01",
+      "OB-02",
+      "OB-18"
+    ],
+    "contract": "本表列特有候选；通用范围/有效规则/血缘按实际性质实例化，空专属数组不豁免通用保护。"
+  },
+  "no_association_reasons": {
+    "playbook_refs": "本逻辑例未固定该类具体选择；在其通用治理对象上验证，实际任务按触达实例化。",
+    "canonical_recipe_refs": "本case未映射到已登记的具体子手法资格分支；operation_refs只表达相关操作，不证明其全部子手法支持。",
+    "recipe_branch_refs": "本case没有canonical技术分支覆盖声明；通用治理或未细分操作按自己的保护性质验证。"
+  },
+  "primary_subject": {
+    "kind": "code_postimage",
+    "ref": "CASE-D2-10-B/verdict-subject",
+    "scope": "两校验单元规则所有者/时点/错误一致，候选共享保持全部轨迹",
+    "binding_note": "本ref为逻辑对象；执行前必须绑定对应计划/代码/候选/记录的实际版本与hash，不能省略或临时换对象。"
+  },
+  "supporting_verdict_refs": [],
+  "rule_binding": {
+    "stable_objective_source": "java-springboot-refactoring-governance-design-d4.md#d4-rules",
+    "stable_objective_meaning": "rule_refs引用D4保留的22个设计目标ID，不冒充已发布namespace/version/hash。",
+    "technical_rule_resolution": "按此case的保护性质、RT/OP/PB及OB关联，从当前effective_rule_refs绑定适用规则；由obligation_instance记录实际规则、scope、profile与subject阶段。技术overlay未发布或目标版本未绑定时明确待绑定，不猜rule key或版本。",
+    "runtime_effective_rule_refs": null,
+    "runtime_obligation_instance_refs": null,
+    "missing_binding_policy": "依赖的有效规则缺失/冲突/unknown不能记N/A或资格PASS；资格fixture保留NOT_RUN，实际任务依GOV-05停止相关写。"
+  },
+  "case_specification_revision": "D4",
+  "recipe_branch_bindings": [],
+  "qualification_projection_status": "derived_mapping_only_not_runtime_evidence"
+}

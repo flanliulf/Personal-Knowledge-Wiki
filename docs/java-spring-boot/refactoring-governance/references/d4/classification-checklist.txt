@@ -1,0 +1,243 @@
+# 分类与主要重构事项（Classification and Refactoring Checklist）
+
+本清单是对两份 Top 50 并集的定义内容进行的设计归纳，不是 skills.sh 自带分类，也不是已执行的 Java 改造结果。`C01`—`C12` 是重构对象分类；`G` 是横切流程，不与对象分类混成一个互斥目录。同一 Skill 可以覆盖多个分类。
+
+“来源覆盖”指其定义包含相应问题或做法，不表示该 Skill 的脚本、示例或全部支持文件已验证。标为“建议补充”的内容属于本次设计推导，不能倒推成来源已具备的能力。
+
+## 命名与意图表达（Naming and Intent）
+
+分类标识：`C01`。**建议采纳为基础分类。**
+
+- 按领域语义重命名类、方法、字段、变量和常量。
+- 统一同一概念的名称，移除含混缩写与误导性的类型前缀。
+- 将有业务含义的魔法值提取为命名常量。
+- 删除误导、过期或仅重复代码的注释；保留契约、约束和非显然原因。
+- 在声明和全部消费者之间传播 rename，核对导入与公开名称。
+
+来源覆盖：[Clean Code](https://www.skills.sh/wondelai/skills/clean-code)、[GitNexus](https://www.skills.sh/abhigyanpatwari/gitnexus/gitnexus-refactoring)、[refactor](https://www.skills.sh/github/awesome-copilot/refactor)。
+
+需要修订：不能为了名字更统一而改动未经授权的文件；注释清理不应删除业务知识。
+
+建议补充：Java 反射字符串、Spring bean 名称、配置键、序列化字段、Mapper XML、模板与外部消费者的名称契约。
+
+## 方法与表达式组织（Methods and Expressions）
+
+分类标识：`C02`。**建议采纳为基础分类。**
+
+- 提取方法，将连贯职责命名。
+- 内联没有解释价值的间接方法。
+- 提取或内联变量，降低表达式理解成本。
+- 用查询替代临时计算，或显式传入计算结果。
+- 拆分一段逻辑中的多个阶段与多个责任。
+- 将复杂方法转为拥有明确状态的协作对象。
+- 在契约不变的条件下替换更清晰的算法。
+
+来源覆盖：[Java Extract Method](https://www.skills.sh/github/awesome-copilot/java-refactoring-extract-method)、[方法复杂度](https://www.skills.sh/github/awesome-copilot/refactor-method-complexity-reduce)、[手法目录](https://www.skills.sh/andresnator/agents-orchestrator/refactor-java)。
+
+需要修订：`LOC > 15`、参数数量和复杂度阈值只触发检查；不强制抽取。提取以后应减少认知负担，不能把复杂度分散到更多无意义的小方法中。
+
+建议补充：自由变量、别名、返回值、早退、`throws`、`synchronized`、资源释放和副作用顺序的前置条件。
+
+## 条件、循环与控制流（Conditionals and Control Flow）
+
+分类标识：`C03`。**建议采纳为基础分类。**
+
+- 分解复杂条件，给判断和分支命名。
+- 合并具有同一业务含义的判断或重复分支。
+- 采用守卫语句减少嵌套。
+- 用直接控制流替换控制标志。
+- 拆分承担多项任务的循环。
+- 在适合的类型变化点使用多态、策略或明确的状态分派。
+
+来源覆盖：[Refactoring Patterns](https://www.skills.sh/wondelai/skills/refactoring-patterns)、[复杂度降低](https://www.skills.sh/github/awesome-copilot/refactor-method-complexity-reduce)、[通用目录](https://www.skills.sh/smallnest/goal-workflow/refactor)。
+
+需要修订：不能将所有 `switch`、循环和 `null` 判断都认定为坏味道。先判断是校验、相同结果、类型变化还是特殊情况，再选择手法。
+
+建议补充：短路求值、异常抛出时点、循环顺序、迭代中修改集合、早退与资源清理的等价检查。
+
+## 类职责与特性归属（Responsibilities and Feature Placement）
+
+分类标识：`C04`。**建议采纳为基础分类。**
+
+- 拆分混合多种变化原因的大类、God Controller 和大 Service。
+- 内联合并缺少独立职责的小类。
+- 将方法和字段移动到拥有相关数据与变化原因的对象。
+- 合并围绕共同数据工作的函数。
+- 隐藏不必要的导航链，或移除没有价值的中间层。
+- 区分文本重复、结构重复与同一业务知识的重复。
+
+来源覆盖：[indexion-refactor](https://www.skills.sh/trkbt10/indexion-skills/indexion-refactor)、[dry-refactoring](https://www.skills.sh/kucherenko/jscpd/dry-refactoring)、[refactoring-specialist](https://www.skills.sh/zhaono1/agent-playbook/refactoring-specialist)。
+
+需要修订：单一职责不等于“一类一方法”；重复代码不一定代表相同业务知识。只有实际一起变化的知识才适合共享。
+
+建议补充：对象生命周期、依赖注入范围、事务与状态所有权随职责移动的检查。
+
+## 数据组织与领域类型（Data Organization and Domain Types）
+
+分类标识：`C05`。**建议采纳；与数据契约一起评估。**
+
+- 封装字段、记录结构和集合，明确修改入口。
+- 用值对象替代有领域含义的裸 `String`、`int` 等基础类型。
+- 拆分承担多个意义的变量。
+- 消除重复派生状态，明确保存值与按需查询的取舍。
+- 在有依据时调整值语义、引用共享与不可变性。
+- 用参数对象或领域对象承载总是一起出现的数据。
+- 在工具链和框架允许时选择 `record` 或明确的类。
+
+来源覆盖：[经典 Java 目录](https://www.skills.sh/andresnator/agents-orchestrator/refactor-java)、[现代 Java](https://www.skills.sh/jabrena/plinth/141-java-refactoring-with-modern-features)、[Clean Code](https://www.skills.sh/pproenca/dot-skills/clean-code)。
+
+需要修订：不能把所有 DTO、JPA entity 或可变对象机械转换为 `record`。消除 `null`、改变集合可变性或引入 `Optional` 都可能改变现有 API。
+
+建议补充：`equals/hashCode/toString`、集合别名、JSON 字段、数据库映射、缺省值与序列化兼容性。
+
+## 方法调用与接口契约（Calls and API Contracts）
+
+分类标识：`C06`。**建议采纳；公开接口默认提高风险等级。**
+
+- 重命名方法或调整声明。
+- 移除无用参数，或引入参数对象。
+- 用明确的方法替代标志参数。
+- 比较“传完整对象”“传所需值”“由被调方查询”的耦合与时序。
+- 将同类函数参数化，减少真正相同的知识重复。
+- 分离查询与状态修改；必要时引入 Command 或工厂入口。
+- 收紧不必要的 setter 与可见性。
+
+来源覆盖：[Remove Parameter](https://www.skills.sh/github/awesome-copilot/java-refactoring-remove-parameter)、[经典目录](https://www.skills.sh/andresnator/agents-orchestrator/refactor-java)、[Code Refactoring](https://www.skills.sh/moizibnyousaf/ai-agent-skills/code-refactoring)。
+
+需要修订：签名删除和错误码转异常不自动属于行为不变的改动。应证明变更仅限内部，或以兼容适配保留边界行为；否则作为单独授权的 API 迁移。
+
+建议补充：重载选择、泛型、二进制消费者、反射调用、SPI、RPC、异常类型与返回值语义。
+
+## 继承、组合与设计模式（Inheritance, Composition and Patterns）
+
+分类标识：`C07`。**条件采纳；不按模式数量评价体系完整性。**
+
+- 在确有共同契约时提取接口或父类。
+- 上移共有实现，下移特有实现。
+- 合并没有价值的继承层级。
+- 在不满足替换关系或出现独立变化维度时，以委托替代继承。
+- 根据创建、组合和行为变化选择 Factory、Adapter、Facade、Strategy、State 等候选。
+- 支持反向手法：撤销不必要的模式、间接层与提前抽象。
+
+来源覆盖：[通用重构目录](https://www.skills.sh/smallnest/goal-workflow/refactor)、[guard](https://www.skills.sh/amelnagdy/guard-skills/clean-code-guard)。补充阅读：[joacod workflow](https://github.com/joacod/skills/blob/main/skills/refactor-design-patterns/references/refactoring-workflow.md)，该 Skill 未入两榜前 50，单独作为模式选择依据。
+
+需要修订：不强制“优先继承”“所有分支变策略”或“所有调用加接口”。每次须说明变化压力、额外间接成本、较简单的替代方案和停止条件。
+
+建议补充：继承替换关系、可见性、构造顺序、框架代理与测试替身行为。
+
+## 模块、依赖与迁移边界（Modules, Dependencies and Migration Boundaries）
+
+分类标识：`C08`。**建议采纳；跨模块操作采用专门流程。**
+
+- 提取模块、移动 package 或共享能力。
+- 识别循环依赖和跨边界访问内部细节。
+- 分离领域逻辑、业务编排和外部适配。
+- 通过依赖注入和接缝降低隐藏依赖。
+- 将同一知识收敛到单一所有者，逐步迁移消费者。
+- 在必要时采用分阶段兼容或渐进替换，而非一次大改写。
+
+来源覆盖：[GitNexus](https://www.skills.sh/abhigyanpatwari/gitnexus/gitnexus-refactoring)、[refactor-plan](https://www.skills.sh/github/awesome-copilot/refactor-plan)、[qa-refactoring](https://www.skills.sh/vasilyu1983/ai-agents-public/qa-refactoring)。
+
+需要修订：不能统一要求“立即删兼容层”，也不能统一要求“永久保留旧入口”。依据消费者范围与发布条件选择迁移策略。
+
+建议补充：Maven/Gradle 多模块、JPMS、`ServiceLoader`、生成代码、资源文件、包名驱动配置及依赖版本冲突。
+
+## Java 语言与标准库现代化（Java Language and Library Modernization）
+
+分类标识：`C09`。**条件采纳；必须按实际工具链路由。**
+
+- 匿名类与 Lambda、方法引用之间的合理转换。
+- 循环与 Stream 之间按可读性和语义选择。
+- 用 `java.time` 替换适合迁移的旧日期时间用法。
+- 按项目习惯选择 `Optional`、`var` 与集合工厂。
+- 在适用版本使用 text blocks、switch expressions 与模式匹配。
+- 评估 `record`、sealed hierarchy 等类型表达。
+- 区分正式、preview 和 incubator 特性。
+- 将废弃 API 迁移与纯结构重构分开记录。
+
+来源覆盖：[141-modern-features](https://www.skills.sh/jabrena/plinth/141-java-refactoring-with-modern-features)、[Spring 重构](https://www.skills.sh/snakeo/claude-debug-and-refactor-skills-plugin/refactorspring-boot)。
+
+需要修订：不能由 `build.gradle.kts` 推断源语言是 Kotlin，也不能由 `pom.xml` 推断项目只含 Java。须读取 source set、编译器 `release`、toolchain 与实际源码。新写法不自动更快或更安全。
+
+版本核验例：Unnamed Variables and Patterns 在 Java 21 为 preview，在 Java 22 正式化，不能把它无条件放入 Java 21 默认操作。[Oracle 版本说明](https://docs.oracle.com/en/java/javase/22/language/java-language-changes.html)
+
+建议补充：每项现代化独立维护最低版本、preview 标志、原语义前提、不能转换的反例与回退方法。
+
+## Spring 与持久化边界（Spring and Persistence Boundaries）
+
+分类标识：`C10`。**作为可选 profile 采纳，不进入所有 Java 项目的默认要求。**
+
+- 梳理 Controller、Service 和数据访问职责。
+- 在现有结构中改善依赖注入与配置管理。
+- 调整事务边界前先理解代理与实际调用路径。
+- 保持异常映射和对外错误格式。
+- 用实际 SQL 证据处理 N+1、fetch 策略、分页和查询边界。
+- 移动横切职责时核对 AOP、缓存和安全注解。
+- 区分 imperative 与 reactive 链路，维持其既有调用模型。
+
+来源覆盖：[refactorspring-boot](https://www.skills.sh/snakeo/claude-debug-and-refactor-skills-plugin/refactorspring-boot)。来源偏薄，应作为待完善模块，不能称为多来源充分验证的完整持久化目录。
+
+需要修订：固定 Spring Boot 3.x、ALWAYS 构造器注入或一套固定分层不应覆盖项目现有约束。
+
+补充的关键运行规则：默认 proxy 模式只拦截经代理进入的调用，self-invocation 不会因被调方法的 `@Transactional` 自动启动相应事务。提取或移动方法必须保留这类运行语义。[Spring 官方说明](https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html)
+
+建议补充：事务传播/隔离/回滚、lazy loading、实体身份、监听器顺序、Bean 生命周期与 Spring 版本差异的集成测试。
+
+## 并发、资源与异常语义（Concurrency, Resources and Failure Semantics）
+
+分类标识：`C11`。**作为高风险专项采纳。**
+
+- 明确共享可变状态和线程安全边界。
+- 改善资源所有权和 `try-with-resources` 作用范围。
+- 保留异常类型、cause、传播与补偿行为。
+- 调整 executor、并发协作或线程模型时保持生命周期边界。
+- 明确 timeout、取消、中断与背压。
+- 按实际 JDK 状态评估虚拟线程和结构化并发。
+
+来源覆盖：[145-high-performance](https://www.skills.sh/jabrena/plinth/145-java-refactoring-high-performance)、[Spring 重构](https://www.skills.sh/snakeo/claude-debug-and-refactor-skills-plugin/refactorspring-boot)、[当前 Java notes](https://github.com/andresnator/agents-orchestrator/blob/b1c6d297a6d8d704b178c687c17dac366a405900/domains/plan/skills/refactor/references/java-notes.md)。
+
+需要修订：没有异常不等于行为保持；换成并发、异步或虚拟线程也不自动属于低风险改写。
+
+建议补充：竞争条件、取消传播、线程上下文、安全上下文、事务上下文、锁顺序和资源泄漏的针对性实验。
+
+## 性能与测量闭环（Performance and Measurement）
+
+分类标识：`C12`。**条件采纳；先有热点证据。**
+
+- 用 profiling 确认 CPU、分配、I/O、查询或等待热点。
+- 减少有证据的临时对象、装箱与不合理的数据布局。
+- 改善热点算法、循环和数据访问。
+- 评估解析、序列化与 I/O 策略。
+- 评估缓存、批处理和查询策略，同时检查正确性。
+- 用一致条件比较前后表现，无显著收益或有回归时回退。
+
+来源覆盖：[163-profiling-refactor](https://www.skills.sh/jabrena/plinth/163-java-profiling-refactor)、[145-high-performance](https://www.skills.sh/jabrena/plinth/145-java-refactoring-high-performance)、[code-refactor-master](https://www.skills.sh/yennanliu/cs_basics/code-refactor-master)。
+
+需要修订：编译与测试通过不能证明性能改善。缓存、并行化和低层技巧可能改变一致性、内存占用或延迟分布，应列为独立实验。
+
+建议补充：环境、JDK、warmup、负载、样本、分位延迟、吞吐、分配/GC、资源上限、误差和保留/回退标准。
+
+## 横切执行流程（Cross-Cutting Execution Protocol）
+
+分类标识：`G`。**所有分类共用；按风险调整证据强度。**
+
+1. 确认任务意图、允许改动范围、语言版本与构建方式。
+2. 只读定位问题、消费者和运行边界；将事实与改进假设分开。
+3. 写明行为不变契约：输入、输出、错误、状态、副作用和边界兼容性。
+4. 选择安全网：已有测试、特征测试、契约测试、golden output、集成验证或性能基线。
+5. 选择一个主要重构目标，定义最小可逆步骤和停止条件。
+6. 优先使用具备符号/类型信息的编辑方式；批量转换先预览、再试点、再扩大。
+7. 按步骤验证，并检查真实结果；失败时定位、收窄或回到最近可验证状态。
+8. 交付实际变化、验证命令与结果、剩余风险、未验证项和迁移后续。
+
+来源覆盖：[safe-refactor](https://www.skills.sh/juliusbrussee/caveman/safe-refactor)、[request-refactor-plan](https://www.skills.sh/mattpocock/skills/request-refactor-plan)、[四模式路由](https://www.skills.sh/akillness/jeo-skills/code-refactoring)、[遗留安全](https://www.skills.sh/wondelai/skills/working-with-legacy-code)。
+
+建议补充：`analyze`、`plan`、`apply`、`verify` 的读写职责应明确；审计请求不触发改写。局部 rename 与跨模块签名迁移采用不同证据深度，避免统一要求全库重测或统一放宽为编译通过。
+
+## 分类应用规则（Taxonomy Application Rules）
+
+- “诊断坏味道”“执行手法”“验证结果”是三个字段，不把其中一个字段当成另外两个的证明。
+- 每个事项至少记录：`operation_id`、`problem_evidence`、`applicability`、`preconditions`、`behavior_contract`、`steps`、`validation`、`rollback`、`stop_conditions`、`source_revision`。
+- `applicability` 包含 JDK、框架、构建、模块与工具能力；`validation` 区分编译、静态检查、测试、运行与性能证据。
+- 将“未运行”“无法运行”“运行失败”“运行通过”分别记录，不能把其中任何一种改写成笼统的“已验证”。
+- 许可与出处按复用方式处理。本轮许可全文审查未完成，不据排名直接整包复制。

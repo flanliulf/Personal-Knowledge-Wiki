@@ -1,0 +1,90 @@
+# D4 来源采纳与修订闭环（D4 Adoption and Revision Traceability）
+
+日期：2026-10-18（Asia/Shanghai）。本册配套[完整D4主方案](java-springboot-refactoring-governance-design-d4.md)，记录当前设计落点及保留/条件/排除理由。原 D3/D2、评审、来源与历史统计未修改。实际Skill和运行验证尚未开始。
+
+## 口径与来源边界（Criteria and Source Boundaries）
+
+历史安装Top50与star Top50交39、并61listing，按历史正文去重54组，共300能力。D4完整保留原链接、规范链接、GitHub来源、rank、hash、源行号、去重关系、prior_coverage、d2_adoption 与 d3_adoption，并新增 d4_adoption；详见[逐能力登记](java-springboot-refactoring-governance-d4-adoption.json)。
+
+D2-R1曾全文复读36组、选读18组，见[历史阅读账本](../d2-review-work/read-ledger.json)。D4 本轮整合 D3 文档、D3-R1 评审及全部能力字段投影，没有将历史阅读换标签为本轮重读。未刷新排行榜、技术版本或上游HEAD，未追读全部支持文件。新观察SRC-39-OBS-01不混入原300条基线。
+
+adopted表示设计采用；conditional须满足对应条件；excluded保留原因；pending_evidence保留证据缺口。复合facets分别裁定，主excluded条目可有conditional的通用原则。计数不等于覆盖率或运行通过。
+
+| 当前主裁决 | 条数 |
+|---|---:|
+| adopted | 223 |
+| excluded | 52 |
+| conditional | 21 |
+| pending_evidence | 4 |
+
+## 本轮两项修订（Two Current Revisions）
+
+| 问题 | D4 修订与设计出口 | 当前落点 | 资格验收规格 |
+|---|---|---|---|
+| D3R-01 / P2 | 主契约加入不可变对象身份与版本；同对象同版本多路由合并，异候选/版本分开；组合检查逐对象覆盖，相关变化按影响失效 | [义务实例](java-springboot-refactoring-governance-design-d4.md#d4-obligations)、[证据血缘](java-springboot-refactoring-governance-design-d4.md#d4-evidence)、[验收规格](java-springboot-refactoring-governance-d4-acceptance.md) | CASE-D4-R01—R03 |
+| D3R-02 / P2 | canonical recipe 单源登记必要资格分支与 case；Builder/Factory 补正常及关键违约，其他分支按证据标已映射或 qualification_pending；alias 消费同一关系 | [操作库](java-springboot-refactoring-governance-d4-operations.md)、[OP-21](java-springboot-refactoring-governance-d4-operations.md#op-21)、[OP-23](java-springboot-refactoring-governance-d4-operations.md#op-23)、[OP-27](java-springboot-refactoring-governance-d4-operations.md#op-27)、[两套选择集合](java-springboot-refactoring-governance-design-d4.md#d4-acceptance) | CASE-D4-R04—R06；OC-21-BP/BN、OC-23-FP/FN |
+
+两项均为 `closed_in_design`；逻辑规格均 `NOT_RUN`。未把资格待补变成所有任务的新门禁，也未把 Builder/Factory 的少量例子声明为任意变体的运行资格。保留两个核心入口、48 OP、8 PB 和按需加载。
+
+## 原十一项修订的当前承接（Current Mapping of Eleven Prior Revisions）
+
+下表保留原 D2R ID。D3-R1 对 D2R-05/06 的裁决为 partial，D4 分别由 D3R-01/02 补齐；其余九项保持原设计闭环和条件。
+
+| 问题 | 裁决与D4内容 | 当前落点 | 资格验收 |
+|---|---|---|---|
+| D2R-01 / P2 | addressed_in_design；按operation分事实分析、已有对象验证、PB08 plan/apply，不因只读任务生成改写备选。 | [d4-evidence](java-springboot-refactoring-governance-design-d4.md#d4-evidence)、[d4-routing](java-springboot-refactoring-governance-design-d4.md#d4-routing)、[pb-08](java-springboot-refactoring-governance-d4-playbooks.md#pb-08) | CASE-D3-R01、CASE-D3-R02 |
+| D2R-02 / P2 | addressed_in_design；闭合transformation_unit；single_slice复用最小证据；多独立单元才batch，依赖组原子处理。 | [d4-context](java-springboot-refactoring-governance-design-d4.md#d4-context)、[pb-02](java-springboot-refactoring-governance-d4-playbooks.md#pb-02)、[op-01](java-springboot-refactoring-governance-d4-operations.md#op-01) | CASE-D3-R03、CASE-D3-R04 |
+| D2R-03 / P2 | addressed_in_design；tool/manual与discover/consolidate/reverse分轴；人工同范围复核，reverse不追重复率下降。 | [pb-03](java-springboot-refactoring-governance-d4-playbooks.md#pb-03)、[op-15](java-springboot-refactoring-governance-d4-operations.md#op-15)、[d4-abstraction](java-springboot-refactoring-governance-design-d4.md#d4-abstraction) | CASE-D3-R05、CASE-D3-R06 |
+| D2R-04 / P2 | addressed_in_design；技术recipe唯一owner，PB仅编排；OP27模式索引跳转到canonical；相关链接不全加载。 | [d4-rules](java-springboot-refactoring-governance-design-d4.md#d4-rules)、[op-21](java-springboot-refactoring-governance-d4-operations.md#op-21)、[op-23](java-springboot-refactoring-governance-d4-operations.md#op-23)、[op-27](java-springboot-refactoring-governance-d4-operations.md#op-27)、[op-45](java-springboot-refactoring-governance-d4-operations.md#op-45)、[op-46](java-springboot-refactoring-governance-d4-operations.md#op-46)、[pb-05](java-springboot-refactoring-governance-d4-playbooks.md#pb-05)、[pb-06](java-springboot-refactoring-governance-d4-playbooks.md#pb-06) | CASE-D3-R07、CASE-D3-R08 |
+| D2R-05 / P2 | closed_in_design；原 scope/profile 规则保留；D3R-01 补不可变 subject_identity 与版本，组合检查逐对象覆盖。 | [d4-obligations](java-springboot-refactoring-governance-design-d4.md#d4-obligations) | CASE-D3-R09、CASE-D2-G01-A；CASE-D4-R01—R03 |
+| D2R-06 / P2 | closed_in_design；原索引和两套选择保留；D3R-02 补子手法必要资格分支、case 映射与待补出口。 | [d4-acceptance](java-springboot-refactoring-governance-design-d4.md#d4-acceptance) | CASE-D3-R10、CASE-D3-R11；CASE-D4-R04—R06 |
+| D2R-07 / P2 | addressed_in_design；基线失败绑定实际对象；候选未验与apply blocked分开，资格FAIL明确eligibility。 | [d4-acceptance](java-springboot-refactoring-governance-design-d4.md#d4-acceptance) | CASE-D3-R12、CASE-D2-26-B |
+| D2R-08 / P2 | addressed_in_design；性能资料记录来源/审阅/事实与建议；资料不授权，不覆盖规则，未经独立核实不直接优化。 | [pb-05](java-springboot-refactoring-governance-d4-playbooks.md#pb-05)、[d4-evidence](java-springboot-refactoring-governance-design-d4.md#d4-evidence) | CASE-D3-R13 |
+| D2R-09 / P2 | addressed_in_design；M7唯一条件独立审查契约，PB06复用或移交；父结果当前充分则直接复用，缺必需证据不完成。 | [d4-review-evidence](java-springboot-refactoring-governance-design-d4.md#d4-review-evidence)、[pb-06](java-springboot-refactoring-governance-d4-playbooks.md#pb-06) | CASE-D3-R14 |
+| D2R-10 / P2 | addressed_in_design；PB07引用已知替换退役期限影响可选投资，unknown不猜、不取消强制文档目标。 | [pb-07](java-springboot-refactoring-governance-d4-playbooks.md#pb-07)、[d4-abstraction](java-springboot-refactoring-governance-design-d4.md#d4-abstraction) | CASE-D3-R15 |
+| D2R-11 / P3 | conditionally_adopted_in_design；条件采用有界删除原意检查，OP14唯一维护/OP40引用；现有充分证明不因缺历史受阻。 | [op-14](java-springboot-refactoring-governance-d4-operations.md#op-14)、[op-40](java-springboot-refactoring-governance-d4-operations.md#op-40) | CASE-D3-R16 |
+
+所有状态是设计承接，case均NOT_RUN。资格集合验证将来实现是否正确；单次工程任务的required_check_set按义务实例选择，不因本表要求每次重跑全部反例。
+
+## 历史修订与用户规则保留（Inherited Revisions and User Rules）
+
+### R1十四项（Retained Design Mapping）
+
+| ID | D4承接 | 当前落点 |
+|---|---|---|
+| R1-01 | 保留两个核心入口，将诊断/抽象/运行保护/验证留作内部职责，避免细碎分包。 | [d4-architecture](java-springboot-refactoring-governance-design-d4.md#d4-architecture) |
+| R1-02 | 通用保护由主题规则定义，Spring仅追加已确认生态overlay；区分维护、评估、验证和收口责任。 | [d4-architecture](java-springboot-refactoring-governance-design-d4.md#d4-architecture)、[d4-rules](java-springboot-refactoring-governance-design-d4.md#d4-rules)、[d4-obligations](java-springboot-refactoring-governance-design-d4.md#d4-obligations) |
+| R1-03 | 有效规则以唯一key/版本/hash解析；冲突不偷偷择新，多路由仅归并义务和触发原因。 | [d4-rules](java-springboot-refactoring-governance-design-d4.md#d4-rules) |
+| R1-04 | 普通查询/转换/校验照常做行为检查，仅真实重复候选才触发重复比较。 | [d4-routing](java-springboot-refactoring-governance-design-d4.md#d4-routing)、[d4-abstraction](java-springboot-refactoring-governance-design-d4.md#d4-abstraction) |
+| R1-05 | 显式登记资源、配置、生成物/源、构建、数据库和外部消费者，mapped/excluded/unknown分开。 | [d4-routing](java-springboot-refactoring-governance-design-d4.md#d4-routing) |
+| R1-06 | 路由取触达闭包，写前/新触达/改后重评；unmapped/unsupported停止依赖动作并明确出口。 | [d4-routing](java-springboot-refactoring-governance-design-d4.md#d4-routing) |
+| R1-07 | 比较单元和证据充分性分开；允许只共享技术子职责，业务语义不同不强行合并。 | [d4-abstraction](java-springboot-refactoring-governance-design-d4.md#d4-abstraction) |
+| R1-08 | assessment/recommended_operation/target_form/implementation_gate分轴；keep_local、defer和撤销抽象都可合法收口。 | [d4-abstraction](java-springboot-refactoring-governance-design-d4.md#d4-abstraction)、[op-48](java-springboot-refactoring-governance-d4-operations.md#op-48) |
+| R1-09 | 活动完成与对象合规/证据结论分开，analyze/plan/apply/verify按操作收口。 | [d4-acceptance](java-springboot-refactoring-governance-design-d4.md#d4-acceptance) |
+| R1-10 | 每项义务映射最小检查、独立oracle和覆盖限制；机械证明须满足明确前提。 | [d4-obligations](java-springboot-refactoring-governance-design-d4.md#d4-obligations)、[d4-acceptance](java-springboot-refactoring-governance-design-d4.md#d4-acceptance) |
+| R1-11 | 验收形成输入/分支/预期结果/独立oracle的case，说明未运行而非用文档检查替代。 | [d4-acceptance](java-springboot-refactoring-governance-design-d4.md#d4-acceptance) |
+| R1-12 | 验证命令也评估写入、外部服务和环境副作用；既有授权只覆盖确实适用范围。 | [d4-scope](java-springboot-refactoring-governance-design-d4.md#d4-scope)、[d4-acceptance](java-springboot-refactoring-governance-design-d4.md#d4-acceptance) |
+| R1-13 | 证据绑定preimage/计划变化/实际patch/postimage/受测环境，漂移后重评对应证明。 | [d4-evidence](java-springboot-refactoring-governance-design-d4.md#d4-evidence) |
+| R1-14 | 性能允许diagnose→measure→optimize，缺热点可诊断，缺可比实验不报告优化收益。 | [pb-05](java-springboot-refactoring-governance-d4-playbooks.md#pb-05)、[d4-routing](java-springboot-refactoring-governance-design-d4.md#d4-routing) |
+
+### Top50九组缺口（Retained Design Mapping）
+
+| ID | D4承接 | 当前落点 |
+|---|---|---|
+| COV-01 | 经典重构从目录补为操作卡；保留原求值、身份、错误、消费者与逆操作条件。 | [op-01](java-springboot-refactoring-governance-d4-operations.md#op-01)、[op-03](java-springboot-refactoring-governance-d4-operations.md#op-03)、[op-04](java-springboot-refactoring-governance-d4-operations.md#op-04)、[op-11](java-springboot-refactoring-governance-d4-operations.md#op-11)、[op-12](java-springboot-refactoring-governance-d4-operations.md#op-12)、[op-13](java-springboot-refactoring-governance-d4-operations.md#op-13)、[op-14](java-springboot-refactoring-governance-d4-operations.md#op-14)、[op-17](java-springboot-refactoring-governance-d4-operations.md#op-17)、[op-20](java-springboot-refactoring-governance-d4-operations.md#op-20)、[op-21](java-springboot-refactoring-governance-d4-operations.md#op-21)、[op-23](java-springboot-refactoring-governance-d4-operations.md#op-23)、[op-25](java-springboot-refactoring-governance-d4-operations.md#op-25)、[op-26](java-springboot-refactoring-governance-d4-operations.md#op-26)、[op-27](java-springboot-refactoring-governance-d4-operations.md#op-27)、[op-28](java-springboot-refactoring-governance-d4-operations.md#op-28) |
+| COV-02 | 遗留改动点/测试点/依赖阻碍/机械准备准入/快照审阅与归一闭环。 | [pb-01](java-springboot-refactoring-governance-d4-playbooks.md#pb-01) |
+| COV-03 | 闭合transformation_unit；single_slice复用最小证据；多独立单元才batch，依赖组原子处理。真实batch保留packet/预览/试点/恢复。 | [pb-02](java-springboot-refactoring-governance-d4-playbooks.md#pb-02) |
+| COV-04 | tool/manual与discover/consolidate/reverse分轴；人工同范围复核，reverse不追重复率下降。保留有价值防复发不变量。 | [pb-03](java-springboot-refactoring-governance-d4-playbooks.md#pb-03)、[op-15](java-springboot-refactoring-governance-d4-operations.md#op-15) |
+| COV-05 | 渐进迁移阶段、新旧权威、消费者/发布/退役/回退条件；行为变更另授权。 | [pb-04](java-springboot-refactoring-governance-d4-playbooks.md#pb-04)、[op-28](java-springboot-refactoring-governance-d4-operations.md#op-28) |
+| COV-06 | Java/Spring逐项准入、语义反例与证据；Java25两候选在限定官方核验后列conditional，目标项目适用性仍待核。 | [op-25](java-springboot-refactoring-governance-d4-operations.md#op-25)、[op-29](java-springboot-refactoring-governance-d4-operations.md#op-29)、[op-30](java-springboot-refactoring-governance-d4-operations.md#op-30)、[op-31](java-springboot-refactoring-governance-d4-operations.md#op-31)、[op-32](java-springboot-refactoring-governance-d4-operations.md#op-32)、[op-33](java-springboot-refactoring-governance-d4-operations.md#op-33)、[op-34](java-springboot-refactoring-governance-d4-operations.md#op-34)、[op-35](java-springboot-refactoring-governance-d4-operations.md#op-35)、[op-36](java-springboot-refactoring-governance-d4-operations.md#op-36)、[op-37](java-springboot-refactoring-governance-d4-operations.md#op-37)、[op-38](java-springboot-refactoring-governance-d4-operations.md#op-38)、[op-39](java-springboot-refactoring-governance-d4-operations.md#op-39)、[op-40](java-springboot-refactoring-governance-d4-operations.md#op-40)、[op-41](java-springboot-refactoring-governance-d4-operations.md#op-41)、[op-42](java-springboot-refactoring-governance-d4-operations.md#op-42) |
+| COV-07 | PB05/06与OP45/46单源分工，性能来源可信/条件审查，证明策略按需启用。 | [pb-05](java-springboot-refactoring-governance-d4-playbooks.md#pb-05)、[pb-06](java-springboot-refactoring-governance-d4-playbooks.md#pb-06)、[op-45](java-springboot-refactoring-governance-d4-operations.md#op-45)、[op-46](java-springboot-refactoring-governance-d4-operations.md#op-46) |
+| COV-08 | PB07引用已知替换退役期限影响可选投资，unknown不猜、不取消强制文档目标。 | [pb-07](java-springboot-refactoring-governance-d4-playbooks.md#pb-07) |
+| COV-09 | 普通plan包含替代、目标职责/数据错误流、现有能力复用、测试先例及独立oracle。 | [pb-08](java-springboot-refactoring-governance-d4-playbooks.md#pb-08) |
+
+### 用户二十二项规则（Retained Design Mapping）
+
+| ID | D4承接 | 当前落点 |
+|---|---|---|
+| DOC-01 | 保留用户目标要求；主文统一维护，入口与操作引用 | [d4-docs](java-springboot-refactoring-governance-design-d4.md#d4-docs)、[op-47](java-springboot-refactoring-governance-d4-operations.md#op-47) |
+| DOC-02 | 保留用户目标要求；主文统一维护，入口与操作引用 | [d4-docs](java-springboot-refactoring-governance-design-d4.md#d4-docs)、[op-03](java-springboot-refactoring-governance-d4-operations.md#op-03)、[op-47](java-springboot-refactoring-governance-d4-operations.md#op-47) |
+| DOC-03 | 保留用户目标要求；主文统一维护，入口与操作引用 | [d4-docs](java-springboot-refactoring-governance-design-d4.md#d4-docs)、[op-47](java-springboot-refactoring-governance-d4-operations.md#op-47) |

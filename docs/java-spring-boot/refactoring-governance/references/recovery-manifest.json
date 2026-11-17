@@ -1,0 +1,151 @@
+{
+  "recovery_date": "2026-11-17",
+  "historical_date": "2026-10-18",
+  "method": "用户授权本次会话；静态提取指定产物正文、显式读取片段与生成脚本的字符串常量；未执行历史脚本",
+  "privacy": "不包含原会话消息、session 元数据或账号字段；只保存方案产物",
+  "complete_main": {
+    "lines": 651,
+    "sha256_matches_historical": true
+  },
+  "complete_playbooks": {
+    "lines": 565,
+    "method": "D3 全文 + 完整 D3→D4 文本 diff；每个 hunk 严格验证旧文本",
+    "D3_sha256_matches_historical": true,
+    "D4_historical_hash_recovered": false
+  },
+  "operations": {
+    "total_historical_lines": 805,
+    "recovered_lines": 242,
+    "ranges": [
+      [
+        1,
+        115
+      ],
+      [
+        305,
+        390
+      ],
+      [
+        735,
+        775
+      ]
+    ]
+  },
+  "acceptance": {
+    "total_historical_lines": 390,
+    "recovered_lines": 165,
+    "ranges": [
+      [
+        1,
+        90
+      ],
+      [
+        105,
+        138
+      ],
+      [
+        350,
+        390
+      ]
+    ]
+  },
+  "qualification_projection": {
+    "recipes": 23,
+    "branches": 76,
+    "mapped_in_design": 58,
+    "qualification_pending": 18,
+    "original_full_spec_recovered": false
+  },
+  "not_recovered": [
+    "D4 操作库其余行",
+    "D4 验收正文其余行",
+    "D4 完整 307 case 机器索引",
+    "D4 完整 300 能力、61 listing、68 facets 采纳登记",
+    "两份 Top 50 的原始逐项名次和数值文件",
+    "D4 来源/交付核验与评审核验的完整原始 JSON",
+    "原 54 组上游定义与支持文件、本地参考历史快照"
+  ],
+  "files": [
+    {
+      "path": "references/d4/acceptance-fragments.txt",
+      "sha256": "690bffa04e44e40149311f16e603d66d02e8ef24d11cbed0f202f1eedf13058b",
+      "lines": 170
+    },
+    {
+      "path": "references/d4/case-d2-10-b.json",
+      "sha256": "2b95f82676f37eae286bd5e57b2801b9a70769172a4b2ab6006c1c058eb74af0",
+      "lines": 81
+    },
+    {
+      "path": "references/d4/classification-checklist.txt",
+      "sha256": "10a05fb4b4bb457ef818365cd141e3bea1ab546ce6eb019694d5dd20d104e3ad",
+      "lines": 243
+    },
+    {
+      "path": "references/d4/design-d4.txt",
+      "sha256": "4d25c2ed783a64d6e0880eab106a78247262ce5440e61574b7acbb2f3304da18",
+      "lines": 651
+    },
+    {
+      "path": "references/d4/operations-fragments.txt",
+      "sha256": "ac9bc2937876b969b31cfbb8109e7520623dd4c909a32cede646740b2078dea6",
+      "lines": 247
+    },
+    {
+      "path": "references/d4/playbooks-d4.txt",
+      "sha256": "537be8a9bdd329f559ddc26ff263866cfd2363d84a2269c20561e8e263100485",
+      "lines": 565
+    },
+    {
+      "path": "references/d4/qualification-projection.json",
+      "sha256": "9ae4d5748600877713f2aad1cb168df990a2c548ed2786af060f4763977d6bad",
+      "lines": 1288
+    },
+    {
+      "path": "references/d4/qualification-summary.txt",
+      "sha256": "80b526ff0f3a47d7cd098804b4baa4766d1d871726feb3b98c7551f61977463f",
+      "lines": 163
+    },
+    {
+      "path": "references/d4/research-summary.txt",
+      "sha256": "56c72446437856214189877e7638cccc9a1998280790e9af7efeb33239c8c77a",
+      "lines": 169
+    },
+    {
+      "path": "references/d4/review-d4-r1.txt",
+      "sha256": "a6a5c7391f4bd1690906c6398e78a228aafb7edc0f058fab045523a7f669d51c",
+      "lines": 163
+    },
+    {
+      "path": "references/d4/review-identity.txt",
+      "sha256": "481dd455bcc8afda8d231b1e95e5151b54c609c0c62416e4c057c4d5397c217e",
+      "lines": 61
+    },
+    {
+      "path": "references/d4/review-qualification.txt",
+      "sha256": "ede1fc67a3e55c317f1c95fcc814e826993566d79824fd815bdacf6bf6fc6c7f",
+      "lines": 109
+    },
+    {
+      "path": "references/d4/review-retention.txt",
+      "sha256": "a15c82c7be17ef2afd54ffe9b3dca14dce62d62e68a0db95ddda83b75e8595ef",
+      "lines": 94
+    },
+    {
+      "path": "references/d4/top50-coverage-review.txt",
+      "sha256": "e4b5d85a0f97fcc976f240f96c8d514e1470f3f6857b2c53bd8e1be73d09bd80",
+      "lines": 222
+    },
+    {
+      "path": "references/d4/traceability-fragment.txt",
+      "sha256": "e2d01b39198427147dec4ac8cbaac25214bb2395019747e52e579f237e3a0f87",
+      "lines": 90
+    },
+    {
+      "path": "references/d4/validation-branch.txt",
+      "sha256": "8b1568712a4211495a0f45614c3d6f201c4d7597d0aa955fa9860014af864a47",
+      "lines": 1
+    }
+  ],
+  "fragment_rendering": "带行号片段的空内容行仅显示原行号，不保留行末制表分隔符；原行号与正文内容不变。"
+}

@@ -1,0 +1,1288 @@
+{
+  "kind": "recovered_projection_not_original_spec",
+  "source": "qualification-summary.txt",
+  "history_date": "2026-10-18",
+  "recovery_date": "2026-11-17",
+  "missing_fields": [
+    "完整 branch conditions/properties",
+    "原 qualification-spec 其他字段",
+    "全部 case 原文与运行绑定"
+  ],
+  "recipes": [
+    {
+      "canonical_recipe_id": "OP-21/builder",
+      "historical_design_status": "mapped_in_design",
+      "supported_variants": [
+        {
+          "id": "builder_protocol_v1",
+          "mapping_status": "mapped_in_design"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-21/builder:setter_order:preserve",
+          "supported_variant": "builder_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-21-BP",
+              "variant_id": "setter_order",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-21/builder:setter_order:reject",
+          "supported_variant": "builder_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-21-BN",
+              "variant_id": "setter_order",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-21/builder:repeated_set:preserve",
+          "supported_variant": "builder_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-21-BP",
+              "variant_id": "repeated_set",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-21/builder:repeated_set:reject",
+          "supported_variant": "builder_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-21-BN",
+              "variant_id": "repeated_set",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-21/builder:default_value:preserve",
+          "supported_variant": "builder_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-21-BP",
+              "variant_id": "default_value",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-21/builder:default_value:reject",
+          "supported_variant": "builder_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-21-BN",
+              "variant_id": "default_value",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-21/builder:build_timing:preserve",
+          "supported_variant": "builder_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-21-BP",
+              "variant_id": "build_timing",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-21/builder:build_timing:reject",
+          "supported_variant": "builder_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-21-BN",
+              "variant_id": "build_timing",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-21/builder:builder_reuse:preserve",
+          "supported_variant": "builder_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-21-BP",
+              "variant_id": "builder_reuse",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-21/builder:builder_reuse:reject",
+          "supported_variant": "builder_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-21-BN",
+              "variant_id": "builder_reuse",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-23/factory",
+      "historical_design_status": "mapped_in_design",
+      "supported_variants": [
+        {
+          "id": "factory_protocol_v1",
+          "mapping_status": "mapped_in_design"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-23/factory:subtype:preserve",
+          "supported_variant": "factory_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-23-FP",
+              "variant_id": "subtype",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-23/factory:subtype:reject",
+          "supported_variant": "factory_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-23-FN",
+              "variant_id": "subtype",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-23/factory:identity:preserve",
+          "supported_variant": "factory_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-23-FP",
+              "variant_id": "identity",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-23/factory:identity:reject",
+          "supported_variant": "factory_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-23-FN",
+              "variant_id": "identity",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-23/factory:scope:preserve",
+          "supported_variant": "factory_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-23-FP",
+              "variant_id": "scope",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-23/factory:scope:reject",
+          "supported_variant": "factory_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-23-FN",
+              "variant_id": "scope",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-23/factory:cache:preserve",
+          "supported_variant": "factory_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-23-FP",
+              "variant_id": "cache",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-23/factory:cache:reject",
+          "supported_variant": "factory_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-23-FN",
+              "variant_id": "cache",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-23/factory:injection:preserve",
+          "supported_variant": "factory_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-23-FP",
+              "variant_id": "injection",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-23/factory:injection:reject",
+          "supported_variant": "factory_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-23-FN",
+              "variant_id": "injection",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-23/factory:exception:preserve",
+          "supported_variant": "factory_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-23-FP",
+              "variant_id": "exception",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-23/factory:exception:reject",
+          "supported_variant": "factory_protocol_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-23-FN",
+              "variant_id": "exception",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-09/dispatch",
+      "historical_design_status": "qualification_pending",
+      "supported_variants": [
+        {
+          "id": "stable_strategy_v1",
+          "mapping_status": "mapped_in_design"
+        },
+        {
+          "id": "state",
+          "mapping_status": "qualification_pending"
+        },
+        {
+          "id": "ordered_chain",
+          "mapping_status": "qualification_pending"
+        },
+        {
+          "id": "lookup_table",
+          "mapping_status": "qualification_pending"
+        },
+        {
+          "id": "special_case",
+          "mapping_status": "qualification_pending"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-09/dispatch:strategy:preserve",
+          "supported_variant": "stable_strategy_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-09-P",
+              "variant_id": "base",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-09/dispatch:strategy:reject_priority",
+          "supported_variant": "stable_strategy_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-09-N",
+              "variant_id": "base",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-09/dispatch:state:transitions",
+          "supported_variant": "state",
+          "mapping_status": "qualification_pending",
+          "case_refs": [],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "现有计价策略例不固定状态转移表；需补对应合法保持及非法/提前推进拒绝分支。"
+        },
+        {
+          "branch_id": "OP-09/dispatch:chain:control",
+          "supported_variant": "ordered_chain",
+          "mapping_status": "qualification_pending",
+          "case_refs": [
+            {
+              "case_id": "OC-09-N",
+              "variant_id": "base",
+              "coverage_role": "supporting_priority_only"
+            }
+          ],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "优先级反例只支持顺序性质；缺完整继续/停止、无人命中和错误聚合的正反分支。"
+        },
+        {
+          "branch_id": "OP-09/dispatch:lookup:keys",
+          "supported_variant": "lookup_table",
+          "mapping_status": "qualification_pending",
+          "case_refs": [],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "计价分派例未指定表驱动及重复键行为；缺表驱动正反分支。"
+        },
+        {
+          "branch_id": "OP-09/dispatch:special:missing",
+          "supported_variant": "special_case",
+          "mapping_status": "qualification_pending",
+          "case_refs": [],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "缺特殊值保持及错误被静默吞掉的具体正反分支。"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-13/adapter_facade",
+      "historical_design_status": "qualification_pending",
+      "supported_variants": [
+        {
+          "id": "bounded_adapter_v1",
+          "mapping_status": "mapped_in_design"
+        },
+        {
+          "id": "facade_resources",
+          "mapping_status": "qualification_pending"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-13/adapter_facade:adapter:preserve",
+          "supported_variant": "bounded_adapter_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-13-P",
+              "variant_id": "base",
+              "coverage_role": "behavior_preserve"
+            },
+            {
+              "case_id": "OC-27-P",
+              "variant_id": "base",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-13/adapter_facade:adapter:reject_seam",
+          "supported_variant": "bounded_adapter_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-13-N",
+              "variant_id": "base",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-13/adapter_facade:facade:ownership",
+          "supported_variant": "facade_resources",
+          "mapping_status": "qualification_pending",
+          "case_refs": [],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "现有日期 adapter/客户端 seam 例不证明多资源 Facade；需独立正反协议。"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-13/library_extension",
+      "historical_design_status": "qualification_pending",
+      "supported_variants": [
+        {
+          "id": "foreign_method",
+          "mapping_status": "qualification_pending"
+        },
+        {
+          "id": "local_extension",
+          "mapping_status": "qualification_pending"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-13/library_extension:foreign:library",
+          "supported_variant": "foreign_method",
+          "mapping_status": "qualification_pending",
+          "case_refs": [
+            {
+              "case_id": "OC-13-P",
+              "variant_id": "base",
+              "coverage_role": "supporting_adapter_only"
+            }
+          ],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "局部 adapter 例不等于任意 Foreign Method；需绑定所选扩展的正反分支。"
+        },
+        {
+          "branch_id": "OP-13/library_extension:local:subclass",
+          "supported_variant": "local_extension",
+          "mapping_status": "qualification_pending",
+          "case_refs": [],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "未声明可安全继承任何库；需目标库证据与子类特有正反分支。"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-15/consolidate",
+      "historical_design_status": "qualification_pending",
+      "supported_variants": [
+        {
+          "id": "method_unit",
+          "mapping_status": "qualification_pending"
+        },
+        {
+          "id": "query_unit",
+          "mapping_status": "qualification_pending"
+        },
+        {
+          "id": "conversion_unit",
+          "mapping_status": "qualification_pending"
+        },
+        {
+          "id": "validation_unit",
+          "mapping_status": "qualification_pending"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-15/consolidate:method:preserve",
+          "supported_variant": "method_unit",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-15-P",
+              "variant_id": "base",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-15/consolidate:method:reject",
+          "supported_variant": "method_unit",
+          "mapping_status": "qualification_pending",
+          "case_refs": [],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "现有正例不覆盖方法所有者或副作用差异的技术拒绝；形态选择反例不替代此行为分支。"
+        },
+        {
+          "branch_id": "OP-15/consolidate:query:reject",
+          "supported_variant": "query_unit",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-15-N",
+              "variant_id": "base",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-15/consolidate:query:preserve",
+          "supported_variant": "query_unit",
+          "mapping_status": "qualification_pending",
+          "case_refs": [
+            {
+              "case_id": "OC-38-P",
+              "variant_id": "base",
+              "coverage_role": "supporting_extraction_only"
+            }
+          ],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "普通查询提取不是多调用者共享资格；缺共享正例。"
+        },
+        {
+          "branch_id": "OP-15/consolidate:conversion:both",
+          "supported_variant": "conversion_unit",
+          "mapping_status": "qualification_pending",
+          "case_refs": [
+            {
+              "case_id": "OC-40-P",
+              "variant_id": "base",
+              "coverage_role": "supporting_mapping_only"
+            }
+          ],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "已有映射提取正例；缺多调用者同语义确认及方向/单位冲突拒绝分支。"
+        },
+        {
+          "branch_id": "OP-15/consolidate:validation:both",
+          "supported_variant": "validation_unit",
+          "mapping_status": "qualification_pending",
+          "case_refs": [
+            {
+              "case_id": "OC-40-N",
+              "variant_id": "base",
+              "coverage_role": "supporting_error_order_only"
+            }
+          ],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "首错反例只支持一个性质；缺同语义共享正例及边界/所有者分支。"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-21/parameter_object",
+      "historical_design_status": "qualification_pending",
+      "supported_variants": [
+        {
+          "id": "parameter_snapshot_v1",
+          "mapping_status": "qualification_pending"
+        },
+        {
+          "id": "whole_object",
+          "mapping_status": "qualification_pending"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-21/parameter_object:parameter:preserve",
+          "supported_variant": "parameter_snapshot_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-21-P",
+              "variant_id": "base",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-21/parameter_object:parameter:reject",
+          "supported_variant": "parameter_snapshot_v1",
+          "mapping_status": "qualification_pending",
+          "case_refs": [],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "原正例不覆盖该参数对象的具体违约；不能借 Builder 用例补齐不同recipe。"
+        },
+        {
+          "branch_id": "OP-21/parameter_object:whole:reject_timing",
+          "supported_variant": "whole_object",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-21-N",
+              "variant_id": "base",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-21/parameter_object:whole:preserve",
+          "supported_variant": "whole_object",
+          "mapping_status": "qualification_pending",
+          "case_refs": [],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "缺完整对象合法保持分支；参数对象正例不充当此例。"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-23/cqs",
+      "historical_design_status": "mapped_in_design",
+      "supported_variants": [
+        {
+          "id": "atomic_deduction_v1",
+          "mapping_status": "mapped_in_design"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-23/cqs:preserve_atomic_boundary",
+          "supported_variant": "atomic_deduction_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-23-P",
+              "variant_id": "base",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-23/cqs:reject_split_atomicity",
+          "supported_variant": "atomic_deduction_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-23-N",
+              "variant_id": "base",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-23/command",
+      "historical_design_status": "qualification_pending",
+      "supported_variants": [
+        {
+          "id": "command_object",
+          "mapping_status": "qualification_pending"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-23/command:command:delivery",
+          "supported_variant": "command_object",
+          "mapping_status": "qualification_pending",
+          "case_refs": [],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "现有 CQS 原子扣减例未固定 Command 对象交付协议；需具体保持及无意重试/异步拒绝分支。"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-28/port",
+      "historical_design_status": "qualification_pending",
+      "supported_variants": [
+        {
+          "id": "dependency_port_v1",
+          "mapping_status": "mapped_in_design"
+        },
+        {
+          "id": "repository",
+          "mapping_status": "qualification_pending"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-28/port:port:preserve",
+          "supported_variant": "dependency_port_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-28-P",
+              "variant_id": "base",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-28/port:port:reject_discovery",
+          "supported_variant": "dependency_port_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-28-N",
+              "variant_id": "base",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-28/port:repository:semantics",
+          "supported_variant": "repository",
+          "mapping_status": "qualification_pending",
+          "case_refs": [
+            {
+              "case_id": "OC-28-P",
+              "variant_id": "base",
+              "coverage_role": "supporting_dependency_only"
+            }
+          ],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "依赖倒置例不证明数据访问语义；需所选端口正反分支并条件消费OP-38/39。"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-41/integration",
+      "historical_design_status": "qualification_pending",
+      "supported_variants": [
+        {
+          "id": "decorator",
+          "mapping_status": "qualification_pending"
+        },
+        {
+          "id": "observer",
+          "mapping_status": "qualification_pending"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-41/integration:decorator:composition",
+          "supported_variant": "decorator",
+          "mapping_status": "qualification_pending",
+          "case_refs": [
+            {
+              "case_id": "OC-41-MN",
+              "variant_id": "base",
+              "coverage_role": "supporting_retry_only"
+            }
+          ],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "重试反例不覆盖多层组合；缺保持顺序及改变层次/清理的具体正反分支。"
+        },
+        {
+          "branch_id": "OP-41/integration:observer:reject_async",
+          "supported_variant": "observer",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-27-N",
+              "variant_id": "base",
+              "coverage_role": "governance_selection_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-41/integration:observer:delivery",
+          "supported_variant": "observer",
+          "mapping_status": "qualification_pending",
+          "case_refs": [],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "已有同步改异步反例；缺原交付协议正常保持及其他已声明关键分支。"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-41/cache",
+      "historical_design_status": "mapped_in_design",
+      "supported_variants": [
+        {
+          "id": "cache_commit_v1",
+          "mapping_status": "mapped_in_design"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-41/cache:preserve",
+          "supported_variant": "cache_commit_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-41-CP",
+              "variant_id": "base",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-41/cache:reject",
+          "supported_variant": "cache_commit_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-41-CN",
+              "variant_id": "base",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-41/security",
+      "historical_design_status": "mapped_in_design",
+      "supported_variants": [
+        {
+          "id": "authorization_proxy_v1",
+          "mapping_status": "mapped_in_design"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-41/security:preserve",
+          "supported_variant": "authorization_proxy_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-41-SP",
+              "variant_id": "base",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-41/security:reject",
+          "supported_variant": "authorization_proxy_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-41-SN",
+              "variant_id": "base",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-41/observability",
+      "historical_design_status": "mapped_in_design",
+      "supported_variants": [
+        {
+          "id": "existing_events_v1",
+          "mapping_status": "mapped_in_design"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-41/observability:preserve",
+          "supported_variant": "existing_events_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-41-OP",
+              "variant_id": "base",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-41/observability:reject",
+          "supported_variant": "existing_events_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-41-ON",
+              "variant_id": "base",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-41/external_client",
+      "historical_design_status": "mapped_in_design",
+      "supported_variants": [
+        {
+          "id": "message_retry_v1",
+          "mapping_status": "mapped_in_design"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-41/external_client:preserve",
+          "supported_variant": "message_retry_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-41-MP",
+              "variant_id": "base",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-41/external_client:reject",
+          "supported_variant": "message_retry_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-41-MN",
+              "variant_id": "base",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-41/scheduler",
+      "historical_design_status": "mapped_in_design",
+      "supported_variants": [
+        {
+          "id": "registration_once_v1",
+          "mapping_status": "mapped_in_design"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-41/scheduler:preserve",
+          "supported_variant": "registration_once_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-41-TP",
+              "variant_id": "base",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-41/scheduler:reject",
+          "supported_variant": "registration_once_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-41-TN",
+              "variant_id": "base",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-48/private_method",
+      "historical_design_status": "mapped_in_design",
+      "supported_variants": [
+        {
+          "id": "private_selection_v1",
+          "mapping_status": "mapped_in_design"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-48/private_method:accept_selection",
+          "supported_variant": "private_selection_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-48-PP",
+              "variant_id": "base",
+              "coverage_role": "governance_selection_accept"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-48/private_method:reject_selection",
+          "supported_variant": "private_selection_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-48-PN",
+              "variant_id": "base",
+              "coverage_role": "governance_selection_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-48/helper",
+      "historical_design_status": "mapped_in_design",
+      "supported_variants": [
+        {
+          "id": "helper_selection_v1",
+          "mapping_status": "mapped_in_design"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-48/helper:accept_selection",
+          "supported_variant": "helper_selection_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-48-HP",
+              "variant_id": "base",
+              "coverage_role": "governance_selection_accept"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-48/helper:reject_selection",
+          "supported_variant": "helper_selection_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-48-HN",
+              "variant_id": "base",
+              "coverage_role": "governance_selection_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-48/component",
+      "historical_design_status": "mapped_in_design",
+      "supported_variants": [
+        {
+          "id": "component_selection_v1",
+          "mapping_status": "mapped_in_design"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-48/component:accept_selection",
+          "supported_variant": "component_selection_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-48-CP",
+              "variant_id": "base",
+              "coverage_role": "governance_selection_accept"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-48/component:reject_selection",
+          "supported_variant": "component_selection_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-48-CN",
+              "variant_id": "base",
+              "coverage_role": "governance_selection_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-48/template",
+      "historical_design_status": "mapped_in_design",
+      "supported_variants": [
+        {
+          "id": "template_selection_v1",
+          "mapping_status": "mapped_in_design"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-48/template:accept_selection",
+          "supported_variant": "template_selection_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-48-TP",
+              "variant_id": "base",
+              "coverage_role": "governance_selection_accept"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-48/template:reject_selection",
+          "supported_variant": "template_selection_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-48-TN",
+              "variant_id": "base",
+              "coverage_role": "governance_selection_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-48/reverse",
+      "historical_design_status": "mapped_in_design",
+      "supported_variants": [
+        {
+          "id": "reverse_flag_v1",
+          "mapping_status": "mapped_in_design"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-48/reverse:preserve",
+          "supported_variant": "reverse_flag_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-48-RP",
+              "variant_id": "base",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-48/reverse:reject",
+          "supported_variant": "reverse_flag_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-48-RN",
+              "variant_id": "base",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-48/pure_core",
+      "historical_design_status": "mapped_in_design",
+      "supported_variants": [
+        {
+          "id": "pure_core_io_v1",
+          "mapping_status": "mapped_in_design"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-48/pure_core:preserve",
+          "supported_variant": "pure_core_io_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-48-FP",
+              "variant_id": "base",
+              "coverage_role": "behavior_preserve"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-48/pure_core:reject",
+          "supported_variant": "pure_core_io_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-48-FN",
+              "variant_id": "base",
+              "coverage_role": "behavior_reject"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        }
+      ]
+    },
+    {
+      "canonical_recipe_id": "OP-48/keep_local",
+      "historical_design_status": "qualification_pending",
+      "supported_variants": [
+        {
+          "id": "retain_selection_v1",
+          "mapping_status": "qualification_pending"
+        }
+      ],
+      "branches": [
+        {
+          "branch_id": "OP-48/keep_local:retain",
+          "supported_variant": "retain_selection_v1",
+          "mapping_status": "mapped_in_design",
+          "case_refs": [
+            {
+              "case_id": "OC-48-KP",
+              "variant_id": "base",
+              "coverage_role": "governance_selection_accept"
+            }
+          ],
+          "runtime_status": "NOT_RUN"
+        },
+        {
+          "branch_id": "OP-48/keep_local:reject_forced_merge",
+          "supported_variant": "retain_selection_v1",
+          "mapping_status": "qualification_pending",
+          "case_refs": [
+            {
+              "case_id": "OC-48-HN",
+              "variant_id": "base",
+              "coverage_role": "supporting_shape_reject_only"
+            }
+          ],
+          "runtime_status": "NOT_RUN",
+          "pending_reason": "若能力仅为如实输出keep_local，无代码变换义务；若还声明自动判断所有强制共享反例，现有形态反例不足，需限定域或补其反例。"
+        }
+      ]
+    }
+  ]
+}

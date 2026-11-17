@@ -1,0 +1,222 @@
+# Top 50 来源能力覆盖评审（Top 50 Source Capability Coverage Review）
+
+评审编号：`COV-R1`。日期：2026-10-18（Asia/Shanghai）。状态：来源能力对照与补充建议，未实施。
+
+## 核心结论（Core Conclusion）
+
+**当前建议没有完整覆盖最初两份 Top 50 定义中的全部能力。即使只看适用于 Java/Spring Boot 的可迁移能力，也还有需要细化和补入的内容。**
+
+已经承接的是治理骨架：授权与读写区分、行为保护、小步操作、技术画像、影响面、重复/抽象判断、文档治理、真实验证和失败收口。经典手法、遗留代码、现代化、Spring、并发和性能也进入了分类。
+
+主要差距在深度。部分能力只有目录和原则，还没有具体手法的前置条件、步骤、反例及验证；部分来源独有的流程还没有稳定的路由与证据要求。另一些工具、宿主约定或危险的默认行为属于有理由不采纳，不能统一算成应补缺陷。
+
+**此前“方案完整”表示用户提出的体系设计章节齐全，不表示已经逐项承接 61 个来源的全部定义。上一轮 R1 主要检查治理结构和执行契约，也没有完成这次来源逐项覆盖核对。** 本轮补上这条证据链，不将先前的结构检查 PASS 当作能力覆盖证明。
+
+## 评审对象与来源范围（Targets and Source Scope）
+
+### 对照目标（Target Baseline）
+
+本轮“修订后的方案建议”指以下组合，不存在已经合并或实施的 D2：
+
+1. [D1 体系方案](java-springboot-refactoring-governance-design.md)保留的正文。
+2. [R1 设计评审](java-springboot-refactoring-governance-design-review.md)提出的修订方向，包括两核心入口、内部模块、条件路由、抽象单元和分层验收。
+3. D1 经 SRC-02 明确采用的[分类与事项清单](classification-checklist.md)。R1 没有重新列出的事项不视为删除。
+
+因此，参数对象、CQS、Hide Delegate、断言、特征测试、golden output、渐进迁移、`java.time`、text blocks 等不能因 D1 使用缩写就被判为“完全不存在”。本轮主要核对它们是否已从目录层进入可执行的操作规范。
+
+### 历史来源集合（Historical Source Set）
+
+- 使用 session 最初研究的[安装量 Top 50](top50-installs.md)与[仓库 star Top 50](top50-stars.md)，不重新排序。
+- 两榜各 50 项，交集 39 项，并集 **61 个 listing**。按原轮 `definition_sha256` 口径去重，为 **54 份不同的展示正文**。
+- 逐项保存原始链接、规范链接、排名、原轮规范化 hash、本轮原始文件 hash 和正文位置，见[逐项矩阵](top50-design-coverage-matrix.md)及[能力登记](top50-design-coverage-register.json)。
+- 本轮重读可取得的展示正文。该正文不含完整 YAML frontmatter；代码示例按能力概念审阅，没有运行。没有把所有 references/rules/scripts 全文作为已读内容。
+- `pproenca` 的 43/48 条规则等入口索引，不能证明被引用的每个规则文件均已核验；这部分仍是来源深度限制。
+- 辅助研究的其他 Java 专项、andresnator 当前 refactor 与 joacod 等不加入这 61 项分母。本方案采用它们的事实另行保留。
+- 未刷新安装量、star、上游 HEAD 或网页访问状态。结论针对当轮保存的定义，不声称覆盖目前全站或当前上游版本。
+
+## 判定口径（Assessment Criteria）
+
+### 覆盖层次（Coverage Levels）
+
+| 层次 | 判定问题 | 本轮结论 |
+|---|---|---|
+| 来源登记 | 两榜每个 listing 是否有对照记录 | 逐项检查 61 个来源，副本仍保留各自排名 |
+| 分类覆盖 | 主要主题是否进入 C01—C13/G | 主要主题有承接；不能代替操作规范 |
+| 核心能力覆盖 | 该来源主要可迁移能力是否有明确设计承接 | 逐项判 covered/partial/gap，见矩阵 |
+| 定义逐条采纳 | 所有工具、约束、工作流及示例是否原样采用 | 未完整采用，也不建议机械采用 |
+| 实现验证 | Skill/宿主/Java 操作是否已证明可运行 | 本轮未执行，不能由设计映射推出 |
+
+### 单项能力状态（Capability Statuses）
+
+| 状态 | 含义 |
+|---|---|
+| `covered` | 该能力有明确的设计承接和责任/约束/证明方向；只指设计层 |
+| `partial` | 目录或原则已承接，但特定操作、条件、流程或证明尚不完整 |
+| `gap` | 在所评目标中没有可定位的对应能力或流程，且适用于本体系目标 |
+| `conditional` | 按项目、工具、宿主或专项条件选择；当前并未承诺直接可用 |
+| `excluded` | 明确不原样采用，并记录边界、冲突或风险原因 |
+
+listing 的“核心已承接”不代表其所有条款都被采纳。一个来源可以同时有 covered、partial 和 excluded 能力。主能力尚有关键部分未落实时，整体记“部分承接”。
+
+本轮拆解主要能力以便复核，不把不同审阅者划出的能力条数当作精确覆盖率，不按 installs 或 star 加权计算质量。副本不增加独立能力数量。
+
+## 已明确承接的能力（Capabilities Already Addressed）
+
+| 来源能力 | 代表来源 | 目标证据与保留判断 |
+|---|---|---|
+| 先理解问题、比较方案、界定范围并计划 | `mattpocock/request-refactor-plan`、GitHub `refactor-plan` | D1 第 269—305、484—495 行；R1 按 operation 修订收口。保留计划能力，issue 外发另受授权。 |
+| 行为不变、小步推进、真实验证 | `safe-refactor`、GitHub `refactor`、`smallnest/refactor` | D1 第 56—60、449—521、523—574 行；R1 补义务和证据映射。 |
+| 只读审计与明确要求的改写分开 | `tartinerlabs/refactor`、GitHub `refactor-plan` | D1 operation 与 RT-14；R1 第 333—345 行附近的状态/完成条件。 |
+| 概念重复、共享收益、保留业务边界 | `indexion-refactor`、`dry-refactoring`、`clean-code-guard` | D1 第 365—415 行；R1 抽象单元、动作与门状态。 |
+| 影响范围、消费者、仓库与基线 | `gitnexus-refactoring`、`refactor-safely` | D1 第 247—291、352—363 行；R1 补间接消费者和资产映射。工具本身仍条件采用。 |
+| 不以阈值或模式数量直接决定改写 | `refactoring-patterns`、`guard`、`smallnest/refactor` | 分类应用规则及 D1 第 378—409 行；R1 保留领域/扩展/测试 seam。 |
+| Spring/ORM/API/异常/资源等保护 | `refactorspring-boot`、`qa-refactoring` | D1 第 313—350、453—476 行；R1 补通用责任。保护要求比最初个别来源更细，不等于全部主动重构手法已完备。 |
+
+本会话新增的强制 Javadoc、段落注释及 MyBatis 等细化治理，不是所有 Top 50 来源已经具备的能力。方案在这些方面更具体，仍不能抵消下面的来源能力缺口。
+
+## 仍未完整承接的能力（Capabilities Not Fully Addressed）
+
+### COV-01：经典重构需要具体操作规范（Concrete Refactoring Procedures）
+
+**代表来源**：`smallnest/goal-workflow/refactor`、GitHub `refactor`/两个 Java 单项、`pproenca/refactor`、`zhaono1/refactoring-specialist`、`wondelai/refactoring-patterns`。
+
+**已有**：C01—C08 明确包含 extract/inline、参数对象、CQS、封装、值对象、职责移动、继承/组合和反向手法。分类清单第 272 行也规定每个 operation 应有字段。
+
+**未完整之处**：未形成有限、逐项的 operation 登记和实例化规范。例如 Remove Parameter 如何保留调用表达式的求值副作用；Move Method 如何处理继承、自由状态和生命周期；值/引用转换如何保持对象身份；多态替换如何证明真实变体及顺序。通用“保持行为”不能替代这些手法的特定前提。
+
+**原因**：当前文档优先设计治理编排，手法库仍是候选目录，且原分类比主方案的缩写更细。不是这些分类全部丢失，也不是两核心入口无法承载。
+
+**建议**：在主包内部维护操作目录，逐项登记问题信号、适用条件、反例、步骤、消费者、保护义务、检查和反向操作。先完成实际使用的核心手法；需改变对外契约的候选另走迁移任务。无需为每种手法新增 Skill。
+
+### COV-02：无测试遗留代码缺少准入程序（Untested Legacy Code Entry）
+
+**代表来源**：`wondelai/working-with-legacy-code`、`akillness/code-refactoring`、`vasilyu1983/qa-refactoring`。
+
+**已有**：测试 seam、依赖注入、特征测试、golden output 和“观察现状与期望行为分开”已承接。
+
+**未完整之处**：从无法实例化/观测到建立保护测试的操作顺序；测试点与改动点的区别；最小依赖切断的选择；建立安全网前可接受哪些机械步骤及其证明；golden master 的首次核对和波动字段归一。一般“基线先行”没有说明安全网尚无法建立时如何合法推进。
+
+**原因**：普通有测试重构和遗留代码准备共用一个流程，缺少专门的分支及阶段出口。源码的 Sprout/Wrap 若用于新增功能，还超出当前行为保持任务，不能直接采用。
+
+**建议**：增加内部 `legacy-characterization` 模式：定位变更点/测试点 → 识别观测与隔离障碍 → 选择最小且获准的依赖切断 → 固定当前可观察行为 → 再进入结构重构。各阶段真实报告缺证据，不把已有失败或新生成快照当作 PASS；噪声归一不能遮蔽业务字段。
+
+### COV-03：批量改写缺少可重复的转换包（Repeatable Batch Transformation）
+
+**代表来源**：`mhattingpete/code-refactor`、`akillness/code-refactoring`、`qa-refactoring`、图谱类来源。
+
+**已有**：分类清单第 261 行明确“预览→试点→扩大”，D1/R1 已要求实际影响、hash 和消费者校验。
+
+**未完整之处**：转换规则、目标快照、匹配/未匹配/误匹配、例外、试点选择、扩大与退出条件、批次失败恢复、重复执行的行为。通用 slice 概念尚不足以替代这些批量操作的记录。
+
+**原因**：治理的授权/验证契约已设计，批量执行 adapter 和验证 packet 尚未细化。按文件数自动改用文本替换不适合作为 Java 默认。
+
+**建议**：设计 `transformation_packet`，固定规则版本、符号/类型前提、目标集合和 dry-run 结果；用含正例、反例及隐式消费者的试点决定是否扩大，报告漏改与误改。工具选择由可用性和风险决定，不照搬“10 文件”或 token 节省宣传。
+
+### COV-04：去重的检测复现与防复发约束不足（Reproducible Duplication Analysis and Prevention）
+
+**代表来源**：`kucherenko/jscpd/dry-refactoring`、`codebase-refactoring`、`trkbt10/indexion-refactor`。
+
+**已有**：文本/结构/概念重复、语义准入、keep_local、单一职责所有者和工具只能提供候选，均已承接。
+
+**未完整之处**：不同检测模式、目标/排除范围及参数需要分别保存可比基线；检测后应按相同配置复检；有理由保留的重复与误报如何登记。`indexion` 提出的防复发不变量也没有对应的必需/可选证据条款。
+
+**原因**：本方案主要覆盖“应否抽取”，没有把检测 adapter 与改后持续约束具体化。工具命令是否适用于目标 Java 工程仍未验证。
+
+**建议**：为已采用检测器记录模式、版本、配置、范围、候选位置、复检和例外；“没有再检出”不能替代语义证明。对值得长期保护的领域/依赖不变量，增加稳定的契约或架构检查，不写锁死代码形状的镜像测试，也不追求零重复。
+
+### COV-05：跨模块与迁移收口仍需专项规格（Module and Migration Procedures）
+
+**代表来源**：`GitNexus`、`dzhng/refactor-clean`、`parcadei/refactor`、`qa-refactoring`。
+
+**已有**：C08 有模块提取、依赖循环、单一所有者、分阶段兼容和渐进替换；R1 补资源/间接消费者及变换血缘。
+
+**未完整之处**：循环依赖怎样选择切断位置；目标依赖图和包边界如何证明；新旧职责在迁移中的权威关系；兼容层何时退役；跨发布消费者迁移的阶段出口。只说“消费者同步”不能覆盖所有分阶段迁移。
+
+**原因**：普通保持型重构刻意不承诺 API、schema 或依赖升级；这部分应分为内部范围可做与需单独授权的专项，不能一律纳入核心自动改写。
+
+**建议**：为授权范围内的模块移动补依赖/消费者/资源验证；迁移方案另记兼容契约、阶段责任、退役前提和回退。既不照搬“立即删除所有旧结构”，也不默认永久保留双份实现。
+
+### COV-06：Java 与 Spring 候选仍需逐项适用规格（Java and Spring Applicability Specifications）
+
+**代表来源**：`jabrena/141-java-refactoring-with-modern-features`、`snakeo/refactorspring-boot`、`yennanliu/code-refactor-master`。
+
+**已有**：C09/C10 已列 `java.time`、Optional、Lambda/Stream、text blocks、record、版本状态、DI/配置、事务和持久化；profile 和保护面是明确设计。
+
+**未完整之处**：每项具体变换的适用版本/preview 前提、行为差异、不能变换的反例及验证。来源列出的若干新增语言/库候选与 Spring 主动改进手法，未逐项进入有限登记。当前更多说明“不能破坏什么”，少有逐项“什么条件下怎样改”。
+
+**原因**：有意避免固定 JDK/Spring Boot 版本和无条件改写，是正确边界；但仅按 profile 参数化还不能代替每项变换的事实核验和操作规范。
+
+**建议**：建立 feature/recipe 矩阵，逐项核对目标工具链及框架支持，登记 null、顺序、可变性、身份、序列化和代理等前提。来源涉及的 Java 版本/JEP 仅视为待核事实，本轮未重新验证其技术正确性；不凭来源推荐就升级工程。
+
+### COV-07：性能与高级验证策略仍是可选骨架（Performance and Advanced Verification）
+
+**代表来源**：`jabrena/145-java-refactoring-high-performance`、`163-java-profiling-refactor`、`qa-refactoring`。
+
+**已有**：测量先行、热点/基线、行为与性能分别证明、保留/回退，及 R1 增补 diagnose/measure/optimize，已承接。分类也列出环境、warmup、负载、样本、分位延迟、GC 等要求。
+
+**未完整之处**：具体 profiling 输入和可信度、实验设计、分配/数据布局/并发/I/O 等优化候选的前提，以及差分、性质/变异等验证策略怎样按风险选择。引用工具或策略名称不代表相应操作和判定已设计。
+
+**原因**：性能是有意可选的专项；高级 QA 策略需项目成本和风险依据。源入口指向的深层支持文件本轮未全部阅读，因此不能宣称其全部内容都已覆盖或全部缺失。
+
+**建议**：启用专项时补测量/实验规格和经核验的操作参考；普通核心任务继续只用最小充分验证。高级策略作为条件选择，不把某工具、变异分数或固定全库测试强加所有任务。
+
+### COV-08：发现排序与改后收益还缺稳定记录（Prioritization and Improvement Evidence）
+
+**代表来源**：`codebase-refactoring`、`refactoring-analysis`、`cs-refactor`、`qa-refactoring`。
+
+**已有**：事实与假设分开、风险等级、抽象收益成本、前后基线和不采用项说明已承接。
+
+**未完整之处**：多个候选之间怎样比较维护痛点、变更扩散、风险和收益；实际改后是否降低认知/依赖/变更成本；哪些问题刻意留待后续。仅记录风险或最终验证 PASS，不能说明优先处理是否合理、收益是否兑现。
+
+**原因**：本方案聚焦单次授权任务的治理，还没有形成轻量的候选评估和改进回看记录。来源评分表不适合未经校准直接作为门禁。
+
+**建议**：每个候选保留问题证据、影响、预期收益、成本/风险、选择或放弃理由及改后观察；未发生性能测量时不报告提速。不要演变成统一 10/10 评分系统或额外强制仪表盘。
+
+## 未原样采用的合理原因（Reasons for Deliberate Non-Adoption）
+
+| 来源做法或依赖 | 原因 | 当前建议 |
+|---|---|---|
+| 必须至少抽取一个方法、固定 LOC/参数门槛 | 会推动无价值改动，且可能损害语义和领域边界 | 用作候选信号，允许 no_change/keep_local |
+| 固定 Java 17/21+、Boot 3.x、Maven/npm 命令 | 不能证明实际工程采用这些版本或工具 | 技术画像确认，按实际项目入口验证；不照搬升级 |
+| 删除显然注释、不写 private/简单方法文档 | 与用户明确的类/方法多行 Javadoc 要求冲突 | 保留强制块，修正内容；简单语句仅免机械逐行复述 |
+| 强制 Git commit/干净工作树、默认 GitHub issue/发布 | 超出当前任务授权或会干扰已有改动 | 可保留计划和证据，实际外发/提交由具体授权决定 |
+| 指定 named Agent、Claude/MCP 工具名和项目隐藏目录 | 属于来源宿主，不是 Java 重构语义 | 做可选 adapter；内部模块不能冒充已安装独立能力 |
+| jscpd/indexion/GitNexus/特定 recipe 的精确命令 | 当前可用性、Java 支持和输出契约未验证 | 候选发现思想已采用；具体集成条件化，未验证如实记录 |
+| Python/JS/TS/MoonBit 等专属语法和脚本示例 | 当前体系目标是 Java/Spring Boot | 迁移语言无关意图，排除原语法和未验证执行路径 |
+| 立即删除全部兼容层、一律继承/构造器注入 | 会忽略消费者、代理、测试及迁移条件 | 按实际责任、语义和净收益判断 |
+| 新功能 Sprout/Wrap、依赖升级、schema/API 迁移 | 可有价值，但不属于默认行为保持型改写 | 识别后转专项计划；需要时单独授权，不在普通简化中夹带 |
+| 深层支持文件未逐份阅读或许可未审完 | 来源研究不足以支持整包能力和再分发结论 | 登记待核范围，不能推断已覆盖，也不整包复制 |
+
+“合理不采用”应有明确记录，不能成为忽略适用能力的通用理由。COV-01—04 等适用流程仍需补齐，不能仅说“这是外部 Skill”就排除。
+
+## 对 Skill 拆分建议的影响（Impact on Skill Decomposition）
+
+本次没有发现“必须恢复六个核心包才能补齐这些能力”的依据。**两核心入口可以保留，但需要补齐内部手法与模式目录。**
+
+| 内部内容 | 补充范围 | 不需要新增的用户入口 |
+|---|---|---|
+| 结构操作库 | 具名经典手法、前后置和反向操作 | 不按每个手法建 Skill |
+| 遗留代码模式 | seam、观测、依赖切断、特征测试与快照治理 | 可由主入口按 no-test/testability 信号路由 |
+| 批量转换模式 | 转换包、样本、误命中、试点、批次和恢复 | 可由主入口按改写规模与风险路由 |
+| 主题 recipe/profile | Java 现代化、Spring、数据/异常/并发等 | 按实际技术和保护面加载 |
+| 工具 adapter | 克隆/图谱/符号改写，输入输出和限制 | 没有工具时仍能交付分析或明确缺口 |
+| 可选性能包 | 诊断、测量、实验、结果和回退 | 保留原可选入口，按任务启用 |
+
+需要防止另一种精简：虽然入口减为两个，却把所有操作只概括成“遵守 SOLID、保持语义、运行测试”。这样会丢掉 Top 50 中可复用的具体方法。
+
+## 补充顺序与完成要求（Completion Priorities and Requirements）
+
+1. 将本轮 61 项对照保留为来源追溯表，明确采用、条件采用、排除和待补；同 hash 来源共享能力分析。
+2. 先补核心操作卡和遗留代码准入，明确“无测试”时的允许步骤与最低证明。继续保留用户文档规范。
+3. 补批量转换、检测复现、防复发不变量和跨模块迁移的操作分支，复用 R1 的权限、路由和证据契约。
+4. Java/Spring 每项 recipe 按实际采用范围核验。性能与高级 QA 在启用时再补完整专项规格。
+5. 每个决定采用的能力，至少有 operation/profile/adapter 的落点、路由信号、前置/停止条件、保护义务和可判断 case；只列来源链接或类别名称不能算完成。
+6. 明确排除项不计为待实现缺陷，但保留原因；未读支持文件另列待核，不冒充已证实的能力空白。
+
+本轮提出的补充不意味着需要复制所有上游约束，也没有实施任何操作卡、adapter、case 或实际 Skill。
+
+## 交付与验证边界（Delivery and Verification Boundaries）
+
+完整逐项结果见[覆盖矩阵](top50-design-coverage-matrix.md)和[能力登记](top50-design-coverage-register.json)，交付核对见[验证记录](top50-design-coverage-verification.json)。
+
+静态核对只确认两榜成员/排名、来源与目标行号、条目与副本映射、本地引用、hash 和文件保护。本轮原方案、R1 报告、原榜单及已保存定义不改写。没有执行候选 Skill、宿主、Java/Javadoc、数据库、代理/事务、并发或性能验证。

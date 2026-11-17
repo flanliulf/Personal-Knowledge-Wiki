@@ -1,0 +1,169 @@
+# Java 重构 Skill 检索与体系设计分析（Java Refactoring Skills Research and System Design）
+
+核验日期：2026-10-18（Asia/Shanghai）。状态：临时研究结果。按用户要求保存于 `/tmp/java-refactor-research/`，不写入项目 `docs/`，不更新 `README.md`。
+
+## 执行结论（Executive Findings）
+
+这些 Skill 适合用来设计重构体系的内容骨架，尤其是经典手法、坏味道诊断、行为保持和小步验证。**不建议按安装量或仓库 star 直接整包采纳。**两项热度指标反映的对象不同，定义本身还存在复制、固定版本、硬阈值、宿主依赖和索引过期等问题。
+
+建议采用“12 类重构对象 + 横切执行协议 + 按版本/框架/构建路由的 profile + 可选工具适配器”。方法提取等基础手法默认可用；Spring、并发和性能作为有前置条件的专项。诊断、计划、应用与验证应有明确职责。
+
+本轮 Java 专项只有 **26 条候选，规范化展示正文去重后为 22 份**，其中包含副本及流程辅助。因此没有伪造“50 个独立 Java 专项 Skill”。两份 Top 50 使用 Java 专项与可借鉴于 Java 的通用重构候选汇总；严格 Java 清单单独交付。
+
+## 交付导航（Deliverables）
+
+| 文件 | 内容 |
+|---|---|
+| [安装量 Top 50](top50-installs.md) | 50 项、准确整数、来源仓库、定义摘要 |
+| [仓库 star Top 50](top50-stars.md) | 以 Skill 为单位排序，同仓库允许多项 |
+| [唯一仓库 Top 50](top50-repositories.md) | 归并合集热度，辅助识别排名偏差 |
+| [Java 专项候选](java-specific.md) | 26 项，分别给出安装与 star 序号 |
+| [分类与主要事项](classification-checklist.md) | 12 类事项、适用判断、修订与补充建议 |
+| [61 项定义审阅记录](skill-definition-review.md) | 逐项定义重点、分类、采纳限制与正文入口 |
+| [来源与核验边界](sources-and-method.md) | 检索方法、阅读范围、重复、上游差异、访问状态 |
+| [候选登记 JSON](candidate-register.json) | 253 项定义审查对象、纳入/排除原因与来源 |
+| [全部搜索候选 JSON](search-candidates.json) | 1,187 个去重搜索项及其审查状态 |
+| [排名 JSON](rankings.json) | 两榜与并集的机器可读数据 |
+| [统计 JSON](research-stats.json) | 样本规模、搜索响应与未核验 star 项 |
+
+## 检索范围与排名口径（Scope and Ranking Rules）
+
+从用户提供的 [skills.sh](https://www.skills.sh/) 出发，使用 11 组关键词，包括 `java refactor`、`refactor java`、`java refactoring`、`refactor`、`refactoring`、`spring refactor`、`java modernization`、`code refactoring` 等。
+
+本轮样本流转为：
+
+| 阶段 | 数量 | 含义 |
+|---|---:|---|
+| 搜索结果去重 | 1,187 | 不是全站完整索引 |
+| 按名称进入定义审查 | 253 | 其余 934 项未逐份阅读定义 |
+| 可取得展示正文 | 236 | 16 项目录页访问失败，1 项页面无 SKILL.md |
+| 根据定义纳入 | 166 | A 类 Java 专项 26，B 类通用重构 140 |
+| 可读取 GitHub star | 159 | 另外 7 项未填 0，未进入 star 排序 |
+| 两份 Top 50 交集 | 39 | 保留两个独立排名 |
+| 两榜并集 | 61 | 规范化展示正文 hash 去重后 54 份 |
+
+排名是**本轮已筛选候选内的 Top 50**。多组搜索达到 200 条上限，且名称初筛可能遗漏以其他名称表达重构的 Skill，因此不能称为“skills.sh 全站 Java 重构完整 Top 50”。star 榜进一步限定在可读取仓库 star 的子集内。
+
+installs 是平台安装指标，本轮没有把它改称下载次数或用户人数。依据 [官方 FAQ](https://www.skills.sh/docs/faq)，排行来自 Skills CLI 安装遥测。star 从 GitHub 仓库页面读取整数；它属于仓库整体，不属于某个 Skill。
+
+安装量相同按 id 排序；star 相同按安装量、id 稳定排序。这只是排版规则，不是质量差异。相同定义仍保留各条目的热度数据，在内容分类时合并研究。[全部方法与原响应](sources-and-method.md)
+
+## 定义中包含哪些分类（Observed Content Families）
+
+来源的组织方式并不一致，大致包括以下六种内容形态：
+
+| 内容形态 | 代表 Skill | 主要贡献 |
+|---|---|---|
+| 经典手法目录 | refactor-java、smallnest/refactor | 方法、职责、数据、条件、调用、继承等命名手法 |
+| Clean Code 与设计原则 | clean-code、clean-code-guard | 命名、函数、注释、错误、SOLID、避免过度设计 |
+| 安全执行与计划 | safe-refactor、request-refactor-plan、qa-refactoring | 范围、行为契约、风险、测试、回退与交付证据 |
+| 代码图谱和重复发现 | gitnexus-refactoring、refactor-safely、jscpd | rename 预览、消费者、影响面、克隆与死代码候选 |
+| Java/Spring 专项 | Java Extract Method、modern-features、refactorspring-boot | Java 语言、方法调用、依赖注入、事务与 JPA |
+| 性能证据闭环 | high-performance、profiling-refactor | 热点、分配、CPU/I/O、测量与保留/回退 |
+
+以上是基于定义归纳的形态，不能理解为六种已经互相兼容、安装后可自动组合的运行能力。具体来源与每项范围见 [逐项审阅](skill-definition-review.md)。
+
+`refactor-java` 的平台快照将 62 项手法组织为 7 组：方法组合、特性移动、数据组织、条件简化、方法调用/API、继承处理和附加手法。这适合作为经典目录骨架。[平台定义](https://www.skills.sh/andresnator/agents-orchestrator/refactor-java)
+
+## 建议采用的分类（Recommended Taxonomy）
+
+下表是本次设计推导。详细事项和来源分别见 [完整清单](classification-checklist.md)。
+
+| 分类 | 主要事项点 | 采纳判断 |
+|---|---|---|
+| C01 命名与意图表达 | rename、统一领域词汇、常量、有效注释 | 采纳；核查框架和外部名称契约 |
+| C02 方法与表达式 | 提取/内联、变量、查询、分阶段、算法替换 | 采纳；不由行数自动决定改写 |
+| C03 条件与控制流 | 守卫、条件分解/合并、循环拆分、控制标志 | 采纳；保留求值与副作用顺序 |
+| C04 职责与特性归属 | 拆/并类、移动字段/方法、去重、代理层取舍 | 采纳；避免一方法一类与错误共享 |
+| C05 数据与领域类型 | 封装、值对象、不可变性、派生状态、record | 采纳；先核对相等性和数据契约 |
+| C06 调用与 API 契约 | 参数、标志参数、查询/修改分离、可见性 | 采纳；跨公开边界提高风险等级 |
+| C07 继承、组合与模式 | 接口、层级调整、委托、模式选用与撤销 | 条件采纳；以现实变化压力决定 |
+| C08 模块、依赖与迁移 | package/模块、循环依赖、DI、渐进迁移 | 采纳；显式消费者和兼容策略 |
+| C09 Java 现代化 | Lambda/Stream、时间、集合、var、switch 等 | 条件采纳；按实际 JDK 与 preview 状态 |
+| C10 Spring 与持久化 | 注入、配置、事务、AOP、JPA、查询边界 | 专项采纳；不用固定框架覆盖所有项目 |
+| C11 并发、资源与异常 | 状态所有权、锁、取消、资源释放、错误传播 | 高风险专项；需要运行层证据 |
+| C12 性能与测量 | profiling、分配/CPU/I/O、查询/缓存、前后对照 | 条件采纳；无热点与基线不开展优化 |
+
+G 横切流程涵盖：范围确认 → 只读诊断 → 行为契约 → 安全网 → 最小步骤 → 预览/试点 → 验证 → 结果与剩余风险。测试、授权与回退是所有分类的共同要求，不宜作为与“提取方法”并列的互斥分类。
+
+## 应保留、修订与补充什么（Adopt, Revise and Extend）
+
+### 可以保留的内容（Adopt）
+
+1. 经典手法及其反向手法。提取与内联、隐藏代理与移除中间层都应存在，避免体系只有“继续抽象”这一种方向。
+2. 坏味道先于手法。每条发现包含具体源码、维护后果与预期收益，而非只贴 SOLID 标签。
+3. 行为保持、小步、可逆和有证据的验证。
+4. 遗留代码的特征测试与接缝策略。
+5. 批量转换的预览、试点与消费者核查。
+6. 性能工作的测量先行和按证据保留/回退。
+
+这些内容分别在 [经典目录](https://www.skills.sh/smallnest/goal-workflow/refactor)、[四模式路由](https://www.skills.sh/akillness/jeo-skills/code-refactoring)、[遗留代码](https://www.skills.sh/wondelai/skills/working-with-legacy-code)、[高性能](https://www.skills.sh/jabrena/plinth/145-java-refactoring-high-performance) 的定义中可找到依据。
+
+### 需要改写的规则（Revise）
+
+| 来源中的做法 | 问题 | 建议修订 |
+|---|---|---|
+| LOC > 15、至少提取一个方法 | 将诊断信号变成必须改写 | 阈值只触发检查，以实际职责与维护成本决定 |
+| 固定输出 Java 17 或默认 Java 21+ | 可能与目标 toolchain 不符 | 从实际编译配置和源码确认版本，建立特性适用矩阵 |
+| 全面 Stream/Optional/record 化 | 可能改变顺序、缺失值、可变性和数据契约 | 每项转换写清前提与反例；允许保留旧形态 |
+| 默认 Maven 命令 | 不能覆盖 Gradle、特殊 wrapper 和多模块验证 | 由项目构建 profile 给出命令 |
+| 强制 SOLID 或模式套用 | 可能增加类型和间接层 | 同时说明变化压力、替代方案和撤销条件 |
+| 只匹配 failed=0 | 测试框架输出格式不同，可能误判 | 检查退出码与真实测试报告，并区分无测试、跳过和失败 |
+| 更新 snapshot 再宣称等价 | 新结果可能覆盖旧行为的证据 | 先比较差异，预期行为变化另行授权 |
+| 超过 10 个文件就文本批替换 | 不理解 Java 绑定、重载或反射 | 使用类型/符号信息，预览并试点 |
+| 一律立即删除兼容层 | 不符合存在外部消费者的发布过程 | 显式选择内部原子迁移、并行兼容或分阶段废弃 |
+| 固定宿主 Agent、MCP、知识目录 | 降低可移植性 | 作为可选 adapter，定义无工具时的降级与未验证结果 |
+
+这些是对定义规则的适用性分析，不是运行后发现的产品缺陷。代表证据：[Extract Method](https://www.skills.sh/github/awesome-copilot/java-refactoring-extract-method)、[复杂度 Skill](https://www.skills.sh/github/awesome-copilot/refactor-method-complexity-reduce)、[批量重构](https://www.skills.sh/mhattingpete/claude-skills-marketplace/code-refactor)、[行为验证模板](https://www.skills.sh/aiskillstore/marketplace/code-refactoring)、[Clean Refactoring](https://www.skills.sh/dzhng/skills/refactor-clean)。
+
+### 建议新增的能力（Extend）
+
+下面是本次设计建议，不宣称 61 项来源已经完整提供：
+
+- **消费者与边界契约**：源调用之外，补查反射、配置、SPI、序列化、SQL/XML、RPC 和二进制消费者。
+- **框架运行语义**：Spring 代理、self-invocation、事务、缓存、安全、监听器、JPA lazy loading 与实体身份。
+- **异常与资源时序**：关闭顺序、异常 cause、取消、中断、timeout 与锁顺序。
+- **风险分层**：局部 private 方法、跨模块接口、数据边界、框架注解、并发与性能采用不同验证深度。
+- **可证伪的验收**：明确什么结果会推翻“行为保持”“降低复杂度”或“性能提升”的判断。
+- **来源治理**：源 revision、分类依据、支持文件完整性、许可和安装/加载验证分别记录。
+
+Spring 的默认 proxy 模式具有 self-invocation 约束，说明“编译和单测通过”不足以覆盖所有方法移动风险。[Spring 官方说明](https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html)
+
+批量 Java 转换可评估 IntelliJ/LSP 或 OpenRewrite 等具备符号/类型信息的路径。OpenRewrite 的 type attribution 用于区分语法相似而语义不同的调用，Maven 插件提供 dryRun；本轮没有运行这些工具或替目标项目选择版本。[类型信息说明](https://docs.openrewrite.org/reference/type-attribution)、[dryRun 说明](https://docs.openrewrite.org/reference/rewrite-maven-plugin)
+
+## 建议的体系结构（Proposed System Structure）
+
+| 层次 | 内容 | 设计理由 |
+|---|---|---|
+| 入口与总协议 | analyze / plan / apply / verify；范围、证据与退出条件 | 让用户意图与允许动作清楚对应 |
+| 诊断与手法目录 | 12 类事项，按需加载具体手法及反向手法 | 避免一次加载全部规则，也避免只有口号 |
+| 项目 profile | JDK/release/preview、Maven/Gradle、模块、Spring/JPA/reactive | 技术前提可独立演进 |
+| 专项安全规则 | 公开 API、数据契约、并发、持久化、性能 | 高风险行为有明确验证要求 |
+| 可选工具 adapter | IDE/LSP、图谱、重复检测、结构化转换 | 工具缺失不伪造能力，工具成功不替代验收 |
+| 证据与来源登记 | 验证结果、未验证项、源 revision、迁移后续 | 支持复核与更新 |
+
+每个手法至少有 `operation_id`、问题证据、适用范围、前置条件、行为契约、步骤、验证、回退、停止条件和来源 revision。建议先完成这些字段，再决定拆为多少个 Skill；分类数量不应直接等于 Skill 数量。
+
+## 优先参考组合（Preferred Reference Combination）
+
+| 用途 | 优先参考 | 采用边界 |
+|---|---|---|
+| 经典目录与 Java 安全约束 | andresnator 当前 refactor + java-notes；smallnest/refactor | 以固定 revision 为准，核验适用性，不直接复制旧 listing 名称 |
+| 计划和最小范围 | request-refactor-plan、refactor-plan、safe-refactor | 访谈和流程深度按风险缩放 |
+| 运行模式 | akillness/code-refactoring | 局部、遗留、批量迁移与 diff 整理分开 |
+| 遗留安全 | working-with-legacy-code | 先固定现状，区分缺陷修复 |
+| Java 现代化与性能 | plinth 141 / 145 / 163 | 按版本、热点证据和实际构建方式路由 |
+| Spring 专项 | refactorspring-boot + Spring 官方规则 | 内容范围可参考，版本与运行语义需要补强 |
+| 模式选择 | joacod/refactor-design-patterns，补充阅读 | 未进入两榜；它的最小设计与模式取舍规则有参考价值 |
+
+上述组合是内容研究建议，不是已经完成的互操作测试或安装推荐清单。
+
+## 上游差异与未验证事项（Upstream Differences and Unverified Items）
+
+最重要的源码差异是：skills.sh 仍展示 `andresnator/agents-orchestrator/refactor-java`，当前仓库 commit `b1c6d297a6d8d704b178c687c17dac366a405900` 的入口已是 `domains/plan/skills/refactor/SKILL.md`，名称为 `refactor`，并将 Java 约束放到 `references/java-notes.md`。
+
+本轮通过 Git tree 确认 62 个编号手法文件存在，并读取当前主定义、Java notes、适用矩阵、选择规则和诊断。并未逐份审核全部手法示例，也未确认旧 `--skill refactor-java` 安装命令仍可用。[固定主定义](https://github.com/andresnator/agents-orchestrator/blob/b1c6d297a6d8d704b178c687c17dac366a405900/domains/plan/skills/refactor/SKILL.md)、[固定 Java notes](https://github.com/andresnator/agents-orchestrator/blob/b1c6d297a6d8d704b178c687c17dac366a405900/domains/plan/skills/refactor/references/java-notes.md)
+
+两榜以平台条目和抓取指标为基准；当前源码差异单独登记，不悄悄替换历史平台定义。其他条目没有全部完成 listing 与当前 HEAD 的逐项对比。
+
+本次完成的是检索、静态定义分析和报告检查。未安装候选 Skill，未执行其指令、脚本或多 Agent 工作流，未运行 Java 构建/测试/性能实验，未完成所有来源许可全文审查。原始 HTML、搜索响应和定义文本均保留在临时研究目录，可按 [来源记录](sources-and-method.md) 复核。

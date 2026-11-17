@@ -1,0 +1,163 @@
+# Java/Spring Boot 重构治理 D4 完整评审（D4 Governance Design Review）
+
+评审版本：`D4-R1`。日期：2026-10-18（Asia/Shanghai）。对象：D4 主文、操作库、专项流程、验收规格、用例索引及来源采纳登记。本轮只保存评审与修订建议，未回写 D4，未创建或修改实际 Skill。
+
+## 执行结论（Executive Decision）
+
+**两项原 P2 均已在设计层闭环。本轮未确认新增 P1/P2；保留两个核心入口、48 个操作族、8 个专项及现有内部目录。** 没有证据支持增加入口、资格审核专项或每任务全量测试门禁。
+
+剩余建议共 **3 项 P3**：其中 2 项是非阻断的设计改进，1 项是在未来实施 adapter/schema 时采用的检查点。它们不改变两项 P2 的闭环结论，也不要求先创建全部 fixture。
+
+1. `D4R-01`：共享校验已有可复用正例，但 pending 说明仍称缺正例。建议补关联、缩小待补理由，避免重复建例。
+2. `D4R-02`：Builder 的“禁止清空状态”表述比当前输入轨迹宽。建议收窄覆盖声明，或在确需该承诺时补一个区别输入。
+3. `D4R-03`：未来资格摘要显式保留被测实现、操作能力范围和实际输出引用，防止 adapter 丢失现有约束。此项是实施建议。
+
+**D4 可继续作为实施设计基线。** 这里的闭环指规则、选择、对象、停止条件和逻辑验收能够相互承接。307 个设计用例仍为 `NOT_RUN`，实际 Skill、资格选择器及 Java/Spring 行为尚未验证。
+
+## 输入、阅读与证据边界（Inputs Reading and Evidence Boundaries）
+
+| 输入 | 本轮实际阅读与核对 | 边界 |
+|---|---|---|
+| [主方案](java-springboot-refactoring-governance-design-d4.md) | 主审与身份专项全文 651 行 | 核对设计，不替代目标工程事实 |
+| [操作库](java-springboot-refactoring-governance-d4-operations.md) | 资格专项全文 805 行；23 个 recipe、76 个分支逐项核对；主审精读公共契约及相关卡 | 没有运行操作或外部工具 |
+| [专项流程](java-springboot-refactoring-governance-d4-playbooks.md) | 保留专项全文；8 PB 触发、阶段出口及 24 个用例与 D3 对照 | 未执行其中的步骤 |
+| [验收正文](java-springboot-refactoring-governance-d4-acceptance.md)与[机器索引](java-springboot-refactoring-governance-d4-cases.json) | 两专项全文阅读正文 390 行；全 307 项结构及 133 项正文投影核对；新 22 个变体、40 个被引用旧 OC 与相关复合对象详读 | 没有把 JSON 解析等同逐字人工审阅或运行通过 |
+| [采纳登记](java-springboot-refactoring-governance-d4-adoption.json)与[追溯](java-springboot-refactoring-governance-d4-traceability.md) | 追溯全文；61 listing、300 能力、68 facets 的字段/条件/落点全量投影对照 | 不表示本轮重新读完 54 组来源正文 |
+| [D3-R1 评审](java-springboot-refactoring-governance-d3-review.md) | 两项原 P2 的反例、已有保护、最小修订及验收逐项核对 | 不仅复用 D4 自述的 closed 标签 |
+| D4 来源、核验及资格派生规格 | 独立重查 hash、关系和当前状态；没有运行旧生成/核验脚本 | 历史静态 PASS 不替代本轮复核 |
+
+本轮不刷新 skills.sh 安装量、GitHub stars、上游 HEAD 或技术版本。两榜仍按历史快照各 50 项、交集 39 项、并集 61 个 listing、正文去重 54 组处理。两份用户原始本地资料未重新读取；按本 session 明确要求及 D4 的 DOC/DUP/ABS/BND/GOV 承接检查，不把历史读取改写为本轮核验。
+
+专项记录：[对象身份](../d4-review-work/identity-review.md)、[资格映射](../d4-review-work/qualification-review.md)、[能力与待补负担](../d4-review-work/retention-review.md)。最终去重裁决以本文及[结构化问题登记](java-springboot-refactoring-governance-d4-review-findings.json)为准。
+
+## 两项 P2 的闭环判定（Closure of the Two P2 Findings）
+
+| 原问题 | 裁决 | 当前规范与验收证据 | 仍需实施验证的部分 |
+|---|---|---|---|
+| D3R-01：实例键缺对象身份/版本 | **closed_in_design** | 主文 L344—369；验收 L24—28、L367—370。kind/ref/revision 进入实例键；A@1、B@1、B@2 分开；同义引用先规范化；组合证据和集合结论分开 | 实际身份解析、版本绑定、证据复用和 manifest 实现 |
+| D3R-02：子手法资格分支映射不足 | **closed_in_design** | 主文 L504—530；OP L50—62、L308—339、L359—394；验收 L371—374。recipe/variant/branch/case/role 有单源关系，Builder/Factory 有具体正反例，其余缺口明确 pending | 声明的首版支持范围、真实 fixture/命令、被测实现与各层结果 |
+
+D3R-02 原修订允许“明确已映射范围及具体待补”，并不要求本轮构建全部 Java 生态 fixture。因此 18 个已解释的资格待补分支本身不使原问题重新变为 partial。若后续声明扩大，却没有补对应必要分支，就不能给扩大的能力范围资格 PASS。
+
+原 10 项 P2 和条件 P3 没有被本轮身份规则反向撤销：analyze/verify 不强制 PB-08；single_slice 不强制批量试点；manual/reverse 不强制 detector；OP/PB 技术职责仍单源；基线与候选结论、独立审查、性能资料来源、生命周期与删除原意检查均保留原边界。
+
+## 对象身份、版本与证据一致性（Subject Identity Versions and Evidence Consistency）
+
+| 审查场景 | D4 必须得到的结果 | 评审结论 |
+|---|---|---|
+| 同 scope/profile/stage 的 A@1、B@1、B@2 | 三个实例；只有 A 的证据不能使 B 通过 | R01 明确；原身份冲突消除 |
+| 同一对象版本被三路由命中，含已证实 alias | 一个实例、全部理由保留 | R02 与 G01-A 一致；无需重复存 hash |
+| 仅内容 hash 相同但候选 ref/用途不同 | 不能自动合并 | 主文 L349 已限制；血缘也不作等同依据 |
+| B→B2，p 变化，q 有独立不变证明 | 新实例；p 未验；q 可显式复用原证据，保留其原执行对象 | R03 正反条件齐全；不是直接复制 PASS |
+| 一次组合检查 A PASS、B FAIL | 一次执行、两个实例结论；不自动造集合 | R04 与 check_result 覆盖关系一致 |
+| 需要 A+B 的集合结论 | 先固定不可变 manifest、成员版本与实例映射；成员变化使集合版本变化 | 旧 R09 承接；不强迫单对象或普通组合检查生成空 manifest |
+| 尚未实施的候选 | 绑定不可变计划/patch 规格；不虚构 postimage | 主文 L351 已规定；真实绑定缺失不得执行 PASS |
+| 治理记录正确报告 B 未验 | 治理记录可 PASS，B 的 supporting 仍 NOT_CHECKED | 对象与活动维度一致，不是代码通过 |
+
+本轮全量字段检查未发现 `primary_subject` 与兼容 `verdict_subject` 冲突。新四个技术 case 的 22 个变体展开为 **26 个候选逻辑 ref**；不同错误候选分别受评。26 是设计对象数，不是执行次数。
+
+身份协议没有引入全仓 hash、每行一个实例或每次全量重测。只有相关对象/配置/消费者或 oracle 变化时重评受影响证明。具体序列化与 hash 算法属于实施 schema 的选择，当前逻辑维度已经确定，不应把尚未编写 schema 再列为 P2。
+
+## 资格分支与用例的可执行性（Qualification Branch and Case Executability）
+
+设计中的选择链为：**支持声明 → canonical recipe → 确切 supported variant → 适用必要 branch → case/variant/role → 真实对象和运行绑定 → 按所声明范围收口**。
+
+| 核查点 | 结果与限制 |
+|---|---|
+| 单一维护源 | OP 卡维护技术与资格分支，spec 与 case 索引派生；不存在第二套相互独立的技术裁决 |
+| 全量关系 | 23 recipe / 76 branch；58 mapped_in_design、18 qualification_pending；正向与反向引用可解析且一致 |
+| Builder / Factory | 4 个新 case、22 个具名正反变体分别保护 5 项和 6 项性质；原参数对象/CQS例不能代替它们 |
+| 别名与多变体 | OP-27 先确定 owner，再按入口语义和明确声明选 variant；State 不借用 Strategy 的已映射资格 |
+| 证明角色 | 行为保持/拒绝、形态选择和 owner 解析分别登记；OP-48 的形态选择不自动证明代码改写 |
+| 缺映射或未绑定 | 报具体缺口；不能用父 OP 有正反例、加载一致或文档检查 PASS 填补 |
+| 工程任务 | 仍按实际义务选择 required_check_set；不把 307 个逻辑用例搬到每次任务 |
+
+负例 `code_postimage:FAIL` 是 verify 对错误代码的预期结论。被测验证器错报 PASS 就不满足预期；正确报告 FAIL 可以支持该验证能力，不能让错误代码本身变成 PASS。现有授权、operation 和分层规则也禁止 verify 自动改写。没有确认 D4 允许“外部 oracle 发现失败，所以未运行的改写引擎也通过资格”；D4R-03 只建议在实施摘要中显式保留这些限定。
+
+这里的“可执行”指逻辑输入、预期、独立 oracle 和选择条件可转化为实现检查。当前尚无实际 Skill、fixture 及命令绑定，不能声称运行可执行性已经验证。
+
+## 待补分支、能力保留与负担（Pending Branches Capability Retention and Cost）
+
+18 个资格待补分支逐项清单见[待补专项记录](../d4-review-work/retention-review.md)。下表按 canonical owner 汇总，数量互不重叠。
+
+| 位置 | 待补数 | 尚缺内容 | 采纳及减负判断 |
+|---|---:|---|---|
+| OP-09/dispatch | 4 | State、责任链、表驱动、Special Case 的限定正反协议 | 技术候选保留；声明哪种变体才补哪种，不要求先全做 |
+| OP-13/adapter_facade | 1 | 多资源 Facade 的资源责任正反分支 | 局部 Adapter 的既有映射保留，不被 Facade 待补阻断 |
+| OP-13/library_extension | 2 | Foreign Method、Local Extension 的具体库/继承协议 | 需要目标库证据；不凭通用 adapter 推出安全继承 |
+| OP-15/consolidate | 4 | 方法拒绝、查询共享保持、转换与校验的多调用者/边界性质 | 四类重复能力仍保留；校验已有保持正例可复用，见 D4R-01 |
+| OP-21/parameter_object | 2 | 参数对象违约拒绝、完整对象合法保持 | 当前任务可按实际义务检查；实现资格仍不能借 Builder 正反例 |
+| OP-23/command | 1 | Command 交付保持及无意重试/异步拒绝 | CQS 窄变体已有映射，二者支持声明分开 |
+| OP-28/port | 1 | Repository 的数据访问语义 | 普通依赖端口资格保留；有数据访问变换才条件消费 OP-38/39 |
+| OP-41/integration | 2 | Decorator 组合及 Observer 交付协议 | 不删除 cache/security/observability 等已有窄变体；按实际声明补 |
+| OP-48/keep_local | 1 | 如同时声明自动识别强制共享反例，需对应拒绝范围 | 如实输出 keep_local 不产生代码变换义务；不能要求预先证明所有可能的强制共享错误 |
+
+**未确认这些待补项造成 D4 相比 D3 的技术能力删除。** 路由与操作规范仍有落点；待补主要限制“某个实现已经证明支持什么”的声明。未发现它们自动变成普通注释、改名、人工分析或充分证明任务的前置门禁。
+
+首次实施应先列真实支持范围，再补其中必需分支。若希望首版声明完整四类重复重构或参数对象改写，优先补 OP-15、OP-21 的对应缺口；这只是所选范围的资格要求。无需为了“清零 pending”先实现 State、Facade、Command 或全部高级模式。
+
+来源采纳与资格范围分别统计：300 条主裁决仍为 223 adopted、21 conditional、52 excluded、4 pending_evidence；68 个 facets 中另有 19 个 pending_evidence 分面。分面嵌套在原能力记录中，不能与 4 条主裁决相加成新的独立条目数，更不能与 18 个资格分支混算。当前投影没有撤销历史条件或排除理由；本轮没有重新审计全部来源支持文件，不能推出“Top 50 全部内容已覆盖”。
+
+## 剩余建议与最小修订（Remaining Suggestions and Minimal Revisions）
+
+### D4R-01：复用已有共享校验正例（Reuse the Existing Shared Validation Case）
+
+**P3，非阻断设计改进。** OP-15 的 `validation:both` 在操作库 L252 称缺同语义共享正例；验收 L134 的 `CASE-D2-10-B` 已固定同规则所有者、时点及错误契约，验证成功、各单失败、双失败轨迹与异常消息，属于 `code_behavior/code_postimage`。当前 case 没有 recipe/branch 反向关联。
+
+可能的后果是未来维护者按 pending_reason 重新创建同构正例。通用证据复用规则已经允许复用，因此这不构成能力丢失，也不允许把 validation_unit 整体直接标为 mapped。
+
+建议在下次获准修订或绑定该能力时，由 OP-15 canonical 卡引用该正例的限定保持范围，派生索引关联；将待补理由缩小到真正缺少的信任边界/规则所有者冲突等拒绝分支。保留 case 原对象和 oracle，不复制正文。
+
+修订验收：选择该限定共享校验资格时能找到已有正例；缺拒绝分支时仍 pending；普通任务的检查集合不扩大。
+
+### D4R-02：使 Builder 状态保留表述匹配轨迹（Align Builder State Retention with the Trace）
+
+**P3，非阻断设计改进。** 操作库 L318 的轨迹是 `setLabel(a) → build → setLabel(b) → build`。它能观察产品独立快照、第二次 build 成功及 P1 不被反向修改；同段又写“同时禁止无依据清空状态”。每次覆盖 label 的输入不能单独证明未重设字段跨 build 保留。
+
+现有支持范围限定为本 fixture 的性质和输入，真实项目协议仍须取证，也允许充分的独立语义证明。本评审不据此认定已限定的 Builder 映射失效，不要求穷举故障变异。
+
+最小修订有两种选择：默认将清空状态说明明确为真实项目协议的条件检查，不声称当前轨迹已经覆盖；若确要把未重设字段保留纳入本 variant，则增加一个未重设字段或无 setter 的第二次 build 输入，并登记 `reset_after_build` 错误候选。两者择一，不新增操作族或专项。
+
+修订验收：窄支持摘要不外推未观察性质；选择扩展时，正确保留状态与错误清空状态可被独立 oracle 区分；不要求所有 Builder 采用同一种复用协议。
+
+### D4R-03：实施时保留资格结论的操作范围（Preserve the Operation Scope in Implementation）
+
+**P3，条件采用的实施检查点。** 主文 L504—507、L522—526 及验收 L19—21 已要求实现版本、声明范围、operation、刺激与分层结果。建议未来 adapter/schema 的资格摘要直接携带这些已有信息及被测输出引用，防止展示或导出时丢失限定。
+
+仅通过 verify 的正反例，只能支撑相应验证范围，不能在摘要中扩大为自动 apply 能力。外部 oracle 知道候选错误，也不能冒充被测实现已经识别并拒绝它。此建议落实现有规则，不构成本轮新的协议缺口。
+
+实施验收：实际验证器把错误候选报 PASS 时资格检查失败；只有 verify 的证据不能导出 apply 已获资格；正确拒绝的治理结论与候选代码 FAIL 分开。复用现有字段与 R05/R06，不另建审核流程。
+
+## 全面框架复查（Overall Framework Review）
+
+| 维度 | 结果与建议 |
+|---|---|
+| Skill 拆分 | 两入口清晰；M1—M8 是内部职责，没有证据支持继续拆成独立包 |
+| 规则重复与权威 | 共享 registry、OP 技术 owner、PB 编排、派生投影各有职责；身份/资格共同契约有明确唯一引用 |
+| 触达路由 | 20 路由覆盖源码、文档、SQL/XML、配置/资源、生成、测试、框架和消费者；全匹配及写前/写后重评保留，未确认本轮新增遗漏 |
+| 抽象决策 | 比较单元、语义、领域/测试边界、收益成本、形态和实施门分开；保留 helper/component/template、keep_local 和 reverse |
+| 用户文档要求 | 类及全部目标方法本地多行 Javadoc；阶段空行与行注释；复杂流程/多级分支解释保留。简单单行不机械复述 |
+| 小任务负担 | 不强制空 plan、空 decision、detector、独立审查或全库 fixture；构造器/生成源等未定 profile 不被伪装为已采用要求 |
+| 专项流程 | 8 PB 的实际条件与 24 原用例保留；资格待补不新增专项触发 |
+| 授权与恢复 | 不扩大写范围；恢复只处理本次拥有的差异；不自动 reset、commit 或发布 |
+| 验收与收口 | 义务实例→检查→证据→对象结论链一致；apply 必需 FAIL/NOT_CHECKED 不 completed；verify 完整报告可 completed |
+| 父流程与分发 | Story/tracker 由父流程负责；内部参考消费不冒实际 Skill 调用；安装、包级 lint、技术运行分开验证 |
+
+## 已排除的疑点与未验证项（Rejected Concerns and Unverified Items）
+
+- 逻辑对象没有实际 hash：当前设计明确执行前绑定，不是身份维度缺失。
+- R01/R03/R04 治理 PASS 同时含未验或失败代码：主对象和 supporting 对象不同，规范已禁止暗换。
+- B2 复用 B 的证据：须证明相关依赖和覆盖不变，保留原执行对象；不等于跨版本复制结论。
+- 组合检查没有 manifest：只有需要集合结论时才要求；强制补空 manifest 反而增加负担。
+- 负例预期代码 FAIL：这是 verify 的检错断言，不代表错误实现通过。
+- 18 个 pending 或尚未实现 fixture：不自动构成剩余 P2；声明该范围时才必须补足，不能提前宣称运行资格。
+
+本轮没有验证实际 Skill 源包、skills-lint、宿主触发、对象解析器、资格选择器、真实 fixture/命令、Java/Javadoc、SQL、代理事务、并发或性能。没有重新核验外部链接、排名、技术版本、全部上游支持文件和许可。
+
+## 验证结果与采用顺序（Verification Results and Adoption Sequence）
+
+本轮新建只读检查：主审 16 项结构/快照检查、身份专项 17 项、资格专项 12 项均通过；能力专项完成全量历史字段与当前落点对照。不同检查存在重叠，不把数量相加当覆盖率。静态结果只能证明文档和登记一致性，P3 建议仍如上保留。
+
+建议维持 D4 为设计基线；下次获准文档修订时优先采纳 D4R-01 和 D4R-02 的最小变化。未来进入实施时，先限定首版支持范围，再绑定相应 pending 分支及 D4R-03 的输出契约。无需为了本次评审新增入口、目录或重新编写整套 D5。
+
+最终文件与原输入保护结果见[本轮核验记录](java-springboot-refactoring-governance-d4-review-verification.json)。本轮产物继续保存在 `/tmp/java-refactor-research/`，D4、旧版本、仓库 docs/README 及实际 Skill 均未修改。

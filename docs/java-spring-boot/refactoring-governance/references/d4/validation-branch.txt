@@ -1,0 +1,1 @@
+| `OP-15/consolidate` / `validation_unit` | `OP-15/consolidate:validation:both`：声明合并相似校验；信任边界、首错、所有者 | `OC-40-N/base`（`supporting_error_order_only`） | `qualification_pending`；首错反例只支持一个性质；缺同语义共享正例及边界/所有者分支。 |

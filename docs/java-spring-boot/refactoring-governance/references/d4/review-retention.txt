@@ -1,0 +1,94 @@
+# D4 能力保留与负担评审（Capability Retention and Burden Review）
+
+日期：2026-10-18。范围：本轮独立专项评审；输出仅在临时目录。未修改 D4、历史资料、仓库或实际 Skill。
+
+## 结论（Conclusion）
+
+本专项未确认新增 P1/P2 能力回退，也未确认资格待补被升级为所有任务的新门禁。18 个 `qualification_pending` 保留了相应技术或治理候选。它们暴露的是**相应实现支持声明的资格规格缺口**，不是从设计删除这些能力；同时，不能据“adopted”或父 OP 正反例宣称这些能力已经具备自动执行资格。
+
+D3R-02 在“资格按子手法/变体求闭包、缺口公开、不借父操作通过”的协议层可闭环。这里不把全部 18 分支称为已补齐，也不替代其他专项对 Builder/Factory oracle 与对象身份的一致性判定。
+
+## 阅读与证据边界（Reading and Evidence Boundary）
+
+- 全文读 D4 PB 565 行和 traceability 203 行。后者来源表后半以保留单元格文本的去 URL 投影视图阅读，原目标另作机器核对。
+- 逐项读 61 listing / 300 capability 的当前摘要、裁决、targets、68 facets；检查全部 21 conditional 与条件 facet 的前提。与 D3 旧字段逐项静态比对。
+- 逐项读全部 18 pending branch 的性质、case 证明角色和待补原因，并选读对应 OP 技术步骤、路由、主文抽象/文档/资格契约。23 recipe 的状态/支持范围完成结构读取。
+- D3 只读 PB diff、22 规则行和 adoption 字段对比。未重读 54 组上游定义及支持文件，也未联网刷新排名或版本。
+- 本轮仅静态核对与逻辑审阅。没有运行 Skill、Java、数据库、性能或宿主用例。
+
+## 保留检查（Retention Checks）
+
+| 检查 | 本轮结果 | 证据 |
+|---|---|---|
+| 两个入口及内部目录 | 保留；不要求再装独立诊断/抽象/验证 Skill | [主文](../output/java-springboot-refactoring-governance-design-d4.md):54—74、113 |
+| 300 条来源能力 | 全量旧字段保留；D4 targets、条件不变；facets 只加继承说明，目标换 D4；所有当前锚点可解析 | [静态记录](retention-static.json)、[全量投影](retention-projection.json) |
+| 主裁决口径 | adopted 223 / conditional 21 / excluded 52 / pending_evidence 4；不作为覆盖率 | [traceability](../output/java-springboot-refactoring-governance-d4-traceability.md):7—18 |
+| 分面口径 | 68 facets；adopted 11 / conditional 15 / excluded 23 / pending_evidence 19；分面不是独立主条目，不与 300 相加 | [adoption](../output/java-springboot-refactoring-governance-d4-adoption.json)各 capability 的 `d4_adoption/facets` |
+| 用户 22 规则 | D3→D4 规范行逐字保留；目标类/方法多行 Javadoc、段落及复杂流程注释、四类重复、抽象收益与边界均存在 | [主文](../output/java-springboot-refactoring-governance-design-d4.md):142—163、278—311、318—337 |
+| 8 PB / 24 原 case | 触发没有新增；24 原 case 行逐字保留。新增内容只引用主身份/资格契约 | [PB](../output/java-springboot-refactoring-governance-d4-playbooks.md):17—28、45—63；[静态记录](retention-static.json) |
+| 条件采用 | 原逐项前提保留；平台/行为迁移、工具选择、性能与独立审查未获得默认执行权 | [PB](../output/java-springboot-refactoring-governance-d4-playbooks.md):262—311、324—364、413—426；主文46—51 |
+
+“四个来源待证”仅指主裁决 `SRC-16-CAP-04 / SRC-20-CAP-03 / SRC-38-CAP-05 / SRC-54-CAP-03`；它们与下面 18 个资格分支、19 条待证分面不是同一种计数。未读 support 内容不能据此推断为没有能力，也不能推断已经采纳。
+
+## 十八项待补分支逐项判断（Eighteen Pending Branch Decisions）
+
+下表“保留”表示当前设计仍有规则/候选；不表示运行通过。“无新增任务门禁”统一依据主文 530、OP 60—62 和 PB 61—63。真实任务仍须满足自己的必需义务；依赖未核自动能力时，GOV-05 只阻断相关动作。JSON 中保留精确 `branch_id`、JSON pointer、原缺口与 case 角色。
+
+| # | recipe / variant；OP行 | 能力与支持边界 | 何时补与最小动作 |
+|---|---|---|---|
+| PENDING-01 | `OP-09/dispatch` / `state`；172 | 状态分派仍在OP-09步骤和OB-05/07/14/17中；普通策略正例未被误记成状态转换资格。 未删除能力；该资格分支仍待补。 | 有状态模式实现支持声明时固定有限状态转移表，补合法/非法迁移及提前推进反例。 |
+| PENDING-02 | `OP-09/dispatch` / `ordered_chain`；173 | 有序责任链的命中、继续/停止、错误聚合及无人命中规则仍在OP-09。 未删除能力；该资格分支仍待补。 | 选择该变体时补正常有序交付、无人命中和继续/停止错误分支；原OC-09-N只能辅助顺序。 |
+| PENDING-03 | `OP-09/dispatch` / `lookup_table`；174 | 逐键覆盖、重复键、缺省/null核对仍在OP-09步骤；不是新删除的能力。 未删除能力；该资格分支仍待补。 | 声明表驱动改写时补已定键语义的保持及重复/覆盖/缺省反例，不为普通switch整理预建。 |
+| PENDING-04 | `OP-09/dispatch` / `special_case`；175 | Special Case/Null Object候选和不吞失败原则仍在OP-09及OP-27。 未删除能力；该资格分支仍待补。 | 声明该变体时用已有缺省契约建立正常特殊值与吞错/副作用反例，不能改变原错误契约。 |
+| PENDING-05 | `OP-13/adapter_facade` / `facade_resources`；219 | Facade隔离候选、资源所有权/异常/释放责任仍在OP-13。 未删除能力；该资格分支仍待补。 | 选择多资源Facade支持时补真实多资源协议；有限日期adapter例不能代替。 |
+| PENDING-06 | `OP-13/library_extension` / `foreign_method`；220 | 不可改库的Foreign Method仍是OP-13条件候选。 未删除能力；该资格分支仍待补。 | 绑定具体外部类型公开契约与扩展范围后补正反分支；不对任意库作普遍保证。 |
+| PENDING-07 | `OP-13/library_extension` / `local_extension`；221 | Local Extension与受控子类的继承限制仍在OP-13。 未删除能力；该资格分支仍待补。 | 先证实目标库允许继承及构造/覆盖/升级边界，再补子类专属正反分支。 |
+| PENDING-08 | `OP-15/consolidate` / `method_unit`；248 | 相似方法比较和同语义合并仍由DUP-01、OP-15、PB-03支持。 未删除能力；该资格分支仍待补。 | 若首版声称自动合并方法，优先补所有者/副作用不同而语法相似的拒绝分支。 |
+| PENDING-09 | `OP-15/consolidate` / `query_unit`；250 | 相似查询比较与数据/tenant/事务/分页保持仍由DUP-02、OP-15、OP-38/39承接。 未删除能力；该资格分支仍待补。 | 若首版声称查询共享，补至少两个调用者同语义共享的正例；保留不同tenant/排序拒绝。 |
+| PENDING-10 | `OP-15/consolidate` / `conversion_unit`；251 | 相似转换的方向、单位、缺省和所有者比较仍由DUP-03、OP-15、OP-40承接。 未删除能力；该资格分支仍待补。 | 若首版声称转换合并，补同语义多调用者共享及方向/单位冲突拒绝；普通映射提取不足。 |
+| PENDING-11 | `OP-15/consolidate` / `validation_unit`；252 | 相似校验的信任边界、所有者、首错和短路仍由DUP-04、OP-15、OP-40承接；CASE-D2-10-B已是可复用同语义共享正例。 未删除能力；该资格分支仍待补。 | 若首版声称校验合并，先把CASE-D2-10-B映射为behavior_preserve，再补边界/所有者不同反例；既有首错反例复用，不重建同构正例。 |
+| PENDING-12 | `OP-21/parameter_object` / `parameter_snapshot_v1`；337 | 同账期参数对象的正例及不新增校验/默认的规则仍在OP-21。 未删除能力；该资格分支仍待补。 | 若首版声称参数对象自动改写，优先补新增校验、默认或别名改变的具体拒绝分支；不借Builder资格。 |
+| PENDING-13 | `OP-21/parameter_object` / `whole_object`；339 | 完整对象传递的耦合、时点和空值保护仍在OP-21，既有反例保留。 未删除能力；该资格分支仍待补。 | 声明该变体时补合法完整对象传递的保持正例；普通参数对象正例不替代。 |
+| PENDING-14 | `OP-23/command` / `command_object`；392 | Command对象候选仍在OP-23，CQS保持与Command交付已分开。 未删除能力；该资格分支仍待补。 | 声明Command变体时固定同步/异步、重试、异常与资源协议，补保持和无意改变交付反例。 |
+| PENDING-15 | `OP-28/port` / `repository`；456 | Repository仍经OP-27指向OP-28，按实际变化追加OP-38/39。 未删除能力；该资格分支仍待补。 | 声明Repository端口变换时补持久化所有权、查询/映射和隔离的正反例，不能只用依赖倒置例。 |
+| PENDING-16 | `OP-41/integration` / `decorator`；623 | Decorator逐层事件、失败与清理规则仍在OP-41。 未删除能力；该资格分支仍待补。 | 声明多层Decorator支持时补组合顺序保持及重排/清理改变反例；单重试反例只作辅助。 |
+| PENDING-17 | `OP-41/integration` / `observer`；625 | Observer交付、次序、重复/退订、生命周期和失败时点仍在OP-41；同步转异步拒绝仍存在。 未删除能力；该资格分支仍待补。 | 声明Observer变体时补原交付协议保持及其余关键分支，不用治理分流反例证明所有交付行为。 |
+| PENDING-18 | `OP-48/keep_local` / `retain_selection_v1`；748 | keep_local仍是主方案及OP-48合法决定，OC-48-KP已有治理正例。 未删除能力；该资格分支仍待补。 | 只输出有据keep_local无需代码变换资格；如声称自动拒绝强制共享，限定可判断的领域和反例后补分支，勿宣称识别所有错误抽象。 |
+
+这 18 项没有统一的“全部必须在下一版完成”要求。若首版实施明确承诺四类重复逻辑自动合并，则 OP-15 的方法、查询、转换、校验缺口属于该声明的发布前工作；不能以整个设计文档已完整交付而跳过。若首版只交有据分析与建议，保留规则和缺口是合法范围。OP-21 参数对象是常用窄变体，建议与首版声明一并优先确定。其余模式按实际选入的支持范围补齐，不预建全 Java 生态目录。
+
+## 负担与反例推演（Burden and Counterexample Walkthrough）
+
+| 场景 | 应走路径 | D4已有抑制条件 | 本轮裁决 |
+|---|---|---|---|
+| 给一个 private 方法补多行 Javadoc | 注释入口、RT-01、DOC必需集、内容/语法审阅 | 主文260、337、530；PB-01不因无测试启动 | 不加载 Builder/Factory/18pending；无新增行为fixture |
+| 人工发现两个方法相似，只要分析 | RT-14 + RT-03；PB-03 manual/discover；给语义差异和建议 | PB201—224；不虚构detector_run，不因发现候选生成apply计划 | 能力仍可用；资格待补不阻断有界分析 |
+| 一个符号跨三模块改名 | 一个闭合单元；single_slice和实际消费者检查 | PB143—174；不按文件数升级batch | 无空pilot/expand；检查可组合复用 |
+| 实现仅声明CQS | 只取OP-23/cqs声明分支 | 主文522—526、530 | 不因同OP含Factory而运行其22构造变体 |
+| State别名被解析到OP-09 | 绑定state，不可回退stable_strategy | 主文523、OP58、172 | pending如实限制该能力资格；不是删掉状态分析能力 |
+| 全自动四类重复合并实现宣称全功能 | 按四个variant补对应资格闭包 | OP248—252；主文518、525、530 | 不能只给OP-15父例便PASS；这是范围内必需工作，不是额外通用门禁 |
+| 选择keep_local，不改代码 | 保留理由、作用域及实际治理证明 | 主文308；OP721、747—748 | 不要求先证明能识别所有错误合并；若额外声明该能力，才需限定域/补分支 |
+| 查询共享触达ORM与事务 | RT-03/04/08按事实合取；保留最小必需义务 | 主文231、258—267；PB相同context/验证计划 | 资格pending不允许绕开数据保护；也不一律运行全部PB |
+
+上述为静态逻辑推演，未运行选择器或 fixture。
+
+## 剩余建议与验收（Remaining Suggestions and Acceptance）
+
+本专项没有新增 P1/P2。确认一项可减少重复工作的 P3：**OP-15 校验共享资格未引用现成正例。** 操作库252行称缺同语义共享正例，但验收134行的 `CASE-D2-10-B` 已固定两校验单元规则所有者、时点和错误一致，`code_behavior / code_postimage:PASS`，独立 oracle 覆盖成功、各单失败、双失败轨迹与异常消息；`cases.json /cases/24` 与 `/case_index/24` 的 recipe 反向映射仍为空。
+
+真实反例是实施者照待补理由再建同构正例，增加工作；当前主文516/524与OP60允许复用，且pending阻止错误资格PASS，所以不构成P2安全缺口。原则允许复用仍不能替代当前分支的具体映射。最小修订是把B作为 `behavior_preserve` 关联到原分支，派生反向索引，把理由收窄为仍缺边界/owner冲突等拒绝分支；保留pending，不直接把整个validation_unit标成mapped。验收应确认资格选择包含既有B、保留独立oracle和证据层、缺拒绝分支仍报告pending、不新增同构fixture。
+
+以下两项是实施阶段的可选建议，不构成本轮 D4 必须继续扩写的理由。
+
+1. **有限首版支持声明。** 复用已有 `supported_variants` 选定首版范围。若宣称四类合并，优先补 OP-15 四项；若宣称参数对象改写，补 OP-21 拒绝例。验收：声明范围、所需分支、pending 和实际结果一一对应；不通过无限扩大名称来承诺所有模式；单个工程任务仍按本次义务选检查。
+2. **摘要分开三种状态。** 从现有数据派生来源裁决、资格映射、运行结果。反例是把“223 adopted”“18 qualification_pending”“4 source pending”合成一个覆盖率；当前正文已经禁止这种推论，但短摘要仍可能省略口径。最小建议是在未来生成摘要时附一句口径，不新增第二套状态字段或门禁。验收：300 主条目与 68 分面不相加；76资格分支/18pending与全部NOT_RUN独立表达。
+
+无需拆出第三个入口，无需新设待补专项，不建议为每个真实任务建立18行追踪表，也不要求本轮追读所有历史support内容。来源覆盖的未验证边界继续保留。后续若要扩大支持声明，再读取相应资料和固定独立 oracle。
+
+## 产物与未验证事项（Artifacts and Unverified Items）
+
+- [机器评审](retention-review.json)：18项精确指针、证据、采用边界和最小补齐动作。
+- [全量能力投影](retention-projection.json)：300条当前能力摘要、条件及分面，便于复核；它是审阅投影，不是新的规则权威。
+- [静态核对](retention-static.json)：原字段保留、target/facet投影、22规则和24PB case保留检查。
+
+没有修改旧文件、D4方案或真实Skill。没有获得实现运行证据，不能把本专项无新P2解读为系统已经实现或全部能力通过。

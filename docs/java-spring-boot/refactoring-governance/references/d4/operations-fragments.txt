@@ -1,0 +1,247 @@
+===== 原文件 L1—L115 =====
+0001	# D4 内部操作库（D4 Internal Operation Library）
+0002
+0003	方案版本：`D4`。设计日期：2026-10-18（Asia/Shanghai）。本附册是[完整 D4 方案](java-springboot-refactoring-governance-design-d4.md)的内部操作参考，供两个核心入口按需消费。`OP-01`—`OP-48` 是有限操作族，不是 48 个 Skill，也不要求一次加载全部内容。
+0004
+0005	本轮只形成设计。本文完整继承 D3 的 48 个操作族与 146 个稳定 `OC-*` 标识，新增 4 个 Builder/Factory 用例，并整合 D3-R1 的两项局部修订。4 个新用例各有具名变体，共覆盖 11 项性质的 22 个正反分支；不增加操作族、专项或入口。`OC-*` 是待绑定的实现资格用例；未创建 fixture、执行 Java/Spring/数据库测试、安装检查器或验证实际 Skill。条目完整不等于实现通过。
+0006
+0007	## 使用边界与单一规则来源（Usage Boundaries and Single Rule Authority）
+0008
+0009	规则含义只由主方案的[规则载体](java-springboot-refactoring-governance-design-d4.md#d4-rules)、[触达路由](java-springboot-refactoring-governance-design-d4.md#d4-routing)、[保护义务](java-springboot-refactoring-governance-design-d4.md#d4-obligations)、[抽象决策](java-springboot-refactoring-governance-design-d4.md#d4-abstraction)、[文档规范](java-springboot-refactoring-governance-design-d4.md#d4-docs)及[验收要求](java-springboot-refactoring-governance-design-d4.md#d4-acceptance)定义。本文将这些规则应用到具体变换，不另设相同规则的第二份权威文本。
+0010
+0011	每次实际选择一个变换 recipe 后，实例化 `operation_instance`：目标及其 preimage、具体子手法与 canonical owner、选用理由、适用前提证据、义务实例引用、计划变换、允许写范围、所选检查与 oracle、回退定位。只读 analyze 记录候选与事实，verify 绑定既有对象和检查，不因查阅 OP 自动创建改写计划或变换记录。父流程已有同一对象和范围的充分记录时直接引用。`oracle` 是提前固定的判定依据，例如既有契约、调用事件序列、输入输出样本或独立实现；不能用改后实现自身输出生成“正确答案”。下文 `OC-XX-P/N` 的 P/N 是可接受/应拒绝或需分流的逻辑分支，不是测试结果。
+0012
+0013	本文的 `OB-01`—`OB-18` 都是 `obligation_family`（义务族），不直接代表一项运行结果。所有条目共同消费 `OB-01/02/18`：范围、路由、证据血缘；目标声明变化消费 `OB-03`。实例身份、去重、对象版本变化及证据复用统一引用主文的[对象身份契约](java-springboot-refactoring-governance-design-d4.md#d4-subject-identity)，本册不另定义一套键。不同不可变对象身份或版本不能因同 scope/profile/stage 合并；血缘相连不等于同一受评对象。检查通过 `covered_instance_refs` 逐实例声明覆盖；一次组合执行可证明多个对象，但不隐去对象责任或计算成多次独立执行。每条列出的其他义务族是最低补充，实际影响可能增加义务。`RT-*` 只是初始路由提示，最终按主方案求全匹配并集和依赖闭包。普通 SQL、DTO、校验和方法整理只触发自身规则；出现重复候选、共享建议或撤销抽象时才追加 `RT-03`。不因文件含 Spring 注解就把纯注释操作升级为运行语义变更。
+0014
+0015	回退均指撤回本次已识别的变换差异，恢复相应 preimage 或兼容步骤。须先核对期间的外部修改；无法安全分离时停止并报告，不执行仓库级 reset，不覆盖用户改动。每个操作的反向手法也重新评估适用性，不能以“回退”绕过范围和契约。
+0016
+0017	专项入口只引用[流程附册](java-springboot-refactoring-governance-d4-playbooks.md)：`PB-01` 遗留准备，`PB-02` 闭合变换与分批转换，`PB-03` 重复及抽象证据，`PB-04` 跨模块迁移，`PB-05` 性能实验，`PB-06` 高级证明策略，`PB-07` 候选排序与收益，`PB-08` plan/apply 计划。专项流程可组合多个 OP；专项本身不授予源码写权限。相关链接只是发现线索，是否加载由下面的关系语义和实际条件决定。
+0018
+0019	### 子手法关系与唯一维护位置（Recipe Relations and Canonical Ownership）
+0020
+0021	`recipe_ref` 使用 `OP ID + subrecipe` 表示，例如 `OP-21/builder`。它是操作族内的定位，不新增用户入口、另一套编号或独立规则副本。每个被选中的子手法解析到一个 canonical owner，再取得其条件与义务；加载同一个 owner 一次即可，不生成重复变换记录。
+0022
+0023	| 关系 | 含义与加载行为 | 本库示例 |
+0024	|---|---|---|
+0025	| `alias` | 不维护技术细则；选择该入口即解析到同一 canonical recipe，保留入口理由 | `OP-27/Builder → OP-21/builder`、`OP-27/Factory → OP-23/factory` |
+0026	| `requires` | 已选择该 recipe 后，必需消费的已适用规则或协议；可复用现有证据，不代表重跑 | `OP-15/consolidate → 主抽象决策`，`OP-45/optimize → PB-05` |
+0027	| `conditional_requires` | 条件成立才加入闭包；条件 unknown 时补相关事实，不把所有关联全部加载 | 声称性能收益→PB-05；多个独立单元需要分批→PB-02；普通证据不足且选择高级策略→PB-06 |
+0028	| `informational` | 只用于发现相关候选，不授予写权限，也不自动加入闭包 | OP-45 中与查询/缓存/并发候选有关的其他 OP；仅浏览模式索引 |
+0029
+0030	| 选择入口或用途 | 唯一技术 owner | 本处不再维护的内容 |
+0031	|---|---|---|
+0032	| Builder | `OP-21/builder` | setter 顺序、重复设置、缺省、build 时点与复用性只维护在 OP-21 |
+0033	| Factory | `OP-23/factory` | 创建子类型、身份、scope、缓存与异常协议只维护在 OP-23 |
+0034	| Strategy / State / 有序责任链 / Special Case | `OP-09/dispatch` | 变体、优先级、状态/default/null 与事件轨迹只维护在 OP-09 |
+0035	| Adapter / Facade | `OP-13/adapter_facade` | 边界接口、映射及资源归属只维护在 OP-13 |
+0036	| Repository | `OP-28/port`，条件消费 `OP-38/39` | 端口归属维护在 OP-28；发生数据访问或映射变换时分别加载 OP-38/39 |
+0037	| Decorator / Observer | `OP-41/integration` | 附加责任顺序、交付与生命周期只维护在 OP-41 |
+0038	| Template、撤销共享形态 | `OP-48/template`、`OP-48/reverse`；实际类型变换条件消费 OP-26 | 共享形态与退出条件只维护在 OP-48；不在 OP-27 复制 |
+0039	| 性能优化 | OP-45 维护技术候选；PB-05 维护来源、测量、实验与保留裁决 | 不在 OP-45 再维护一套实验协议 |
+0040	| 测试整理与高级证明 | OP-46 维护测试代码变换；PB-06 维护证明策略选择/收集 | 测试代码整理不会仅因“测试”二字强制进入 PB-06 |
+0041
+0042	上表的路径引用对应本文件同名 OP 锚点，无需为每个子手法复制文件。未列出的条目默认由自身 OP 维护；条目中的其他 OP/PB 只有明确选用的子手法或触发条件成立才成为依赖。`OP-27` 的两个原用例仍保留其稳定 ID，但技术判定分别由 OP-13 和 OP-41 提供，不据此重复运行同一充分检查。
+0043
+0044	### 用例资格与本次检查（Qualification Cases and Task Checks）
+0045
+0046	[统一验收规格](java-springboot-refactoring-governance-d4-acceptance.md)区分 `qualification_case_set` 和 `required_check_set`。前者验证将来实现的 recipe、引擎或 adapter 是否覆盖适用的正确与拒绝分支；后者只为当前真实任务选择充分检查。不能每次执行一个 OP 都要求创建或重跑该 OP 全部正反 fixture。也不能因当前任务无需某负例，就在 recipe 实现资格中删除关键拒绝用例。
+0047
+0048	每个 `OC-*` 由统一索引关联逻辑对象、预期、适用条件、route、recipe/PB、义务族和共享 scenario/check；正文保留可读规范。生产任务按本次义务实例选证据，不把计划正确拒绝计作 Java 行为运行通过，不把多个引用计作多份独立证明。当前全部运行用例为 `NOT_RUN`。
+0049
+0050
+0051	<a id="d4-qualification"></a>
+0052	### 子手法资格清单与支持边界（Recipe Qualification and Support Boundary）
+0053
+0054	本节消费[主文子手法资格契约](java-springboot-refactoring-governance-design-d4.md#d4-recipe-qualification)。技术前提、支持范围及必要分支只在下面的 canonical 操作卡维护；验收索引和 `qualification-spec.json` 是派生视图，不成为另一份权威。路径仍是 `OP/subrecipe`，不新增 Skill、操作族或独立目录。`supported_variants` 表示**拟支持且已限定范围的设计变体**，不代表实现已通过。
+0055
+0056	每行登记 `canonical_recipe_id`、`supported_variant`、必要分支 `branch_id`、性质、`case_id + variant_id` 与 `coverage_role`。普通旧例使用 `variant_id=base`；新构造例使用卡中具名变体。`mapped_in_design` 仅表示该限定分支已有可判定规格与关系；`qualification_pending` 表示具体分支缺失或证据层不够。所有运行状态仍为 `NOT_RUN`。若一个 recipe 含多变体，按实际声明的变体选择；某变体 pending 不抹掉另一变体已存在的映射，也不允许把后者外推为整个 recipe 已通过。
+0057
+0058	资格选择先解析 canonical owner，再按声明变体计算必要分支。缺正例、缺关键拒绝例、只关联父 OP、只给 owner 加载例，均不能报告相应技术资格 PASS。`CASE-D3-R07` 只证明 Builder 的别名与直接入口加载相同 owner/前提，不能替代 `OC-21-BP/BN`。OP-27 没有第二套支持范围；从别名进入所得 recipe、变体和分支集合与直接入口相同。alias 只确定 owner：同 owner 有多变体时，须依据入口语义及明确支持声明绑定确切 variant；State 不能退回已映射的 stable_strategy。缺失或歧义保留 qualification_pending，不能猜测或回退到较容易通过的变体。Builder/Factory 的当前单变体仍可直接解析。共享 fixture 可复用一次充分检查，仍须逐对象、逐分支说明覆盖。
+0059
+0060	登记按需进行：本轮补已发现的 Builder/Factory 和既有 canonical 模式/抽象选择关系，保留现有技术候选。其他 OP 中提到的具名特性、API、具体工具和方向，不因出现在候选文字或父 OP 有正反例就自动获得实现资格。声明支持前只补**被声明的具体变体**；未登记的选择记 `qualification_pending` 并写明该 owner 内的分支缺口，不提前穷举全 Java 生态。已有窄范围用例可直接引用，不能重新命名后扩大其 oracle。
+0061
+0062	这是一份实现资格边界，不是每次任务的必跑表。纯注释、改名或只选参数对象/CQS，不自动加载 Builder/Factory；真实人工重构也不先补全库 fixture。当前 `required_check_set` 仍只按本次义务实例选充分证据。工具或能力未经确认时按既有 GOV-05 处理相关动作，不全局阻断无关任务。按已定需求有意改变构造协议仍转相应行为迁移，不以本表的 fixture 取代项目契约。
+0063
+0064	## 分类索引（Category Index）
+0065
+0066	| 原分类 | 内部操作 | 保留的主要事项 |
+0067	|---|---|---|
+0068	| C01 命名与意图 | OP-01、OP-02 | 领域命名、缩写、魔法值、全部消费者同步 |
+0069	| C02 方法与表达式 | OP-03—OP-06 | 提取/内联、变量/查询、阶段、方法对象、算法 |
+0070	| C03 控制流 | OP-07—OP-10 | 守卫、条件、循环、分派、内部不变量 |
+0071	| C04 类职责与特性 | OP-11—OP-15、OP-48 | 拆并类、移动、委托、死代码、四类重复、共享形态 |
+0072	| C05 数据与领域类型 | OP-16—OP-19、OP-34 | 封装、值对象、变量、派生状态、身份、record |
+0073	| C06 方法与接口 | OP-20—OP-24 | 签名/参数、参数对象、标志、CQS、工厂、可见性 |
+0074	| C07 继承与模式 | OP-25—OP-27、OP-48 | 接口、上下移、组合、模式选择与反向操作 |
+0075	| C08 模块与迁移 | OP-13、OP-28、OP-36 | package、循环依赖、接缝、资源消费者、阶段迁移 |
+0076	| C09 Java 现代化 | OP-29—OP-35 | Lambda、Stream、日期、Optional、语言特性、版本资格 |
+0077	| C10 Spring 与持久化 | OP-36—OP-42 | 分层、DI、配置、事务、SQL/ORM、DTO、横切、reactive |
+0078	| C11 并发资源异常 | OP-43、OP-44 | 生命周期、异常、资源关闭、取消、锁与线程上下文 |
+0079	| C12 性能 | OP-45，关联 OP-06/30/38/41/44 | CPU、分配、数据布局、I/O、查询/缓存、测量保留 |
+0080	| C13 文档 | OP-47，全部声明变化关联 | 多行 Javadoc、阶段空行/行注释、复杂决策与同步 |
+0081	| G 横切 | 全部；OP-46 测试代码专项 | 计划、比较、安全网、批次、证据、收益回看 |
+0082
+0083	## 经典操作规范（Classical Operation Specifications）
+0084
+0085	<a id="op-01"></a>
+0086	### OP-01：领域命名与消费者传播（Domain Rename and Consumer Propagation）
+0087
+0088	- **适用与反例**：名称偏离已确认术语；只做符号名称更正。反射名、Bean 名、序列化名、SPI、外部二进制/API 名称不是普通内部 rename 的自动可写范围。
+0089	- **步骤**：确认术语证据和声明绑定 → 找源码及隐式消费者 → 将一个符号及必要引用定义为一个可独立验证/恢复的闭合 `transformation_unit` → 预览完整符号改名 → 更新已授权消费者与文档 → 比较绑定、资源和差异。无可靠符号工具时先确认语言结构，不全库字符串替换。
+0090	- **义务与 oracle**：`OB-04/07/14`；引用仍绑定同一职责，重载选择和公开名称契约保持。隐式名称契约由资源登记和实际发现/调用检查证明；搜索零结果只记录已查范围。
+0091	- **用例**：`OC-01-P` 私有局部变量改名后，声明引用映射和行为结果相同；`OC-01-N` 改类名但 `META-INF/services` 仍旧名，oracle 为真实发现结果，应拒绝完成。
+0092	- **停止、回退与路由**：一个符号及必要引用可用 `single_slice`，复用本条范围、预览和验证，不生成空 pilot/expand；只有多个独立单元同规则转换或需要分批扩大时才采用 PB-02 的 batch 路径。相互依赖的引用组不能拆成失去闭合性的半次改名。存在未知外部消费者则保留兼容或转 `PB-04`；绑定改变撤回此次 rename。`RT-02/07/16`，资源/生成链追加 `RT-15`。
+0093
+0094	<a id="op-02"></a>
+0095	### OP-02：常量与术语统一（Named Constants and Terminology）
+0096
+0097	- **适用与反例**：同一领域含义的魔法值或含混缩写。相同字面值但不同单位、法律/计费规则或生命周期不共享一个常量。
+0098	- **步骤**：记录含义、单位、所有者和消费者 → 选择最小可见范围 → 提取同类型常量或更正名称 → 检查初始化时点及调用绑定。可逆地内联没有语义价值的别名。
+0099	- **义务与 oracle**：`OB-04/05/06/07`；数字类型、溢出、精度、字符串内容和初始化副作用保持；公开常量另考虑二进制消费者与发布契约。
+0100	- **用例**：`OC-02-P` 私有重试次数常量替代同义字面值，调用序列与边界相同；`OC-02-N` 两个值均为 100 的金额比例和批量上限合并，所有者/单位表证明不同，应保留分离。
+0101	- **停止、回退与路由**：业务含义不明不命名猜测；撤回常量及引用差异。`RT-02/07`；新共享候选追加 `RT-03`。
+0102
+0103	<a id="op-03"></a>
+0104	### OP-03：提取与内联方法（Extract and Inline Method）
+0105
+0106	- **适用与反例**：一段连贯职责可被准确命名，或间接方法没有独立价值。行数阈值、需要段落注释或单调用者不构成必做理由。
+0107	- **步骤**：列自由变量、读取/写回、别名、返回/早退、异常与资源范围 → 确定参数和返回责任 → 提取一个最小块或将方法体放回合法调用点 → 同步 Javadoc/段落 → 检查所有分支。先比较仅分段能否解决理解问题。
+0108	- **义务与 oracle**：`OB-05/06/12/13`；求值次数、顺序、异常位置、锁/资源范围和测试 seam 不变。存在代理、缓存、权限边界时追加 `OB-09/10/11`，不得把普通提取当作纯语法移动。
+0109	- **用例**：`OC-03-P` 纯金额计算段提取后，各边界输入结果相同且只有原次数求值；`OC-03-N` 将事务方法内联到绕过代理的调用方，真实事务记录变化，应拒绝普通内联。
+0110	- **停止、回退与路由**：无法解释早退或写回责任时拆小或保留；撤回方法及对应调用。`RT-02/01`，涉及抽象边界加 `RT-03`，Spring 加 `RT-08`。
+0111
+0112	<a id="op-04"></a>
+0113	### OP-04：变量、查询与计算时点（Variables, Queries and Evaluation Time）
+0114
+0115	- **适用与反例**：表达式含义不清，临时变量复用困难，或查询方法使稳定计算更清楚。非纯 getter、当前时间、随机值、可变状态和外部查询不自动等价。
+
+===== 原文件 L305—L390 =====
+0305	- **用例**：`OC-21-P` 同一账期的 start/end 形成内部参数对象且取值时点保持；`OC-21-N` 原来调用前取的配置值改为 callee 从完整配置对象读取，期间变更导致结果不同，应拒绝。
+0306	- **停止、回退与路由**：字段没有共同语义就保留原参数；按调用者恢复原签名。`RT-02/05/07/03`；公开构造协议迁移走 `PB-04`。
+0307
+0308	**新增构造协议用例（Construction Protocol Cases）。** 以下是本设计自建的逻辑 fixture，不能当成所有 Builder/Factory 的默认规则。每行是独立 variant；正候选保持原协议，负候选按所列反例改变一个关键性质。运行前逐变体绑定不可变 subject 身份和独立 oracle。多个错误候选分别受评，不混成一个候选结果。每例使用 `case_id/{variant_id}/{candidate_id}` 的逐对象模板，预期只适用于单个展开对象，不是集合汇总结论。对表中明确列出的不同错误候选逐项登记并验证；例如默认零/null、缓存键/失效、吞异常/重试分别判定。
+0309
+0310	`OC-21-BP`：`operation=verify`、`activity_status=completed`，各适用变体的 `code_postimage` 预期 `PASS`。`OC-21-BN`：同为 verify/completed，各错误候选的 `code_postimage` 预期 `FAIL`；正确拒绝可以令资格治理检查 PASS，不能把该候选行为写成 PASS。全部 `execution_status=NOT_RUN`。
+0311
+0312	| variant / 性质 | 输入及预先固定协议 | 正候选必须保持 | 负候选与独立 oracle |
+0313	|---|---|---|---|
+0314	| `setter_order`：setter 的调用与求值顺序 | base 初始为 1；setBase(x) 保存 x，setScaled(k) 当场保存 base×k；输入为 setBase(10)→setScaled(2)→build。 | `OC-21-BP/setter_order`：构造结果 scaled=20；事件次序 base(10)→scaled(2)→build。 | `OC-21-BN/setter_order`：候选因按字段排序而先调用 setScaled(2)，再调用 setBase(10)。 判定：固定事件表及结果 scaled=20；错误候选为 scaled=2，次序也不一致。 |
+0315	| `repeated_set`：同一 setter 重复设置 | setLabel(a)→setLabel(b)→build；原协议为最后一次值生效，两个调用都被观察。 | `OC-21-BP/repeated_set`：label=b 且 setter 调用事件为 a 后 b。 | `OC-21-BN/repeated_set`：候选只接受首次设置，或去掉第二次调用。 判定：预置 label=b 与两个调用事件；只保留 a 或缺事件均拒绝。 |
+0316	| `default_value`：未设置与显式值的默认规则 | 三条独立输入：未设置 limit、显式 limit=0、显式 label=null；原协议分别是 limit=10、limit=0、label=null。 | `OC-21-BP/default_value`：保持未设置与显式零/null 的区别；不增加新校验。 | `OC-21-BN/default_value`：候选用通用空值/零值判定覆盖显式 limit=0 或 label=null。 判定：预置三条输入输出表，默认只作用于未设置字段；三条结果逐项判定。 |
+0317	| `build_timing`：校验、失败及副作用的时点 | 输入 setStart(2)→setEnd(1)→记录 before_build→build；原 setter 只存值，build 才校验 start<=end 并抛已定 InvalidRange，无产品发布。 | `OC-21-BP/build_timing`：setter 完成、before_build 事件存在，InvalidRange 仅由 build 产生且不发布产品。 | `OC-21-BN/build_timing`：候选将跨字段校验移至 setEnd，提前抛 InvalidRange。 判定：预置事件与异常位置表；异常类型相同但 before_build 缺失或失败提前仍拒绝。 |
+0318	| `builder_reuse`：复用策略及已建对象隔离 | 原协议明确为同一 Builder 可顺序复用：setLabel(a)→build 得 P1，再 setLabel(b)→build 得 P2；每次 build 返回独立不可变快照。 | `OC-21-BP/builder_reuse`：P1.label=a、P2.label=b、P1≠P2；第二次 build 成功，P1 不随 Builder 改变。 | `OC-21-BN/builder_reuse`：候选让两次 build 返回同一可变产品，第二次设置反向修改 P1。 判定：预置两次成功、值与身份/别名断言；同时禁止无依据清空状态或把原可复用协议改成一次性。 |
+0319
+0320	不同复用、缓存、scope、默认或失败协议可另列窄变体；不能用“与本 fixture 不同”判真实项目错误。所声明协议 unknown 时，先补决定性事实；不猜标准库或框架行为。
+0321
+0322	**子手法资格登记（Recipe Qualification Registry）。** 下表只解释本卡当前支持声明的范围；运行均为 `NOT_RUN`。
+0323
+0324	| canonical recipe / 设计变体 | 必要分支与保护性质 | 资格用例及覆盖角色 | 设计映射及缺口 |
+0325	|---|---|---|---|
+0326	| `OP-21/builder` / `builder_protocol_v1` | `OP-21/builder:setter_order:preserve`：声明并选择本 fixture 已定协议下的 setter 的调用与求值顺序；setter 的调用与求值顺序 | `OC-21-BP/setter_order`（`behavior_preserve`） | `mapped_in_design` |
+0327	| `OP-21/builder` / `builder_protocol_v1` | `OP-21/builder:setter_order:reject`：候选违反本 fixture 已定协议下的 setter 的调用与求值顺序；setter 的调用与求值顺序 | `OC-21-BN/setter_order`（`behavior_reject`） | `mapped_in_design` |
+0328	| `OP-21/builder` / `builder_protocol_v1` | `OP-21/builder:repeated_set:preserve`：声明并选择本 fixture 已定协议下的 同一 setter 重复设置；同一 setter 重复设置 | `OC-21-BP/repeated_set`（`behavior_preserve`） | `mapped_in_design` |
+0329	| `OP-21/builder` / `builder_protocol_v1` | `OP-21/builder:repeated_set:reject`：候选违反本 fixture 已定协议下的 同一 setter 重复设置；同一 setter 重复设置 | `OC-21-BN/repeated_set`（`behavior_reject`） | `mapped_in_design` |
+0330	| `OP-21/builder` / `builder_protocol_v1` | `OP-21/builder:default_value:preserve`：声明并选择本 fixture 已定协议下的 未设置与显式值的默认规则；未设置与显式值的默认规则 | `OC-21-BP/default_value`（`behavior_preserve`） | `mapped_in_design` |
+0331	| `OP-21/builder` / `builder_protocol_v1` | `OP-21/builder:default_value:reject`：候选违反本 fixture 已定协议下的 未设置与显式值的默认规则；未设置与显式值的默认规则 | `OC-21-BN/default_value`（`behavior_reject`） | `mapped_in_design` |
+0332	| `OP-21/builder` / `builder_protocol_v1` | `OP-21/builder:build_timing:preserve`：声明并选择本 fixture 已定协议下的 校验、失败及副作用的时点；校验、失败及副作用的时点 | `OC-21-BP/build_timing`（`behavior_preserve`） | `mapped_in_design` |
+0333	| `OP-21/builder` / `builder_protocol_v1` | `OP-21/builder:build_timing:reject`：候选违反本 fixture 已定协议下的 校验、失败及副作用的时点；校验、失败及副作用的时点 | `OC-21-BN/build_timing`（`behavior_reject`） | `mapped_in_design` |
+0334	| `OP-21/builder` / `builder_protocol_v1` | `OP-21/builder:builder_reuse:preserve`：声明并选择本 fixture 已定协议下的 复用策略及已建对象隔离；复用策略及已建对象隔离 | `OC-21-BP/builder_reuse`（`behavior_preserve`） | `mapped_in_design` |
+0335	| `OP-21/builder` / `builder_protocol_v1` | `OP-21/builder:builder_reuse:reject`：候选违反本 fixture 已定协议下的 复用策略及已建对象隔离；复用策略及已建对象隔离 | `OC-21-BN/builder_reuse`（`behavior_reject`） | `mapped_in_design` |
+0336	| `OP-21/parameter_object` / `parameter_snapshot_v1` | `OP-21/parameter_object:parameter:preserve`：已取快照组成参数对象；取值时点、共同语义 | `OC-21-P/base`（`behavior_preserve`） | `mapped_in_design` |
+0337	| `OP-21/parameter_object` / `parameter_snapshot_v1` | `OP-21/parameter_object:parameter:reject`：参数对象改写包含校验/默认或所有者改变；不新增校验、默认与别名 | 无对应技术分支 | `qualification_pending`；原正例不覆盖该参数对象的具体违约；不能借 Builder 用例补齐不同recipe。 |
+0338	| `OP-21/parameter_object` / `whole_object` | `OP-21/parameter_object:whole:reject_timing`：快照值改成完整对象延迟读取；读取时点 | `OC-21-N/base`（`behavior_reject`） | `mapped_in_design` |
+0339	| `OP-21/parameter_object` / `whole_object` | `OP-21/parameter_object:whole:preserve`：声明完整对象变换；不扩大耦合、时点、空值 | 无对应技术分支 | `qualification_pending`；缺完整对象合法保持分支；参数对象正例不充当此例。 |
+0340
+0341	<a id="op-22"></a>
+0342	### OP-22：标志参数与函数参数化（Flag Arguments and Parameterized Functions）
+0343
+0344	- **适用与反例**：布尔 flag 实际代表可准确命名的动作；重复函数仅存在一个稳定参数差异。大量 flag 组合和业务不同的共同“通用处理”不合并。
+0345	- **步骤**：列 flag 组合/合法域与每个动作契约 → 比较明确入口、枚举/策略与保持本地 → 抽出已证明相同单元或拆回多个动作 → 保留同一错误/顺序 → 迁移消费者。
+0346	- **义务与 oracle**：`OB-05/07/17`；非法组合的原行为不能遗漏，参数化不能吞掉领域差异。
+0347	- **用例**：`OC-22-P` 一个 stable rounding mode 作为已定义参数，两调用者输出相同；`OC-22-N` 七个 flags 形成隐藏状态机，只有部分组合有测试，无法证明共享契约，应拆分或 defer。
+0348	- **停止、回退与路由**：组合语义不完整时停止；可反向拆分统一方法并保留适配入口。`RT-03/07`。
+0349
+0350	<a id="op-23"></a>
+0351	### OP-23：查询修改分离、Command 与工厂（Separate Query and Command, Factories）
+0352
+0353	- **适用与反例**：读写责任混杂但可在同一契约边界内部解耦；创建逻辑有稳定变化点。原“取值并原子更新”不能拆成外部两次调用而改变原子性。
+0354	- **步骤**：列状态读取/写入及原子边界 → 先在原公开入口内部拆 query/command → 有净收益才引入 Command 对象或 factory → 固定工厂的创建子类型、身份/scope/缓存/注入与异常协议；若使用 Builder，引用 OP-21/builder 的同一构造前提 → 核对异常与资源。
+0355	- **义务与 oracle**：`OB-05/06/07/09/12/17`；Command 不隐式增加重试或异步；工厂不隐式改 scope、子类型或对象共享。
+0356	- **用例**：`OC-23-P` 公开扣减接口保持原事务，内部提取只读校验与写入步骤，结果/锁序不变；`OC-23-N` 用独立 query+decrement 替代原子扣减，竞争 fixture 超卖，应拒绝。
+0357	- **停止、回退与路由**：原子边界无法保持时转专项；恢复原编排/创建入口。`RT-02/07/08/11`，新共享决策加 `RT-03`。
+0358
+0359	**新增构造协议用例（Construction Protocol Cases）。** 以下是本设计自建的逻辑 fixture，不能当成所有 Builder/Factory 的默认规则。每行是独立 variant；正候选保持原协议，负候选按所列反例改变一个关键性质。运行前逐变体绑定不可变 subject 身份和独立 oracle。多个错误候选分别受评，不混成一个候选结果。每例使用 `case_id/{variant_id}/{candidate_id}` 的逐对象模板，预期只适用于单个展开对象，不是集合汇总结论。对表中明确列出的不同错误候选逐项登记并验证；例如默认零/null、缓存键/失效、吞异常/重试分别判定。
+0360
+0361	`OC-23-FP`：`operation=verify`、`activity_status=completed`，各适用变体的 `code_postimage` 预期 `PASS`。`OC-23-FN`：同为 verify/completed，各错误候选的 `code_postimage` 预期 `FAIL`；正确拒绝可以令资格治理检查 PASS，不能把该候选行为写成 PASS。全部 `execution_status=NOT_RUN`。
+0362
+0363	| variant / 性质 | 输入及预先固定协议 | 正候选必须保持 | 负候选与独立 oracle |
+0364	|---|---|---|---|
+0365	| `subtype`：创建子类型和选择分支 | 输入 kind=A、kind=B；原创建协议分别返回 ProductA、ProductB，公开行为和构造事件已固定。 | `OC-23-FP/subtype`：两个分支的运行类型、行为及构造事件均保持。 | `OC-23-FN/subtype`：候选始终返回 ProductA，即使输入为 B。 判定：预置类型/结果/事件表，不仅比较共同接口可编译。 |
+0366	| `identity`：对象身份与可变隔离 | 原入口 create(A) 每次返回新产品；同一调用方连续创建 P1/P2，改变 P1 的本地状态不得影响 P2。 | `OC-23-FP/identity`：P1≠P2 且本地状态隔离；值相等不代替身份。 | `OC-23-FN/identity`：候选用全局单例替代每次创建，导致共享可变产品。 判定：预置两次身份不等与独立状态断言；候选共享实例必须拒绝。 |
+0367	| `scope`：创建作用域及请求隔离 | 原协议为同一 request 内返回同一请求对象，request R1 与 R2 返回不同对象；请求结束执行一次清理。 | `OC-23-FP/scope`：R1 内身份相同、跨请求身份不同、各请求恰好清理一次。 | `OC-23-FN/scope`：候选把 request scope 缓存移至 singleton 字段，使 R1/R2 共享对象。 判定：按原请求生命周期提供预置身份矩阵和清理事件表；不能只验证一次请求。 |
+0368	| `cache`：既有缓存键、失效与创建次数 | 原 factory 已有缓存：同 tenant+key 在失效前复用，另一 tenant 隔离；显式 invalidate 后下一次重建，构造次数已固定。 | `OC-23-FP/cache`：同键复用、跨 tenant 隔离、失效后新实例及构造次数保持。 | `OC-23-FN/cache`：候选缓存键去掉 tenant，或忽略已定 invalidate。 判定：预置调用轨迹、身份矩阵与构造计数；两种错误候选分别判定，不以命中率证明正确。 |
+0369	| `injection`：注入对象及装配协议 | 原创建路径从实际 fixture 容器取得 qualifier=primary 的 collaborator；另一同类型 Bean 同时存在，已定回调及 scope 保持。 | `OC-23-FP/injection`：产品绑定原指定 Bean，调用/初始化轨迹与 scope 一致。 | `OC-23-FN/injection`：候选在 factory 中直接 new 默认 collaborator，绕过 qualifier 与容器回调。 判定：容器 fixture 的 Bean identity、qualifier、回调与调用结果为 oracle；普通 mock 自述不足。 |
+0370	| `exception`：创建失败、异常映射和资源责任 | 原 create(bad) 分配资源后校验失败，抛已定 CreationError 并保留 cause，资源关闭一次；无产品发布或自动重试。 | `OC-23-FP/exception`：错误类型/cause、失败时点、关闭次数与不发布/不重试保持。 | `OC-23-FN/exception`：候选吞异常返回 null，或无依据重试导致多次构造/释放轨迹改变。 判定：预置异常树、事件序列和资源计数；每个错误候选独立受评，代码回退不冒充外部效果撤销。 |
+0371
+0372	不同复用、缓存、scope、默认或失败协议可另列窄变体；不能用“与本 fixture 不同”判真实项目错误。所声明协议 unknown 时，先补决定性事实；不猜标准库或框架行为。
+0373
+0374	**子手法资格登记（Recipe Qualification Registry）。** 下表只解释本卡当前支持声明的范围；运行均为 `NOT_RUN`。
+0375
+0376	| canonical recipe / 设计变体 | 必要分支与保护性质 | 资格用例及覆盖角色 | 设计映射及缺口 |
+0377	|---|---|---|---|
+0378	| `OP-23/factory` / `factory_protocol_v1` | `OP-23/factory:subtype:preserve`：声明并选择本 fixture 已定协议下的 创建子类型和选择分支；创建子类型和选择分支 | `OC-23-FP/subtype`（`behavior_preserve`） | `mapped_in_design` |
+0379	| `OP-23/factory` / `factory_protocol_v1` | `OP-23/factory:subtype:reject`：候选违反本 fixture 已定协议下的 创建子类型和选择分支；创建子类型和选择分支 | `OC-23-FN/subtype`（`behavior_reject`） | `mapped_in_design` |
+0380	| `OP-23/factory` / `factory_protocol_v1` | `OP-23/factory:identity:preserve`：声明并选择本 fixture 已定协议下的 对象身份与可变隔离；对象身份与可变隔离 | `OC-23-FP/identity`（`behavior_preserve`） | `mapped_in_design` |
+0381	| `OP-23/factory` / `factory_protocol_v1` | `OP-23/factory:identity:reject`：候选违反本 fixture 已定协议下的 对象身份与可变隔离；对象身份与可变隔离 | `OC-23-FN/identity`（`behavior_reject`） | `mapped_in_design` |
+0382	| `OP-23/factory` / `factory_protocol_v1` | `OP-23/factory:scope:preserve`：声明并选择本 fixture 已定协议下的 创建作用域及请求隔离；创建作用域及请求隔离 | `OC-23-FP/scope`（`behavior_preserve`） | `mapped_in_design` |
+0383	| `OP-23/factory` / `factory_protocol_v1` | `OP-23/factory:scope:reject`：候选违反本 fixture 已定协议下的 创建作用域及请求隔离；创建作用域及请求隔离 | `OC-23-FN/scope`（`behavior_reject`） | `mapped_in_design` |
+0384	| `OP-23/factory` / `factory_protocol_v1` | `OP-23/factory:cache:preserve`：声明并选择本 fixture 已定协议下的 既有缓存键、失效与创建次数；既有缓存键、失效与创建次数 | `OC-23-FP/cache`（`behavior_preserve`） | `mapped_in_design` |
+0385	| `OP-23/factory` / `factory_protocol_v1` | `OP-23/factory:cache:reject`：候选违反本 fixture 已定协议下的 既有缓存键、失效与创建次数；既有缓存键、失效与创建次数 | `OC-23-FN/cache`（`behavior_reject`） | `mapped_in_design` |
+0386	| `OP-23/factory` / `factory_protocol_v1` | `OP-23/factory:injection:preserve`：声明并选择本 fixture 已定协议下的 注入对象及装配协议；注入对象及装配协议 | `OC-23-FP/injection`（`behavior_preserve`） | `mapped_in_design` |
+0387	| `OP-23/factory` / `factory_protocol_v1` | `OP-23/factory:injection:reject`：候选违反本 fixture 已定协议下的 注入对象及装配协议；注入对象及装配协议 | `OC-23-FN/injection`（`behavior_reject`） | `mapped_in_design` |
+0388	| `OP-23/factory` / `factory_protocol_v1` | `OP-23/factory:exception:preserve`：声明并选择本 fixture 已定协议下的 创建失败、异常映射和资源责任；创建失败、异常映射和资源责任 | `OC-23-FP/exception`（`behavior_preserve`） | `mapped_in_design` |
+0389	| `OP-23/factory` / `factory_protocol_v1` | `OP-23/factory:exception:reject`：候选违反本 fixture 已定协议下的 创建失败、异常映射和资源责任；创建失败、异常映射和资源责任 | `OC-23-FN/exception`（`behavior_reject`） | `mapped_in_design` |
+0390	| `OP-23/cqs` / `atomic_deduction_v1` | `OP-23/cqs:preserve_atomic_boundary`：保持原公开入口与事务；原子性、结果、锁序 | `OC-23-P/base`（`behavior_preserve`） | `mapped_in_design` |
+
+===== 原文件 L735—L775 =====
+0735	| `OP-48/private_method` / `private_selection_v1` | `OP-48/private_method:accept_selection`：有已定适用证据选择形态；形态收益、责任、保护边界 | `OC-48-PP/base`（`governance_selection_accept`） | `mapped_in_design` |
+0736	| `OP-48/private_method` / `private_selection_v1` | `OP-48/private_method:reject_selection`：反例说明该形态破坏边界或无净收益；拒绝不当形态 | `OC-48-PN/base`（`governance_selection_reject`） | `mapped_in_design` |
+0737	| `OP-48/helper` / `helper_selection_v1` | `OP-48/helper:accept_selection`：有已定适用证据选择形态；形态收益、责任、保护边界 | `OC-48-HP/base`（`governance_selection_accept`） | `mapped_in_design` |
+0738	| `OP-48/helper` / `helper_selection_v1` | `OP-48/helper:reject_selection`：反例说明该形态破坏边界或无净收益；拒绝不当形态 | `OC-48-HN/base`（`governance_selection_reject`） | `mapped_in_design` |
+0739	| `OP-48/component` / `component_selection_v1` | `OP-48/component:accept_selection`：有已定适用证据选择形态；形态收益、责任、保护边界 | `OC-48-CP/base`（`governance_selection_accept`） | `mapped_in_design` |
+0740	| `OP-48/component` / `component_selection_v1` | `OP-48/component:reject_selection`：反例说明该形态破坏边界或无净收益；拒绝不当形态 | `OC-48-CN/base`（`governance_selection_reject`） | `mapped_in_design` |
+0741	| `OP-48/template` / `template_selection_v1` | `OP-48/template:accept_selection`：有已定适用证据选择形态；形态收益、责任、保护边界 | `OC-48-TP/base`（`governance_selection_accept`） | `mapped_in_design` |
+0742	| `OP-48/template` / `template_selection_v1` | `OP-48/template:reject_selection`：反例说明该形态破坏边界或无净收益；拒绝不当形态 | `OC-48-TN/base`（`governance_selection_reject`） | `mapped_in_design` |
+0743	| `OP-48/reverse` / `reverse_flag_v1` | `OP-48/reverse:preserve`：flag helper拆回owner且保留兼容与seam；领域owner、兼容/测试seam | `OC-48-RP/base`（`behavior_preserve`） | `mapped_in_design` |
+0744	| `OP-48/reverse` / `reverse_flag_v1` | `OP-48/reverse:reject`：flag helper拆回owner且保留兼容与seam；领域owner、兼容/测试seam | `OC-48-RN/base`（`behavior_reject`） | `mapped_in_design` |
+0745	| `OP-48/pure_core` / `pure_core_io_v1` | `OP-48/pure_core:preserve`：pure core提取保持原读取/写入及早退I/O；读取/写入顺序、早退及I/O时点 | `OC-48-FP/base`（`behavior_preserve`） | `mapped_in_design` |
+0746	| `OP-48/pure_core` / `pure_core_io_v1` | `OP-48/pure_core:reject`：pure core提取保持原读取/写入及早退I/O；读取/写入顺序、早退及I/O时点 | `OC-48-FN/base`（`behavior_reject`） | `mapped_in_design` |
+0747	| `OP-48/keep_local` / `retain_selection_v1` | `OP-48/keep_local:retain`：领域规则不同且无共享收益；保留领域所有权 | `OC-48-KP/base`（`governance_selection_accept`） | `mapped_in_design` |
+0748	| `OP-48/keep_local` / `retain_selection_v1` | `OP-48/keep_local:reject_forced_merge`：声明同时支持识别错误强制共享；合法差异、维护净收益 | `OC-48-HN/base`（`supporting_shape_reject_only`） | `qualification_pending`；若能力仅为如实输出keep_local，无代码变换义务；若还声明自动判断所有强制共享反例，现有形态反例不足，需限定域或补其反例。 |
+0749
+0750	**`OP-48/private_method` 未声明范围：** 这里只映射形态选择的治理资格；不宣称 private_method 的所有代码变换已获技术资格。实际实现若声明自动改写，应引用所选技术owner并补齐其执行顺序、异常、状态/生命周期的正反分支；未补为 qualification_pending。
+0751
+0752	**`OP-48/helper` 未声明范围：** 这里只映射形态选择的治理资格；不宣称 helper 的所有代码变换已获技术资格。实际实现若声明自动改写，应引用所选技术owner并补齐其执行顺序、异常、状态/生命周期的正反分支；未补为 qualification_pending。
+0753
+0754	**`OP-48/component` 未声明范围：** 这里只映射形态选择的治理资格；不宣称 component 的所有代码变换已获技术资格。实际实现若声明自动改写，应引用所选技术owner并补齐其执行顺序、异常、状态/生命周期的正反分支；未补为 qualification_pending。
+0755
+0756	**`OP-48/template` 未声明范围：** 这里只映射形态选择的治理资格；不宣称 template 的所有代码变换已获技术资格。实际实现若声明自动改写，应引用所选技术owner并补齐其执行顺序、异常、状态/生命周期的正反分支；未补为 qualification_pending。
+0757
+0758	**`OP-48/reverse` 未声明范围：** 这里只映射上述窄范围行为分支；不宣称全部 reverse 变换已获资格。其他状态/异常/框架与生命周期变体被声明时补齐所选技术分支，未补为 qualification_pending。HOF/currying的捕获/绑定等不由pure_core的I/O顺序例推出。
+0759
+0760	**`OP-48/pure_core` 未声明范围：** 这里只映射上述窄范围行为分支；不宣称全部 pure_core 变换已获资格。其他状态/异常/框架与生命周期变体被声明时补齐所选技术分支，未补为 qualification_pending。HOF/currying的捕获/绑定等不由pure_core的I/O顺序例推出。
+0761
+0762	## 机械证据适用与高风险分支（Mechanical Evidence and High-Risk Branches）
+0763
+0764	操作库允许用充分机械证据完成低影响变换，但不能把一个 `OP` 整族预先标成“无需行为检查”。
+0765
+0766	| 变换 | 机械证据可能充分的前提 | 不再足够的分支 |
+0767	|---|---|---|
+0768	| 仅文档/空行 | 实际差异限注释与空白；未改注解、字面量、预处理/生成输入；DOC内容另审 | 改Javadoc引用触及生成/发布工具，或夹带代码差异，需相应义务 |
+0769	| 内部符号rename | 声明/引用绑定与消费者闭合，隐式名称已证实无影响 | 公开/反射/Bean/SPI/资源/序列化名称，需发现或契约检查 |
+0770	| 局部纯变量提取 | 类型、求值位置次数、作用域和绑定一致，无别名/异常变化 | 移动或缓存getter/I/O/当前时间，编译不能证明 |
+0771	| 移除参数 | callee未用、全部callsite可见、实参无副作用且类型转换/重载/兼容无影响 | 实参会求值写入、抛错、拆装箱、receiver顺序或外部签名，不可直接删 |
+0772	| import整理 | 全部引用绑定保持，工具链与项目风格允许 | 模块导入歧义、shadowing、生成器/分析器不支持，不能以简单编译一次代替完整范围 |
+0773
+0774	机械证明也要写出输入、检查范围和假设。对上表不满足前提的分支，不强制某种固定测试工具，但必须提供足以覆盖对应义务的独立证明；没有证据即 `NOT_CHECKED`。正常结构重构不为凑操作库覆盖而添加镜像实现测试。
+0775

@@ -1,0 +1,406 @@
+{
+  "artifact": "Java/Spring Boot refactoring governance D5",
+  "date": "2026-11-17",
+  "history_date": "2026-10-18",
+  "check_type": "static_documents_and_relationships_only",
+  "check_summary": {
+    "PASS": 24
+  },
+  "checks": [
+    {
+      "id": "REC-EXACT",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": "D4 主文 651 行，与历史记录 SHA-256 一致。"
+    },
+    {
+      "id": "REC-INTEGRITY",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": "恢复文件与本轮归档 manifest 的逐文件 SHA-256 一致；不表示所有原历史 hash 已找回。"
+    },
+    {
+      "id": "DOC-LINKS",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": {
+        "local_links_checked": 91,
+        "errors": [],
+        "external_links": "NOT_RECHECKED",
+        "historical_txt_links": "原样快照，不作为当前导航；缺失已登记"
+      }
+    },
+    {
+      "id": "DOC-STRUCTURE",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": {
+        "heading_errors": [],
+        "table_errors": [],
+        "duplicate_anchors": []
+      }
+    },
+    {
+      "id": "CAT-RT",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": {
+        "expected_count": 20,
+        "actual_count": 20,
+        "missing": []
+      }
+    },
+    {
+      "id": "CAT-OB",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": {
+        "expected_count": 18,
+        "actual_count": 18,
+        "missing": []
+      }
+    },
+    {
+      "id": "CAT-OP",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": {
+        "expected_count": 48,
+        "actual_count": 48,
+        "missing": []
+      }
+    },
+    {
+      "id": "RULES-22",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": {
+        "count": 22,
+        "ids": [
+          "DOC-01",
+          "DOC-02",
+          "DOC-03",
+          "DOC-04",
+          "DOC-05",
+          "DOC-06",
+          "DOC-07",
+          "DUP-01",
+          "DUP-02",
+          "DUP-03",
+          "DUP-04",
+          "ABS-01",
+          "ABS-02",
+          "ABS-03",
+          "BND-01",
+          "BND-02",
+          "BND-03",
+          "GOV-01",
+          "GOV-02",
+          "GOV-03",
+          "GOV-04",
+          "GOV-05"
+        ]
+      }
+    },
+    {
+      "id": "ARCH-RETAINED",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": {
+        "entry_points": [
+          "java-refactor-governor",
+          "java-comment-governance"
+        ],
+        "internal_directories": [
+          "governance/operations/playbooks/profiles/adapters"
+        ],
+        "note": "正文保留两个拟议入口与 M1—M8；未生成源包。"
+      }
+    },
+    {
+      "id": "PB-24-PRESERVED",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": "24 个 CASE-PB 表行与恢复的 D4 完全一致；不是运行断言通过。"
+    },
+    {
+      "id": "PB-STEPS-PRESERVED",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": {
+        "stage_rows": 45,
+        "note": "原专项步骤动作与出口保持；D4/D5 步骤编号未当版本替换。"
+      }
+    },
+    {
+      "id": "QUAL-COUNTS",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": {
+        "recipes": 23,
+        "branches": 76,
+        "statuses": {
+          "mapped_in_design": 58,
+          "qualification_pending": 18
+        },
+        "runtime": "NOT_RUN"
+      }
+    },
+    {
+      "id": "QUAL-DOC-PROJECTION",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": "全部 76 branch 与 case/variant/role 关联可在 canonical 操作目录定位；未复验丢失的原 307 case 全量引用。"
+    },
+    {
+      "id": "P3-01-FORWARD-REVERSE",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": "OP-15 canonical 正向引用与 CASE-D2-10-B 反向引用一致；原拒绝缺口和 pending 保留。"
+    },
+    {
+      "id": "P3-01-SEMANTICS",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": {
+        "unchanged_fields": [
+          "verdict_subject",
+          "primary_subject",
+          "independent_oracle",
+          "expected",
+          "validation_layer",
+          "execution_status"
+        ],
+        "new_case_copy": false,
+        "note": "仅修订关联/版本/定位；不创造新同构 fixture。"
+      }
+    },
+    {
+      "id": "P3-02-NARROW",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": "Builder 原输入与五性质/正反分支保留；未观察的状态保留改成真实协议条件，未新增 reset_after_build fixture。"
+    },
+    {
+      "id": "P3-03-CONTRACT",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": {
+        "required_semantics": [
+          "implementation_identity",
+          "contract_revision",
+          "recipe_spec_refs",
+          "case_revision_refs",
+          "operation_scope",
+          "required_branch_refs",
+          "case_bindings",
+          "subject_identity_refs",
+          "implementation_invocation_ref",
+          "observed_output_refs",
+          "oracle_refs",
+          "comparison_refs",
+          "uncovered_branch_refs",
+          "binding_gaps",
+          "object_verdict_refs",
+          "qualification_verdict",
+          "qualified_operation_scope",
+          "execution_status"
+        ],
+        "implementation": "NOT_IMPLEMENTED",
+        "runtime": "NOT_RUN"
+      }
+    },
+    {
+      "id": "P3-AC-CLOSURE",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": "3 项 P3 均有规则落点与逻辑验收；复用 R05/R06，未新增 PB/Skill。"
+    },
+    {
+      "id": "GAP-DISCLOSURE",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": "主方案、入口与清单明确恢复缺口；未将历史 mapped/静态通过称运行已证。"
+    },
+    {
+      "id": "PRIVACY-MINIMUM",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": {
+        "matches": [],
+        "note": "限定常见私有定位/账号标志检查及产物内容审阅；不声称完成通用秘密检测。"
+      }
+    },
+    {
+      "id": "WORK-IGNORED",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": "原会话恢复过程留本机忽略的 work/；正式依据已保存 references/。"
+    },
+    {
+      "id": "README-PRESERVATION",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": "撤销本轮三处导航增量后，README 与本轮开始快照完全一致；既有 X 资产等改动保留。"
+    },
+    {
+      "id": "WRITE-SCOPE",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": {
+        "new_work": "仅本分析资产和 README 导航；本轮未写 Skill 文件",
+        "existing_untracked_assets": "保留既有 .agents/ 与四个 X-* 资产；未对其内容作本轮修改",
+        "limitation": "初始未对既有未跟踪目录逐文件取 hash；不声称做过全库内容字节审计"
+      }
+    },
+    {
+      "id": "JSON-PARSE",
+      "status": "PASS",
+      "scope": "static_document_check",
+      "details": "本资产当前 JSON 均可解析；不等同未来 runtime schema 验证。"
+    }
+  ],
+  "not_verified": [
+    "实际 Skill 源包和 skills-lint",
+    "宿主发现与触发",
+    "实际对象解析器、资格选择器、adapter/schema",
+    "真实 fixture 或 Java/Javadoc/SQL/事务/并发/性能运行",
+    "未恢复 307 case 原索引和 300 能力账本的全量闭包",
+    "外部排名、链接、版本、许可的当前状态"
+  ],
+  "artifacts": [
+    {
+      "path": "README.md",
+      "sha256": "0ba4f805f285d53a4005aa80d4aaab9402f4c51417a7d4dbfb5ddd5105beeaa3",
+      "bytes": 3049
+    },
+    {
+      "path": "d5/专项流程.md",
+      "sha256": "7a0989ba7da3c9691e2614fd65ca3c25ca586745fb7ed50384812611fa406370",
+      "bytes": 75691
+    },
+    {
+      "path": "d5/内部操作库.md",
+      "sha256": "fcc8905c07a173cff827267b416b715addac68a1e8ca936d49b8b35947850376",
+      "bytes": 57511
+    },
+    {
+      "path": "d5/方案.md",
+      "sha256": "449ef1abb5ba6fb3f32014b25cf1318b1306119a8eab94833eb2ae46c7c44d01",
+      "bytes": 81611
+    },
+    {
+      "path": "d5/资格关联投影.json",
+      "sha256": "35859a358c615ce9e923955d2b7349a4979e23fcb24df8c9a3ef579b1cf638e0",
+      "bytes": 52284
+    },
+    {
+      "path": "d5/验收与资格输出.md",
+      "sha256": "2ad200ff10fc5eb54daa3b3df719d1a54ea10f74cfe24d44543aa43fbf664044",
+      "bytes": 35901
+    },
+    {
+      "path": "references/d4/acceptance-fragments.txt",
+      "sha256": "690bffa04e44e40149311f16e603d66d02e8ef24d11cbed0f202f1eedf13058b",
+      "bytes": 29972
+    },
+    {
+      "path": "references/d4/case-d2-10-b.json",
+      "sha256": "2b95f82676f37eae286bd5e57b2801b9a70769172a4b2ab6006c1c058eb74af0",
+      "bytes": 3856
+    },
+    {
+      "path": "references/d4/classification-checklist.txt",
+      "sha256": "10a05fb4b4bb457ef818365cd141e3bea1ab546ce6eb019694d5dd20d104e3ad",
+      "bytes": 17017
+    },
+    {
+      "path": "references/d4/design-d4.txt",
+      "sha256": "4d25c2ed783a64d6e0880eab106a78247262ce5440e61574b7acbb2f3304da18",
+      "bytes": 80319
+    },
+    {
+      "path": "references/d4/operations-fragments.txt",
+      "sha256": "ac9bc2937876b969b31cfbb8109e7520623dd4c909a32cede646740b2078dea6",
+      "bytes": 43298
+    },
+    {
+      "path": "references/d4/playbooks-d4.txt",
+      "sha256": "537be8a9bdd329f559ddc26ff263866cfd2363d84a2269c20561e8e263100485",
+      "bytes": 76483
+    },
+    {
+      "path": "references/d4/qualification-projection.json",
+      "sha256": "9ae4d5748600877713f2aad1cb168df990a2c548ed2786af060f4763977d6bad",
+      "bytes": 40322
+    },
+    {
+      "path": "references/d4/qualification-summary.txt",
+      "sha256": "80b526ff0f3a47d7cd098804b4baa4766d1d871726feb3b98c7551f61977463f",
+      "bytes": 13429
+    },
+    {
+      "path": "references/d4/research-summary.txt",
+      "sha256": "56c72446437856214189877e7638cccc9a1998280790e9af7efeb33239c8c77a",
+      "bytes": 15980
+    },
+    {
+      "path": "references/d4/review-d4-r1.txt",
+      "sha256": "a6a5c7391f4bd1690906c6398e78a228aafb7edc0f058fab045523a7f669d51c",
+      "bytes": 18986
+    },
+    {
+      "path": "references/d4/review-identity.txt",
+      "sha256": "481dd455bcc8afda8d231b1e95e5151b54c609c0c62416e4c057c4d5397c217e",
+      "bytes": 7495
+    },
+    {
+      "path": "references/d4/review-qualification.txt",
+      "sha256": "ede1fc67a3e55c317f1c95fcc814e826993566d79824fd815bdacf6bf6fc6c7f",
+      "bytes": 7223
+    },
+    {
+      "path": "references/d4/review-retention.txt",
+      "sha256": "a15c82c7be17ef2afd54ffe9b3dca14dce62d62e68a0db95ddda83b75e8595ef",
+      "bytes": 15283
+    },
+    {
+      "path": "references/d4/top50-coverage-review.txt",
+      "sha256": "e4b5d85a0f97fcc976f240f96c8d514e1470f3f6857b2c53bd8e1be73d09bd80",
+      "bytes": 21244
+    },
+    {
+      "path": "references/d4/traceability-fragment.txt",
+      "sha256": "e2d01b39198427147dec4ac8cbaac25214bb2395019747e52e579f237e3a0f87",
+      "bytes": 16348
+    },
+    {
+      "path": "references/d4/validation-branch.txt",
+      "sha256": "8b1568712a4211495a0f45614c3d6f201c4d7597d0aa955fa9860014af864a47",
+      "bytes": 314
+    },
+    {
+      "path": "references/recovery-manifest.json",
+      "sha256": "54ff79003c0524a1f20ae6e9e3995ff829f9b6ee36975656069c5eeb94164fad",
+      "bytes": 4526
+    },
+    {
+      "path": "资料与恢复清单.md",
+      "sha256": "6dd7621878b2aa2707893e3dbfb016a3a0f6d829a9468774beb0a318635a58d2",
+      "bytes": 11480
+    }
+  ],
+  "manual_review": [
+    "核对 P3 的规则、选择、对象、输出与逻辑验收连接；仅设计审阅。",
+    "发现并修正复制过程中的 PB-03 步骤编号版本替换、历史阅读措辞和用例表列数；未修改历史快照。"
+  ],
+  "historical_snapshot_policy": "references/d4/*.txt 保留原样链接、临时路径和当轮措辞；当前导航和恢复状态由资料清单提供。",
+  "publication_preparation": {
+    "date": "2026-11-17",
+    "format_change": "清理两份编号片段空内容行的末尾制表分隔符；原行号和正文完全一致",
+    "separator_count": 112,
+    "payload_comparison": "PASS",
+    "source_main_sha256_unchanged": true,
+    "scope": "本节补充提交准备；原 24 项为 D5 交付时的静态检查记录"
+  }
+}

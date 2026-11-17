@@ -1,0 +1,163 @@
+
+ OP-21/builder mapped_in_design
+ VARIANTS [('builder_protocol_v1', 'mapped_in_design')]
+OP-21/builder:setter_order:preserve | builder_protocol_v1 | mapped_in_design | [('OC-21-BP', 'setter_order', 'behavior_preserve')]
+OP-21/builder:setter_order:reject | builder_protocol_v1 | mapped_in_design | [('OC-21-BN', 'setter_order', 'behavior_reject')]
+OP-21/builder:repeated_set:preserve | builder_protocol_v1 | mapped_in_design | [('OC-21-BP', 'repeated_set', 'behavior_preserve')]
+OP-21/builder:repeated_set:reject | builder_protocol_v1 | mapped_in_design | [('OC-21-BN', 'repeated_set', 'behavior_reject')]
+OP-21/builder:default_value:preserve | builder_protocol_v1 | mapped_in_design | [('OC-21-BP', 'default_value', 'behavior_preserve')]
+OP-21/builder:default_value:reject | builder_protocol_v1 | mapped_in_design | [('OC-21-BN', 'default_value', 'behavior_reject')]
+OP-21/builder:build_timing:preserve | builder_protocol_v1 | mapped_in_design | [('OC-21-BP', 'build_timing', 'behavior_preserve')]
+OP-21/builder:build_timing:reject | builder_protocol_v1 | mapped_in_design | [('OC-21-BN', 'build_timing', 'behavior_reject')]
+OP-21/builder:builder_reuse:preserve | builder_protocol_v1 | mapped_in_design | [('OC-21-BP', 'builder_reuse', 'behavior_preserve')]
+OP-21/builder:builder_reuse:reject | builder_protocol_v1 | mapped_in_design | [('OC-21-BN', 'builder_reuse', 'behavior_reject')]
+
+ OP-23/factory mapped_in_design
+ VARIANTS [('factory_protocol_v1', 'mapped_in_design')]
+OP-23/factory:subtype:preserve | factory_protocol_v1 | mapped_in_design | [('OC-23-FP', 'subtype', 'behavior_preserve')]
+OP-23/factory:subtype:reject | factory_protocol_v1 | mapped_in_design | [('OC-23-FN', 'subtype', 'behavior_reject')]
+OP-23/factory:identity:preserve | factory_protocol_v1 | mapped_in_design | [('OC-23-FP', 'identity', 'behavior_preserve')]
+OP-23/factory:identity:reject | factory_protocol_v1 | mapped_in_design | [('OC-23-FN', 'identity', 'behavior_reject')]
+OP-23/factory:scope:preserve | factory_protocol_v1 | mapped_in_design | [('OC-23-FP', 'scope', 'behavior_preserve')]
+OP-23/factory:scope:reject | factory_protocol_v1 | mapped_in_design | [('OC-23-FN', 'scope', 'behavior_reject')]
+OP-23/factory:cache:preserve | factory_protocol_v1 | mapped_in_design | [('OC-23-FP', 'cache', 'behavior_preserve')]
+OP-23/factory:cache:reject | factory_protocol_v1 | mapped_in_design | [('OC-23-FN', 'cache', 'behavior_reject')]
+OP-23/factory:injection:preserve | factory_protocol_v1 | mapped_in_design | [('OC-23-FP', 'injection', 'behavior_preserve')]
+OP-23/factory:injection:reject | factory_protocol_v1 | mapped_in_design | [('OC-23-FN', 'injection', 'behavior_reject')]
+OP-23/factory:exception:preserve | factory_protocol_v1 | mapped_in_design | [('OC-23-FP', 'exception', 'behavior_preserve')]
+OP-23/factory:exception:reject | factory_protocol_v1 | mapped_in_design | [('OC-23-FN', 'exception', 'behavior_reject')]
+
+ OP-09/dispatch qualification_pending
+ VARIANTS [('stable_strategy_v1', 'mapped_in_design'), ('state', 'qualification_pending'), ('ordered_chain', 'qualification_pending'), ('lookup_table', 'qualification_pending'), ('special_case', 'qualification_pending')]
+OP-09/dispatch:strategy:preserve | stable_strategy_v1 | mapped_in_design | [('OC-09-P', 'base', 'behavior_preserve')]
+OP-09/dispatch:strategy:reject_priority | stable_strategy_v1 | mapped_in_design | [('OC-09-N', 'base', 'behavior_reject')]
+OP-09/dispatch:state:transitions | state | qualification_pending | []
+ PENDING: 现有计价策略例不固定状态转移表；需补对应合法保持及非法/提前推进拒绝分支。
+OP-09/dispatch:chain:control | ordered_chain | qualification_pending | [('OC-09-N', 'base', 'supporting_priority_only')]
+ PENDING: 优先级反例只支持顺序性质；缺完整继续/停止、无人命中和错误聚合的正反分支。
+OP-09/dispatch:lookup:keys | lookup_table | qualification_pending | []
+ PENDING: 计价分派例未指定表驱动及重复键行为；缺表驱动正反分支。
+OP-09/dispatch:special:missing | special_case | qualification_pending | []
+ PENDING: 缺特殊值保持及错误被静默吞掉的具体正反分支。
+
+ OP-13/adapter_facade qualification_pending
+ VARIANTS [('bounded_adapter_v1', 'mapped_in_design'), ('facade_resources', 'qualification_pending')]
+OP-13/adapter_facade:adapter:preserve | bounded_adapter_v1 | mapped_in_design | [('OC-13-P', 'base', 'behavior_preserve'), ('OC-27-P', 'base', 'behavior_preserve')]
+OP-13/adapter_facade:adapter:reject_seam | bounded_adapter_v1 | mapped_in_design | [('OC-13-N', 'base', 'behavior_reject')]
+OP-13/adapter_facade:facade:ownership | facade_resources | qualification_pending | []
+ PENDING: 现有日期 adapter/客户端 seam 例不证明多资源 Facade；需独立正反协议。
+
+ OP-13/library_extension qualification_pending
+ VARIANTS [('foreign_method', 'qualification_pending'), ('local_extension', 'qualification_pending')]
+OP-13/library_extension:foreign:library | foreign_method | qualification_pending | [('OC-13-P', 'base', 'supporting_adapter_only')]
+ PENDING: 局部 adapter 例不等于任意 Foreign Method；需绑定所选扩展的正反分支。
+OP-13/library_extension:local:subclass | local_extension | qualification_pending | []
+ PENDING: 未声明可安全继承任何库；需目标库证据与子类特有正反分支。
+
+ OP-15/consolidate qualification_pending
+ VARIANTS [('method_unit', 'qualification_pending'), ('query_unit', 'qualification_pending'), ('conversion_unit', 'qualification_pending'), ('validation_unit', 'qualification_pending')]
+OP-15/consolidate:method:preserve | method_unit | mapped_in_design | [('OC-15-P', 'base', 'behavior_preserve')]
+OP-15/consolidate:method:reject | method_unit | qualification_pending | []
+ PENDING: 现有正例不覆盖方法所有者或副作用差异的技术拒绝；形态选择反例不替代此行为分支。
+OP-15/consolidate:query:reject | query_unit | mapped_in_design | [('OC-15-N', 'base', 'behavior_reject')]
+OP-15/consolidate:query:preserve | query_unit | qualification_pending | [('OC-38-P', 'base', 'supporting_extraction_only')]
+ PENDING: 普通查询提取不是多调用者共享资格；缺共享正例。
+OP-15/consolidate:conversion:both | conversion_unit | qualification_pending | [('OC-40-P', 'base', 'supporting_mapping_only')]
+ PENDING: 已有映射提取正例；缺多调用者同语义确认及方向/单位冲突拒绝分支。
+OP-15/consolidate:validation:both | validation_unit | qualification_pending | [('OC-40-N', 'base', 'supporting_error_order_only')]
+ PENDING: 首错反例只支持一个性质；缺同语义共享正例及边界/所有者分支。
+
+ OP-21/parameter_object qualification_pending
+ VARIANTS [('parameter_snapshot_v1', 'qualification_pending'), ('whole_object', 'qualification_pending')]
+OP-21/parameter_object:parameter:preserve | parameter_snapshot_v1 | mapped_in_design | [('OC-21-P', 'base', 'behavior_preserve')]
+OP-21/parameter_object:parameter:reject | parameter_snapshot_v1 | qualification_pending | []
+ PENDING: 原正例不覆盖该参数对象的具体违约；不能借 Builder 用例补齐不同recipe。
+OP-21/parameter_object:whole:reject_timing | whole_object | mapped_in_design | [('OC-21-N', 'base', 'behavior_reject')]
+OP-21/parameter_object:whole:preserve | whole_object | qualification_pending | []
+ PENDING: 缺完整对象合法保持分支；参数对象正例不充当此例。
+
+ OP-23/cqs mapped_in_design
+ VARIANTS [('atomic_deduction_v1', 'mapped_in_design')]
+OP-23/cqs:preserve_atomic_boundary | atomic_deduction_v1 | mapped_in_design | [('OC-23-P', 'base', 'behavior_preserve')]
+OP-23/cqs:reject_split_atomicity | atomic_deduction_v1 | mapped_in_design | [('OC-23-N', 'base', 'behavior_reject')]
+
+ OP-23/command qualification_pending
+ VARIANTS [('command_object', 'qualification_pending')]
+OP-23/command:command:delivery | command_object | qualification_pending | []
+ PENDING: 现有 CQS 原子扣减例未固定 Command 对象交付协议；需具体保持及无意重试/异步拒绝分支。
+
+ OP-28/port qualification_pending
+ VARIANTS [('dependency_port_v1', 'mapped_in_design'), ('repository', 'qualification_pending')]
+OP-28/port:port:preserve | dependency_port_v1 | mapped_in_design | [('OC-28-P', 'base', 'behavior_preserve')]
+OP-28/port:port:reject_discovery | dependency_port_v1 | mapped_in_design | [('OC-28-N', 'base', 'behavior_reject')]
+OP-28/port:repository:semantics | repository | qualification_pending | [('OC-28-P', 'base', 'supporting_dependency_only')]
+ PENDING: 依赖倒置例不证明数据访问语义；需所选端口正反分支并条件消费OP-38/39。
+
+ OP-41/integration qualification_pending
+ VARIANTS [('decorator', 'qualification_pending'), ('observer', 'qualification_pending')]
+OP-41/integration:decorator:composition | decorator | qualification_pending | [('OC-41-MN', 'base', 'supporting_retry_only')]
+ PENDING: 重试反例不覆盖多层组合；缺保持顺序及改变层次/清理的具体正反分支。
+OP-41/integration:observer:reject_async | observer | mapped_in_design | [('OC-27-N', 'base', 'governance_selection_reject')]
+OP-41/integration:observer:delivery | observer | qualification_pending | []
+ PENDING: 已有同步改异步反例；缺原交付协议正常保持及其他已声明关键分支。
+
+ OP-41/cache mapped_in_design
+ VARIANTS [('cache_commit_v1', 'mapped_in_design')]
+OP-41/cache:preserve | cache_commit_v1 | mapped_in_design | [('OC-41-CP', 'base', 'behavior_preserve')]
+OP-41/cache:reject | cache_commit_v1 | mapped_in_design | [('OC-41-CN', 'base', 'behavior_reject')]
+
+ OP-41/security mapped_in_design
+ VARIANTS [('authorization_proxy_v1', 'mapped_in_design')]
+OP-41/security:preserve | authorization_proxy_v1 | mapped_in_design | [('OC-41-SP', 'base', 'behavior_preserve')]
+OP-41/security:reject | authorization_proxy_v1 | mapped_in_design | [('OC-41-SN', 'base', 'behavior_reject')]
+
+ OP-41/observability mapped_in_design
+ VARIANTS [('existing_events_v1', 'mapped_in_design')]
+OP-41/observability:preserve | existing_events_v1 | mapped_in_design | [('OC-41-OP', 'base', 'behavior_preserve')]
+OP-41/observability:reject | existing_events_v1 | mapped_in_design | [('OC-41-ON', 'base', 'behavior_reject')]
+
+ OP-41/external_client mapped_in_design
+ VARIANTS [('message_retry_v1', 'mapped_in_design')]
+OP-41/external_client:preserve | message_retry_v1 | mapped_in_design | [('OC-41-MP', 'base', 'behavior_preserve')]
+OP-41/external_client:reject | message_retry_v1 | mapped_in_design | [('OC-41-MN', 'base', 'behavior_reject')]
+
+ OP-41/scheduler mapped_in_design
+ VARIANTS [('registration_once_v1', 'mapped_in_design')]
+OP-41/scheduler:preserve | registration_once_v1 | mapped_in_design | [('OC-41-TP', 'base', 'behavior_preserve')]
+OP-41/scheduler:reject | registration_once_v1 | mapped_in_design | [('OC-41-TN', 'base', 'behavior_reject')]
+
+ OP-48/private_method mapped_in_design
+ VARIANTS [('private_selection_v1', 'mapped_in_design')]
+OP-48/private_method:accept_selection | private_selection_v1 | mapped_in_design | [('OC-48-PP', 'base', 'governance_selection_accept')]
+OP-48/private_method:reject_selection | private_selection_v1 | mapped_in_design | [('OC-48-PN', 'base', 'governance_selection_reject')]
+
+ OP-48/helper mapped_in_design
+ VARIANTS [('helper_selection_v1', 'mapped_in_design')]
+OP-48/helper:accept_selection | helper_selection_v1 | mapped_in_design | [('OC-48-HP', 'base', 'governance_selection_accept')]
+OP-48/helper:reject_selection | helper_selection_v1 | mapped_in_design | [('OC-48-HN', 'base', 'governance_selection_reject')]
+
+ OP-48/component mapped_in_design
+ VARIANTS [('component_selection_v1', 'mapped_in_design')]
+OP-48/component:accept_selection | component_selection_v1 | mapped_in_design | [('OC-48-CP', 'base', 'governance_selection_accept')]
+OP-48/component:reject_selection | component_selection_v1 | mapped_in_design | [('OC-48-CN', 'base', 'governance_selection_reject')]
+
+ OP-48/template mapped_in_design
+ VARIANTS [('template_selection_v1', 'mapped_in_design')]
+OP-48/template:accept_selection | template_selection_v1 | mapped_in_design | [('OC-48-TP', 'base', 'governance_selection_accept')]
+OP-48/template:reject_selection | template_selection_v1 | mapped_in_design | [('OC-48-TN', 'base', 'governance_selection_reject')]
+
+ OP-48/reverse mapped_in_design
+ VARIANTS [('reverse_flag_v1', 'mapped_in_design')]
+OP-48/reverse:preserve | reverse_flag_v1 | mapped_in_design | [('OC-48-RP', 'base', 'behavior_preserve')]
+OP-48/reverse:reject | reverse_flag_v1 | mapped_in_design | [('OC-48-RN', 'base', 'behavior_reject')]
+
+ OP-48/pure_core mapped_in_design
+ VARIANTS [('pure_core_io_v1', 'mapped_in_design')]
+OP-48/pure_core:preserve | pure_core_io_v1 | mapped_in_design | [('OC-48-FP', 'base', 'behavior_preserve')]
+OP-48/pure_core:reject | pure_core_io_v1 | mapped_in_design | [('OC-48-FN', 'base', 'behavior_reject')]
+
+ OP-48/keep_local qualification_pending
+ VARIANTS [('retain_selection_v1', 'qualification_pending')]
+OP-48/keep_local:retain | retain_selection_v1 | mapped_in_design | [('OC-48-KP', 'base', 'governance_selection_accept')]
+OP-48/keep_local:reject_forced_merge | retain_selection_v1 | qualification_pending | [('OC-48-HN', 'base', 'supporting_shape_reject_only')]
+ PENDING: 若能力仅为如实输出keep_local，无代码变换义务；若还声明自动判断所有强制共享反例，现有形态反例不足，需限定域或补其反例。
