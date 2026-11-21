@@ -7,7 +7,7 @@
 | 路径 | 职责与当前内容 |
 | --- | --- |
 | [prompts/](prompts/) | 按独立资产子目录存放提示词及其配套内容；当前收录 Codex 会话标题整理提示词。 |
-| [skills/](skills/) | 按独立资产子目录存放 Agent 技能及配套内容；当前维护会话标题整理、技能创建、规范检查、教师研究、中文技术写作、事件风暴、领域关系、聚合设计、会话收尾规约检查和公众号文章获取十个源包；另原样收录 guizang-ppt-skill、codex-ppt 和 image-to-editable-ppt 三个第三方 PPT 生成 Skill。 |
+| [skills/](skills/) | 按独立资产子目录存放 Agent 技能及配套内容；当前维护会话标题整理、技能创建、规范检查、教师研究、中文技术写作、事件风暴、领域关系、聚合设计、会话收尾规约检查、公众号文章获取和 Arc 登录态 X 帖子检索十一个源包；另原样收录 guizang-ppt-skill、codex-ppt 和 image-to-editable-ppt 三个第三方 PPT 生成 Skill。 |
 | [guidelines/](guidelines/) | 按上游项目收录规范指南原文、许可与来源记录；当前收录两份中文写作指南，均为外部参考资料。 |
 | [docs/](docs/) | 按主题和独立分析资产保存自行整理的技术研究、方案和分析文档，以及最小永久核验证据；当前收录本地消息表与 RocketMQ 分析、LMP 部署架构评审案例，以及 Java/Spring Boot 重构治理 D5 方案。 |
 | [AGENTS.md](AGENTS.md) | AI LLM / Agent 分析和维护本项目时的顶层规约。 |
@@ -70,6 +70,9 @@ prompts/
     ├── work/                         # 本次会话工作文件、执行证据与迁移清单
     └── output/                       # 两版对照表、执行结果、handoff 与迁移记录
 skills/
+├── x-arc-research/
+│   ├── x-arc-research/  # Arc 登录态的 X 方向检索与领域热点发现
+│   └── output/          # 本机验证记录
 ├── wechat-article-fetcher/
 │   ├── wechat-article-fetcher/  # 公众号正文获取、指定目录保存、来源清单与测试
 │   └── output/                # 本机创建检查与真实调用证据
@@ -168,6 +171,7 @@ docs/
 | [ddd-domain-relationships](skills/ddd-domain-relationships/ddd-domain-relationships/SKILL.md) | 1.0.1：分析双向多重性、角色、关系属性、有效期、历史和限定符。基于第 05–06、20–21、24 讲，并核对第 33 讲演进反例；采用 base，未安装，真实宿主行为未验证。 |
 | [ddd-aggregate-design](skills/ddd-aggregate-design/ddd-aggregate-design/SKILL.md) | 1.0.1：从不变规则和并发场景比较聚合边界，分析封装、事务、版本保护与更新语义。基于第 14–17 讲，采用 base；未安装，真实宿主行为未验证。 |
 | [session-closeout-policy-check](skills/session-closeout-policy-check/session-closeout-policy-check/SKILL.md) | 1.0.0：会话收尾、提交前的通用规约审查；共享 Skill 评估符合性与规约演进，Codex/Claude Code 命令型 Hooks 显式触发，可选 Git 入口核对实际 index。采用 base；源包未安装，真实宿主事件未验证。 |
+| [x-arc-research](skills/x-arc-research/x-arc-research/SKILL.md) | 1.0.0 使用选定的 Arc 登录态，通过固定版本 last30days 检索 X 原帖，按领域归纳讨论，保留原帖链接、实际时间范围和待核验线索。 |
 | [wechat-article-fetcher](skills/wechat-article-fetcher/wechat-article-fetcher/SKILL.md) | 1.0.0：通过 Article Lens MCP 单篇或批量获取公开公众号文章，保存原样 Markdown、返回对象及执行清单到用户指定目录；保留截断和失败状态，不覆盖既有文件。采用 base 与 Codex 适用规则；21 项脚本测试及单篇实际读取通过，源包未安装，宿主触发未验证，不支持视频号。检查及真实调用证据仅保存在本机 `skills/wechat-article-fetcher/output/creation-1.0.0/`。 |
 | [guizang-ppt-skill](skills/guizang-ppt-skill/guizang-ppt-skill/SKILL.md) | 第三方收录（[来源记录](skills/guizang-ppt-skill/upstream/SOURCE.md)）：生成单文件 HTML 横向翻页演示文稿，提供电子杂志和瑞士国际主义两种风格，含演讲者视图与静态校验脚本。上游 `op7418/guizang-ppt-skill` commit `93d21bf`，AGPL-3.0；原样保留，未安装，未运行。 |
 | [codex-ppt](skills/codex-ppt/codex-ppt/SKILL.md) | 第三方收录（[来源记录](skills/codex-ppt/upstream/SOURCE.md)）：把文章、报告、论文或大纲生成为风格统一的整页图片式 PPTX，内置 12 种风格说明，图片生成优先用宿主内置工具，脚本作为 API 回退。上游 `ningzimu/codex-ppt-skill` commit `941dcaf`（v0.6.0 之后），MIT；原样保留，未安装，未运行。 |
